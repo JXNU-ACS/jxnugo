@@ -1,0 +1,184 @@
+{%-extends "base.html" %} {%-block nav %}
+<style>
+body {
+    padding-top: 140px;
+}
+</style>
+<div class="contain-fluid">
+    <div class="ui-trade-subnav">
+        <div class="ui-trade-subnav-content">
+            <div class="left" style="font-size:30px;">
+                这里是站名
+            </div>
+            <div class="right" style="display: inline-flex;">
+                <button class="btn btn-default">
+                    发布商品！
+                </button>
+                <form role="search">
+                    <div class="input-group" style="width:200px">
+                        <input type="text" class="form-control" placeholder="搜索">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block content %}
+<nav class="ui-trade-detail-nav">
+    <a href="#detail">
+        <div class="ui-trade-detail-panel-label"><span class="glyphicon glyphicon-file" style="color:#fff;"> 介绍</span></div>
+    </a>
+    <a href="#photo">
+    <div class="ui-trade-detail-panel-label"><span class="glyphicon glyphicon-camera" style="color:#fff;"> 照片</span></div>
+        </a>
+    <a href="#comment">
+    <div class="ui-trade-detail-panel-label"><span class="glyphicon glyphicon-comment" style="color:#fff;"> 评论</span></div>
+        </a>
+</nav>
+<div class="cantain-fluid">
+    <div class="ui-trade-mainct">
+        <div class="ui-trade-detail-panel">
+            <div class="ui-trade-detail-panel-cover" style="background-image:url('static/images/2.jpeg')">
+            </div>
+            <div class="row">
+                <!--左边-->
+                <div class="col-md-8 left-panel">
+                    <!--zuobian-->
+                    <div id="detail" class="ui-trade-detail-title">
+                        <h1>妖妖零么，咱要报警！</h1>
+                        <h5><span class="glyphicon glyphicon-time"></span>2015/3/10</h5>
+                    </div>
+                    <div  class="ui-trade-detail-content">
+                        <p>若相遇只为邂逅而美，我想这世间没有人能读懂的心了。若岁月象风，思绪就正如那风中花蕊。曾经想着和她厮守一生，在一个没有人认识我们的地方，度过我们的一生。若岁月像雨，寂寥便落成一地惆怅。惊慌无处躲藏，无须剑拔弩张，一触皆魂殇。 若被情爱所伤，一定很痛吧，然而现在才那么彻底的感觉。哪感觉只是褪色片章，再也挽不回灯火阑珊处的痴狂。岁月口，谁为谁摆渡，谁来共我一生红尘煮酒？对酒当歌，跌跌撞撞一季又一季，谁来抚我半世沧桑。 夜无眠，伏香案，画婵娟，乱了一怀冥想。人生历程不能全由自己来安排，但人生的道路却全靠自己一步一步地去走。窥窗远去，思绪翻飞，红尘深处，再作一次想你。人生的旅途酸甜苦辣百味具有，其味，恬涩参半。想你的心情，宛如品读唐风宋雨一阕，其韵，似懂非懂。寂寥红尘，谁借我一把锈蚀的岁月弯镰？收获满载相思的草。 酒入愁肠，夜凄凉，风浅抚，流水望落花，你是否依旧舞姿翩绵。固执成习惯，无数个夜晚，用思绪描摹你满带诱惑容颜。忘不了，豆蔻情怀，如鸟语萦绕。忘不了，万千柔脉，如烟花妖娆。浮生留梦，始终做不到洒脱，只言片语中都是这绵绵的情殇。且让我今夜为你醉一场，梦一场。何惧，明朝酒醒踌凄凉。离愁轻弹，浮尘扰事何须拈。念只念，旧年，抚琴莞尔醉沙潭。盼只盼，昨夜清风再起时，与伊再奏一曲琵琶怨。叹只叹，此去经年，自别后，惊艳难起，情无再圆。 哀叹着缘来缘去的无奈，种豆相思，落花一笔，难描红妆素颜。苍凉一纸，难抒惆怅万千。寡淡华年，残烛孤影空长叹。梦醒了就醒了，人散了就散了，我怎会借你半边容颜幻整颜。问苍天有泪，为何而悲？问世间有情，为谁而圆？道是地阔天蓝，何处觅香山，一曲相思葬泪眼。墨洒素笺，叹往事一去不复返。轻描淡写间，花事难开言。陌上红尘，是谁把思念碾成一地碎沫，任随风雨践踏着禁锢缠绵。红尘路，误了谁的期盼？香梦辗转事如烟，一壶愁绪难入咽，弹指间，青丝染白颜。奈何残红深处，无语无言。 若，相逢只是梦一场，一片朦胧，是与非懂也不懂。我醒，一场春梦，爱与恨一切成空。此生，为你，再作一次回首。从此，不再为你，面憔心瘦。
+                        </p>
+                    </div>
+                    <div id="photo" class="ui-trade-detail-content">
+                        <img src="static/images/1.jpg" />
+                        <img src="static/images/1.jpg" />
+                    </div>
+                    <div id="comment" class="ui-trade-detail-content">
+                        <div>
+
+                        </div>
+                        <!--一个主评论-->
+                        <div class="ui-trade-detail-comment">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="ui-trade-detail-comment-extendtext">can1</div>
+                                        <div class="ui-trade-detail-comment-textcontain">
+                                            <p>是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？ 是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？ 是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？ 是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？
+                                            </p>
+                                        </div>
+                                        <span class="ui-trade-detail-comment-extendtext">2016/3/3<a href="#" style="margin-left:30px;">回复</a></span>
+                                    </div>
+                                    <!--评论的评论-->
+                                    <div class="row" style="margin-top:10px;margin-bottom:10px;">
+                                        <div class="col-md-2">
+                                            <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="ui-trade-detail-comment-extendtext">can2</div>
+                                                <div class="ui-trade-detail-comment-textcontain">
+                                                    <p>一脸蒙逼</p>
+                                                </div>
+                                                <span class="ui-trade-detail-comment-extendtext">2016/3/3<a href="#" style="margin-left:30px;">回复</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--评论的评论-->
+                                    <div class="row" style="margin-top:10px;margin-bottom:10px;">
+                                        <div class="col-md-2">
+                                            <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="ui-trade-detail-comment-extendtext">can3</div>
+                                                <div class="ui-trade-detail-comment-textcontain">
+                                                    <p>一脸蒙逼</p>
+                                                </div>
+                                                <span class="ui-trade-detail-comment-extendtext">2016/3/3<a href="#" style="margin-left:30px;">回复</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--一个主评论-->
+                        <div class="ui-trade-detail-comment">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="ui-trade-detail-comment-extendtext">can4</div>
+                                        <div class="ui-trade-detail-comment-textcontain">
+                                            <p>是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？ 是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？ 是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？ 是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？
+                                            </p>
+                                        </div>
+                                        <span class="ui-trade-detail-comment-extendtext">2016/3/3<a href="#" style="margin-left:30px;">回复</a></span>
+                                    </div>
+                                    <!--评论的评论-->
+                                    <div class="row" style="margin-top:10px;margin-bottom:10px;">
+                                        <div class="col-md-2">
+                                            <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="ui-trade-detail-comment-extendtext">can5</div>
+                                                <div class="ui-trade-detail-comment-textcontain">
+                                                    <p>一脸蒙逼</p>
+                                                </div>
+                                                <span class="ui-trade-detail-comment-extendtext">2016/3/3<a href="#" style="margin-left:30px;">回复</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="ui-trade-detail-comment">
+                    <div class="ui-trade-detail-comment-headbg" style="float:left"></div>
+                    <div class="ui-trade-detail-comment-textcontain">
+                        <p>是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？是不是傻了啊？</p>
+                    </div>
+                    <div class="ui-trade-detail-comment-id_time">can2?-2015/3/3</div>
+                </div>-->
+                        <!--end-->
+                    </div>
+                </div>
+                <!--右边-->
+                <div class="col-md-4 right-panel">
+                    <div class="ui-trade-detail-headbg" style="background-image:url(/static/images/1.jpg)">
+                        <div class="ui-trade-detail-userinfo">
+                            <h3>can2</h3>
+                            <h5>这里是心情什么gui的</h5></div>
+                    </div>
+                    <div class="contentlist sticky" >
+                        <div class="ui-trade-detail-rightlist">
+                            <span>该用户的其他帖子</span>
+                            <div>333333333333333</div>
+                            <div>111111111111</div>
+                            <div>22222222222</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+$(".right-panel").height($(".left-panel").height())
+console.log($(".left-panel").height())
+
+</script>
+{% endblock %}

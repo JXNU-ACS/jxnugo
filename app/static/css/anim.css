@@ -1,0 +1,76 @@
+/*图片滚动*/
+/*主页菜单伸缩*/
+@keyframes list-collapse-close{
+	from{width: 25%
+		position:relative;}
+	to{
+		width: 0px;
+		padding: 0;
+		position: absolute;
+	}
+}
+@keyframes list-collapse-open{
+	from{
+		width: 0px;
+		padding: 0;
+		position: absolute;
+	}
+	to{
+		width: 25%;
+		position:relative;
+	}
+}
+@keyframes contain-extend{
+	from{width: 75%}
+	to{width: 100%}
+}
+@keyframes contain-shrink{
+	from{width: 100%}
+	to{width: 75%}
+}
+@keyframes fade-out{
+	from{opacity:1}
+	to{opacity:0;}
+}
+@keyframes fade-in{
+	from{opacity:0;}
+	to{opacity:1;}
+}
+/*----------------动画------------------*/
+.list-collapse-close{
+    animation:list-collapse-close 1s;
+    -webkit-animation:list-collapse-close 1s;
+    animation-fill-mode:both;
+    -webkit-animation-fill-mode:both;
+}
+.list-collapse-open{
+    animation:list-collapse-open 1s;
+    -webkit-animation:list-collapse-open 1s;
+    animation-fill-mode:both;
+    -webkit-animation-fill-mode:both;
+}
+.contain-extend{
+	animation:contain-extend 1s;
+    -webkit-animation:contain-extend 1s;
+    animation-fill-mode:both;
+    -webkit-animation-fill-mode:both;
+}
+.contain-shrink{
+	animation:contain-shrink 1s;
+    -webkit-animation:contain-shrink 1s;
+    animation-fill-mode:both;
+    -webkit-animation-fill-mode:both;
+}
+.fade-out{
+	animation:fade-out 1s;
+    -webkit-animation:fade-out 1s;
+    animation-fill-mode:both;
+    -webkit-animation-fill-mode:both;
+}
+.fade-in{
+	animation:fade-in 1s;
+    -webkit-animation:fade-in 1s;
+    animation-fill-mode:both;
+    -webkit-animation-fill-mode:both;
+}
+/*------------end----------------------*/

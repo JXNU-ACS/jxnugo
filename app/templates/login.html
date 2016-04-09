@@ -1,0 +1,15 @@
+{%-extends "base.html" %}
+{% block content %}
+<div class="divstyle" style="text-align: center;padding: 200px">
+<div>
+    <form action="/login" method="POST">
+              {{loginform.hidden_tag()  }}
+              用户名:{{ loginform.userName(class="ui-form-style") }}
+              <br>
+              密码:&nbsp;&nbsp;&nbsp;&nbsp;{{loginform.passWord(class="ui-form-style") }}<br>
+              记住我:{{loginform.rememberMe()}}<br>
+              {{ loginform.submit() }}
+    </form>
+</div>
+</div>
+{% endblock %}

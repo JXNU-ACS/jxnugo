@@ -1,0 +1,134 @@
+{%-extends "base.html" %}
+{%-block nav %}
+<style>
+body {
+    padding-top: 140px;
+}
+</style>
+<div class="contain-fluid">
+    <div class="ui-trade-subnav">
+        <div class="ui-trade-subnav-content">
+            <div class="left" style="font-size:30px;">
+                这里是站名
+            </div>
+            <div class="right" style="display: inline-flex;">
+                <button class="btn btn-default">
+                    发布商品！
+                </button>
+                <form role="search">
+                    <div class="input-group" style="width:200px">
+                        <input type="text" class="form-control" placeholder="搜索">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+    <div class="ui-trade-mainct">
+        <div class="row ui-trade-mainct-row">
+            <div class="row">
+                <div class="row">
+                        <div class="col-md-5 btn-list-toggle" style="font-size:30px;padding-left:30px"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>分类</div>
+                        <div class="right-align col-md-7"><span class="ui-trade-listct">按时间</span><span class="ui-trade-listct">按评论</span></div>
+                </div>
+                <div class="ui-trade-show-list col-md-3" >
+                    
+                    
+                        <div><span class="glyphicon glyphicon-camera"></span> 闲置数码</div>
+                        <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
+                        <div><span class="glyphicon glyphicon-camera"></span> 衣服什么的</div>
+                        <span>手机</span><span>手机</span><span>手机</span><span>手机</span><br><span>手机</span>
+                        <div><span class="glyphicon glyphicon-camera"></span> 日常物品</div>
+                        <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
+                    
+                </div>
+                <div class="ui-trade-show col-md-9" style="background-color:#fff;">
+
+                    <!--
+        <div class="row">
+            <div class="col-md-6">
+                <div class="ui-trade-show-notice">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="ui-trade-show-notice">
+                </div>
+            </div>
+        </div>
+    -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="ui-trade-show-contain" style="background-image:url('static/images/2.jpeg');background-size:cover;">
+                                <div class="ui-trade-show-contain-side">
+                                </div>
+                                <div " class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');">
+                                </div>
+                                <div class="ui-trade-show-contain-text">
+                                    <div class="ui-trade-show-contain-price">$110</div>
+                                    <div class="ui-trade-show-contain-title">妖妖零么，咱要报警1111111111</div>
+                                    <div class="ui-trade-show-contain-userid">can2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end-->
+                        <div class="col-md-4">
+                            <div class="ui-trade-show-contain" style="background-image:url('static/images/2.jpeg');background-size:cover;">
+                                <div class="ui-trade-show-contain-side">
+                                </div>
+                                <div class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');">
+                                </div>
+                                <div class="ui-trade-show-contain-text">
+                                    <div class="ui-trade-show-contain-price">$110</div>
+                                    <div class="ui-trade-show-contain-title">妖妖零么，咱要报警1111111111</div>
+                                    <div class="ui-trade-show-contain-userid">can2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end-->
+                        <div class="col-md-4">
+                            <div class="ui-trade-show-contain" style="background-image:url('static/images/2.jpeg');background-size:cover;">
+                                <div class="ui-trade-show-contain-side">
+                                </div>
+                                <div class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');">
+                                </div>
+                                <div class="ui-trade-show-contain-text">
+                                    <div class="ui-trade-show-contain-price">$110</div>
+                                    <div class="ui-trade-show-contain-title">妖妖零么，咱要报警1111111111</div>
+                                    <div class="ui-trade-show-contain-userid">can2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+var state=1
+$('.btn-list-toggle').click(function(){
+    
+    if(state==1){
+        $(".ui-trade-show-list").removeClass("list-collapse-open").addClass("list-collapse-close")
+        $(".ui-trade-show").removeClass("contain-shrink").addClass("contain-extend")
+        $(".ui-trade-show-contain-headbg").removeClass("fade-out").addClass("fade-in")
+        state=0
+    }else{
+        $(".ui-trade-show-list").removeClass("list-collapse-close").addClass("list-collapse-open")
+        $(".ui-trade-show").removeClass("contain-extend").addClass("contain-shrink")
+        $(".ui-trade-show-contain-headbg").removeClass("fade-in").addClass("fade-out")
+        state=1
+    }
+    //$(".ui-trade-show-list").toggleClass("list-collapse-close","list-collapse-open")
+    console.log("1")
+})
+</script>
+{% endblock %}
