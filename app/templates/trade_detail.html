@@ -1,11 +1,11 @@
 {%-extends "base.html" %} {%-block nav %}
 <style>
 body {
-    padding-top: 140px;
+    padding-top: 100px;
 }
 </style>
-<div class="contain-fluid">
-    <div class="ui-trade-subnav">
+<!--<div class="contain-fluid">
+    div class="ui-trade-subnav">
         <div class="ui-trade-subnav-content">
             <div class="left" style="font-size:30px;">
                 这里是站名
@@ -25,7 +25,7 @@ body {
             </div>
         </div>
     </div>
-</div>
+</div>-->
 {% endblock %} {% block content %}
 <nav class="ui-trade-detail-nav">
     <a href="#detail">
@@ -46,7 +46,7 @@ body {
             <div class="row">
                 <!--左边-->
                 <div class="col-md-8 left-panel">
-                    <!--zuobian-->
+                    
                     <div id="detail" class="ui-trade-detail-title">
                         <h1>妖妖零么，咱要报警！</h1>
                         <h5><span class="glyphicon glyphicon-time"></span>2015/3/10</h5>
@@ -178,7 +178,6 @@ body {
 {% endblock %} {% block script %}
 <script>
 $(".right-panel").height($(".left-panel").height())
-console.log($(".left-panel").height())
 
 </script>
 {% endblock %}

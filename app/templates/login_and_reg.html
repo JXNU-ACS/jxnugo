@@ -1,0 +1,21 @@
+{%-extends "base.html" %} 
+{% block content %}
+<div class="cantain-fluid center-align" style="">
+    	<div class="ui-login_reg-main-pannel">
+    		<div class="ui-login_reg-main-pannel-title row">
+    			<div class="ui-login_reg-main-pannel-lefttitle col-md-5">
+    				登录
+    			</div>
+    		</div>
+    	</div>
+</div>
+
+
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+$(function () {
+	$(".cantain-fluid").height($(window).height()-200)
+})
+</script>
+{% endblock %}

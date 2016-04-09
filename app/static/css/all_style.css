@@ -1,58 +1,10 @@
 
-/*主导航*/
-.ui-trade-mainnav{
-    width:950px;
-    position:relative;
-    left:-10px;
-}
-/*副导航*/
-.ui-trade-subnav{
-    text-align:center;
-    height:70px;
-    box-shadow:0 0 10px #eee;
 
-    background:rgba(255,255,255,0.89);
-    margin-top:-20px;
-
-}
-.ui-trade-subnav-content{
-    margin:auto;
-    width:950px;
-
-    padding:20px;
-}
-/*界面容器*/
-.ui-trade-mainct{
-    width:950px;
-    margin:auto;
-    margin-top:15px;
-}
-.ui-trade-mainct-row{
-    margin-left:20px;
-}
-/*20px小字体列表公用*/
-.ui-trade-listct{
-    margin-right:30px;
-    font-size:20px
-}
-/*表单输入样式*/
-.ui-form-style{
-    border:0;
-    border-style:none;
-}
-/*足*/
-.ui-footer{
-    margin-top:50px;
-    height:100px;
-    border-top-right-radius:50%;
-    border-top-left-radius:50%;
-    text-align:center;
-    box-shadow:0 0 5px #eee inset;
-    padding-top:40px;
-    color:#B1B2AB;
-}
 /*------------列表-------------------------------------------------*/
 /*公告容器*/
+.ui-trade-show{
+    background-color: #fff;
+}
 .ui-trade-show-notice{
     margin-top:20px;
     height:80px;
@@ -61,6 +13,9 @@
     box-shadow:0 0 10px #AEAFA9;
 }
 /*列表分类*/
+.ui-trade-show-list{
+    position: fixed;
+}
 .ui-trade-show-list>div{
     font-size: 25px;
     margin:20px 0 20px 0;
@@ -324,21 +279,21 @@
 
 /*------------end----------------------*/
 
-.right{
-    float:right;
+/*登录/注册界面*/
+.ui-login_reg-main-pannel{
+    background-color: #fff;
+    box-shadow: 0 0 10px #eee;
+    width: 800px;
 }
-.left{
-    float:left;
+.ui-login_reg-main-pannel-title{
+    height: 100px;
 }
-.right-align{
-    text-align:right;
-}
-.left-align{
-    text-align:left;
-}
-.sticky{
+.ui-login_reg-main-pannel-lefttitle{
 
-    position:-webkit-sticky;
-    position:sticky;
-    top:175px;
+    background: #000;
+    width: 200px;
+    margin-left: 70px;
+    transform:skewX(-45deg);
+    -webkit-transform:skewX(-45deg);
+    -ms-transform:skewX(-45deg);
 }

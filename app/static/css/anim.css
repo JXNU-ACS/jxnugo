@@ -21,12 +21,12 @@
 	}
 }
 @keyframes contain-extend{
-	from{width: 75%}
-	to{width: 100%}
+	from{margin-left:25%;width: 75%}
+	to{margin-left:0;width: 100%}
 }
 @keyframes contain-shrink{
-	from{width: 100%}
-	to{width: 75%}
+	from{margin-left:0;width: 100%}
+	to{margin-left:25%;width: 75%}
 }
 @keyframes fade-out{
 	from{opacity:1}

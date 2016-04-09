@@ -1,29 +1,29 @@
-{%-extends "base.html" %}
-{%-block nav %}
+{%-extends "base.html" %} {%-block nav %}
 <style>
 body {
-    padding-top: 140px;
+    padding-top: 120px;
 }
 </style>
 <div class="contain-fluid">
     <div class="ui-trade-subnav">
         <div class="ui-trade-subnav-content">
-            <div class="left" style="font-size:30px;">
-                这里是站名
-            </div>
-            <div class="right" style="display: inline-flex;">
-                <button class="btn btn-default">
+            <div class="row">
+                        <div class="col-md-2 left-align btn-list-toggle" style="font-size:30px;padding-left:30px"><span class="glyphicon glyphicon-th-list"></span> 分类</div>
+                        
+
+                        <div class="col-md-7 left-align" style="margin-top:5px;">
+                <button class="btn btn-default" style="font-size:15px;">
                     发布商品！
                 </button>
-                <form role="search">
-                    <div class="input-group" style="width:200px">
-                        <input type="text" class="form-control" placeholder="搜索">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                        </span>
-                    </div>
-                </form>
+                
+
             </div>
+            <div class="right-align col-md-3" style="margin-top:10px;"><span class="ui-trade-listct">按时间</span><span class="ui-trade-listct">按评论</span></div>
+                </div>
+            <!--<div class="left" style="font-size:30px;">
+                这里是站名
+            </div>-->
+            
         </div>
     </div>
 </div>
@@ -32,10 +32,7 @@ body {
     <div class="ui-trade-mainct">
         <div class="row ui-trade-mainct-row">
             <div class="row">
-                <div class="row">
-                        <div class="col-md-5 btn-list-toggle" style="font-size:30px;padding-left:30px"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>分类</div>
-                        <div class="right-align col-md-7"><span class="ui-trade-listct">按时间</span><span class="ui-trade-listct">按评论</span></div>
-                </div>
+                
                 <div class="ui-trade-show-list col-md-3" >
                     
                     
@@ -47,7 +44,7 @@ body {
                         <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
                     
                 </div>
-                <div class="ui-trade-show col-md-9" style="background-color:#fff;">
+                <div class="ui-trade-show col-md-9" style="width:100%">
 
                     <!--
         <div class="row">
@@ -66,7 +63,7 @@ body {
                             <div class="ui-trade-show-contain" style="background-image:url('static/images/2.jpeg');background-size:cover;">
                                 <div class="ui-trade-show-contain-side">
                                 </div>
-                                <div " class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');">
+                                <div class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');">
                                 </div>
                                 <div class="ui-trade-show-contain-text">
                                     <div class="ui-trade-show-contain-price">$110</div>
@@ -113,16 +110,17 @@ body {
 {% endblock %}
 {% block script %}
 <script type="text/javascript">
-var state=1
+$(function(){
+    var state=0
 $('.btn-list-toggle').click(function(){
     
     if(state==1){
-        $(".ui-trade-show-list").removeClass("list-collapse-open").addClass("list-collapse-close")
+        //$(".ui-trade-show-list").removeClass("list-collapse-open").addClass("list-collapse-close")
         $(".ui-trade-show").removeClass("contain-shrink").addClass("contain-extend")
         $(".ui-trade-show-contain-headbg").removeClass("fade-out").addClass("fade-in")
         state=0
     }else{
-        $(".ui-trade-show-list").removeClass("list-collapse-close").addClass("list-collapse-open")
+        //$(".ui-trade-show-list").removeClass("list-collapse-close").addClass("list-collapse-open")
         $(".ui-trade-show").removeClass("contain-extend").addClass("contain-shrink")
         $(".ui-trade-show-contain-headbg").removeClass("fade-in").addClass("fade-out")
         state=1
@@ -130,5 +128,7 @@ $('.btn-list-toggle').click(function(){
     //$(".ui-trade-show-list").toggleClass("list-collapse-close","list-collapse-open")
     console.log("1")
 })
+})
+
 </script>
 {% endblock %}

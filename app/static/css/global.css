@@ -1,0 +1,82 @@
+/*主导航*/
+.ui-trade-mainnav{
+    width:950px;
+    position:relative;
+    left:-10px;
+}
+/*副导航*/
+.ui-trade-subnav{
+    text-align:center;
+    height:70px;
+    box-shadow:0 0 10px #eee;
+
+    background:rgba(255,255,255,0.89);
+    margin-top:-20px;
+
+}
+.ui-trade-subnav-content{
+    margin:auto;
+    width:950px;
+
+    padding:20px;
+}
+/*界面容器*/
+.ui-trade-mainct{
+    width:950px;
+    margin:auto;
+    margin-top:15px;
+}
+.ui-trade-mainct-row{
+    margin-left:20px;
+}
+/*20px小字体列表公用*/
+.ui-trade-listct{
+    margin-right:30px;
+    font-size:20px
+}
+/*表单输入样式*/
+.ui-form-style{
+    border:0;
+    border-style:none;
+}
+/*足*/
+.ui-footer{
+    margin-top:50px;
+    height:100px;
+    border-top-right-radius:50%;
+    border-top-left-radius:50%;
+    text-align:center;
+    box-shadow:0 0 5px #eee inset;
+    padding-top:40px;
+    color:#B1B2AB;
+}
+.right{
+    float:right;
+}
+.left{
+    float:left;
+}
+.right-align{
+    text-align:right;
+}
+.left-align{
+    text-align:left;
+}
+.center-align{
+    display:-moz-box; /* Firefox */
+    display:-webkit-box; /* Safari and Chrome */
+    display:-ms-flexbox; /* Internet Explorer 10 */
+    display:box;
+    -webkit-box-align:center;
+    -webkit-box-pack:center;
+    -ms-flex-align:center;
+    -ms-flex-pack:center;
+    -moz-box-align:center;
+    -moz-box-pack:center;
+}
+.sticky{
+
+    position:-webkit-sticky;
+    position:sticky;
+    top:175px;
+}
