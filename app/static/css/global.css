@@ -80,3 +80,11 @@
     position:sticky;
     top:175px;
 }
+.slideBlock{
+    width:70px;
+    height:5px;
+    background:#6cf;
+    -webkit-transition:transform .5s ease-in;
+    -moz-transition:transform .5s ease-in;
+    transition:background-color .5s ease-in;
+}

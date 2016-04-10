@@ -279,21 +279,26 @@
 
 /*------------end----------------------*/
 
-/*登录/注册界面*/
-.ui-login_reg-main-pannel{
+/*-------------登录/注册界面==============*/
+.ui-passport-main-pannel{
     background-color: #fff;
     box-shadow: 0 0 10px #eee;
-    width: 800px;
+    width: 500px;
+    padding: 20px;
 }
-.ui-login_reg-main-pannel-title{
-    height: 100px;
-}
-.ui-login_reg-main-pannel-lefttitle{
+.ui-passport-main-pannel-title{
+   text-align: center;
+   padding: 0 0 10px 0;
+   border-bottom:1px solid #eee;
 
-    background: #000;
-    width: 200px;
-    margin-left: 70px;
-    transform:skewX(-45deg);
-    -webkit-transform:skewX(-45deg);
-    -ms-transform:skewX(-45deg);
 }
+.ui-passport-main-pannel-title>div{
+    font-size: 20px;
+}
+.ui-passport-main-pannel-form div{
+    
+    margin:30px 0 30px 0;
+    height: 30px;
+    width: 300px;
+}
+
