@@ -15,12 +15,4 @@ def trade_detail():
 
 @main.route('/trade_post')
 def trade_post():
-    return render_template("trade_post")
-
-@main.route('/user_zone')
-def user_zone():
-    return render_template("user_zone.html")
-
-@main.route('/user_passport')
-def user_passport():
-    return render_template("passport.html")
+    return render_template("trade_post.html")
