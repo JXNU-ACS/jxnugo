@@ -3,16 +3,16 @@
 <div class="cantain-fluid center-align" style="">
     	<div class="ui-passport-main-pannel">
     		<div class="ui-passport-main-pannel-title row">
-    			<div class="col-xs-6" id="pass_login">
-    				<a href="#">登录</a>
+    			<div class="col-xs-6 " >
+    				<a class="select" id="pass_login" href="#">登录</a>
     			</div>
-    			<div class="col-xs-6" id="pass_reg">
-    				<a href="#">注册</a>
+    			<div class="col-xs-6 " >
+    				<a class="select" id="pass_reg" href="#">注册</a>
     			</div>
 
     		</div>
             <div class="slideBlock" style="margin-left:70px;"></div>
-    		<div class="ui-passport-main-pannel-form center-align " style="display:none;">
+    		<div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariaform="pass_login">
     			<form action="/" method="post">
     				<div class="input-group">
     					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
@@ -25,7 +25,7 @@
     				<div><button class="btn btn-info center-block">登录</button></div>
     			</form>	
     		</div>
-            <div class="ui-passport-main-pannel-form center-align" >
+            <div class="ui-passport-main-pannel-form center-align" data-ariaform="pass_reg">
                 <form action="/" method="post">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
@@ -52,6 +52,20 @@
 <script type="text/javascript">
 $(function () {
 	$(".cantain-fluid").height($(window).height()-100)
+})
+$(".select").click(function(){
+    
+    var state = $(this).attr("id")
+    $("div[data-ariaform]").each(function(i){
+        if($(this).attr("data-ariaform")==state)
+        {
+            $(this).attr("style","")
+        }else
+        {
+            $(this).attr("style","display:none;")
+        }
+    })
+    
 })
 //$("#pass_login").hover(function(){
 //    $(".slideBlock").attr("style","margin-left:70px;")
