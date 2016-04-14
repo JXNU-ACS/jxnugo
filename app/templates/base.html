@@ -40,8 +40,16 @@
                     </div>
                 </form>
                     <ul class="nav navbar-nav navbar-right">
+                        {% if current_user.is_authenticated %}
+                        <li><a href="{{url_for('auth.logout')}}">登出</a> </li>
+                        {% else %}
+                        <li><a href="{{url_for('auth.passport')}}">用户管理</a> </li>
+                        {% endif %}
+                        <li><a href="#"> 你好&nbsp;{% if name %}{{name|capitalize}}{% else %}游客{% endif %}</a></li>
+                        <!--上面我添加了登录登出,可以变更
                         <li><a href="#loginModal" data-toggle="modal" data-target="#loginModal">登录</a></li>
                         <li><a href="#regModal" data-toggle="modal">注册</a></li>
+                        -->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -79,13 +87,7 @@
                         {{ loginform.submit(class="btn btn-default",value="登陆") }}
                         <button class="btn btn-default" type="submit">提交</button>
                     </form>
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                    {% for message in messages %}
-                    <h3>{{ message }}</h3>
-                    {% endfor %}
-                    {% endif %}
-                    {% endwith %}
+
                 </div>
             </div>
         </div>
@@ -152,7 +154,13 @@
     </script>
     {% block script %}{% endblock %}
     <footer class="ui-footer">
-        这里是声明
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+         {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
     </footer>
 </body>
 

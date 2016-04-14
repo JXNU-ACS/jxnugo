@@ -5,9 +5,9 @@ from wtforms.validators import Required,Email,EqualTo,Length
 
 class loginForm(Form):
     userName=StringField(validators=[Required()])
-    passWord=PasswordField()
-    rememberMe=BooleanField()
-    submit=SubmitField(u'提交')
+    passWord=PasswordField(validators=[Required()])
+    rememberMe=BooleanField(u'记住我')
+    submit=SubmitField(u'登录')
 
 
 class registerForm(Form):
@@ -15,4 +15,4 @@ class registerForm(Form):
     email=StringField(validators=[Email()])
     passWord=PasswordField(validators=[Required(),EqualTo('confirm')])
     confirm=PasswordField()
-    submit=SubmitField('Submit')
+    submit=SubmitField(u'注册')

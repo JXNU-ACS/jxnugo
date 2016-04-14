@@ -285,6 +285,9 @@
     box-shadow: 0 0 10px #eee;
     width: 500px;
     padding: 20px;
+    margin: auto;
+    margin-top: 200px;
+
 }
 .ui-passport-main-pannel-title{
    text-align: center;
@@ -300,5 +303,8 @@
     margin:30px 0 30px 0;
     height: 30px;
     width: 300px;
+    -webkit-transition:display .5s case-in;
+    -moz-transition:display .5s case-in;
+    transition:display .5s case-in;
 }
 

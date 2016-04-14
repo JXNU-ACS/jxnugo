@@ -1,15 +1,21 @@
-{%-extends "./base.html" %}
+{%-extends "base.html" %}
 {% block content %}
 <div class="divstyle" style="text-align: center;padding: 200px">
 <div>
-    <form action="/login" method="POST">
-              {{loginform.hidden_tag()  }}
-              用户名:{{ loginform.userName(class="ui-form-style") }}
-              <br>
-              密码:&nbsp;&nbsp;&nbsp;&nbsp;{{loginform.passWord(class="ui-form-style") }}<br>
-              记住我:{{loginform.rememberMe()}}<br>
-              {{ loginform.submit() }}
-    </form>
-</div>
+   <!-- <form action="/login" method="post">
+    				<div class="input-group">
+                        {{loginform.hidden_tag()}}
+    					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+    					<!--<input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">
+                        {{ loginform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"}) }}
+                    </div>
+    				<div class="input-group">
+    					<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+    					<!--<input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2">
+                        {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
+    				</div>
+                    <div>{{loginform.rememberMe()}}</div>
+    				<div></div></form>
+</div>-->
 </div>
 {% endblock %}
