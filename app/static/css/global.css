@@ -87,7 +87,11 @@ a:active{color:#000}
 .slideBlock{
     width:70px;
     height:5px;
+<<<<<<< HEAD
     position: relative;
+=======
+    position: absolute;
+>>>>>>> origin/master
     background:#6cf;
     -webkit-transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
     -moz-transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
