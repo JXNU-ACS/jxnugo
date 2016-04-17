@@ -9,39 +9,42 @@ from flask.ext.login import logout_user,login_required,login_user
 @auth.route('/login',methods=['GET','POST'])
 def login():
     loginform=loginForm()
-    registerform=registerForm()
     db.create_all()
     if loginform.validate_on_submit():
         user=User.query.filter_by(userName=loginform.userName.data).first()
         if user is not None: #and user.verify_password(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             session['name']=loginform.userName.data
-            flash('flash message:login successful')
-            return render_template('trade_list.html',name=session.get('name'))
+            flash('flash message:login successful,regsussful')
+            return redirect(url_for('main.trade_list'))
         else:
             flash('userName or userPassword uncorrect')
-    return render_template('auth/passport.html',loginform=loginform,registerform=registerform)
+            return redirect(url_for('auth.passport'))
+    return redirect(url_for('auth.passport'))
+
 
 @auth.route('/register',methods=['GET','POST'])
 def register():
     loginform=loginForm()
     registerform=registerForm()
     if registerform.validate_on_submit():
-        flash('receive reg info successful')
-        userid=111111111
-        regUser=User(id=userid,userName=registerform.userName.data,userEmail=registerform.email.data,userPasswrod=registerform.confirm.data)
+        userid=randomId()
+        regUser=User(id=userid,userName=registerform.userName.data,userEmail=registerform.email.data,userPassword=registerform.passWord.data)
         db.session.add(regUser)
         db.session.commit()
-        flash('register successful')
+        flash('register successful,Now you can login your account')
         return redirect(url_for('auth.passport'))
     else:
-        flash('no register information post')
-    return redirect(url_for('auth.passport'))
+        flash('post info failed')
+    return render_template("auth/passport.html",loginform=loginform,registerform=registerform)
+
+
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
+    session.pop('name',None)
     flash('flash message:logout successful')
     return redirect(url_for('auth.passport'))
 

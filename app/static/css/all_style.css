@@ -308,3 +308,8 @@
     transition:display .5s case-in;
 }
 
+.error{
+    background-clip: red;
+    color:blue;
+}
+

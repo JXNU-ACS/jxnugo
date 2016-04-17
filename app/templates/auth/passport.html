@@ -3,6 +3,7 @@
 <div class="cantain-fluid" style="">
     	<div class="ui-passport-main-pannel">
     		<div class="ui-passport-main-pannel-title row">
+
     			<div class="col-xs-6 " >
     				<a class="select" id="pass_login" href="#">登录</a>
     			</div>
@@ -11,61 +12,50 @@
     			</div>
 
     		</div>
-<<<<<<< HEAD
             <div class="slideBlock" style="left:75.5px;"></div>
-    		<div class="ui-passport-main-pannel-form center-align "  data-ariaform="pass_login">
+
+            <div class="ui-passport-main-pannel-form center-align "  data-ariaform="pass_login">
     			<form action="/login" method="post">
-=======
-            <div class="slideBlock" style=""></div>
-    		<div class="ui-passport-main-pannel-form center-align "  data-ariaform="pass_login">
-    			<form action="/" method="post">
->>>>>>> origin/master
     				<div class="input-group">
                         {{loginform.hidden_tag()}}
     					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-    					<!--<input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">-->
                         {{ loginform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"}) }}
                     </div>
     				<div class="input-group">
     					<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
-    					<!--<input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2">-->
                         {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
     				</div>
                     <div>{{loginform.rememberMe()}}</div>
-    				<div><!--<button class="btn btn-info center-block">登录</button>-->{{ loginform.submit(class="btn btn-info center-block") }}</div>
-    			</form>	
+    				<div>{{ loginform.submit(class="btn btn-info center-block") }}</div>
+    			</form>
     		</div>
             <div class="ui-passport-main-pannel-form center-align" style="display:none;" data-ariaform="pass_reg" >
-<<<<<<< HEAD
                 <form action="/register" method="post">
-=======
-                <form action="/" method="post">
->>>>>>> origin/master
+                    {{registerform.hidden_tag()}}
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                        <!--<input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">-->
+
                         {{registerform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"})}}
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon2">@</span>
-                        <!--<input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">-->
+
                         {{registerform.email(class="form-control",**{"placeholder":"邮箱","aria-describedby":"basic-addon2"})}}
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon3"><span class="glyphicon glyphicon-lock"></span></span>
-                        <!--<input type="password" class="form-control" placeholder="密码" 
-                        aria-describedby="basic-addon2">-->
                         {{registerform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon3"})}}
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-lock"></span></span>
-                        <!--<input type="password" class="form-control" placeholder="确认密码" 
-                        aria-describedby="basic-addon2">-->
+
                         {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4"})}}
                     </div>
-                    <div><!--<button class="btn btn-info center-block">注册</button>-->{{registerform.submit(class="btn btn-info center-block")}}</div>
-                </form> 
+                    <div>{{ registerform.submit(class="btn btn-info center-block") }}</div>
+                </form>
             </div>
+
+
     	</div>
 </div>
 
@@ -75,23 +65,12 @@
 <script type="text/javascript">
 
 (function(){
-<<<<<<< HEAD
     
     var a = "#pass_login" //这里大概是判断进入时注册还是登录，没有测试传入的值于是假设惹
     function setSlideBlockState(a){
         var offset = (a.closest("div").position().left-a.closest("div").parent().find("div:first-child").position().left)+(a.closest("div").innerWidth()/2)-47
         $(".slideBlock").css("left",offset)
         //console.log(a.closest("div").parent().find("div:first-child").position().left)
-=======
-    
-    var a = "#pass_login" //这里大概是判断进入时注册还是登录，没有测试传入的值于是假设惹
-    var orign = setSlideBlockState($(a))
-        
-    
-    function setSlideBlockState(a){
-        var offset = a.closest("div").position().left+(a.closest("div").innerWidth()/2)-35
-        $(".slideBlock").css("left",offset)
->>>>>>> origin/master
     }
     $(".cantain-fluid").height($(window).height()-100)
     $(".select").click(function(){
@@ -102,22 +81,11 @@
         $("div[data-ariaform]").each(function(){
             $(this).attr("data-ariaform")==state?$(this).attr("style",""):$(this).attr("style","display:none;")
         })
-<<<<<<< HEAD
     })
     $(".select").hover(function(){
         setSlideBlockState($(this))
     },function(){
         setSlideBlockState($(a))
-=======
-        console.log(a)
-    })
-    $(".select").hover(function(){
-        setSlideBlockState($(this))
-        console.log(a)
-    },function(){
-        setSlideBlockState($(a))
-        console.log(a)
->>>>>>> origin/master
     })
     
 })();

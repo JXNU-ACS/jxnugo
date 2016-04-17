@@ -3,7 +3,7 @@ from . import db
 from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import login_manager
-from random import uniform
+import random
 
 
 class Role(db.Model):
