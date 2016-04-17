@@ -31,7 +31,10 @@
     		</div>
             <div class="ui-passport-main-pannel-form center-align" style="display:none;" data-ariaform="pass_reg" >
                 <form action="/register" method="post">
+<<<<<<< HEAD
                     {{registerform.hidden_tag()}}
+=======
+>>>>>>> origin/master
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
 
@@ -48,11 +51,21 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-lock"></span></span>
+<<<<<<< HEAD
 
                         {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4"})}}
                     </div>
                     <div>{{ registerform.submit(class="btn btn-info center-block") }}</div>
                 </form>
+=======
+                        <!--<input type="password" class="form-control" placeholder="确认密码" 
+                        aria-describedby="basic-addon2">-->
+                        {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4")}}
+                    </div>
+                    <div><!--<button class="btn btn-info center-block">注册</button>-->{{registerform.submit()}}</div>
+
+                </form> 
+>>>>>>> origin/master
             </div>
 
 
@@ -65,6 +78,10 @@
 <script type="text/javascript">
 
 (function(){
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     
     var a = "#pass_login" //这里大概是判断进入时注册还是登录，没有测试传入的值于是假设惹
     function setSlideBlockState(a){
@@ -81,13 +98,22 @@
         $("div[data-ariaform]").each(function(){
             $(this).attr("data-ariaform")==state?$(this).attr("style",""):$(this).attr("style","display:none;")
         })
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
     })
     $(".select").hover(function(){
         setSlideBlockState($(this))
     },function(){
         setSlideBlockState($(a))
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
     })
-    
 })();
 
 //$("#pass_login").hover(function(){
