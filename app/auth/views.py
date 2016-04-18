@@ -15,10 +15,10 @@ def login():
         if user is not None: #and user.verify_password(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             session['name']=loginform.userName.data
-            flash('flash message:login successful,regsussful')
+            flash(u'login successful,regsussful','bg-success')
             return redirect(url_for('main.trade_list'))
         else:
-            flash('userName or userPassword uncorrect')
+            flash(u'userName or userPassword uncorrect','bg-warning')
             return redirect(url_for('auth.passport'))
     return redirect(url_for('auth.passport'))
 

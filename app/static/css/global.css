@@ -2,6 +2,9 @@ a:link{color: #000;}
 a:visited{color:#000;}
 a:hover{color:#000;text-decoration:none;}
 a:active{color:#000}
+.modal{
+    margin-top: 200px;
+}
 /*主导航*/
 .ui-trade-mainnav{
     width:950px;

@@ -14,7 +14,7 @@
     		</div>
             <div class="slideBlock" style="left:75.5px;"></div>
 
-            <div class="ui-passport-main-pannel-form center-align "  data-ariaform="pass_login">
+            <div class="ui-passport-main-pannel-form center-align  "  data-ariaform="pass_login">
     			<form action="/login" method="post">
     				<div class="input-group">
                         {{loginform.hidden_tag()}}
@@ -25,19 +25,16 @@
     					<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
                         {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
     				</div>
-                    <div>{{loginform.rememberMe()}}</div>
-    				<div>{{ loginform.submit(class="btn btn-info center-block") }}</div>
-    			</form>
+                    <div>{{loginform.rememberMe()}}记住我</div>
+    				<div><!--<button class="btn btn-info center-block">登录</button>-->{{ loginform.submit(class="btn btn-info center-block") }}</div>
+    			</form>	
     		</div>
-            <div class="ui-passport-main-pannel-form center-align" style="display:none;" data-ariaform="pass_reg" >
+            <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariaform="pass_reg" >
                 <form action="/register" method="post">
-<<<<<<< HEAD
                     {{registerform.hidden_tag()}}
-=======
->>>>>>> origin/master
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-
+                        
                         {{registerform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"})}}
                     </div>
                     <div class="input-group">
@@ -51,21 +48,12 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-lock"></span></span>
-<<<<<<< HEAD
+
 
                         {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4"})}}
                     </div>
                     <div>{{ registerform.submit(class="btn btn-info center-block") }}</div>
                 </form>
-=======
-                        <!--<input type="password" class="form-control" placeholder="确认密码" 
-                        aria-describedby="basic-addon2">-->
-                        {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4")}}
-                    </div>
-                    <div><!--<button class="btn btn-info center-block">注册</button>-->{{registerform.submit()}}</div>
-
-                </form> 
->>>>>>> origin/master
             </div>
 
 
@@ -78,12 +66,9 @@
 <script type="text/javascript">
 
 (function(){
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-    
     var a = "#pass_login" //这里大概是判断进入时注册还是登录，没有测试传入的值于是假设惹
+    setSlideBlockState($(a))
     function setSlideBlockState(a){
         var offset = (a.closest("div").position().left-a.closest("div").parent().find("div:first-child").position().left)+(a.closest("div").innerWidth()/2)-47
         $(".slideBlock").css("left",offset)
@@ -98,30 +83,14 @@
         $("div[data-ariaform]").each(function(){
             $(this).attr("data-ariaform")==state?$(this).attr("style",""):$(this).attr("style","display:none;")
         })
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
     })
     $(".select").hover(function(){
         setSlideBlockState($(this))
     },function(){
         setSlideBlockState($(a))
-<<<<<<< HEAD
-=======
 
-
->>>>>>> origin/master
     })
 })();
 
-//$("#pass_login").hover(function(){
-//    $(".slideBlock").attr("style","margin-left:70px;")
-//    console.log("1")
-//    },function(){
-//    $(".slideBlock").attr("style","margin-left:320px;")
-//    console.log("2")
-//})
 </script>
 {% endblock %}
