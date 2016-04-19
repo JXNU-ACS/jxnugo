@@ -1,0 +1,8 @@
+<p> 尊敬的{{ User.userName }}:</p>
+<p>欢迎注册 <b>JxnuGo</b>!</p>
+<p>为了保护个人账户安全,<h3 style="color: red;">请先在页面登录自己注册时的账号,登录成功后,</h3>再点击 <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">这里</a>激活和绑定邮箱操作</p>
+<p>如果链接无法点击,请复制下面的链接到浏览器打开</p>
+<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
+<p>谢谢</p>
+<p>The JxnuGo Team</p>
+<p><small>备注:此为系统邮件,请勿直接回复,激活链接有效期1小时</small></p>

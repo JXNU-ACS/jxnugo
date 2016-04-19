@@ -1,0 +1,13 @@
+尊敬的{{ User.userName }}:
+
+欢迎注册 JxnuGo!
+
+为了保护个人账户安全,请先在页面登录自己注册时的账号,登录成功后,再点击这里激活和绑定邮箱操作
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+谢谢,
+
+The JxnuGo Team
+
+备注:此为系统邮件,请勿直接回复,激活链接有效期1小时

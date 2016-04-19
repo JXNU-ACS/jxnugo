@@ -2,6 +2,8 @@
 from flask.ext.wtf import Form
 from wtforms import StringField,SubmitField,PasswordField,BooleanField
 from wtforms.validators import Required,Email,EqualTo,Length
+from ..models import User
+from wtforms import ValidationError
 
 class loginForm(Form):
     userName=StringField(validators=[Required()])
@@ -16,3 +18,11 @@ class registerForm(Form):
     passWord=PasswordField(validators=[Required(),EqualTo('confirm',message=u'两次密码必须一样')])
     confirm=PasswordField(validators=[Required()])
     submit=SubmitField(u'注册')
+
+    def validate_email(self,field):
+        if User.query.filter_by(userEmail=field.data).first():
+            raise ValidationError(u'该邮箱已经被注册')
+
+    def validate_userName(self,field):
+        if User.query.filter_by(userName=field.data).first():
+            raise ValidationError(u'该用户名已经存在')

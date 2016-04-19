@@ -3,7 +3,6 @@
 <div class="cantain-fluid" style="">
     	<div class="ui-passport-main-pannel">
     		<div class="ui-passport-main-pannel-title row">
-
     			<div class="col-xs-6 " >
     				<a class="select" id="pass_login" href="#">登录</a>
     			</div>
@@ -13,28 +12,48 @@
 
     		</div>
             <div class="slideBlock" style="left:75.5px;"></div>
+<<<<<<< Updated upstream
 
             <div class="ui-passport-main-pannel-form center-align  "  data-ariaform="pass_login">
+=======
+    		<div class="ui-passport-main-pannel-form center-align "  data-ariaform="pass_login">
+>>>>>>> Stashed changes
     			<form action="/login" method="post">
     				<div class="input-group">
                         {{loginform.hidden_tag()}}
     					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+    					<!--<input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">-->
                         {{ loginform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"}) }}
                     </div>
     				<div class="input-group">
     					<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+    					<!--<input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2">-->
                         {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
     				</div>
+<<<<<<< Updated upstream
                     <div>{{loginform.rememberMe()}}记住我</div>
     				<div><!--<button class="btn btn-info center-block">登录</button>-->{{ loginform.submit(class="btn btn-info center-block") }}</div>
     			</form>	
+=======
+                    <div>{{loginform.rememberMe()}}</div>
+    				<div><!--<button class="btn btn-info center-block">登录</button>-->{{ loginform.submit(class="btn btn-info center-block") }}</div>
+    			</form>
+>>>>>>> Stashed changes
     		</div>
             <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariaform="pass_reg" >
                 <form action="/register" method="post">
+<<<<<<< Updated upstream
                     {{registerform.hidden_tag()}}
+=======
+>>>>>>> Stashed changes
                     <div class="input-group">
+                        {{registerform.hidden_tag()}}
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+<<<<<<< Updated upstream
                         
+=======
+                        <!--<input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">-->
+>>>>>>> Stashed changes
                         {{registerform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"})}}
                     </div>
                     <div class="input-group">
@@ -48,15 +67,21 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-lock"></span></span>
+<<<<<<< Updated upstream
 
 
                         {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4"})}}
                     </div>
                     <div>{{ registerform.submit(class="btn btn-info center-block") }}</div>
+=======
+                        <!--<input type="password" class="form-control" placeholder="确认密码"
+                        aria-describedby="basic-addon2">-->
+                        {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4"})}}
+                    </div>
+                    <div><!--<button class="btn btn-info center-block">注册</button>-->{{registerform.submit()}}</div>
+>>>>>>> Stashed changes
                 </form>
             </div>
-
-
     	</div>
 </div>
 
@@ -88,8 +113,12 @@
         setSlideBlockState($(this))
     },function(){
         setSlideBlockState($(a))
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     })
+
 })();
 
 </script>

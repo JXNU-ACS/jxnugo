@@ -1,0 +1,18 @@
+{%-extends "./base.html" %}
+{% block content %}
+<div style="padding-top:100px;">
+    <h1>
+        你好, {{ current_user.userName }}!
+    </h1>
+    <h3>你还没有激活你的账户,为了确保你的账户安全</h3>
+    <p>
+        请进入你注册时的邮箱查看激活链接(备注:部分邮箱可能会把激活邮件判为垃圾邮件,遇此情况,请进入垃圾邮箱查看.)
+    </p>
+    <p>
+        如没有收到激活邮件,
+        <a href="{{ url_for('auth.resend_email') }}" style="color: red;">点击这里</a>重新发送激活邮件
+    </p>
+</div>
+
+
+{% endblock %}
