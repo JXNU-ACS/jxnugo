@@ -26,11 +26,7 @@ def login():
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             session['name']=loginform.userName.data
-<<<<<<< Updated upstream
             flash(u'login successful,regsussful','bg-success')
-=======
-            flash('flash message:login successful')
->>>>>>> Stashed changes
             return redirect(url_for('main.trade_list'))
         else:
             flash(u'userName or userPassword uncorrect','bg-warning')
