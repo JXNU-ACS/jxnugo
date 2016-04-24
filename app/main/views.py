@@ -7,19 +7,6 @@ from forms import EditProfileForm,EditProfileAdminForm
 from flask.ext.login import login_required,current_user
 from ..models import Permission,User,Role
 
-@main.route('/trade_list')
-def trade_list():
-    return render_template('trade_list.html')
-
-@main.route('/trade_detail')
-def trade_detail():
-    return render_template("trade_detail.html")
-
-@main.route('/trade_post')
-def trade_post():
-    return render_template("trade_post.html")
-
-<<<<<<< HEAD
 @main.route('/test')
 @login_required
 @admin_required
@@ -75,8 +62,8 @@ def editUserInfoAdmin(id):
     form.location.data=user.location
     form.about_me.data=user.about_me
     return render_template('editUserInfo.html',form=form,user=user)
-=======
+
 @main.route('/user_zone')
 def user_zone():
     return render_template("user_zone.html")
->>>>>>> origin/master
+

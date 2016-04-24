@@ -284,9 +284,9 @@
     margin:30px 0 30px 0;
     height: 30px;
     width: 300px;
-    -webkit-transition:display .5s case-in;
-    -moz-transition:display .5s case-in;
-    transition:display .5s case-in;
+    -webkit-transition:all .5s case-in;
+    -moz-transition:all .5s case-in;
+    transition:all .5s case-in;
 }
 
 /*-----------end-----------------*/
@@ -298,7 +298,8 @@
     padding: 0 0 10px 0;
     border-bottom:1px solid #eee;
 }
-.ui-userzone-tag>div{
+
+.ui-userzone-tag>div>a{
     color: #fff;
     font-size: 20px;
 }
@@ -307,10 +308,15 @@
 }
 .ui-userzone-user-head{
     width: 200px;
-    height: 200px;
+    height: 200px;s
+    position: relative;
+    left: 20px;
+    top: 70px;
     background-color:#DADBD4;
     background-size:cover;
-    border-radius:50%;
+    border-radius:20%;
+    box-shadow: 0 5px 10px #000;
+
 
 }
 

@@ -115,7 +115,7 @@ a:active{color:#000}
     width:70px;
     height:5px;
     position: relative;
-    background:#6cf;
+    background:#9BB7B4;
     -webkit-transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
     -moz-transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
     transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
