@@ -19,6 +19,7 @@ def trade_detail():
 def trade_post():
     return render_template("trade_post.html")
 
+<<<<<<< HEAD
 @main.route('/test')
 @login_required
 @admin_required
@@ -74,3 +75,8 @@ def editUserInfoAdmin(id):
     form.location.data=user.location
     form.about_me.data=user.about_me
     return render_template('editUserInfo.html',form=form,user=user)
+=======
+@main.route('/user_zone')
+def user_zone():
+    return render_template("user_zone.html")
+>>>>>>> origin/master
