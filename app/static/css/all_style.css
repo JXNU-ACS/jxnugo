@@ -298,11 +298,8 @@
     padding: 0 0 10px 0;
     border-bottom:1px solid #eee;
 }
-<<<<<<< HEAD
+
 .ui-userzone-tag>div>a{
-=======
-.ui-userzone-tag>div{
->>>>>>> master
     color: #fff;
     font-size: 20px;
 }
@@ -311,8 +308,7 @@
 }
 .ui-userzone-user-head{
     width: 200px;
-    height: 200px;
-<<<<<<< HEAD
+    height: 200px;s
     position: relative;
     left: 20px;
     top: 70px;
@@ -320,11 +316,7 @@
     background-size:cover;
     border-radius:20%;
     box-shadow: 0 5px 10px #000;
-=======
-    background-color:#DADBD4;
-    background-size:cover;
-    border-radius:50%;
->>>>>>> master
+
 
 }
 

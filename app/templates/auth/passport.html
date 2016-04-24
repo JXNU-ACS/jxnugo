@@ -13,12 +13,7 @@
 
     		</div>
             <div class="slideBlock" style="left:75.5px;"></div>
-
-<<<<<<< HEAD
             <div class="ui-passport-main-pannel-form center-align  "  data-ariapannel="pass_login">
-=======
-            <div class="ui-passport-main-pannel-form center-align  "  data-ariaform="pass_login">
->>>>>>> master
     			<form action="/login" method="post">
     				<div class="input-group">
                         {{loginform.hidden_tag()}}
@@ -30,7 +25,7 @@
                         {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
     				</div>
                     <div>{{loginform.rememberMe()}} 记住我</div>
-    				<div><!--<button class="btn btn-info center-block">登录</button>-->{{ loginform.submit(class="btn btn-info center-block") }}</div>
+    				<div>{{ loginform.submit(class="btn btn-info center-block") }}</div>
     			</form>	
     		</div>
             <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariapannel="pass_reg" >
