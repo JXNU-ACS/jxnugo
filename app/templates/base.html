@@ -27,8 +27,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">主页</a></li>
-                        <li><a href={{url_for('main.trade_list')}}>淘二手</a></li>
-                        <li><a href={{url_for('main.trade_detail')}} data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
+                        <li><a href={{url_for('trade.trade_list')}}>淘二手</a></li>
+                        <li><a href={{url_for('trade.trade_detail')}} data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
 
                         <li><a href="#">客户端</a></li>
                     </ul>
@@ -194,7 +194,6 @@
                 $(".modal").modal('hide')
             }, 1500)
         }).on("hidden.bs.modal",function(){
-            back()
             clearInterval(a)
         }).ready(function(){
             {% with messages = get_flashed_messages() %}

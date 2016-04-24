@@ -5,7 +5,7 @@ from . import main
 from .. import db
 
 
-@main.route('/trade_list')
+"""@main.route('/trade_list')
 def trade_list():
     return render_template('trade_list.html')
 
@@ -19,4 +19,4 @@ def trade_post():
 
 @main.route('/user_zone')
 def user_zone():
-    return render_template("user_zone.html")
+    return render_template("user_zone.html")"""
