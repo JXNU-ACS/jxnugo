@@ -26,3 +26,4 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint,urlfix='/auth')
     login_manager.init_app(app)
     return app
+

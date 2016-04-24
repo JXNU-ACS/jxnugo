@@ -6,8 +6,8 @@ class Config:
     SECRET_KEY=os.environ.get('SECRET_KEY') or 'the string was hard to guess'
     SQLALCHEMY_COMMIT_ON_TEARDOWN=True
     JXNUGO_MAIL_SUBJECT_PREFIX='[JxnuGo]'
-    JXNUGO_MAIL_SENDER='JXNUGO Admin <jxnugo@163.com>'
-    JXNUGO_ADMIN='jxnugo@163.com'
+    JXNUGO_MAIL_SENDER='JXNUGO 管理员 <jxnugo@163.com>'
+    JXNUGO_ADMIN='1157675625@qq.com'
     SQLALCHEMY_DATABASE_URI= 'mysql://root:laidaolong@localhost:3306/jxnugo'
     @staticmethod
     def init_app(app):

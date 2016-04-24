@@ -58,7 +58,7 @@
                                 {% if current_user.is_authenticated %}
                                     <li><a href="#">帖子</a></li>
                                     <li><a href="#">消息</a></li>
-                                    
+                                    <li><a href="{{url_for('main.user',username=current_user.userName)}}" >个人信息</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">偏好设置</a></li>
                                     <li role="separator" class="divider"></li>
@@ -192,7 +192,7 @@
         }).on("shown.bs.modal",function(){
             var a = setInterval(function(){
                 $(".modal").modal('hide')
-            }, 1000)
+            }, 3000)
         }).on("hidden.bs.modal",function(){
             clearInterval(a)
         }).ready(function(){

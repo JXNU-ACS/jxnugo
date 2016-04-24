@@ -26,14 +26,9 @@ def login():
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             session['name']=loginform.userName.data
-<<<<<<< Updated upstream
-            flash(u'login successful,regsussful','bg-success')
-=======
-            flash('flash message:login successful')
->>>>>>> Stashed changes
             return redirect(url_for('main.trade_list'))
         else:
-            flash(u'userName or userPassword uncorrect','bg-warning')
+            flash(u'用户名或密码错误','bg-warning')
             return redirect(url_for('auth.passport'))
     return redirect(url_for('auth.passport'))
 
@@ -47,25 +42,20 @@ def register():
         regUser=User(id=userid,userName=registerform.userName.data,userEmail=registerform.email.data,passWord=registerform.passWord.data)
         db.session.add(regUser)
         db.session.commit()
-        flash('register successful,Now you can check your email')
         token=regUser.generate_confirmation_token()
         send_email(regUser.userEmail,'激活你的账户',
                    'auth/email/confirm',User=regUser,token=token
                    )
-        flash('confirm email has been sent to your mail server')
+        flash(u'注册成功,账户激活信息已经发送到您的邮件!')
         return redirect(url_for('auth.passport'))
-    else:
-        flash('post info failed')
     return redirect(url_for('auth.passport'))
-
-
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     session.pop('name',None)
-    flash('flash message:logout successful')
+    flash(u'成功推出账户')
     return redirect(url_for('auth.passport'))
 
 @auth.route('/confirm/<token>')
@@ -74,10 +64,10 @@ def confirm(token):
     if current_user.confirmed:
         return redirect(url_for('main.trade_list'))
     if current_user.confirm(token):
-        flash('successful confirm account')
+        flash(u'恭喜您完成账户验证')
     else:
-        flash('confirm token invalid or has expired')
-    return redirect('main.trade_list')
+        flash(u'验证信息已过期,请申请系统重新发送邮件')
+    return redirect('trade_list')
 
 
 @auth.route('/confirm')
@@ -85,21 +75,22 @@ def confirm(token):
 def resend_email():
     token=current_user.generate_confirmation_token()
     send_email(current_user.userEmail,'激活你的账户','auth/email/confirm',User=current_user,token=token)
-    flash('a new email has been sent to your email')
+    flash(u'激活邮件已经发送到您的账户')
     return redirect(url_for('main.trade_list'))
 
 
 @auth.before_app_request
 def before_request():
-    if current_user.is_authenticated and not current_user.confirmed and request.endpoint[:5]!='auth.' and request.endpoint !='static':
-        return redirect(url_for('auth.unconfirmed'))
+    if current_user.is_authenticated:
+        current_user.ping()
+        if not current_user.confirmed and request.endpoint[:5]!='auth.':
+            return redirect(url_for('auth.unconfirmed'))
 
 @auth.route('/unconfirmed')
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
         return redirect(url_for('main.trade_list'))
     return render_template('auth/unconfirmed.html')
-
 
 
 
