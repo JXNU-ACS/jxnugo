@@ -192,8 +192,9 @@
         }).on("shown.bs.modal",function(){
             var a = setInterval(function(){
                 $(".modal").modal('hide')
-            }, 1000)
+            }, 1500)
         }).on("hidden.bs.modal",function(){
+            back()
             clearInterval(a)
         }).ready(function(){
             {% with messages = get_flashed_messages() %}

@@ -14,7 +14,7 @@
     		</div>
             <div class="slideBlock" style="left:75.5px;"></div>
 
-            <div class="ui-passport-main-pannel-form center-align  "  data-ariaform="pass_login">
+            <div class="ui-passport-main-pannel-form center-align  "  data-ariapannel="pass_login">
     			<form action="/login" method="post">
     				<div class="input-group">
                         {{loginform.hidden_tag()}}
@@ -29,7 +29,7 @@
     				<div><!--<button class="btn btn-info center-block">登录</button>-->{{ loginform.submit(class="btn btn-info center-block") }}</div>
     			</form>	
     		</div>
-            <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariaform="pass_reg" >
+            <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariapannel="pass_reg" >
                 <form action="/register" method="post">
                     {{registerform.hidden_tag()}}
                     <div class="input-group">
@@ -77,11 +77,11 @@
     $(".cantain-fluid").height($(window).height()-100)
     $(".select").click(function(){
         //页面切换选择器（
-        var state = $(this).attr("id")
-        a = "#"+state
-        setSlideBlockState($(this))
-        $("div[data-ariaform]").each(function(){
-            $(this).attr("data-ariaform")==state?$(this).attr("style",""):$(this).attr("style","display:none;")
+        var b = $(this).attr("id")
+        a = "#"+b
+        setSlideBlockb($(this))
+        $("div[data-ariapannel]").each(function(){
+            $(this).attr("data-ariapannel")==b?$(this).attr("style",""):$(this).attr("style","display:none;")
         })
     })
     $(".select").hover(function(){
