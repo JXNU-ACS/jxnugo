@@ -20,18 +20,15 @@ class DevelopmentConfig(Config):
     MAIL_USE_TLS=True
     MAIL_USERNAME='jxnugo@163.com'
     MAIL_PASSWORD='ldlmecon419'
-    SQLALCHEMY_DATABASE_URL='mysql://root:laidaolong@localhost:3306/jxnugo'
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    JXNUGO_POSTS_PER_PAGE=9
 
 class TestingConfig(Config):
     TESTING=True
-    SQLALCHEMY_DATABASE_URL='mysql://root:laidaolong@localhost:3306/jxnugo'
 
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URL='mysql://root:laidaolong@localhost:3306/jxnugo'
-
+    TESTING=True
 
 config={
     'development': DevelopmentConfig,

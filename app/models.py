@@ -62,6 +62,7 @@ class User(UserMixin,db.Model):
     about_me=db.Column(db.Text())
     menber_since=db.Column(db.DateTime(),default=datetime.utcnow)
     last_seen=db.Column(db.DateTime(),default=datetime.utcnow)
+    posts=db.relationship('Post',backref='author',lazy='dynamic')
 
 
     def __repr__(self):
@@ -111,16 +112,67 @@ class User(UserMixin,db.Model):
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
-    #user information
+    #user information about time
     def ping(self):
         self.last_seen=datetime.utcnow()
         db.session.add(self)
+
+    @staticmethod
+    def generate_fake(count=100):
+        from sqlalchemy.exc import IntegrityError
+        import forgery_py
+
+        random.seed()
+        for i in range(count):
+            u=User(id=randomId(),userName=forgery_py.internet.user_name(True),
+                   userEmail=forgery_py.internet.email_address(),confirmed=True,
+                   passWord='123',name=forgery_py.name.full_name(),
+                   location=forgery_py.address.city(),about_me=forgery_py.lorem_ipsum.sentence(),
+                   menber_since=forgery_py.date.date(True))
+            db.session.add(u)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self,perimissions):
         return False
     def is_administrator(self):
         return False
+
+
+class Post(db.Model):
+    __tablename__='posts'
+    id=db.Column(db.Integer,primary_key=True)
+    body=db.Column(db.Text())
+    timestamp=db.Column(db.DateTime,index=True,default=datetime.utcnow)
+    goodName=db.Column(db.String(128))
+    goodPrice=db.Column(db.Float,default=0)
+    goodNum=db.Column(db.Integer,default=1)
+    goodLocation=db.Column(db.String(64))
+    goodQuality=db.Column(db.String(64))
+    goodBuyTime=db.Column(db.String(64))
+    goodTag=db.Column(db.Integer,default=4)
+    contact=db.Column(db.String(64))
+    photos=db.Column(db.String(128))
+    author_id=db.Column(db.Integer,db.ForeignKey('users.id'))
+
+    @staticmethod
+    def generate_fake(count=50):
+        import forgery_py
+        random.seed()
+        user_count=User.query.count()
+        random.seed()
+        for i in range(count):
+            u=User.query.offset(random.randint(0,user_count-1)).first()
+            p=Post(body=forgery_py.lorem_ipsum.sentences(random.randint(1,3)),timestamp=forgery_py.date.date(True),
+                   id=randomId(),goodName=forgery_py.name.industry(),goodPrice=1239.12,goodNum=1,goodLocation=forgery_py.address.street_address(),
+                   goodQuality=u'9成新',goodBuyTime=forgery_py.date.date(True),goodTag=4,contact=randomId(),
+                   author=u)
+            db.session.add(p)
+            db.session.commit()
+
 
 @login_manager.user_loader
 def load_user(user_id):

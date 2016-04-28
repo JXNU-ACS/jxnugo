@@ -7,19 +7,16 @@ from forms import EditProfileForm,EditProfileAdminForm
 from flask.ext.login import login_required,current_user
 from ..models import Permission,User,Role
 
-@main.route('/trade_list')
-def trade_list():
-    return render_template('trade_list.html')
 
-@main.route('/trade_detail')
-def trade_detail():
-    return render_template("trade_detail.html")
+@main.route('/')
+def indexof():
+    return render_template('index.html')
 
-@main.route('/trade_post')
-def trade_post():
-    return render_template("trade_post.html")
+@main.route('/index')
+def index():
+    return render_template('index.html')
 
-<<<<<<< HEAD
+
 @main.route('/test')
 @login_required
 @admin_required
@@ -33,6 +30,7 @@ def user(username):
     user=User.query.filter_by(userName=username).first()
     if user is None:
         abort(404)
+    #return redirect(url_for('main.user',username=user.userName))
     return render_template('user.html',user=user)
 
 @main.route('/editUserInfo',methods=['GET','POST'])
@@ -74,9 +72,8 @@ def editUserInfoAdmin(id):
     form.name.data=user.name
     form.location.data=user.location
     form.about_me.data=user.about_me
-    return render_template('editUserInfo.html',form=form,user=user)
-=======
+    return render_template('editUserInfo.html',user=user,form=form)
+
 @main.route('/user_zone')
 def user_zone():
     return render_template("user_zone.html")
->>>>>>> origin/master
