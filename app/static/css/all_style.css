@@ -1,225 +1,236 @@
-
-
 /*------------列表-------------------------------------------------*/
+
+
 /*公告容器*/
-.ui-trade-show{
+
+.ui-trade-show {
     background-color: #fff;
 }
-.ui-trade-show-notice{
-    margin-top:20px;
-    height:80px;
-    border-radius:10px;
-    background-color:#eee;
-    box-shadow:0 0 10px #AEAFA9;
+
+.ui-trade-show-notice {
+    margin-top: 20px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #eee;
+    box-shadow: 0 0 10px #AEAFA9;
 }
+
+
 /*列表分类*/
-.ui-trade-show-list{
+
+.ui-trade-show-list {
     position: fixed;
 }
-.ui-trade-show-list>div{
-    font-size: 25px;
-    margin:20px 0 20px 0;
-    white-space:nowrap;
 
+.ui-trade-show-list>div {
+    font-size: 25px;
+    margin: 20px 0 20px 0;
+    white-space: nowrap;
 }
-.ui-trade-show-list>span{
+
+.ui-trade-show-list>span {
     font-size: 15px;
     margin-right: 20px;
-    white-space:nowrap;
+    white-space: nowrap;
 }
+
+
 /*商品容器*/
-.ui-trade-show-contain{
-    margin-top:40px;
-    height:400px;
-    width:100%;
-    border-radius:10px;
-    background:no-repeat #eee;
-    overflew:hidden;
-    box-shadow:0 0 10px #AEAFA9;
+
+.ui-trade-show-contain {
+    margin-top: 40px;
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+    background: no-repeat #eee;
+    overflew: hidden;
+    box-shadow: 0 0 10px #AEAFA9;
 }
-.ui-trade-show-contain-side{
+
+.ui-trade-show-contain-side {
     background: -webkit-linear-gradient(top, rgba(88, 88, 88, 0) 0%, rgba(70, 70, 70, 0.96) 60%, rgba(43, 41, 41, 1) 90%);
-    background:linear-gradient(top, rgba(88, 88, 88, 0) 0%, rgba(70, 70, 70, 0.96) 60%, rgba(43, 41, 41, 1) 90%);
-    opacity:0.9;
-    border-bottom-left-radius:10px;
-    border-bottom-right-radius:10px;
-    position:relative;
-    top:200px;
-    height:200px;
-    width:inherit;
+    background: linear-gradient(top, rgba(88, 88, 88, 0) 0%, rgba(70, 70, 70, 0.96) 60%, rgba(43, 41, 41, 1) 90%);
+    opacity: 0.9;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    top: 200px;
+    height: 200px;
+    width: inherit;
     filter: blur(3px);
     -webkit-filter: blur(3px);
 }
-.ui-trade-show-contain-headbg{
-    background-color:#DADBD4;
-    background-size:cover;
-    border-radius:50%;
-    width:80px;
-    height:80px;
-    position:relative;
-    left:200px;
-    top:70px;
-    box-shadow:0 0 10px #2B2929;
+
+.ui-trade-show-contain-headbg {
+    background-color: #DADBD4;
+    background-size: cover;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    left: 200px;
+    top: 70px;
+    box-shadow: 0 0 10px #2B2929;
     filter: none;
     -webkit-filter: none;
-
-
 }
-.ui-trade-show-contain-text{
-    white-space:nowrap;
-    text-shadow:0 0 10px #fff;
-    position:relative;
-    left:15px;
-    top:0px;
 
+.ui-trade-show-contain-text {
+    white-space: nowrap;
+    text-shadow: 0 0 10px #fff;
+    position: relative;
+    left: 15px;
+    top: 0px;
 }
-.ui-trade-show-contain-price{
-    font-size:30px;
-    color:#FF7A7C;
-    text-shadow:0 0 10px #FF7A7C;
 
+.ui-trade-show-contain-price {
+    font-size: 30px;
+    color: #FF7A7C;
+    text-shadow: 0 0 10px #FF7A7C;
 }
-.ui-trade-show-contain-title{
-    font-size:20px;
-    color:#fff;
-    text-overflow:ellipsis;
-    width:195px;
 
-    overflow:hidden;
+.ui-trade-show-contain-title {
+    font-size: 20px;
+    color: #fff;
+    text-overflow: ellipsis;
+    width: 195px;
+    overflow: hidden;
 }
-.ui-trade-show-contain-userid{
-    font-size:15px;
-    opacity:0.7;
-    color:#fff;
 
-
+.ui-trade-show-contain-userid {
+    font-size: 15px;
+    opacity: 0.7;
+    color: #fff;
 }
+
+
 /*-------------------end-----------------*/
-/*------------------物品描述--------------*/
-.ui-trade-detail-nav{
-    width:200px;
-    text-align:left;
-    position:fixed;
 
-    left:120px;
-    top:200px;
+
+/*------------------物品描述--------------*/
+
+.ui-trade-detail-nav {
+    width: 200px;
+    text-align: left;
+    position: fixed;
+    left: 120px;
+    top: 200px;
 }
 
-.ui-trade-detail-panel-label{
-
-    width:200px;
-    height:50px;
-    background:#000;
-    box-shadow:0 0 10px #000;
-    border-radius:10px;
-    font-size:22px;
-    padding:10px 0 10px 15px;
-    margin-bottom:10px;
+.ui-trade-detail-panel-label {
+    width: 200px;
+    height: 50px;
+    background: #000;
+    box-shadow: 0 0 10px #000;
+    border-radius: 10px;
+    font-size: 22px;
+    padding: 10px 0 10px 15px;
+    margin-bottom: 10px;
     transition: all 0.3s ease-in-out 0.1s;
     -webkit-transition: all 0.3s ease-in-out 0.1s;
 }
-.ui-trade-detail-panel-label:hover{
-    position:relative;
-    left:-90px;
+
+.ui-trade-detail-panel-label:hover {
+    position: relative;
+    left: -90px;
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
 }
-.ui-trade-detail-title{
-    padding:20px;
-    border-bottom-style:dashed;
-    border-width:2px;
-    border-color:#eee;
 
+.ui-trade-detail-title {
+    padding: 20px;
+    border-bottom-style: dashed;
+    border-width: 2px;
+    border-color: #eee;
 }
-.ui-trade-detail-content{
-    padding:20px;
-    border-bottom-style:dashed;
-    border-width:2px;
-    border-color:#eee;
-    word-wrap:normal;
 
+.ui-trade-detail-content {
+    padding: 20px;
+    border-bottom-style: dashed;
+    border-width: 2px;
+    border-color: #eee;
+    word-wrap: normal;
 }
-.ui-trade-detail-content>p{
-    font-size:20px;
-    line-height:180%;
+
+.ui-trade-detail-content>p {
+    font-size: 20px;
+    line-height: 180%;
     text-indent: 2em;
 }
-.ui-trade-detail-content>img{
-    width:100%;
-    display:block;
-}
-.ui-trade-detail-headbg{
-    background-color:#DADBD4;
-    background-size:cover;
-    border-radius:50%;
-    width:120px;
-    height:120px;
-    box-shadow:0 0 10px #2B2929;
-    position:relative;
-    top:-25px;
 
-}
-.ui-trade-detail-userinfo{
-    position:relative;
-    left:150px;
-    top:30px;
-    max-width:150px;
-    color:#5A5B57;
-}
-.ui-trade-detail-rightlist{
-    font-size:15px;
-    color:#333;
-
-
+.ui-trade-detail-content>img {
+    width: 100%;
+    display: block;
 }
 
-.ui-trade-detail-rightlist div{
-    margin:10px 0 10px 0;
-
+.ui-trade-detail-headbg {
+    background-color: #DADBD4;
+    background-size: cover;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    box-shadow: 0 0 10px #2B2929;
+    position: relative;
+    top: -25px;
 }
-.ui-trade-detail-rightlist span{
-    color:#BCBEB6;
-    font-size:30px;
 
-
+.ui-trade-detail-userinfo {
+    position: relative;
+    left: 150px;
+    top: 30px;
+    max-width: 150px;
+    color: #5A5B57;
 }
-.ui-trade-detail-comment{
+
+.ui-trade-detail-rightlist {
+    font-size: 15px;
+    color: #333;
+}
+
+.ui-trade-detail-rightlist div {
+    margin: 10px 0 10px 0;
+}
+
+.ui-trade-detail-rightlist span {
+    color: #BCBEB6;
+    font-size: 30px;
+}
+
+.ui-trade-detail-comment {
     /*padding-top:20px;
     padding-left:10px;*/
     overflow: hidden;
     padding: 0 0 1em;
     border-bottom: 1px solid #ddd;
     margin: 0 0 1em;
-
 }
 
-.ui-trade-detail-comment-input{
-    width:100%;
-    height:200px;
+.ui-trade-detail-comment-input {
+    width: 100%;
+    height: 200px;
 }
-.ui-trade-detail-comment-textcontain{
+
+.ui-trade-detail-comment-textcontain {
     padding-top: 10px;
-    padding-bottom:10px;
-    width:100%;
-
-
-
+    padding-bottom: 10px;
+    width: 100%;
 }
-.ui-trade-detail-comment-textcontain p{
-    font-size:15px;
-    line-height:110%;
-    color:##777873;
+
+.ui-trade-detail-comment-textcontain p {
+    font-size: 15px;
+    line-height: 110%;
+    color: ##777873;
     text-indent: 0em;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
-.ui-trade-detail-comment-extendtext{
-    font-size:13px;
-    color:#777873;
-
+.ui-trade-detail-comment-extendtext {
+    font-size: 13px;
+    color: #777873;
 }
-.ui-trade-detail-comment .ui-trade-detail-comment-textcontain:before{
-     top: 18px;
+
+.ui-trade-detail-comment .ui-trade-detail-comment-textcontain:before {
+    top: 18px;
     left: 78px;
     width: 9px;
     height: 9px;
@@ -231,86 +242,154 @@
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
-
-}
-.ui-trade-detail-comment-reply{
-    padding:20px 0 20px 20px;
-    box-shadow:0 0 10px #eee inset;
 }
 
-.ui-trade-detail-comment-headbg{
-    background-color:#DADBD4;
-    background-size:cover;
-    border-radius:50%;
-    width:60px;
-    height:60px;
+.ui-trade-detail-comment-reply {
+    padding: 20px 0 20px 20px;
+    box-shadow: 0 0 10px #eee inset;
+}
 
+.ui-trade-detail-comment-headbg {
+    background-color: #DADBD4;
+    background-size: cover;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
 }
-.ui-trade-detail-panel-right{
-    float:right;
-    width:35%;
-    background:#fff;
+
+.ui-trade-detail-panel-right {
+    float: right;
+    width: 35%;
+    background: #fff;
 }
-.ui-trade-detail-panel-left{
-    float:left;
-    width:65%;
-    background:#fff;
+
+.ui-trade-detail-panel-left {
+    float: left;
+    width: 65%;
+    background: #fff;
 }
 
 
 /*------------end----------------------*/
 
+
 /*-------------登录/注册界面==============*/
-.ui-passport-main-pannel{
+
+.ui-passport-main-pannel {
     background-color: #fff;
     box-shadow: 0 0 10px #eee;
     width: 500px;
     padding: 20px;
     margin: auto;
     margin-top: 200px;
-
 }
-.ui-passport-main-pannel-tag{
-   text-align: center;
-   padding: 0 0 10px 0;
-   border-bottom:1px solid #eee;
 
+.ui-passport-main-pannel-tag {
+    text-align: center;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid #eee;
 }
-.ui-passport-main-pannel-tag>div{
+
+.ui-passport-main-pannel-tag>div {
     font-size: 20px;
 }
-.ui-passport-main-pannel-form div{
-    
-    margin:30px 0 30px 0;
+
+.ui-passport-main-pannel-form div {
+    margin: 30px 0 30px 0;
     height: 30px;
     width: 300px;
-    -webkit-transition:display .5s case-in;
-    -moz-transition:display .5s case-in;
-    transition:display .5s case-in;
+    -webkit-transition: all .5s case-in;
+    -moz-transition: all .5s case-in;
+    transition: all .5s case-in;
 }
+
 
 /*-----------end-----------------*/
 
+
 /*------------用户空间------------*/
 
-.ui-userzone-tag{
+.ui-userzone-tag {
     text-align: center;
     padding: 0 0 10px 0;
-    border-bottom:1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
-.ui-userzone-tag>div{
+
+.ui-userzone-tag>div>a {
     color: #fff;
     font-size: 20px;
 }
-.ui-userzone-content{
+
+.ui-userzone-body {
     margin-top: -38px;
 }
-.ui-userzone-user-head{
-    width: 200px;
-    height: 200px;
-    background-color:#DADBD4;
-    background-size:cover;
-    border-radius:50%;
 
+.ui-userzone-body-block {
+    padding: 5px 60px 15px 60px;
+    min-height: 100px;
+    border-bottom: 1px solid #eee;
 }
 
+.ui-userzone-content {
+    margin-top: 38px;
+}
+
+.ui-userzone-content-title {
+    color: #B7ACA2;
+}
+
+.ui-userzone-content-datelinebody {
+    padding: 5px;
+    margin-left: 45px;
+    border-left: 2px solid #eee;
+}
+
+.ui-userzone-content-datelinebody>div>.dot {
+    background-color: #FF9BB5;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: -11px;
+}
+
+.ui-userzone-user-head {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50px;
+    top: -130px;
+    background-color: #DADBD4;
+    background-size: cover;
+    border-radius: 20%;
+    box-shadow: 0 5px 10px #000;
+}
+
+.ui-userzone-user-signature {
+    color: #fff;
+    position: absolute;
+    left: 270px;
+    top: 90px;
+    font-size: 20px;
+}
+
+.ui-userzone-user-signature>span {
+    font-size: 40px;
+    color: #fff;
+}
+
+.ui-userzone-user-info-block {
+    width: 280px;
+    padding: 20px;
+}
+
+.ui-userzone-user-info-block>.content-row {
+    margin-bottom: 20px;
+}
+
+.ui-userzone-user-info-block>.content-row>span {
+    padding-right: 50px;
+    width: 100px;
+    font-size: 15px;
+    color:#B7ACA2;
+}

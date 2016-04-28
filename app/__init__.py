@@ -26,8 +26,11 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint,urlfix='/auth')
     from .trade import trade as trade_blueprint
     app.register_blueprint(trade_blueprint,urlfix='/trade')
+<<<<<<< HEAD
     from .bbs import bbs as bbs_blueprint
     app.register_blueprint(bbs_blueprint,urlfix='/bbs')
+=======
+>>>>>>> origin/master
     login_manager.init_app(app)
     return app
 

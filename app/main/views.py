@@ -1,5 +1,5 @@
 #-*- coding: UTF-8 -*-
-from flask import render_template,redirect,url_for,session,flash
+from flask import render_template,redirect,url_for,session,flash,views
 from ..decorators import admin_required,permission_required
 from . import main
 from .. import db
@@ -7,6 +7,7 @@ from forms import EditProfileForm,EditProfileAdminForm
 from flask.ext.login import login_required,current_user
 from ..models import Permission,User,Role
 
+<<<<<<< HEAD
 
 @main.route('/')
 def indexof():
@@ -17,6 +18,8 @@ def index():
     return render_template('index.html')
 
 
+=======
+>>>>>>> origin/master
 @main.route('/test')
 @login_required
 @admin_required
@@ -24,6 +27,18 @@ def index():
 def test():
     return "for comment permission"
 
+@main.route('/static/<filename>',methods=['GET'])
+def staticfile(filename):
+	url_for("static",filename)
+	return redirect("base.html")
+'''
+class media(views.MethodView):
+	def getfile(document,filename):
+		log(document)
+
+		return url_for(document,filename)
+main.add_url_rule('/media/<ducument>/<filename>', view_func=media.as_view(""))
+'''
 
 @main.route('/user/<username>')
 def user(username):
@@ -72,8 +87,17 @@ def editUserInfoAdmin(id):
     form.name.data=user.name
     form.location.data=user.location
     form.about_me.data=user.about_me
+<<<<<<< HEAD
     return render_template('editUserInfo.html',user=user,form=form)
 
 @main.route('/user_zone')
 def user_zone():
     return render_template("user_zone.html")
+=======
+    return render_template('editUserInfo.html',form=form,user=user)
+
+@main.route('/user_zone')
+def user_zone():
+    return render_template("info/user_zone.html")
+
+>>>>>>> origin/master

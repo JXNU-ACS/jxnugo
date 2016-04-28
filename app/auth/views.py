@@ -26,7 +26,11 @@ def login():
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             session['name']=loginform.userName.data
+<<<<<<< HEAD
             return redirect(url_for('main.index'))
+=======
+            return redirect(url_for('trade.trade_list'))
+>>>>>>> origin/master
         else:
             flash(u'用户名或密码错误','bg-warning')
             return redirect(url_for('auth.passport'))
@@ -61,7 +65,7 @@ def logout():
 @auth.route('/confirm/<token>')
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('main.trade_list'))
+        return redirect(url_for('trade.trade_list'))
     if current_user.confirm(token):
         flash(u'恭喜您完成账户验证')
     else:
