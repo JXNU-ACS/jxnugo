@@ -1,5 +1,5 @@
 #-*- coding: UTF-8 -*-
-from flask import render_template,redirect,url_for,session,flash
+from flask import render_template,redirect,url_for,session,flash,views
 from ..decorators import admin_required,permission_required
 from . import main
 from .. import db
@@ -14,6 +14,18 @@ from ..models import Permission,User,Role
 def test():
     return "for comment permission"
 
+@main.route('/static/<filename>',methods=['GET'])
+def staticfile(filename):
+	url_for("static",filename)
+	return redirect("base.html")
+'''
+class media(views.MethodView):
+	def getfile(document,filename):
+		log(document)
+
+		return url_for(document,filename)
+main.add_url_rule('/media/<ducument>/<filename>', view_func=media.as_view(""))
+'''
 
 @main.route('/user/<username>')
 def user(username):
@@ -65,5 +77,5 @@ def editUserInfoAdmin(id):
 
 @main.route('/user_zone')
 def user_zone():
-    return render_template("user_zone.html")
+    return render_template("info/user_zone.html")
 
