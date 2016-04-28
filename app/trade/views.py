@@ -1,5 +1,4 @@
 #-*- coding: UTF-8 -*-
-<<<<<<< HEAD
 from flask import render_template,redirect,url_for,session,flash,request,current_app
 from ..decorators import admin_required,permission_required
 from . import trade
@@ -15,7 +14,7 @@ def trade_list():
         page,per_page=current_app.config['JXNUGO_POSTS_PER_PAGE'],
         error_out=False)
     posts=pagination.items
-    return render_template('trade_list.html',posts=posts,pagination=pagination)
+    return render_template('trade/trade_list.html',posts=posts,pagination=pagination)
 
 
 
@@ -32,29 +31,11 @@ def trade_post():
         db.session.commit()
         flash(u'帖子发布成功')
         return redirect(url_for('main.index'))
-    return render_template('trade_post.html',form=form)
+    return render_template('trade/trade_post.html',form=form)
 
 
 @trade.route('/trade_detail/<int:id>')
 def post(id):
     post=Post.query.get_or_404(id)
-    return render_template('trade_detail.html',post=post)
-=======
-from flask import render_template,redirect,url_for,session
+    return render_template('trade/trade_detail.html',post=post)
 
-from . import trade
-from .. import db
-
-
-@trade.route('/trade_list')
-def trade_list():
-    return render_template('trade/trade_list.html')
-
-@trade.route('/trade_detail')
-def trade_detail():
-    return render_template("trade/trade_detail.html")
-
-@trade.route('/trade_post')
-def trade_post():
-    return render_template("trade/trade_post.html")
->>>>>>> origin/master

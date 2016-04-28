@@ -7,7 +7,6 @@ from forms import EditProfileForm,EditProfileAdminForm
 from flask.ext.login import login_required,current_user
 from ..models import Permission,User,Role
 
-<<<<<<< HEAD
 
 @main.route('/')
 def indexof():
@@ -17,9 +16,6 @@ def indexof():
 def index():
     return render_template('index.html')
 
-
-=======
->>>>>>> origin/master
 @main.route('/test')
 @login_required
 @admin_required
@@ -31,6 +27,7 @@ def test():
 def staticfile(filename):
 	url_for("static",filename)
 	return redirect("base.html")
+
 '''
 class media(views.MethodView):
 	def getfile(document,filename):
@@ -45,8 +42,7 @@ def user(username):
     user=User.query.filter_by(userName=username).first()
     if user is None:
         abort(404)
-    #return redirect(url_for('main.user',username=user.userName))
-    return render_template('user.html',user=user)
+    return render_template('info/user.html',user=user)
 
 @main.route('/editUserInfo',methods=['GET','POST'])
 @login_required
@@ -61,7 +57,7 @@ def editUserInfo():
     form.name.data=current_user.name
     form.location.data=current_user.location
     form.about_me.data=current_user.about_me
-    return render_template('editUserInfo.html',form=form)
+    return render_template('info/editUserInfo.html',form=form)
 
 @main.route('/editUserInfo/<int:id>',methods=['GET','POST'])
 @login_required
@@ -87,17 +83,9 @@ def editUserInfoAdmin(id):
     form.name.data=user.name
     form.location.data=user.location
     form.about_me.data=user.about_me
-<<<<<<< HEAD
-    return render_template('editUserInfo.html',user=user,form=form)
+    return render_template('info/editUserInfo.html',user=user,form=form)
 
-@main.route('/user_zone')
-def user_zone():
-    return render_template("user_zone.html")
-=======
-    return render_template('editUserInfo.html',form=form,user=user)
 
 @main.route('/user_zone')
 def user_zone():
     return render_template("info/user_zone.html")
-
->>>>>>> origin/master

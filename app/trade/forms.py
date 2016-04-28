@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #-*- coding: UTF-8 -*-
 
 from flask.ext.wtf import Form
@@ -19,6 +18,4 @@ class PostForm(Form):
     mycontact=StringField(u'联系方式',validators=[Required(),Length(1,64)])
     body=TextAreaField(u'物品介绍',validators=[Required()])
     submit=SubmitField(u'提交')
-=======
-#-*- coding: UTF-8 -*-
->>>>>>> origin/master
+

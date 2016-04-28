@@ -26,11 +26,7 @@ def login():
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             session['name']=loginform.userName.data
-<<<<<<< HEAD
             return redirect(url_for('main.index'))
-=======
-            return redirect(url_for('trade.trade_list'))
->>>>>>> origin/master
         else:
             flash(u'用户名或密码错误','bg-warning')
             return redirect(url_for('auth.passport'))

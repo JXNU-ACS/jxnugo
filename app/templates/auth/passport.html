@@ -13,13 +13,9 @@
 
     		</div>
             <div class="slideBlock" style="left:75.5px;"></div>
-<<<<<<< HEAD
 
-            <div class="ui-passport-main-pannel-form center-align "  data-ariaform="pass_login">
+            <div class="ui-passport-main-pannel-form center-align "  data-ariapannel="pass_login">
 
-=======
-            <div class="ui-passport-main-pannel-form center-align  "  data-ariapannel="pass_login">
->>>>>>> origin/master
     			<form action="/login" method="post">
     				<div class="input-group">
                         {{loginform.hidden_tag()}}
@@ -30,27 +26,15 @@
     					<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
                         {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
     				</div>
-<<<<<<< HEAD
-
-                    <div>{{loginform.rememberMe()}}记住我</div>
-    				<div><!--<button class="btn btn-info center-block">登录</button>-->{{ loginform.submit(class="btn btn-info center-block") }}</div>
-    			</form>	
-
-=======
                     <div>{{loginform.rememberMe()}} 记住我</div>
     				<div>{{ loginform.submit(class="btn btn-info center-block") }}</div>
-    			</form>	
->>>>>>> origin/master
+    			</form>
     		</div>
             <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariapannel="pass_reg" >
                 <form action="/register" method="post">
                     {{registerform.hidden_tag()}}
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
                         {{registerform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"})}}
                     </div>
                     <div class="input-group">
