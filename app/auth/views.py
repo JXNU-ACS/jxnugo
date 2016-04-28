@@ -26,7 +26,7 @@ def login():
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             session['name']=loginform.userName.data
-            return redirect(url_for('main.trade_list'))
+            return redirect(url_for('trade.trade_list'))
         else:
             flash(u'用户名或密码错误','bg-warning')
             return redirect(url_for('auth.passport'))
@@ -62,7 +62,7 @@ def logout():
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('main.trade_list'))
+        return redirect(url_for('trade.trade_list'))
     if current_user.confirm(token):
         flash(u'恭喜您完成账户验证')
     else:
@@ -76,7 +76,7 @@ def resend_email():
     token=current_user.generate_confirmation_token()
     send_email(current_user.userEmail,'激活你的账户','auth/email/confirm',User=current_user,token=token)
     flash(u'激活邮件已经发送到您的账户')
-    return redirect(url_for('main.trade_list'))
+    return redirect(url_for('trade.trade_list'))
 
 
 @auth.before_app_request
@@ -89,7 +89,7 @@ def before_request():
 @auth.route('/unconfirmed')
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
-        return redirect(url_for('main.trade_list'))
+        return redirect(url_for('trade.trade_list'))
     return render_template('auth/unconfirmed.html')
 
 

@@ -77,7 +77,7 @@
         //页面切换选择器（
         var b = $(this).attr("id")
         a = "#"+b
-        setSlideBlockb($(this))
+        setSlideBlockState($(this))
         $("div[data-ariapannel]").each(function(){
             $(this).attr("data-ariapannel")==b?$(this).attr("style",""):$(this).attr("style","display:none;")
         })
