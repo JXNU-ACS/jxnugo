@@ -1,3 +1,5 @@
+# coding: utf-8
+
 FLASK = {
     'SECRET_KEY': '',
     'SQLALCHEMY_COMMIT_ON_TEARDOWN': True,
