@@ -1,4 +1,15 @@
-####天机不可泄露......
+## 搭建本地开发环境
+
+```
+pip install -r requirements/develop.txt
+cp config/config_sample.py config/config.py
+vim config/config.py  # 编辑config/config.py or 找其他同学要一份复制
+python manage.py runserver
+```
+
+
+## 天机不可泄露......
+
 数据伪造:
 
 ```
