@@ -11,7 +11,9 @@ body {
         	<!--banner-->
         	<div class="ui-panel-cover" style="background-color:#366462;z-index:0;">
         		<div class="ui-userzone-user-signature">
-                	<span>"</span>一些签名什么的<span>"</span>
+                	<span>"</span>{{user.about_me}}<span>"</span><br>
+					<h6><a href="{{url_for('main.editUserInfo')}}">点击这里修改个人信息</a></h6>
+					<!--修改个人信息的位置,到时候样式位置什么的都改改-->
             	</div>
         	</div>
         	<div class="ui-userzone-body row">
@@ -45,8 +47,6 @@ body {
 	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_message">{% include 'info/_zone_message.html' ignore missing%}</div>
         	</div>
         	</div>
-        	
-        	
         </div>
     </div>
 </div>

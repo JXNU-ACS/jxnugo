@@ -29,11 +29,12 @@ body {
 
     {% for post in posts %}
     <li class="post">
-        <a href="{{url_for('main.user',username=post.author.userName)}}">关于{{post.author.userName}}</a>
+        <a href="{{url_for('main.user_zone',username=post.author.userName)}}" >关于:{{post.author.userName}}</a>
         发布时间:{{moment(post.timestamp).fromNow()}}<br>
-        <a href="{{url_for('main.user',username=post.author.userName)}}">发布者:{{post.author.userName}}</a><br>
-        帖子id:{{post.id}}<br>
+        发布者: {{post.author.userName}}<br>
         物品名:{{post.goodName}}<br>
+        物品id:{{post.id}}
+        <a href="{{ url_for('trade.trade_detail',id=post.id) }}" >关于这个物品</a>
         物品价格:{{post.goodPrice}}<br>
         购买时间:{{post.goodBuyTime}}<br>
         物品成色:{{post.goodQuality}}<br>
