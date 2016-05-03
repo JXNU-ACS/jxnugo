@@ -35,7 +35,7 @@ def trade_post():
 
 
 @trade.route('/trade_detail/<id>')
-def post(id):
+def trade_detail(id):
     post=Post.query.get_or_404(id)
     return render_template('trade/trade_detail.html',post=post)
 

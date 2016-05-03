@@ -63,6 +63,7 @@ class User(UserMixin,db.Model):
     menber_since=db.Column(db.DateTime(),default=datetime.utcnow)
     last_seen=db.Column(db.DateTime(),default=datetime.utcnow)
     posts=db.relationship('Post',backref='author',lazy='dynamic')
+    bbsPosts=db.relationship('bbsPost',backref='author',lazy='dynamic')
 
 
     def __repr__(self):
@@ -174,15 +175,25 @@ class Post(db.Model):
             db.session.commit()
 
 
+class bbsPost(db.Model):
+    __tablename__='bbsposts'
+    id=db.Column(db.Integer,primary_key=True)
+    title=db.Column(db.String(128))
+    body=db.Column(db.Text)
+    timestamp=db.Column(db.DateTime,index=True,default=datetime.utcnow)
+    author_id=db.Column(db.Integer,db.ForeignKey('users.id'))
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
 login_manager.anonymous_user=AnonymousUser
+
 def randomId():
     l='1'
     for x in range(0,9):
-	        a=int(random.uniform(0,9))
-	        z=str(a)
-	        l=l+z
+        a=int(random.uniform(0,9))
+        z=str(a)
+        l=l+z
     return l
