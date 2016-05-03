@@ -1,8 +1,15 @@
 {%-extends "./base.html" %}
+{%-block nav %}
+<style>
+body {
+    padding-top: 100px;
+}
+</style>
+{% endblock %}
 {% block content %}
-<div class="divstyle" style="text-align: center;padding: 100px">
+<!--<div class="divstyle" style="text-align: center;padding: 100px">
     <form action="trade_post" method="post">
-        {{form.hidden_tag()}}
+        {#{{form.hidden_tag()}}
         物品id:{{form.formId()}}<br>
         物品名:{{ form.name()}}<br>
         物品类别:{{ form.tag()}}<br>
@@ -13,7 +20,26 @@
         物品成色:{{form.quality()}}<br>
         联系方式:{{form.mycontact()}}<br>
         物品详细介绍:{{form.body()}}<br>
-        {{form.submit()}}
+        {{form.submit()}}#}
     </form>
+</div>-->
+<div class="cantain-fluid">
+    <div class="ui-mainct">
+        <div class="ui-panel" style="padding:60px;">
+            <div class="row" >
+                <div class="ui-post-title col-sm-12">
+                    <h1 style="font-size: 60px;">发布闲置<small>－xxxxx</small></h1>
+                </div>
+            </div>
+            <div class="row ui-post-row" style="margin-top:30px;">
+                <div class="col-sm-2">
+                    <span class="glyphicon glyphicon-th-list"></span>{{ form.tag()}}
+                </div>
+                <div class="col-sm-10">
+                    {{ form.name(class="ui-form-style ui-post-input",**{"placeholder":"给你要卖的东西起个标题吧"})}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
