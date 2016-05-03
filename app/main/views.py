@@ -32,18 +32,6 @@ def staticfile(filename):
     return redirect("base.html")
 
 
-'''
-
-class media(views.MethodView):
-    def getfile(document,filename):
-        log(document)
-
-        return url_for(document,filename)
-main.add_url_rule('/media/<ducument>/<filename>', view_func=media.as_view(""))
-
-'''
-
-
 @main.route('/user/<username>')
 def user(username):
     user=User.query.filter_by(userName=username).first()
