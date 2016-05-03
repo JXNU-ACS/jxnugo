@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-md-8">
         <div class="ui-userzone-body-block ">
-            <h3><div class="ui-userzone-content-title">ta的收藏</div></h3>
+            <h3><div class="ui-userzone-content-title">ta的帖子</div></h3>
             <!--时间线（？）面板-->
+            {% for post in posts %}
             <div class="ui-userzone-content-datelinebody row">
                 <div class="col-md-1">
                     <div class="dot"></div>
@@ -12,62 +13,38 @@
                         <div class="col-md-2">
                             <div class="smImg"></div>这是图片</div>
                         <div class="col-md-10">
-                            
+
                             <div class="row">
-                                <div class="title">这是标题</div>
+                                <div class="title">{{post.goodName}}</div>
                             </div>
                             <div class="row">
-                                <div class="date">2016/10/10</div>
+                                <div class="date">{{post.timestamp}}</div>
                             </div>
                             <div class="row">
-                                <div class="text">这是文本内容</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end-->
-            <!--时间线（？）面板-->
-            <div class="ui-userzone-content-datelinebody row">
-                <div class="col-md-1">
-                    <div class="dot"></div>
-                </div>
-                <div class="col-md-11">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="smImg"></div>这是图片</div>
-                        <div class="col-md-10">
-                            
-                            <div class="row">
-                                <div class="title">这是标题</div>
-                            </div>
-                            <div class="row">
-                                <div class="date">2016/10/10</div>
-                            </div>
-                            <div class="row">
-                                <div class="text">这是文本内容</div>
+                                <div class="text">{{post.body}}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!--end-->
+            {% endfor %}
         </div>
         <div class="ui-userzone-body-block ">
-            <h3><div class="ui-userzone-content-title">ta的帖子</div></h3>
+            <h3><div class="ui-userzone-content-title">ta的收藏</div></h3>
         </div>
     </div>
     <div class="col-md-4">
 
     	<div class="ui-userzone-user-info-block row">
     		<div class="content-row">
-    			<h3>can2 <tr><small><span>男</span></small></h3>
+    			<h3>{{user.userName}} <tr><small><span>男</span></small></h3>
     		</div>
     		<div class="content-row">
-    			<span>UID xxxxxx</span><span>注册时间</span>
+    			<span>用户ID:{{user.id}}</span><span>注册时间:{{user.menber_since}}</span>
     		</div>
     		<div class="content-row">
-    			<span>位于xxxxx</span>
+    			<span>地址:{{user.location}}</span><span>上次登录:{{user.last_seen}}</span>
     		</div>
     		<div class="content-row">
     			<h3>他的关注</h3>
