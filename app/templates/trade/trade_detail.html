@@ -130,15 +130,21 @@ body {
                 <div class="col-md-4 right-panel">
                     <div class="ui-trade-detail-headbg" style="background-image:url(/static/images/1.jpg)">
                         <div class="ui-trade-detail-userinfo">
-                            <h3>can2</h3>
-                            <h5>这里是心情什么gui的</h5></div>
+                            <h3><a href="{{ url_for('main.user_zone',username=post.author.userName) }}">{{ post.author.userName }}</a> </h3>
+                            <h5>{{ post.author.about_me }}</h5></div>
                     </div>
                     <div class="contentlist sticky" >
                         <div class="ui-trade-detail-rightlist">
                             <span>该用户的其他帖子</span>
-                            <div>333333333333333</div>
-                            <div>111111111111</div>
-                            <div>22222222222</div>
+                            <ul>
+                            {%  if post.author.posts %}
+                            {% for userpost in post.author.posts %}
+                            <li><a href="{{ url_for('trade.trade_detail',goodId=userpost.id)}}"> {{ userpost.goodName }}</a></li>
+                            {%  endfor %}
+                            {% else %}
+                            <li>该用户还未发表过帖子~</li>
+                            {% endif %}
+                            </ul>
                         </div>
                     </div>
                 </div>

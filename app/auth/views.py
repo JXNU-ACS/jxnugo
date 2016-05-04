@@ -1,20 +1,19 @@
 #-*- coding: UTF-8 -*-
-from flask import render_template,redirect,url_for,flash,session,request
+from flask import render_template,redirect,url_for,flash,session,request,abort
 from . import auth
 from ..models import User,Role,randomId
-from .. import  db
+from .. import db
 from ..email import send_email
 from .forms import loginForm,registerForm
 from flask.ext.login import logout_user,login_required,login_user,current_user
-
-
+from itsdangerous import JSONWebSignatureSerializer as Serializer
+from config import configs,ENV
 
 @auth.route('/passport',methods=['POST','GET'])
 def passport():
     loginform=loginForm()
     registerform=registerForm()
     return render_template('auth/passport.html',loginform=loginform,registerform=registerform)
-
 
 
 @auth.route('/login',methods=['GET','POST'])
@@ -25,7 +24,6 @@ def login():
         user=User.query.filter_by(userName=loginform.userName.data).first()
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
-            session['name']=loginform.userName.data
             return redirect(url_for('main.index'))
         else:
             flash(u'用户名或密码错误','bg-warning')
@@ -35,10 +33,9 @@ def login():
 
 @auth.route('/register',methods=['GET','POST'])
 def register():
-    loginform=loginForm()
     registerform=registerForm()
     if registerform.validate_on_submit():
-        userid=randomId()
+        userid=User.query.count()+1
         regUser=User(id=userid,userName=registerform.userName.data,userEmail=registerform.email.data,passWord=registerform.passWord.data)
         db.session.add(regUser)
         db.session.commit()
@@ -50,6 +47,7 @@ def register():
         return redirect(url_for('auth.passport'))
     return redirect(url_for('auth.passport'))
 
+
 @auth.route('/logout')
 @login_required
 def logout():
@@ -58,15 +56,20 @@ def logout():
     flash(u'成功推出账户')
     return redirect(url_for('auth.passport'))
 
+
 @auth.route('/confirm/<token>')
 def confirm(token):
-    if current_user.confirmed:
-        return redirect(url_for('trade.trade_list'))
-    if current_user.confirm(token):
-        flash(u'恭喜您完成账户验证')
-    else:
-        flash(u'验证信息已过期,请申请系统重新发送邮件')
-    return redirect(url_for('trade.trade_list'))
+    s=Serializer(configs[ENV].SECRET_KEY)
+    try:
+        recvData=s.loads(token)
+    except:
+        abort(404)
+    RecvId=recvData.get('confirm')
+    u = User.query.filter_by(id=RecvId).first_or_404()
+    u.confirmed=True
+    db.session.add(u)
+    flash(u'恭喜您完成账号激活')
+    return redirect(url_for('auth.passport'))
 
 
 @auth.route('/confirm')
@@ -84,6 +87,7 @@ def before_request():
         current_user.ping()
         if not current_user.confirmed and request.endpoint[:5]!='auth.':
             return redirect(url_for('auth.unconfirmed'))
+
 
 @auth.route('/unconfirmed')
 def unconfirmed():

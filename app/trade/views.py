@@ -23,7 +23,7 @@ def trade_list():
 def trade_post():
     form=PostForm()
     if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
-        post=Post(id=form.formId.data,body=form.body.data,goodName=form.name.data,goodPrice=form.price.data,goodNum=form.num.data,
+        post=Post(id=Post.query.count()+1,body=form.body.data,goodName=form.name.data,goodPrice=form.price.data,goodNum=form.num.data,
                   goodLocation=form.location.data,goodQuality=form.quality.data,goodTag=form.tag.data,
                   goodBuyTime=form.buyTime.data,contact=form.mycontact.data,
                   author=current_user._get_current_object())
@@ -34,8 +34,8 @@ def trade_post():
     return render_template('trade/trade_post.html',form=form)
 
 
-@trade.route('/trade_detail/<id>')
-def trade_detail(id):
-    post=Post.query.get_or_404(id)
+@trade.route('/trade_detail/<goodId>')
+def trade_detail(goodId):
+    post=Post.query.get_or_404(goodId)
     return render_template('trade/trade_detail.html',post=post)
 
