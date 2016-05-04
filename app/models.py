@@ -65,7 +65,6 @@ class User(UserMixin,db.Model):
     posts=db.relationship('Post',backref='author',lazy='dynamic')
     bbsPosts=db.relationship('bbsPost',backref='author',lazy='dynamic')
 
-
     def __repr__(self):
         return '<User %r>' % self.userName
 
@@ -113,6 +112,7 @@ class User(UserMixin,db.Model):
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
+
     #user information about time
     def ping(self):
         self.last_seen=datetime.utcnow()
@@ -125,7 +125,7 @@ class User(UserMixin,db.Model):
 
         random.seed()
         for i in range(count):
-            u=User(id=randomId(),userName=forgery_py.internet.user_name(True),
+            u=User(id=User.query.count()+1,userName=forgery_py.internet.user_name(True),
                    userEmail=forgery_py.internet.email_address(),confirmed=True,
                    passWord='123',name=forgery_py.name.full_name(),
                    location=forgery_py.address.city(),about_me=forgery_py.lorem_ipsum.sentence(),
@@ -135,6 +135,7 @@ class User(UserMixin,db.Model):
                 db.session.commit()
             except IntegrityError:
                 db.session.rollback()
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self,perimissions):
@@ -168,7 +169,7 @@ class Post(db.Model):
         for i in range(count):
             u=User.query.offset(random.randint(0,user_count-1)).first()
             p=Post(body=forgery_py.lorem_ipsum.sentences(random.randint(1,3)),timestamp=forgery_py.date.date(True),
-                   id=randomId(),goodName=forgery_py.name.industry(),goodPrice=1239.12,goodNum=1,goodLocation=forgery_py.address.street_address(),
+                   id=Post.query.count()+1,goodName=forgery_py.name.industry(),goodPrice=1239.12,goodNum=1,goodLocation=forgery_py.address.street_address(),
                    goodQuality=u'9成新',goodBuyTime=forgery_py.date.date(True),goodTag=4,contact=randomId(),
                    author=u)
             db.session.add(p)
@@ -189,6 +190,7 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 login_manager.anonymous_user=AnonymousUser
+
 
 def randomId():
     l='1'

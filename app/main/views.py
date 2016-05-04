@@ -66,11 +66,20 @@ def editUserInfo():
     return render_template('info/editUserInfo.html', form=form)
 
 
-@main.route('/editUserInfo/<int:id>', methods=['GET', 'POST'])
+@main.route('/show_user',methods=['GET','POST'])
 @login_required
 @admin_required
-def editUserInfoAdmin(id):
-    user = User.query.get_or_404(id)
+def show_user():
+    users=User.query.all()
+    return render_template('info/show_user.html', users=users)
+
+
+
+@main.route('/editUserInfoAdmin/<pid>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def editUserInfoAdmin(pid):
+    user = User.query.get_or_404(pid)
     form = EditProfileAdminForm(user=user)
     if form.validate_on_submit():
         user.userEmail = form.email.data
@@ -81,8 +90,9 @@ def editUserInfoAdmin(id):
         user.locati = form.location.data
         user.about_me = form.about_me.data
         db.session.add(user)
+        db.session.commit()
         flash(u'已将个人信息更新')
-        return redirect(url_for('.user', username=user.userName))
+        return render_template('info/editUserInfoAdmin.html',form=form,pid=user.id)
     form.email.data = user.userEmail
     form.username.data = user.userName
     form.confirmed.data = user.confirmed
@@ -90,4 +100,4 @@ def editUserInfoAdmin(id):
     form.name.data = user.name
     form.location.data = user.location
     form.about_me.data = user.about_me
-    return render_template('info/editUserInfo.html', user=user, form=form)
+    return render_template('info/editUserInfoAdmin.html',form=form,pid=user.id)

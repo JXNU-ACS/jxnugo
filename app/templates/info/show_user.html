@@ -1,0 +1,14 @@
+{%-extends "base.html" %}
+{% block content %}
+<div class="divstyle" style="text-align: center;padding: 100px">
+    <h4>选择用户进行管理</h4>
+    <ul>
+    {% if users %}
+        {% for user in users %}
+        <li><a href="{{ url_for('main.editUserInfoAdmin',pid=user.id) }}">{{ user.userName }}</a></li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+
+</div>
+{% endblock %}
