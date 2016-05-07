@@ -113,3 +113,15 @@ def get_upload_token():
     upload_token=q.upload_token(bucket_name,key,3600)
     return jsonify({'upload_token':upload_token,'key':key})
 
+
+@main.route('/get_mobile_token')
+def get_mobile_token():
+    q=Auth(current_app.config['QINIU_ACCESS_KEY'],current_app.config['QINIU_SECRET_KEY'])
+    bucket_name='trade'
+    mobile_upload_token=q.upload_token(bucket_name,3600)
+    return jsonify({'upload_token':mobile_upload_token})
+
+@main.route('/get_mobile_key')
+def get_mobile_key():
+    key=uuid4()
+    return jsonify({'upload_key':key})
