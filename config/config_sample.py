@@ -21,4 +21,10 @@ JXNUGO = {
     'JXNUGO_POSTS_PER_PAGE': 9,
 }
 
+QINIU = {
+    'ACCESS_KEY':'',
+    'SECRET_KEY':'',
+}
+
+
 ENV = 'development'
