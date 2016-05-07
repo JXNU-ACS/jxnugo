@@ -1,12 +1,14 @@
 # -*- coding: UTF-8 -*-
-from flask import render_template, redirect, url_for, session, flash, views
+from flask import render_template, redirect, url_for, session, flash, views,current_app,jsonify
 from ..decorators import admin_required, permission_required
 from . import main
 from .. import db
 from forms import EditProfileForm, EditProfileAdminForm
 from flask.ext.login import login_required, current_user
 from ..models import Permission, User, Role, Post
-
+from qiniu import Auth,put_file,etag,urlsafe_base64_encode
+import qiniu.config
+from uuid import uuid4
 
 @main.route('/')
 def indexof():
@@ -101,3 +103,13 @@ def editUserInfoAdmin(pid):
     form.location.data = user.location
     form.about_me.data = user.about_me
     return render_template('info/editUserInfoAdmin.html',form=form,pid=user.id)
+
+
+@main.route('/get_upload_token')
+def get_upload_token():
+    q=Auth(current_app.config['QINIU_ACCESS_KEY'],current_app.config['QINIU_SECRET_KEY'])
+    bucket_name='trade'
+    key=uuid4()
+    upload_token=q.upload_token(bucket_name,key,3600)
+    return jsonify({'upload_token':upload_token,'key':key})
+
