@@ -42,9 +42,8 @@ a:active{color:#000}
     font-size:20px
 }
 /*表单输入样式*/
-.ui-form-style{
-    border:0;
-    border-style:none;
+.ui-form-style:focus{
+    outline: none;
 }
 /*带封面的面板*/
 .ui-panel{
@@ -68,15 +67,31 @@ a:active{color:#000}
 }
 /*足*/
 .ui-footer{
-    margin-top:50px;
-    height:100px;
-    border-top-right-radius:50%;
-    border-top-left-radius:50%;
-    text-align:center;
-    box-shadow:0 0 5px #eee inset;
-    padding-top:40px;
-    color:#B1B2AB;
+    height:300px;
+    background:#211C1D;
+    padding:5% 20% 5% 20%;
+    margin-top: 50px;
 }
+.ui-footer .title{
+    color: #B7ACA2;
+    font-size: 30px;
+}
+.ui-footer small{
+    color: #665558;
+}
+.ui-footer ul{
+    color: #eee;
+    font-size: 15px;
+}
+.ui-footer >.row {
+    margin-top: 30px;
+}
+/*分页*/
+.ui-pagination{
+    text-align: center;
+    margin: 50px 0 50px 0;
+}
+
 .right{
     float:right;
 }
@@ -109,7 +124,6 @@ a:active{color:#000}
 
     position:-webkit-sticky;
     position:sticky;
-    top:175px;
 }
 .slideBlock{
     width:70px;
@@ -119,4 +133,9 @@ a:active{color:#000}
     -webkit-transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
     -moz-transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
     transition:left .5s cubic-bezier(0.09, -0.31, 0.38, 1.28);
+}
+.case-in{
+    -webkit-transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in;
+    transition: all .3s ease-in;
 }

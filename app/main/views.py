@@ -6,6 +6,7 @@ from .. import db
 from forms import EditProfileForm, EditProfileAdminForm
 from flask.ext.login import login_required, current_user
 from ..models import Permission, User, Role, Post
+
 from qiniu import Auth,put_file,etag,urlsafe_base64_encode
 import qiniu.config
 from uuid import uuid4

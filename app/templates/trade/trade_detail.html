@@ -24,11 +24,18 @@ body {
             <div class="row">
                 <!--左边-->
                 <div class="col-md-8 left-panel">
-                    
-                    <div id="detail" class="ui-trade-detail-title">
-                        <h1>{{ post.goodName }}</h1>
-                        <h5><span class="glyphicon glyphicon-time"></span>{{post.timestamp}}</h5>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div id="detail" class="ui-trade-detail-title">
+                            <h1>{{ post.goodName }}</h1>
+                            <h5><span class="glyphicon glyphicon-time"></span>{{post.timestamp}}</h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="ui-trade-detail-price">¥{{ post.goodPrice }}</div>
+                        </div>
                     </div>
+                    
                     <div  class="ui-trade-detail-content">
                         <p>{{post.body}}
                         </p>
@@ -131,9 +138,9 @@ body {
                     <div class="ui-trade-detail-headbg" style="background-image:url(/static/images/1.jpg)">
                         <div class="ui-trade-detail-userinfo">
                             <h3><a href="{{ url_for('main.user_zone',username=post.author.userName) }}">{{ post.author.userName }}</a> </h3>
-                            <h5>{{ post.author.about_me }}</h5></div>
+                            <h5 class="sign">{{ post.author.about_me }}</h5></div>
                     </div>
-                    <div class="contentlist sticky" >
+                    <div class="stickypannel " >
                         <div class="ui-trade-detail-rightlist">
                             <span>该用户的其他帖子</span>
                             <ul>
@@ -155,7 +162,14 @@ body {
 </div>
 {% endblock %} {% block script %}
 <script>
-$(".right-panel").height($(".left-panel").innerHeight())
 
+$(document).ready(function(){
+    var ui = new UI();
+    ui.sticky({
+        offsetY:175,
+        contain:$('.right-panel'),
+    })
+    $(".right-panel").height($(".left-panel").innerHeight())
+})
 </script>
 {% endblock %}

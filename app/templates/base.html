@@ -187,46 +187,49 @@
             </div>
         </div>
     </div>
-    <script src={{url_for('main.staticfile',filename='js/jquery.min.js')}}></script>
-    <script src={{url_for('main.staticfile',filename='js/bootstrap.min.js')}}></script>
-    <script>
-    (function(){
-        $(".modal").modal({
-            keyboard:false,
-            show:false
-        }).on("shown.bs.modal",function(){
-            var a = setInterval(function(){
-                $(".modal").modal('hide')
-            }, 3000)
-        }).on("hidden.bs.modal",function(){
-            clearInterval(a)
-        }).ready(function(){
+    <!--依赖框架，插件-->
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/jquery.min.js')}}></script>
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/bootstrap.min.js')}}></script>
+    <!--全局ui-->
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/ui/global.js')}}></script>
+    <script type="text/javascript">
+        var ui = new UI();
+        ui.modalShow(function(){
             {% with messages = get_flashed_messages() %}
             {% if messages %}
                 $(".modal").modal('show')
             {% endif %} 
             {% endwith %}
-            
         });
-        $('[data-toggle="tooltip"]').tooltip() //气泡
-        
-    })();
-    
+        ui.bubbleTip();
     </script>
     {% block script %}{% endblock %}
-    <!--<footer class="ui-footer">
-
-        {#{% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <ul>
-         {% for category,message in messages %}
-            <li class="{{category}}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}#}
-
-    </footer>-->
+    <footer class="ui-footer">
+        <div class="title">
+            <span>江西师大GO(?)<small> -从前端到前台坐台</small></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <ul>
+                    <li>关于我们</li>
+                    <li>关于我们</li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <ul>
+                    <li>关于我们</li>
+                    <li>关于我们</li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <ul>
+                    <li>关于我们</li>
+                    <li>关于我们</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">备案号什么的</div>
+    </footer>
 </body>
 
 </html>

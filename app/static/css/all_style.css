@@ -143,7 +143,11 @@
     border-width: 2px;
     border-color: #eee;
 }
-
+.ui-trade-detail-price{
+    font-size: 30px;
+    color: #FF7A7C;
+    margin-top: 40%;
+}
 .ui-trade-detail-content {
     padding: 20px;
     border-bottom-style: dashed;
@@ -172,6 +176,7 @@
     box-shadow: 0 0 10px #2B2929;
     position: relative;
     top: -25px;
+    z-index: 2;
 }
 
 .ui-trade-detail-userinfo {
@@ -180,8 +185,13 @@
     top: 30px;
     max-width: 150px;
     color: #5A5B57;
-}
 
+}
+.ui-trade-detail-userinfo .sign{
+    text-overflow: ellipsis;
+    max-height: 50px;
+    overflow: hidden;
+}
 .ui-trade-detail-rightlist {
     font-size: 15px;
     color: #333;
@@ -387,9 +397,100 @@
     margin-bottom: 20px;
 }
 
-.ui-userzone-user-info-block>.content-row>span {
-    padding-right: 50px;
+.ui-userzone-user-info-block>.content-row>.item {
     width: 100px;
-    font-size: 15px;
-    color:#B7ACA2;
 }
+
+.ui-userzone-user-info-block>.content-row>.text {
+    font-size: 15px;
+    color: #B7ACA2;
+    padding-right: 50px;
+}
+
+.ui-userzone-user-info-block>.content-row>.headimg {}
+
+
+/*----------发布帖子--------------*/
+
+.ui-post-row {
+    min-height: 80px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.ui-post-title {
+    color: #B7ACA2;
+}
+
+.ui-post-input {
+    width: 100%;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #eee;
+}
+
+.ui-post-upload {
+    height: 180px;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    background-color: #eee;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.ui-post-upload .btn {
+    width: 180px;
+    height: 180px;
+    color: #9BB7B4;
+    font-size: 20px;
+    border-radius: 20px;
+    text-align: center;
+    padding-top: 35%;
+    position: relative;
+    z-index: 0;
+}
+
+.ui-post-upload .btn:hover {
+    color: #fff;
+    border-style: none;
+    background-color: rgba(102, 85, 88, .6);
+}
+.ui-post-upload .btn-shadow{
+    position: absolute;
+    z-index: 1;
+}
+.ui-post-upload .del-bg {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, .6);
+    margin: -20% 0 0 75%;
+    position: relative;
+    z-index: 2;
+}
+
+.ui-post-upload .btn-del {
+    font-size: 30px;
+    color: #fff;
+    border: none;
+    background:transparent;
+    margin: 40% 0 0 11%;
+    position: relative;
+    z-index: 3;
+    opacity: 1;
+    -moz-transform-origin:50% 55%;
+    -webkit-transform-origin:50% 55%;
+    -ms-transform-origin:50% 55%;
+    transform-origin:50% 55%;
+    -moz-transition-duration:.1s;
+    -webkit-transition-duration:.1s;
+    transition-duration:.1s;
+}
+.ui-post-upload .btn-del:hover{
+    text-shadow:0 0 10px #fff;
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+.ui-post-upload>#pickfiles {}

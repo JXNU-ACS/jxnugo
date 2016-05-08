@@ -64,7 +64,12 @@
 {% endblock %}
 {% block script %}
 <script type="text/javascript">
-
+ui = new UI();
+ui.slideBlock({
+    originPosition:"#pass_login"
+})
+$(".cantain-fluid").height($(window).height()-100)
+/*
 (function(){
 
     var a = "#pass_login" //这里大概是判断进入时注册还是登录，没有测试传入的值于是假设惹
@@ -90,6 +95,6 @@
         setSlideBlockState($(a))
     })
 })();
-
+*/
 </script>
 {% endblock %}
