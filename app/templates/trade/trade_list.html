@@ -14,7 +14,7 @@ body {
                         <a href="{{url_for('trade.trade_post')}}">发布商品！</a>
                     </button>
                 </div>
-                <div class="right-align col-md-3" style="margin-top:10px;"><span class="ui-trade-listct">按时间</span><span class="ui-trade-listct">按评论</span></div>
+                
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@ body {
                         <div class="ui-trade-show-contain" style="background-image:url('static/images/2.jpeg');background-size:cover;" data-href={{post.id}}>
                             <div class="ui-trade-show-contain-side">
                             </div>
-                            <div class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');">
+                            <a href="#"><div class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');"></a>
                             </div>
                             <div class="ui-trade-show-contain-text">
                                 <div class="ui-trade-show-contain-price">${{post.goodPrice}}</div>
@@ -77,29 +77,13 @@ body {
     </div>
 </div>
 <!--这里是引用分页导航的局部模板macros-->
-<div class="pagination" style="text-align: center;padding-left: 200px;">
+<div class="ui-pagination center-align">
     {{ macros.pagination_widget(pagination,'.trade_list')}}
 </div>
 </div>
 {% endblock %} {% block script %}
 <script type="text/javascript">
-$(function() {
-    var s = 0
-    $('.btn-list-toggle').click(function() {
-            //列表开关效果
-        if (s == 1) {
-            $(".ui-trade-show").removeClass("contain-shrink").addClass("contain-extend")
-            $(".ui-trade-show-contain-headbg").removeClass("fade-out").addClass("fade-in")
-            s = 0
-        } else {
-            $(".ui-trade-show").removeClass("contain-extend").addClass("contain-shrink")
-            $(".ui-trade-show-contain-headbg").removeClass("fade-in").addClass("fade-out")
-            s = 1
-        }
-    })
-    $('.ui-trade-show-contain').click(function(){
-        localtion.href=$(this).attr("data-href")
-    })
-})
+    ui = new UI();
+    ui.listToggle();
 </script>
 {% endblock %}

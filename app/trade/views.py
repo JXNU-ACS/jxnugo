@@ -33,7 +33,6 @@ def trade_post():
         return redirect(url_for('main.index'))
     return render_template('trade/trade_post.html',form=form)
 
-
 @trade.route('/trade_detail/<goodId>')
 def trade_detail(goodId):
     post=Post.query.get_or_404(goodId)
