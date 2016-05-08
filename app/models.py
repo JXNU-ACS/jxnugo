@@ -8,12 +8,14 @@ from datetime import datetime
 from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
+
 class Permission:
     FOLLOW = 0x01
     COMMENT = 0x02
     WRITE_ARTICLES = 0x04
     MODERATE_COMMENTS = 0x08
     ADMINISTER = 0x80
+
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -48,6 +50,13 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role %r>' % self.name
 
+class Follow(db.Model):
+    __tablename__ = 'follows'
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                            primary_key=True)
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                            primary_key=True)
+    timestamp = db.Column(db.DateTime, default=datetime.now)
 
 class User(UserMixin,db.Model):
     __tablename__='users'
@@ -59,11 +68,14 @@ class User(UserMixin,db.Model):
     role_id=db.Column(db.Integer,db.ForeignKey('roles.id'))
     name=db.Column(db.String(64))
     location=db.Column(db.String(64))
+    sex=db.Column(db.String(20))
     about_me=db.Column(db.Text())
     menber_since=db.Column(db.DateTime(),default=datetime.utcnow)
     last_seen=db.Column(db.DateTime(),default=datetime.utcnow)
     posts=db.relationship('Post',backref='author',lazy='dynamic')
     bbsPosts=db.relationship('bbsPost',backref='author',lazy='dynamic')
+    followed = db.relationship('Follow',foreign_keys=[Follow.follower_id],backref=db.backref('follower', lazy='joined'),lazy='dynamic',cascade='all, delete-orphan')
+    followers = db.relationship('Follow',foreign_keys=[Follow.followed_id], backref=db.backref('followed', lazy='joined'), lazy='dynamic', cascade='all, delete-orphan')
 
     def __repr__(self):
         return '<User %r>' % self.userName
@@ -96,6 +108,21 @@ class User(UserMixin,db.Model):
         self.confirmed=True
         db.session.add(self)
         return True
+    #api generate token
+
+    def generate_auth_token(self,expiration):
+        s=Serializer(current_app.config['SECRET_KEY'],expires_in=expiration)
+        return s.dumps({'id':self.id})
+
+    @staticmethod
+    def verify_auth_token(token):
+        s=Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data=s.loads(token)
+        except:
+            return None
+        return User.query.get(data['id'])
+
 
     #role and permissions
     def __init__(self,**kwargs):
@@ -127,7 +154,7 @@ class User(UserMixin,db.Model):
         for i in range(count):
             u=User(id=User.query.count()+1,userName=forgery_py.internet.user_name(True),
                    userEmail=forgery_py.internet.email_address(),confirmed=True,
-                   passWord='123',name=forgery_py.name.full_name(),
+                   passWord='123',sex=u'男', name=forgery_py.name.full_name(),
                    location=forgery_py.address.city(),about_me=forgery_py.lorem_ipsum.sentence(),
                    menber_since=forgery_py.date.date(True))
             db.session.add(u)
@@ -136,10 +163,28 @@ class User(UserMixin,db.Model):
             except IntegrityError:
                 db.session.rollback()
 
+    #follow and unfollow
+    def follow(self,user):
+        if not self.is_following(user):
+            f=Follow(follower=self,followed=user)
+            db.session.add(f)
+
+    def unfollow(self,user):
+        f=self.followed.filter_by(followed_id=user.id).first()
+        if f:
+           db.session.delete(f)
+
+    def is_following(self,user):
+        return self.followed.filter_by(followed_id=user.id).first() is not None
+
+    def is_followed_by(self,user):
+        return self.followers.filter_by(follower_id=user.id).first() is not None
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self,perimissions):
         return False
+
     def is_administrator(self):
         return False
 
@@ -170,7 +215,7 @@ class Post(db.Model):
             u=User.query.offset(random.randint(0,user_count-1)).first()
             p=Post(body=forgery_py.lorem_ipsum.sentences(random.randint(1,3)),timestamp=forgery_py.date.date(True),
                    id=Post.query.count()+1,goodName=forgery_py.name.industry(),goodPrice=1239.12,goodNum=1,goodLocation=forgery_py.address.street_address(),
-                   goodQuality=u'9成新',goodBuyTime=forgery_py.date.date(True),goodTag=4,contact=randomId(),
+                   goodQuality=u'9成新', goodBuyTime=forgery_py.date.date(True), goodTag=4, contact=randomId(),
                    author=u)
             db.session.add(p)
             db.session.commit()
@@ -190,6 +235,7 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 login_manager.anonymous_user=AnonymousUser
+login_manager.login_message = u'请登陆账户后再尝试访问此页面'
 
 
 def randomId():

@@ -16,6 +16,16 @@ body {
 					<h6><a href="{{url_for('main.editUserInfo')}}">点击这里修改个人信息</a></h6>
                     {% else %}
                     {% endif %}
+                    {% if current_user.can(Permission.FOLLOW) and user != current_user %}
+                        {% if not current_user.is_following(user) %}
+                            <a href="{{ url_for('main.follow', username=user.userName)}}">关注</a>
+                         {% else %}
+                            <a href="{{ url_for('main.unfollow', username=user.userName) }}">取消关注</a>
+                        {% endif %}
+                    {% endif %}
+                    {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
+                    <span class="label label-default">关注了你</span>
+                    {% endif %}
 					<!--修改个人信息的位置,到时候样式位置什么的都改改-->
             	</div>
         	</div>

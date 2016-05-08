@@ -4,4 +4,4 @@ from flask import Blueprint
 
 api=Blueprint('api',__name__)
 
-from . import views,authentication,posts,users,comments
+from . import authentication,comments,errors,tradePosts,users,bbsposts

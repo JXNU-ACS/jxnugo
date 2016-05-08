@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from flask import render_template, redirect, url_for, session, flash, views,current_app,jsonify
+from flask import render_template, redirect, url_for, session, flash, views,current_app,jsonify,request
 from ..decorators import admin_required, permission_required
 from . import main
 from .. import db
@@ -9,6 +9,7 @@ from ..models import Permission, User, Role, Post
 from qiniu import Auth,put_file,etag,urlsafe_base64_encode
 import qiniu.config
 from uuid import uuid4
+
 
 @main.route('/')
 def indexof():
@@ -36,7 +37,7 @@ def staticfile(filename):
 
 @main.route('/user/<username>')
 def user(username):
-    user=User.query.filter_by(userName=username).first()
+    user = User.query.filter_by(userName=username).first()
     if user is None:
         abort(404)
     return render_template('info/user.html', user=user)
@@ -76,7 +77,6 @@ def show_user():
     return render_template('info/show_user.html', users=users)
 
 
-
 @main.route('/editUserInfoAdmin/<pid>', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -105,23 +105,71 @@ def editUserInfoAdmin(pid):
     return render_template('info/editUserInfoAdmin.html',form=form,pid=user.id)
 
 
-@main.route('/get_upload_token')
+@main.route('/get_upload_token',methods=['GET'])
 def get_upload_token():
-    q=Auth(current_app.config['QINIU_ACCESS_KEY'],current_app.config['QINIU_SECRET_KEY'])
+    q=Auth(current_app.config['QINIU_ACCESS_KEY'], current_app.config['QINIU_SECRET_KEY'])
     bucket_name='trade'
     key=uuid4()
-    upload_token=q.upload_token(bucket_name,key,3600)
-    return jsonify({'upload_token':upload_token,'key':key})
+    upload_token=q.upload_token(bucket_name, key, 3600)
+    return jsonify({'uptoken': upload_token,'key':key})
 
 
-@main.route('/get_mobile_token')
-def get_mobile_token():
-    q=Auth(current_app.config['QINIU_ACCESS_KEY'],current_app.config['QINIU_SECRET_KEY'])
-    bucket_name='trade'
-    mobile_upload_token=q.upload_token(bucket_name,3600)
-    return jsonify({'upload_token':mobile_upload_token})
+@main.route('/follow/<username>')
+@login_required
+@permission_required(Permission.FOLLOW)
+def follow(username):
+    user=User.query.filter_by(userName=username).first()
+    if user is None:
+        flash(u'没有该用户,关注失败')
+    if current_user.is_following(user):
+        flash(u'你已经关注过该用户,无需再次关注')
+        return redirect(url_for('trade.trade_list'))
+    current_user.follow(user)
+    flash(u'成功关注%s' % username)
+    return redirect(url_for('main.user_zone',username=username))
 
-@main.route('/get_mobile_key')
-def get_mobile_key():
-    key=uuid4()
-    return jsonify({'upload_key':key})
+
+@main.route('/unfollow/<username>')
+@login_required
+@permission_required(Permission.FOLLOW)
+def unfollow(username):
+    user=User.query.filter_by(userName=username).first()
+    if user is None:
+        flash(u'没有该用户')
+    current_user.unfollow(user)
+    flash(u'成功取消对%s的关注' % username)
+    return redirect(url_for('main.user_zone',username=username))
+
+
+@main.route('/followers/<username>')
+def followers(username):
+    user = User.query.filter_by(userName=username).first()
+    if user is None:
+        flash(u'该用户不存在')
+        return redirect(url_for('trade.trade_list'))
+    page = request.args.get('page', 1, type=int)
+    pagination = user.followers.paginate(
+        page, per_page=current_app.config['JXNUGO_FOLLOWERS_PER_PAGE'],
+        error_out=False)
+    follows = [{'user': item.follower, 'timestamp': item.timestamp}
+               for item in pagination.items]
+    return render_template('info/followers.html', user=user, title="Followers of",
+                           endpoint='.followers', pagination=pagination,
+                           follows=follows,)
+
+
+@main.route('/followed_by/<username>')
+def followed_by(username):
+    user = User.query.filter_by(userName=username).first()
+    if user is None:
+        flash(u'该用户不存在')
+        return redirect(url_for('trade.trade_list'))
+    page = request.args.get('page', 1, type=int)
+    pagination = user.followed.paginate(
+        page, per_page=current_app.config['JXNUGO_FOLLOWERS_PER_PAGE'],
+        error_out=False
+    )
+    follows = [{'user':item.followed, 'timestamp': item.timestamp} for item in pagination.items]
+    return render_template('info/followed.html', user=user, title=u'关注他的',
+                           endpoint='.followed_by', pagination=pagination,
+                           follows=follows,)
