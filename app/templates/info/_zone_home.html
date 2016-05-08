@@ -47,12 +47,12 @@
     			<span>地址:{{user.location}}</span><span>上次登录:{{user.last_seen}}</span>
     		</div>
     		<div class="content-row">
-    			<h3>他的关注</h3>
-    			。。。。。。。。。。
+    			<h3>关注TA的用户</h3>
+                <a href="{{ url_for('main.followers',username=user.userName)}}">{{ user.followers.count() }}</a>
     		</div>
     		<div class="content-row">
-    			<h3>关注他的</h3>
-    			。。。。。。。。。。
+    			<h3>TA关注的用户</h3>
+                <a href="{{ url_for('main.followed_by',username=user.userName)}}">{{ user.followed.count() }}</a>
     		</div>
     	</div>
     	
