@@ -32,6 +32,35 @@
         </div>
         <div class="ui-userzone-body-block ">
             <h3><div class="ui-userzone-content-title">ta的收藏</div></h3>
+            {% for post in user.collectionPost.all() %}
+            <div class="ui-userzone-content-datelinebody row">
+                <div class="col-md-1">
+                    <div class="dot"></div>
+                </div>
+                <div class="col-md-11">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="smImg"></div>这是图片</div>
+                        <div class="col-md-10">
+
+                            <div class="row">
+                                <div class="title"><a href="{{ url_for('trade.trade_detail',goodId=post.id) }}" >{{post.goodName}}</a></div>
+                            </div>
+                            <div class="row">
+                                <div class="date">{{post.timestamp}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="text">{{post.body}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end-->
+            {% endfor %}
+
+
+
         </div>
     </div>
     <div class="col-md-4">

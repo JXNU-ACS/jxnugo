@@ -111,7 +111,11 @@ def get_upload_token():
     q=Auth(current_app.config['QINIU_ACCESS_KEY'], current_app.config['QINIU_SECRET_KEY'])
     bucket_name='trade'
     key=uuid4()
-    upload_token=q.upload_token(bucket_name, key, 3600)
+    policy={
+         "scope": "trade"
+    }
+
+    upload_token=q.upload_token(bucket_name,key,3600,policy)
     return jsonify({'uptoken': upload_token,'key':key})
 
 

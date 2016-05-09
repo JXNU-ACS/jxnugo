@@ -6,6 +6,7 @@ FLASK = {
     'JXNUGO_MAIL_SUBJECT_PREFIX': '',
     'JXNUGO_MAIL_SENDER': '',
     'JXNUGO_ADMIN': '',
+    'SERVER_NAME'
     'SQLALCHEMY_DATABASE_URI': '',
 }
 

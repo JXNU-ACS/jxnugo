@@ -50,6 +50,7 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role %r>' % self.name
 
+
 class Follow(db.Model):
     __tablename__ = 'follows'
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
@@ -58,7 +59,15 @@ class Follow(db.Model):
                             primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
-class User(UserMixin,db.Model):
+
+collectionPosts=db.Table('collectionPosts',
+    db.Column('userId',db.Integer, db.ForeignKey('users.id')),
+    db.Column('postId',db.Integer, db.ForeignKey('posts.id')),
+    db.Column('timestamp',db.DateTime, default=datetime.utcnow)
+)
+
+
+class User(UserMixin, db.Model):
     __tablename__='users'
     id=db.Column(db.Integer,primary_key=True,unique=True)
     userName=db.Column(db.String(20),index=True)
@@ -76,6 +85,7 @@ class User(UserMixin,db.Model):
     bbsPosts=db.relationship('bbsPost',backref='author',lazy='dynamic')
     followed = db.relationship('Follow',foreign_keys=[Follow.follower_id],backref=db.backref('follower', lazy='joined'),lazy='dynamic',cascade='all, delete-orphan')
     followers = db.relationship('Follow',foreign_keys=[Follow.followed_id], backref=db.backref('followed', lazy='joined'), lazy='dynamic', cascade='all, delete-orphan')
+    collectionPost=db.relationship('Post', secondary= collectionPosts, backref=db.backref('users',lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         return '<User %r>' % self.userName
@@ -108,8 +118,8 @@ class User(UserMixin,db.Model):
         self.confirmed=True
         db.session.add(self)
         return True
-    #api generate token
 
+    #api generate token
     def generate_auth_token(self,expiration):
         s=Serializer(current_app.config['SECRET_KEY'],expires_in=expiration)
         return s.dumps({'id':self.id})
@@ -179,6 +189,22 @@ class User(UserMixin,db.Model):
 
     def is_followed_by(self,user):
         return self.followers.filter_by(follower_id=user.id).first() is not None
+
+    def collect(self,post):
+        if not self.is_collecting(post):
+            self.collectionPost.append(post)
+            db.session.commit()
+
+    def uncollect(self,post):
+        if self.is_collecting(post):
+            self.collectionPost.remove(post)
+            db.session.commit()
+
+    def is_collecting(self,post):
+         if post in self.collectionPost.all():
+             return True
+         else:
+             return False
 
 
 class AnonymousUser(AnonymousUserMixin):
