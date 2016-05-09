@@ -52,7 +52,10 @@ def get_token():
 def get_mobile_token():
     q=Auth(current_app.config['QINIU_ACCESS_KEY'],current_app.config['QINIU_SECRET_KEY'])
     bucket_name='trade'
-    mobile_upload_token=q.upload_token(bucket_name,3600)
+    policy={
+         "scope": "trade"
+    }
+    mobile_upload_token=q.upload_token(bucket_name,policy,3600)
     return jsonify({'uptoken':mobile_upload_token})
 
 
@@ -67,5 +70,8 @@ def get_upload_token():
     q=Auth(current_app.config['QINIU_ACCESS_KEY'],current_app.config['QINIU_SECRET_KEY'])
     bucket_name='trade'
     key=uuid4()
-    uptoken=q.upload_token(bucket_name,key,3600)
+    policy={
+         "scope": "trade"
+    }
+    uptoken=q.upload_token(bucket_name,key,3600,policy)
     return jsonify({'uptoken':uptoken,'key':key})

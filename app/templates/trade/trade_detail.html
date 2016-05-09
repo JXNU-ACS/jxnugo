@@ -35,7 +35,7 @@ body {
                             <div class="ui-trade-detail-price">¥{{ post.goodPrice }}</div>
                         </div>
                     </div>
-                    
+
                     <div  class="ui-trade-detail-content">
                         <p>{{post.body}}
                         </p>
@@ -129,7 +129,7 @@ body {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!--end-->
                     </div>
                 </div>
@@ -142,6 +142,13 @@ body {
                     </div>
                     <div class="stickypannel " >
                         <div class="ui-trade-detail-rightlist">
+                            {% if current_user.is_authenticated %}
+                            {% if current_user.is_collecting(post) %}
+                                <h5 ><a href="{{ url_for('.uncollect',pid=post.id) }}" style="color:blue;">取消收藏</a> </h5>
+                                {% else %}
+                                <h5 ><a href="{{ url_for('.collect',pid=post.id) }}" style="color:blue;">收藏该帖子</a></h5>
+                                {% endif %}
+                            {% endif %}
                             <span>该用户的其他帖子</span>
                             <ul>
                             {%  if post.author.posts %}
@@ -162,7 +169,6 @@ body {
 </div>
 {% endblock %} {% block script %}
 <script>
-
 $(document).ready(function(){
     var ui = new UI();
     ui.sticky({

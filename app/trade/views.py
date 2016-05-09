@@ -33,8 +33,34 @@ def trade_post():
         return redirect(url_for('main.index'))
     return render_template('trade/trade_post.html',form=form)
 
+
 @trade.route('/trade_detail/<goodId>')
 def trade_detail(goodId):
     post=Post.query.get_or_404(goodId)
     return render_template('trade/trade_detail.html',post=post)
+
+
+@trade.route('/collect/<pid>',methods=['GET'])
+@login_required
+def collect(pid):
+    post=Post.query.filter_by(id=pid).first()
+    if post is None:
+        flash(u'该帖子不存在')
+    if current_user.is_collecting(post):
+        flash(u'已经收藏了这篇帖子,无需再次收藏')
+        return redirect(url_for('.trade_detail',goodId=pid))
+    current_user.collect(post)
+    flash(u'收藏成功')
+    return redirect(url_for('.trade_detail',goodId=pid))
+
+
+@trade.route('/uncollect/<pid>',methods=['GET'])
+@login_required
+def uncollect(pid):
+    post=Post.query.filter_by(id=pid).first()
+    if post is None:
+        flash(u'该帖子不存在')
+    current_user.uncollect(post)
+    flash(u'成功取消收藏')
+    return redirect(url_for('.trade_detail',goodId=pid))
 
