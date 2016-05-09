@@ -55,7 +55,8 @@ def get_mobile_token():
     policy={
          "scope": "trade"
     }
-    mobile_upload_token=q.upload_token(bucket_name,policy,3600)
+    key=None
+    mobile_upload_token=q.upload_token(bucket_name,key,3600,policy)
     return jsonify({'uptoken':mobile_upload_token})
 
 
