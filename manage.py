@@ -7,6 +7,11 @@ app = create_app()
 manager = Manager(app)
 migrate = Migrate(app, db)
 
+@app.template_filter('changToUserName')
+def change(pid):
+    return User.query.filter_by(id=pid).first().userName
+app.jinja_env.filters['changeToUserName'] = change
+
 
 def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role, Post=Post, bbsPost=bbsPost, Follow=Follow,collectionPosts= collectionPosts)

@@ -5,11 +5,17 @@ from . import main
 from .. import db
 from forms import EditProfileForm, EditProfileAdminForm
 from flask.ext.login import login_required, current_user
-from ..models import Permission, User, Role, Post
+from ..models import Permission, User, Role, Post,Follow,collectionPosts
 from qiniu import Auth,put_file,etag,urlsafe_base64_encode
 import qiniu.config
 from uuid import uuid4
 
+
+@main.context_processor
+def user_processor():
+    def username(pid):
+        return User.query.filter_by(id=pid).first().userName
+    return dict(username=username)
 
 @main.route('/')
 def indexof():
@@ -46,10 +52,18 @@ def user(username):
 @main.route('/user_zone/<username>')
 def user_zone(username):
     user = User.query.filter_by(userName=username).first()
+    followersTen=user.followers.limit(10)
+    followingTen=user.followed.limit(10)
+    followersAll=user.followers.all()
+    followingAll=user.followed.all()
+    postFive=Post.query.filter_by(author_id=user.id).limit(5)
+    collectionFive=user.collectionPost.limit(5)
+    collectionAll=user.collectionPost.all()
     posts = Post.query.filter_by(author_id=user.id).all()
     if user is None:
         abort(404)
-    return render_template('info/user_zone.html', user=user, posts=posts)
+
+    return render_template('info/user_zone.html',user=user, posts=posts,postFive=postFive,collectionAll=collectionAll,collectionFive=collectionFive, followersTen=followersTen, followersAll=followersAll, followingTen=followingTen,followingAll=followingAll)
 
 
 @main.route('/editUserInfo', methods=['GET', 'POST'])
