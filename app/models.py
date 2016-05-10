@@ -53,9 +53,9 @@ class Role(db.Model):
 
 class Follow(db.Model):
     __tablename__ = 'follows'
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),   #粉丝id
                             primary_key=True)
-    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),   #被关注者id
                             primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
@@ -69,23 +69,23 @@ collectionPosts=db.Table('collectionPosts',
 
 class User(UserMixin, db.Model):
     __tablename__='users'
-    id=db.Column(db.Integer,primary_key=True,unique=True)
-    userName=db.Column(db.String(20),index=True)
-    userEmail=db.Column(db.String(30))
-    userPasswordHash=db.Column(db.String(128))
-    confirmed=db.Column(db.Boolean,default=False)
-    role_id=db.Column(db.Integer,db.ForeignKey('roles.id'))
-    name=db.Column(db.String(64))
-    location=db.Column(db.String(64))
-    sex=db.Column(db.String(20))
-    about_me=db.Column(db.Text())
-    menber_since=db.Column(db.DateTime(),default=datetime.utcnow)
-    last_seen=db.Column(db.DateTime(),default=datetime.utcnow)
-    posts=db.relationship('Post',backref='author',lazy='dynamic')
-    bbsPosts=db.relationship('bbsPost',backref='author',lazy='dynamic')
-    followed = db.relationship('Follow',foreign_keys=[Follow.follower_id],backref=db.backref('follower', lazy='joined'),lazy='dynamic',cascade='all, delete-orphan')
-    followers = db.relationship('Follow',foreign_keys=[Follow.followed_id], backref=db.backref('followed', lazy='joined'), lazy='dynamic', cascade='all, delete-orphan')
-    collectionPost=db.relationship('Post', secondary= collectionPosts, backref=db.backref('users',lazy='dynamic'), lazy='dynamic')
+    id=db.Column(db.Integer,primary_key=True,unique=True)  #用户id
+    userName=db.Column(db.String(20),index=True)     #用户名
+    userEmail=db.Column(db.String(30))               #用户邮箱
+    userPasswordHash=db.Column(db.String(128))      #用户密码hash值
+    confirmed=db.Column(db.Boolean,default=False)   #确认用户是否激活,默认未激活
+    role_id=db.Column(db.Integer,db.ForeignKey('roles.id'))  #用户角色,默认为普通用户
+    name=db.Column(db.String(64))                #昵称
+    location=db.Column(db.String(64))           #位置
+    sex=db.Column(db.String(20))                #性别
+    about_me=db.Column(db.Text())               #关于我
+    menber_since=db.Column(db.DateTime(),default=datetime.utcnow)   #注册时间
+    last_seen=db.Column(db.DateTime(),default=datetime.utcnow)      #最后登录时间
+    posts=db.relationship('Post',backref='author',lazy='dynamic')    #关键用户发布的帖子
+    bbsPosts=db.relationship('bbsPost',backref='author',lazy='dynamic')   #关联用户发布的bbs板块帖子
+    followed = db.relationship('Follow',foreign_keys=[Follow.follower_id],backref=db.backref('follower', lazy='joined'),lazy='dynamic',cascade='all, delete-orphan')  #用户关注的人
+    followers = db.relationship('Follow',foreign_keys=[Follow.followed_id], backref=db.backref('followed', lazy='joined'), lazy='dynamic', cascade='all, delete-orphan')  #粉丝id
+    collectionPost=db.relationship('Post', secondary= collectionPosts, backref=db.backref('users',lazy='dynamic'), lazy='dynamic')  #收藏的帖子
 
     def __repr__(self):
         return '<User %r>' % self.userName
@@ -217,19 +217,19 @@ class AnonymousUser(AnonymousUserMixin):
 
 class Post(db.Model):
     __tablename__='posts'
-    id=db.Column(db.Integer,primary_key=True)
-    body=db.Column(db.Text())
-    timestamp=db.Column(db.DateTime,index=True,default=datetime.utcnow)
-    goodName=db.Column(db.String(128))
-    goodPrice=db.Column(db.Float,default=0)
-    goodNum=db.Column(db.Integer,default=1)
-    goodLocation=db.Column(db.String(64))
-    goodQuality=db.Column(db.String(64))
-    goodBuyTime=db.Column(db.String(64))
-    goodTag=db.Column(db.Integer,default=4)
-    contact=db.Column(db.String(64))
-    photos=db.Column(db.String(128))
-    author_id=db.Column(db.Integer,db.ForeignKey('users.id'))
+    id=db.Column(db.Integer,primary_key=True)   #帖子id,主键
+    body=db.Column(db.Text())                   #帖子主题内容
+    timestamp=db.Column(db.DateTime,index=True,default=datetime.utcnow)  #帖子发布时间
+    goodName=db.Column(db.String(128))     #物品名
+    goodPrice=db.Column(db.Float,default=0)  #物品价格
+    goodNum=db.Column(db.Integer,default=1)  #物品数量
+    goodLocation=db.Column(db.String(64))    #发布人位置如一栋N204
+    goodQuality=db.Column(db.String(64))     #物品成色
+    goodBuyTime=db.Column(db.String(64))     #物品购买时间
+    goodTag=db.Column(db.Integer,default=4)  #物品标签,用来确定物品的类型,0生活用品1数码科技2服饰箱包3图书音像4其它,默认其它
+    contact=db.Column(db.String(64))         #发帖人联系方式
+    photos=db.Column(db.String(128))         #图片的key
+    author_id=db.Column(db.Integer,db.ForeignKey('users.id')) #外键  关联发布帖子的人
 
     @staticmethod
     def generate_fake(count=50):

@@ -60,19 +60,3 @@ def get_mobile_token():
     return jsonify({'uptoken':mobile_upload_token})
 
 
-@api.route('/api/get_mobile_key',methods=['GET'])
-def get_mobile_key():
-    key=uuid4()
-    return jsonify({'upkey':key})
-
-
-@api.route('/api/get_upload_token',methods=['GET'])
-def get_upload_token():
-    q=Auth(current_app.config['QINIU_ACCESS_KEY'],current_app.config['QINIU_SECRET_KEY'])
-    bucket_name='trade'
-    key=uuid4()
-    policy={
-         "scope": "trade"
-    }
-    uptoken=q.upload_token(bucket_name,key,3600,policy)
-    return jsonify({'uptoken':uptoken,'key':key})
