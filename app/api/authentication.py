@@ -1,4 +1,4 @@
-#-*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 from flask import g, jsonify,current_app
 from flask.ext.httpauth import HTTPBasicAuth
 from ..models import User, AnonymousUser
@@ -30,20 +30,20 @@ def verify_password(username_or_token, password):
 
 @auth.error_handler
 def auth_error():
-    return unauthorized(u'凭证无效')
+    return unauthorized('Invalid credentidls')
 
 
 @api.before_request
 @auth.login_required
 def before_request():
     if not g.current_user.is_anonymous and not g.current_user.confirmed:
-        return forbidden(u'账户未激活或未登陆')
+        return forbidden('Invalid credentidls')
 
 
 @api.route('/api/get_token')
 def get_token():
     if g.current_user.is_anonymous or g.token_used:
-        return unauthorized(u'凭证无效')
+        return unauthorized('Invalid credentisls')
     return jsonify({'token': g.current_user.generate_auth_token(
         expiration=3600), 'expiration': 3600})
 

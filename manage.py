@@ -7,6 +7,7 @@ app = create_app()
 manager = Manager(app)
 migrate = Migrate(app, db)
 
+
 @app.template_filter('changToUserName')
 def change(pid):
     return User.query.filter_by(id=pid).first().userName

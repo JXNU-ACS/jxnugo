@@ -41,15 +41,23 @@ body {
                         </p>
                     </div>
                     <div id="photo" class="ui-trade-detail-content">
-                        <img src="static/images/1.jpg" />
-                        <img src="static/images/1.jpg" />
+                        <img src="http://7xrkww.com1.z0.glb.clouddn.com/FtMzRQZbpt5CYVadIFdkRqXSDDl6" >
                     </div>
                     <div id="comment" class="ui-trade-detail-content">
                         <div>
 
                         </div>
                         <!--一个主评论-->
-                        <div class="ui-trade-detail-comment">
+                        <form action="/trade_detail/{{ post.id }}" method="post">
+                            {{ form.hidden_tag()}}
+                            {{ form.body() }}
+                            {{ form.submit() }}
+                        </form>
+
+
+                        {% include './_comments.html' %}
+
+                        <!-- <div class="ui-trade-detail-comment">
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
@@ -63,7 +71,7 @@ body {
                                         </div>
                                         <span class="ui-trade-detail-comment-extendtext">2016/3/3<a href="#" style="margin-left:30px;">回复</a></span>
                                     </div>
-                                    <!--评论的评论-->
+
                                     <div class="row" style="margin-top:10px;margin-bottom:10px;">
                                         <div class="col-md-2">
                                             <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
@@ -78,7 +86,7 @@ body {
                                             </div>
                                         </div>
                                     </div>
-                                    <!--评论的评论-->
+
                                     <div class="row" style="margin-top:10px;margin-bottom:10px;">
                                         <div class="col-md-2">
                                             <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
@@ -96,7 +104,7 @@ body {
                                 </div>
                             </div>
                         </div>
-                        <!--一个主评论-->
+
                         <div class="ui-trade-detail-comment">
                             <div class="row">
                                 <div class="col-md-2">
@@ -111,7 +119,7 @@ body {
                                         </div>
                                         <span class="ui-trade-detail-comment-extendtext">2016/3/3<a href="#" style="margin-left:30px;">回复</a></span>
                                     </div>
-                                    <!--评论的评论-->
+
                                     <div class="row" style="margin-top:10px;margin-bottom:10px;">
                                         <div class="col-md-2">
                                             <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>

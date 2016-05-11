@@ -1,11 +1,11 @@
-#-*- coding: UTF-8 -*-
-from flask import render_template,redirect,url_for,session,flash,request,current_app
+# -*- coding: UTF-8 -*-
+from flask import render_template,redirect,url_for,session,flash,request,current_app,request
 from ..decorators import admin_required,permission_required
 from . import trade
 from .. import db
 from flask.ext.login import login_required,current_user
-from ..models import Permission,User,Role,Post
-from forms import PostForm
+from ..models import Permission,User,Role,Post,Comment
+from forms import PostForm,CommentForm
 
 @trade.route('/trade_list')
 def trade_list():
@@ -34,11 +34,26 @@ def trade_post():
     return render_template('trade/trade_post.html',form=form)
 
 
-@trade.route('/trade_detail/<goodId>')
+@trade.route('/trade_detail/<goodId>', methods=['GET', 'POST'])
 def trade_detail(goodId):
-    post=Post.query.get_or_404(goodId)
-    return render_template('trade/trade_detail.html',post=post)
-
+    post = Post.query.get_or_404(goodId)
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(body=form.body.data,post=post,
+            author=current_user._get_current_object())
+        db.session.add(comment)
+        flash(u'你的评论已提交.')
+        return redirect(url_for('.trade_detail', goodId=post.id, page=-1))
+    page = request.args.get('page', 1, type=int)
+    if page == -1:
+        page = (post.comments.count() - 1) // \
+            current_app.config['JXNUGO_COMMENTS_PER_PAGE'] + 1
+    pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
+        page, per_page=current_app.config['JXNUGO_COMMENTS_PER_PAGE'],
+        error_out=False)
+    comments = pagination.items
+    return render_template('trade/trade_detail.html', post=post, form=form,
+                           comments=comments, pagination=pagination)
 
 @trade.route('/collect/<pid>',methods=['GET'])
 @login_required
