@@ -32,3 +32,12 @@ def get_posts():
 def get_post(id):
     post=Post.query.get_or_404(id)
     return jsonify(post.to_json())
+
+
+@api.route('/api/new_post',methods=['POST'])
+def new_post():
+    post=Post.from_json(request.json)
+    post.author=g.current_user
+    db.session.add(post)
+    db.session.commit()
+    return jsonify(post.to_json())

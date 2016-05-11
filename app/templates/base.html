@@ -62,6 +62,9 @@
                                     <li><a href="{{url_for('main.user_zone',username=current_user.userName)}}" >个人信息</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">偏好设置</a></li>
+                                     {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                                         <li><a href="{{ url_for('trade.moderate')}}">评论管理</a> </li>
+                                     {% endif %}
                                     <li role="separator" class="divider"></li>
                                     {% if current_user.role_id==2 %}
                                         <li><a href="{{ url_for('main.show_user') }}">用户管理</a> </li>

@@ -1,4 +1,6 @@
 #JXNUGO
+www.jxnugo.com
+
 查看jxnugo Android app[请戳这里](https://github.com/JXNU-ACS/jxnugo-Android)
 
 #快速导航
@@ -27,28 +29,29 @@ Post.generate_fake(100)  #伪造交易帖子
 ##restful api约定
 
 ###登录注册与token
-#####用户登录  【GET】       {此api已实现}
+
+#####1、用户登录  【GET】       {此api已实现}
 * URL:  www.jxnugo.com/api/get_token
 * 描述：用来用户登录验证
 * 参数：userName,passWord
 * 请求成功返回值：
 
-	```
+```
   {
 		"expiration"3600,
 		"token":"eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ2MjkwMTM1MSwiaWF0IjoxNDYyODk3NzUxfQ.eyJpZCI6NX0.zsYFk7rzBi68TIY3PWe_8jwjsvPTghrM80RjeyDQd1k"
   }
-	```
+```
 * 请求失败情况
   返回：
 
-  ```
+ ```
   {
   		"error": "unauthorized",
   		"message": "Invalid credentidls"
 
   }
-  ```
+ ```
 * 说明：
 
 	expiration： token的有效期，默认一个小时
@@ -59,7 +62,9 @@ Post.generate_fake(100)  #伪造交易帖子
 
 	message：具体错误信息
 
-#####用户注册	【POST】
+
+
+#####2、用户注册	【POST】  {此api已实现}
 * URL: www.jxnugo.com/api/register
 * 上传到服务器的信息：
 
@@ -72,8 +77,21 @@ Post.generate_fake(100)  #伪造交易帖子
 
 ```
 * 备注：客户端先对数据进行验证再上传
+*  注册成功返回值，状态码：200
 
-#####请求七牛云上传token  【GET】   {此api已实现}
+```
+
+  {
+  	"registerStatus":"successful"
+  }
+
+```
+
+
+
+
+
+#####3、请求七牛云上传token  【GET】   {此api已实现}
 * URL: www.jxnugo.com/api/get_mobile_token
 
 * 描述：获取七牛云上传的token
@@ -81,16 +99,18 @@ Post.generate_fake(100)  #伪造交易帖子
 * 请求成功返回值：
 
 
-	```
+```
 	{
   		"uptoken": "BK58FryE-_YddhrnjmpS_phqj3vKrR3k-svdydGB:QFEv3as8vr9qug7eH3qlluADmzw=:eyJzY29wZSI6InRyYWRlIiwiZGVhZGxpbmUiOjE0NjI5MDEyOTF9"
 }
-	```
+```
 
 
 ###帖子相关
 
-#####获取一个页面的帖子的信息   【GET】  {此api已实现}
+
+
+#####4、获取一个页面的帖子的信息   【GET】  {此api已实现}
 * URL: www.jxnugo.com/api/posts
 * 描述：获取固定数量(可指定数量)的帖子信息
 * 请求成功返回值：
@@ -105,7 +125,7 @@ Post.generate_fake(100)  #伪造交易帖子
       "author": "http://127.0.0.1:5000/api/user/46",
       "body": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Maecenas rhoncus aliquam lacus.",
       "contact": "1461526025",
-      "gooLocation": "0243 Gina Plaza",
+      "goodLocation": "0243 Gina Plaza",
       "goodBuyTime": "2016-05-05",
       "goodName": "Entertainment - Diversified",
       "goodPrice": 1239.12,
@@ -131,7 +151,8 @@ http://127.0.0.1:5000/api/posts?page=3
 参数key:page  Value:<int>
 
 
-#####获取某个帖子信息          	【GET】   {此api已实现}
+
+#####5、获取某个帖子信息          	【GET】   {此api已实现}
 * URL: www.jxnugo.com/api/posts/<int:id>
 * 参数：帖子id
 * 描述：获取某个帖子的信息
@@ -157,11 +178,13 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####获取某个用户发布的帖子 [GET]
+
+
+#####6、获取某个用户发布的帖子 [GET]
 * URL：www.jxnugo.com/api/user_posts/<int:id>
 * 参数：用户id
 
-#####获取某个用户收藏的帖子     【GET】    {此api已实现}
+#####7、获取某个用户收藏的帖子     【GET】    {此api已实现}
 * URL:www.jxnugo.com/api/user_collectionpost/<int:id>
 * 参数：用户id
 * 请求成功的返回值(后台设置最大返回5个帖子)
@@ -191,30 +214,54 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####获取某个帖子的评论  【GET】
+#####8、获取某个帖子的评论  【GET】
 * URL: www.jxnugo.com/api/comments/<int:id>
 * 参数：帖子id
 
-#####发表新的帖子  	【POST】
-* URL: www.jxnugo.com/api/new_post
+#####9、发表新的帖子  	【POST】    {此api已实现}
 
-#####对帖子发表评论   	【POST】
+* URL: www.jxnugo.com/api/new_post
+* 描述：上传数据，发布新帖子
+* 上传数据格式
+
+
+```
+	{
+		"body":"",
+		"timestamp":"",
+		"goodName":"",
+		"goodPrice":"",
+		"goodLocation":"",
+		"goodQuality":"",
+		"goodBuyTime":"",
+		"goodTag":"",      #0生活用品1数码科技2服饰箱包3图书音像4其它,默认其它
+		"contact”:“”，
+		"photos":"",
+
+	}
+
+```
+* 上传成功返回值，返回改篇帖子的全部json信息。
+
+
+
+#####10、对帖子发表评论   	【POST】
 * URL: www.jxnugo.com/api/new_comment/<int:id>
 * 参数：帖子id
 
 
-#####收藏某篇帖子      【POST】
+#####11、收藏某篇帖子      【POST】
 * URL:www.jxnugo.com/api/collect/<int:id>
 * 参数：帖子id
 
-#####取消收藏某篇帖子   【POST】
+#####12、取消收藏某篇帖子   【POST】
 * URL:www.jxnugo.com/api/uncollect/<int:id>
 * 参数：帖子id
 
 
 
 ###用户相关
-#####获取个人用户信息  【GET】
+#####13、获取个人用户信息  【GET】    {此api已实现}
 * URL: www.jxnugo.com/api/user/<int:id>
 * 参数：用户id
 * 描述：获取某个用户的信息
@@ -222,40 +269,73 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 {
-  "about_me": "Sed sagittis.",
-  "last_seen": "Wed, 11 May 2016 08:13:17 GMT",
-  "location": "Bell",
-  "menber_since": "Thu, 21 Apr 2016 00:00:00 GMT",
-  "name": "Joyce Crawford",
+  "about_me": "Vivamus tortor.",
+  "followed": 2,
+  "followes": 1,
+  "last_seen": "Wed, 11 May 2016 12:40:22 GMT",
+  "location": "Laguna Beach",
+  "member_since": "Mon, 25 Apr 2016 00:00:00 GMT",
+  "name": "Kathy Richards",
+  "postCollectionCount": 2,
   "postCount": 1,
   "sex": "男",
-  "userName": "ann68"
-  "posts":"",
-  "collectionPost":"",
-  "followed":"",
-  "followers":""
+  "userName": "amy70"
 }
 
 ```
 
-#####获取某个用户关注的人   【GET】
+
+#####14、获取某个用户关注的人   【GET】   {此api已实现}
 * URL：www.jxnugo.com/api/user_followed/<int:id>
 * 参数：用户id
+* 描述：获取用户关注的人的名字还有指向TA的链接
+* 请求成功返回值
 
-#####获取某个用户的粉丝     【GET】
+```
+	{
+  "followers": [
+    {
+      "urlLinkUser": "http://127.0.0.1:5000/api/user/101",
+      "userName": "ddragon"
+    }
+  ]
+}
+```
+*
+
+#####15、获取某个用户的粉丝     【GET】   {此api已实现}
 * URL:www.jxnugo.com/api/user_followers/<int:id>
 * 参数：用户id
+* 描述：获取用户的粉丝的名字还有指向TA的链接
+* 请求成功返回值
 
+```
+	{
+  "followed": [
+    {
+      "urlLinkUser": "http://127.0.0.1:5000/api/user/1",
+      "userName": "shirley91"
+    },
+    {
+      "urlLinkUser": "http://127.0.0.1:5000/api/user/52",
+      "userName": "teresa84"
+    },
+    {
+      等等
+    }
+  ]
+}
+```
 
-#####获取某个用户发表过的评论   【GET】
+#####16、获取某个用户发表过的评论   【GET】
 * URL:www.jxnugo.com/api/user_comments/<int:id>
 * 参数：用户id
 
-#####关注某个用户   【POST】
+#####17、关注某个用户   【POST】
 * URL: www.jxnugo.com/api/follow/<int:id>
 * 参数：被关注用户的id
 
-#####取消关注        【POST】
+#####18、取消关注        【POST】
 * URL：www.jxnugo.com/api/unfollow/<int:id>
 * 参数：被取消关注用户的id
 
