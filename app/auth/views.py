@@ -68,6 +68,7 @@ def confirm(token):
     u = User.query.filter_by(id=RecvId).first_or_404()
     u.confirmed=True
     db.session.add(u)
+    db.session.commit()
     flash(u'恭喜您完成账号激活')
     return redirect(url_for('auth.passport'))
 

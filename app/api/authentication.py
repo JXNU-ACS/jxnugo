@@ -1,14 +1,22 @@
 # -*- coding: UTF-8 -*-
-from flask import g, jsonify,current_app
+from flask import g, jsonify
 from flask.ext.httpauth import HTTPBasicAuth
 from ..models import User, AnonymousUser
 from . import api
+from flask.ext.login import current_app
 from .errors import unauthorized, forbidden
 from qiniu import Auth,put_file,etag,urlsafe_base64_encode
-import qiniu.config
-from uuid import uuid4
+
 
 auth = HTTPBasicAuth()
+
+
+@api.before_request
+@auth.login_required
+def before_request():
+    if not g.current_user.is_anonymous and \
+            not g.current_user.confirmed:
+        return forbidden('Unconfirmed account')
 
 
 @auth.verify_password
