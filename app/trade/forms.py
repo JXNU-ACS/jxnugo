@@ -1,4 +1,4 @@
-#-*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 
 from flask.ext.wtf import Form
 from wtforms import StringField,SubmitField,SelectField,BooleanField,TextAreaField,FloatField,IntegerField,DateTimeField
@@ -19,3 +19,7 @@ class PostForm(Form):
     body=TextAreaField(u'物品介绍',validators=[Required()])
     submit=SubmitField(u'提交')
 
+
+class CommentForm(Form):
+    body=StringField(u'评论',validators=[Required()])
+    submit=SubmitField(u'提交')

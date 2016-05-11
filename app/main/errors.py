@@ -1,10 +1,15 @@
-#-*- coding: UTF-8 -*-
-from flask import render_template
+# -*- coding: UTF-8 -*-
+from flask import render_template,request,jsonify
 from . import main
 
 @main.app_errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'),404
+    if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+        response=jsonify({'error':'page not found'})
+        response.status_code=404
+        return response
+    else:
+        return render_template('404.html'),404
 
 @main.app_errorhandler(500)
 def server_error(e):

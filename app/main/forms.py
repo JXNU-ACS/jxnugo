@@ -1,4 +1,4 @@
-#-*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 
 from flask.ext.wtf import Form
 from wtforms import StringField,SubmitField,PasswordField,BooleanField,TextAreaField,SelectField
