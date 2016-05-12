@@ -12,7 +12,7 @@
     			</div>
 
     		</div>
-            <div class="slideBlock" style="left:75.5px;"></div>
+            <div class="slideBlock slideBlock-passport" style="left:75.5px;"></div>
 
             <div class="ui-passport-main-pannel-form center-align "  data-ariapannel="pass_login">
 
@@ -66,7 +66,8 @@
 <script type="text/javascript">
 ui = new UI();
 ui.slideBlock({
-    originPosition:"#pass_login"
+    originPosition:"#pass_login",
+    slideBlock:".slideBlock-passport"
 })
 $(".cantain-fluid").height($(window).height()-100)
 /*

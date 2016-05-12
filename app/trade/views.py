@@ -25,7 +25,7 @@ def trade_post():
     if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
         post=Post(id=Post.query.count()+1,body=form.body.data,goodName=form.name.data,goodPrice=form.price.data,goodNum=form.num.data,
                   goodLocation=form.location.data,goodQuality=form.quality.data,goodTag=form.tag.data,
-                  goodBuyTime=form.buyTime.data,contact=form.mycontact.data,
+                  goodBuyTime=form.buyTime.data,contact=form.mycontact.data,photo=form.img.data,
                   author=current_user._get_current_object())
         db.session.add(post)
         db.session.commit()

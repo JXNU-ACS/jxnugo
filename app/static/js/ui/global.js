@@ -8,54 +8,67 @@ function UI() {
     this.stickyElement = $(".stickypannel");
     //选择标签
     this.selectTagElement = $(".select");
-    //测试是否支持的css属性
-    this.isSupportSticky = function() {
-        var prefixTestList = ['', '-webkit-', '-ms-', '-moz-', '-o-'];
-        var stickyText = '';
-        for (var i = 0; i < prefixTestList.length; i++) {
-            stickyText += 'position:' + prefixTestList[i] + 'sticky;';
-        }
-        // 创建一个dom来检查
-        var div = document.createElement('div');
-        var body = document.body;
-        div.style.cssText = 'display:none;' + stickyText;
-        body.appendChild(div);
-        var isSupport = /sticky/i.test(window.getComputedStyle(div).position);
-        body.removeChild(div);
-        div = null;
-        return isSupport;
-    };
+    
+
+
 }
+//测试是否支持的css属性(sticky)
+UI.prototype.isSupportSticky = function() {
+    var prefixTestList = ['', '-webkit-', '-ms-', '-moz-', '-o-'];
+    var stickyText = '';
+    for (var i = 0; i < prefixTestList.length; i++) {
+        stickyText += 'position:' + prefixTestList[i] + 'sticky;';
+    }
+    // 创建一个dom来检查
+    var div = document.createElement('div');
+    var body = document.body;
+    div.style.cssText = 'display:none;' + stickyText;
+    body.appendChild(div);
+    var isSupport = /sticky/i.test(window.getComputedStyle(div).position);
+    body.removeChild(div);
+    div = null;
+    return isSupport;
+};
 UI.prototype.bubbleTip = function() {
         this.tooltipElement.tooltip();
     }
     //模态框
-UI.prototype.modalShow = function(messages) {
+UI.prototype.modalShow = function(func,time,isbig) {
     var a;
     var b = this.modalElement;
+    var c;
+    (isbig)?b.find(".modal-dialog").removeClass("modal-sm").addClass("modal-lg"):b.find(".modal-dialog").addClass("modal-sm").removeClass("modal-lg");
     b.modal({
         keyboard: false,
         show: false
     }).on("shown.bs.modal", function() {
-        a = setInterval(function() {
-            b.modal('hide')
-        }, 3000)
+        if(time == 0){
+            a = setInterval(function() {
+                b.modal('hide')
+            }, 3000)
+            c=1;
+        }
+        
     }).on("hidden.bs.modal", function() {
-        clearInterval(a)
-    }).ready(messages);
+        if(c){
+            clearInterval(a);
+        }
+    }).ready(func);
 };
 /*选择标签(tag)指向类(class)“.select”
 id指向作用面板
 data-ariapannel 被作用面板
 .select外需要包含div［不写都不造自己写的什么了orz
 */
+//目前不能在同一页面实现两个实例～
 UI.prototype.slideBlock = function(config) { //config为object
-    var a = config.originPosition;
+    var a = config.originPosition; //id
+    var b = config.slideBlock; //滑块的类
     setSlideBlockState($(a))
 
     function setSlideBlockState(a) {
         var offset = (a.closest("div").position().left - a.closest("div").parent().find("div:first-child").position().left) + (a.closest("div").innerWidth() / 2) - 47
-        $(".slideBlock").css("left", offset)
+        $(b).css("left", offset)
             //console.log(a.closest("div").parent().find("div:first-child").position().left)
     }
     this.selectTagElement.click(function() {
@@ -88,19 +101,22 @@ UI.prototype.listToggle = function() {
         }
     })
 };
+//在支持的但是没开启的浏览器下有bug
 UI.prototype.sticky = function(config) {
     var a = config.offsetY;
-    var b = config.contain;//jq选择对象
-    if (this.isSupportSticky) {
+    var b = config.contain; //jq选择对象
+    if (self.isSupportSticky) {
         this.stickyElement.attr('style', "position:-webkit-sticky;position:sticky;top:" + a + "px;")
-        console.log("1")
+
     } else {
         var Offset = b.offset();
 
         function onScroll(e) {
-            window.scrollY >= Offset.top ? b.css({position:"fixed"}) : b.css({position:""});
+            window.scrollY >= Offset.top ? b.css({ position: "fixed" }) : b.css({ position: "relative" });
         }
         window.addEventListener('scroll', onScroll);
-        console.log("2")
+
     }
 };
+
+

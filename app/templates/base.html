@@ -171,18 +171,19 @@
     <div class="modal fade bs-example-modal-sm " id="myModal" tabindex="-1" role="dialog" aria-labelledby="messegeModalLabel">
         <div class="modal-dialog modal-sm " role="document">
             <div class="modal-content">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %} 
-                    {% for category,message in messages %}
-                <div class="modal-header {{category}}">
+                
+                <div class="modal-header ">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title " id="myModalLabel">提示</h4>
+                    <h4 class="modal-title " id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %} 
+                    {% for category,message in messages %}
                     
                     {{ message }}
                     {% endfor %}
-                    {% else %}无任何消息
+                    
                     {% endif %} 
                     {% endwith %}
                 </div>

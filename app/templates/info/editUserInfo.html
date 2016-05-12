@@ -1,6 +1,30 @@
-{%-extends "base.html" %}
-{% block content %}
-<div class="divstyle" style="text-align: center;padding: 100px">
+{%-extends "base.html" %} {%-block nav %}
+<style>
+body {
+    padding-top: 100px;
+}
+</style>
+{% endblock %} {% block content %}
+<div class="cantain-fluid">
+    <div class="ui-mainct">
+        <div class="ui-panel">
+            <div class="ui-panel-cover" style="background:#B7ACA2;z-index:0;"></div>
+            <div style="padding:60px 60px 0 60px;position:relative;top:-155px;">
+                <div class="row">
+                	<div class="ui-edinfo-title">修改信息</div>
+                </div>
+                <div class="row">
+                	<div class="col-sm-8">
+                		<div></div>
+                	</div>
+                	<div class="col-sm-4">
+                	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="divstyle" style="text-align: center;padding: 100px">
     <h1>修改个人信息</h1>
     <form action="/editUserInfo" method="post">
         {{form.hidden_tag()}}
@@ -10,5 +34,5 @@
         {{form.submit()}}
     </form>
 
-</div>
+</div>-->
 {% endblock %}
