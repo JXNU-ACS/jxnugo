@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
-from flask import jsonify,request,current_app,url_for
+from flask import jsonify,request,current_app,url_for,request
 from .authentication import auth
 from ..models import  Post
 from . import api
+from .. import db
 
 
 @api.route('/api/posts')
@@ -41,3 +42,10 @@ def new_post():
     db.session.add(post)
     db.session.commit()
     return jsonify(post.to_json())
+
+
+@api.route('/api/comments/<int:id>')
+def comments(id):
+    post=Post.query.get_or_404(id)
+    comments=post.comments.all()
+    return jsonify({"comments":[comment.to_json() for comment in comments]})
