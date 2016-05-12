@@ -43,24 +43,35 @@ body {
 	                    <div class="col-md-2">
 	                        <a class="select" id="zone_post" href="#">帖子</a>
 	                    </div>
+                        <div class="col-md-2">
+                            <a class="select" id="zone_comment" href="#">评论</a>
+                        </div>
 	                    <div class="col-md-2">
 	                        <a class="select" id="zone_collection" href="#">收藏</a>
 	                    </div>
-	                    <div class="col-md-2">
-	                        <a class="select" id="zone_message" href="#">消息</a>
-	                    </div>
 
 	                </div>
-	                <div class="slideBlock"></div>
+	                <div class="slideBlock slideblock-user"></div>
 	            </div>
 	            <div class="col-md-12">
 	                <div class="ui-userzone-content" data-ariapannel="zone_home">{% include 'info/_zone_home.html' %}</div>
 	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_post">{% include 'info/_zone_post.html' ignore missing%}</div>
+                    <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_comment">{% include 'info/_zone_comment.html' ignore missing%}</div>
 	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_collection">{% include 'info/_zone_collection.html' ignore missing%}</div>
-	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_message">{% include 'info/_zone_message.html' ignore missing%}</div>
         	</div>
         	</div>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+    var select1 = new UI();
+    select1.slideBlock({
+        originPosition:"#zone_home",
+        slideBlock:".slideblock-user"
+    });
+});
+</script>
 {% endblock %}

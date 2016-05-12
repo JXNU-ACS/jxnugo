@@ -1,110 +1,106 @@
-{%-extends "./base.html" %}
-{%-block nav %}
+{%-extends "./base.html" %} {%-block nav %}
 <style>
 body {
     padding-top: 100px;
 }
 </style>
-{% endblock %}
-{% block content %}
-<!--<div class="divstyle" style="text-align: center;padding: 100px">
-    <form action="trade_post" method="post">
-        {#{{form.hidden_tag()}}
-        物品id:{{form.formId()}}<br>
-        物品名:{{ form.name()}}<br>
-        物品类别:{{ form.tag()}}<br>
-        物品数量:{{form.num}}<br>
-        物品价格:{{form.price()}}<br>
-        楼栋位置:{{form.location()}}<br>
-        购买时间:{{form.buyTime()}}<br>
-        物品成色:{{form.quality()}}<br>
-        联系方式:{{form.mycontact()}}<br>
-        物品详细介绍:{{form.body()}}<br>
-        {{form.submit()}}#}
-    </form>
-</div>-->
+{% endblock %} {% block content %}
 <div class="cantain-fluid">
     <div class="ui-mainct">
-        <div class="ui-panel" style="padding:60px;">
-            <div class="row" >
-                <div class="ui-post-title col-sm-12">
-                    <h1 style="font-size: 40px;">发布闲置<small>－xxxxx</small></h1>
+        <div class="ui-panel">
+            <div class="ui-panel-cover" style="background:#9BB7B4;z-index:0;"></div>
+            <div style="padding:60px 60px 0 60px;position:relative;top:-155px;">
+                <div class="row">
+                    <div class="ui-post-title col-sm-12">
+                        发布闲置
+                    </div>
                 </div>
-            </div>
-            <div class="row ui-post-row" style="margin-top:30px;">
-                <div class="col-sm-3">
-                    <span class="glyphicon glyphicon-th-list"></span>{{ form.tag()}}
+                <form method="POST" action="/trade_post">
+                <div class="row ui-post-row" style="margin-top:30px;">
+                    <div class="col-sm-3">
+                        <span class="glyphicon glyphicon-th-list"></span>{{ form.tag()}}
+                    </div>
+                    <div class="col-sm-9">
+                        {{ form.name(class="ui-form-style ui-post-input",**{"placeholder":"给你要卖的东西起个标题吧"})}}
+                    </div>
                 </div>
-                <div class="col-sm-9">
-                    {{ form.name(class="ui-form-style ui-post-input",**{"placeholder":"给你要卖的东西起个标题吧"})}}
-                </div>
-            </div>
-            <div class="row ui-post-row">
+                <div class="row ui-post-row">
                     {{ form.price(class="ui-form-style ui-post-input",**{"placeholder":"出售的价格"})}}
-            </div>
-            <div class="row ui-post-row">
+                </div>
+                <div class="row ui-post-row">
                     {{ form.num(class="ui-form-style ui-post-input",**{"placeholder":"数量"})}}
-            </div>
-            <div class="row ui-post-row">
+                </div>
+                <div class="row ui-post-row">
                     {{ form.location(class="ui-form-style ui-post-input",**{"placeholder":"坐标"})}}
-            </div>
-            <div class="row ui-post-row">
+                </div>
+                <div class="row ui-post-row">
                     {{ form.buyTime(class="ui-form-style ui-post-input",**{"placeholder":"购买时间"})}}
-            </div>
-            <div class="row ui-post-row">
+                </div>
+                <div class="row ui-post-row">
                     {{ form.quality(class="ui-form-style ui-post-input",**{"placeholder":"成色"})}}
-            </div>
-            <div class="row ui-post-row">
+                </div>
+                <div class="row ui-post-row">
                     {{ form.mycontact(class="ui-form-style ui-post-input",**{"placeholder":"联系方式"})}}
-            </div>
-            <div class="row ui-post-row">
+                </div>
+                <div class="row ui-post-row">
                     {{ form.body(class="ui-form-style ui-post-input",**{"placeholder":"商品描述"})}}
-            </div>
-            <div class="row ui-post-row">
-                <div class="col-sm-3" style="display:none">
-                    <div class="ui-post-upload uploadimg" style="background-image:url('static/images/2.jpeg');">
-                        <a href="#">
-                            <div class="btn btn-shadow case-in" style="display:none;">
+                    {{ form.img(style="display:none;",class="imgjson") }}
+                </div>
+
+                <div class="row ui-post-row" data-ariapannel="uploadarea">
+                    <!--<div class="col-sm-3 show-upload" style="">
+                        <div class="ui-post-upload uploadimg" style="background-image:url('static/images/2.jpeg');">
+                            <a href="#">
+                                <div class="btn btn-shadow case-in zoom-img" style="display:none;">
                                     浏览大图
-                            </div>  
-                        </a>
-                        <div class="del-bg">
-                            <button type='button' class="btn-del case-in" title="删除"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                            </a>
+                            <div class="btn btn-shadow case-in progress-img" style="display:none;">
+                                    
+                            </div>
+                            <div class="del-bg">
+                                <button type='button' class="btn-del case-in" title="删除"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="col-sm-3">
+                        <div id="upload-aira" class="ui-post-upload">
+                            <input type="hidden" id="domain" value="7xrkww.com1.z0.glb.clouddn.com">
+                            <input type="hidden" id="uptoken_url" value="/get_upload_token">
+                            <a id="pickfiles" href="#">
+                                <div class="btn case-in">
+                                    点击这里
+                                    <br>上传图片
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    
                 </div>
-                <div class="col-sm-3">
-                    <div id="upload-aira" class="ui-post-upload">
-                        <input type="hidden" id="domain" value="7xrkww.com1.z0.glb.clouddn.com">
-                        <input type="hidden" id="uptoken_url" value="/get_upload_token">
-                        <a id="pickfiles" href="#">
-                            <div class="btn case-in">
-                                点击这里<br>上传图片
-                            </div>  
-                        </a>
-                    </div>
+                <div class="row ui-post-row" style="color:#eee;">
+                    *最多上传十张图片～
                 </div>
-                
+                <div class="row ui-post-row">
+                    {{form.submit(class="btn")}}
+
+                </div>
+            </form>
+            
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-{% block script %}
-    <!--依赖插件-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/plupload/plupload.full.min.js')}}></script>
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/qinniu/dist/qiniu.min.js')}}></script>
-    <!--配置-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/qinniu/config.js')}}></script>
-    <script type="text/javascript">
-    (function() {
-        var upload = Qiniu.uploader(uploaderoption)
-    })();
-    (function(){
-        $('.uploadimg').hover(function(){
-            $(this).find('div.btn-shadow').toggle()
-        })
-    })();
-    </script>
+{% endblock %} {% block script %}
+<!--依赖插件-->
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/plupload/plupload.full.min.js' )}}></script>
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/qinniu/dist/qiniu.min.js' )}}></script>
+<!--配置-->
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/qinniu/config.js' )}}></script>
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/ui/Fileload.js' )}}></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    var upload = Qiniu.uploader(uploaderoption)
+})
+    
+</script>
 {% endblock %}

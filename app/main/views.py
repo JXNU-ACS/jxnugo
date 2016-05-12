@@ -126,7 +126,6 @@ def get_upload_token():
     key=None
     policy={
          "scope": "trade"
-
     }
 
     upload_token=q.upload_token(bucket_name,key,3600,policy)

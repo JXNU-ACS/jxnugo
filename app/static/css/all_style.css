@@ -336,10 +336,13 @@
 
 .ui-userzone-body-block {
     padding: 5px 60px 15px 60px;
-    min-height: 100px;
+    min-height: 120px;
     border-bottom: 1px solid #eee;
 }
-
+.ui-userzone-body-block .isnone{
+    min-height: 300px;
+    color: #B7ACA2;
+}
 .ui-userzone-content {
     margin-top: 38px;
 }
@@ -352,9 +355,15 @@
     padding: 5px;
     margin-left: 45px;
     border-left: 2px solid #eee;
+    min-height: 150px;
+    text-overflow: ellipsis;
+   } 
+.ui-userzone-content-datelinebody .comment-block{
+    background: #eee;
+    border-radius: 20px;
+    padding: 1% 10% 1% 10%;
 }
-
-.ui-userzone-content-datelinebody>div>.dot {
+.ui-userzone-content-datelinebody .dot {
     background-color: #FF9BB5;
     width: 10px;
     height: 10px;
@@ -362,7 +371,38 @@
     position: absolute;
     left: -11px;
 }
+.ui-userzone-content-datelinebody .smImg{
+    width: 100%;
+    height: 100px;
+    border-radius: 20px;
+    background-size: cover;
+    background-color: #eee;
+}
+.ui-userzone-content-datelinebody .title{
+    font-size: 20px;
+    color: #333;
+}
+.ui-userzone-content-datelinebody .text{
+    max-height: 100px;
+    font-size: 15px;
+    color: #B7ACA2;
+    overflow: hidden;
 
+}
+.ui-userzone-content-datelinebody .date{
+    font-size: 15px;
+    color: #B7ACA2;
+}
+.ui-userzone-content-datelinebody .main-comment{
+    font-size: 21px;
+}
+.ui-userzone-content-datelinebody .main-comment span{
+    color: #3DC7C7;
+}
+.ui-userzone-content-datelinebody .sub-comment{
+    font-size: 18px;
+    color: #B7ACA2;
+}
 .ui-userzone-user-head {
     width: 200px;
     height: 200px;
@@ -372,7 +412,7 @@
     background-color: #DADBD4;
     background-size: cover;
     border-radius: 20%;
-    box-shadow: 0 5px 10px #000;
+    
 }
 
 .ui-userzone-user-signature {
@@ -381,33 +421,61 @@
     left: 270px;
     top: 90px;
     font-size: 20px;
+
 }
 
 .ui-userzone-user-signature>span {
+    text-overflow: ellipsis;
     font-size: 40px;
     color: #fff;
+    max-width: 200px;
+    min-height: 150px;
 }
 
 .ui-userzone-user-info-block {
     width: 280px;
     padding: 20px;
 }
-
-.ui-userzone-user-info-block>.content-row {
+.ui-userzone-user-info-block a {
+    color: #B7ACA2;
+}
+.ui-userzone-user-info-block a:hover{
+    color: #FF9BB5;
+}
+.ui-userzone-user-info-block .content-row {
     margin-bottom: 20px;
 }
 
-.ui-userzone-user-info-block>.content-row>.item {
+.ui-userzone-user-info-block .item {
     width: 100px;
-}
-
-.ui-userzone-user-info-block>.content-row>.text {
     font-size: 15px;
     color: #B7ACA2;
-    padding-right: 50px;
 }
+.ui-userzone-user-info-block .uid{
+    background:#325D5C;
+    color: #fff;
+    padding: 0 1% 0 1%;
+    border-radius: 20px;
 
-.ui-userzone-user-info-block>.content-row>.headimg {}
+}
+.ui-userzone-user-info-block .time{
+    color: #9BB7B4;
+}
+.ui-userzone-user-info-block .map{
+    color: #FF9BB5;
+}
+.ui-userzone-user-info-block .folower-block{
+    max-height: 200px;
+    
+}
+.ui-userzone-user-info-block .folower-head {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #eee;
+    background-size: cover;
+    display: inline-block;
+}
 
 
 /*----------发布帖子--------------*/
@@ -419,7 +487,9 @@
 }
 
 .ui-post-title {
-    color: #B7ACA2;
+    color: #fff;
+    position: relative;
+    font-size: 90px;
 }
 
 .ui-post-input {
@@ -493,4 +563,14 @@
     -ms-transform:rotate(180deg);
     transform:rotate(180deg);
 }
-.ui-post-upload>#pickfiles {}
+/*----------------用户设置-----------*/
+.ui-edinfo-row{
+    min-height: 80px;
+    font-size: 20px;
+    padding: 10px;
+}
+.ui-edinfo-title{
+    color: #fff;
+    position: relative;
+    font-size: 90px;
+}

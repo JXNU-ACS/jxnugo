@@ -17,6 +17,7 @@ class PostForm(Form):
     quality=StringField(u'物品成色',validators=[Required()])
     mycontact=StringField(u'联系方式',validators=[Required(),Length(1,64)])
     body=TextAreaField(u'物品介绍',validators=[Required()])
+    img=StringField(u'图片链接')
     submit=SubmitField(u'提交')
 
 
