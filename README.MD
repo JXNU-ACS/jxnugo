@@ -30,7 +30,7 @@ Post.generate_fake(100)  #伪造交易帖子
 
 ###登录注册与token
 
-#####1、用户登录  【GET】       {此api已实现}
+#####1、用户登录  【GET】         {此api已实现}
 * URL:  www.jxnugo.com/api/get_token
 * 描述：用来用户登录验证
 * 参数：userName,passWord
@@ -40,6 +40,7 @@ Post.generate_fake(100)  #伪造交易帖子
   {
 		"expiration"3600,
 		"token":"eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ2MjkwMTM1MSwiaWF0IjoxNDYyODk3NzUxfQ.eyJpZCI6NX0.zsYFk7rzBi68TIY3PWe_8jwjsvPTghrM80RjeyDQd1k"
+		“userId”:40
   }
 ```
 * 请求失败情况
@@ -61,6 +62,7 @@ Post.generate_fake(100)  #伪造交易帖子
 	error：错误信息
 
 	message：具体错误信息
+	userId:用户id
 
 
 
@@ -117,32 +119,28 @@ Post.generate_fake(100)  #伪造交易帖子
 
 ```
 	{
-	"count":"100",
-	"next":"http://127.0.0.1:5000/api/posts?page=3",
-	“prev”:"http://127.0.0.1:5000/api/posts?page=1",
-  "posts": [
-    {
-      "author": "http://127.0.0.1:5000/api/user/46",
-      "body": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Maecenas rhoncus aliquam lacus.",
-      "contact": "1461526025",
-      "goodLocation": "0243 Gina Plaza",
-      "goodBuyTime": "2016-05-05",
-      "goodName": "Entertainment - Diversified",
+	  "author": "http://127.0.0.1:5000/api/user/25",
+      "body": "Suspendisse potenti. Ut tellus.",
+      "commentsCount": 0,
+      "contact": "1381077326",
+      "goodBuyTime": "2016-04-29",
+      "goodLocation": "637 Shopko Hill",
+      "goodName": "Property & Casualty Insurance",
       "goodPrice": 1239.12,
       "goodQuality": "9成新",
       "goodTag": 4,
+      "postId": 5,
       "photos": null,
-      "timestamp": "Mon, 02 May 2016 00:00:00 GMT",
-      "url": "http://127.0.0.1:5000/api/posts/1"
-      "comments":"http://....."
-      "comments_count":"http://......"
-    },
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
+      "postUserName": "marie80",
+      "timestamp": "2016-04-29 00:00:00",
+      "url": "http://127.0.0.1:5000/api/posts/1"    },
     {
 
     },
     {
     }，
-    ....等等
+    等等
   ]
 }
 ```
@@ -160,29 +158,60 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 	{
-  "author": "http://127.0.0.1:5000/api/user/79",
-  "body": "Nulla nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.",
-  "contact": "1266275125",
-  "gooLocation": "3 Toban Pass",
-  "goodBuyTime": "2016-05-10",
-  "goodName": "Medical Practitioners",
+  {
+  "author": "http://127.0.0.1:5000/api/user/43",
+  "body": "Curabitur at ipsum ac tellus semper interdum. Morbi a ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.",
+  "commentsCount": 0,
+  "contact": "1040471275",
+  "goodBuyTime": "2016-05-09",
+  "goodLocation": "8271 Fair Oaks Road",
+  "goodName": "Office Supplies",
   "goodPrice": 1239.12,
   "goodQuality": "9成新",
   "goodTag": 4,
   "photos": null,
-  "timestamp": "Mon, 09 May 2016 00:00:00 GMT",
-  "url": "http://127.0.0.1:5000/api/posts/4"
-  "comments":"http://",
-  "comments_count":"http://"
-}
+  "postId": 5,
+  "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
+  "postUserName": "ruby90",
+  "timestamp": "2016-05-06 00:00:00",
+  "url": "http://127.0.0.1:5000/api/posts/5"
+}}
 
 ```
 
 
 
-#####6、获取某个用户发布的帖子 [GET]
+#####6、获取某个用户发布的帖子 [GET]   {此api已实现}
 * URL：www.jxnugo.com/api/user_posts/<int:id>
 * 参数：用户id
+* 请求成功的返回值
+
+
+```
+{
+  "userPosts": [
+    {
+      "author": "http://127.0.0.1:5000/api/user/40",
+      "body": "Nulla mollis molestie lorem. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. In sagittis dui vel nisl.",
+      "commentsCount": 0,
+      "contact": "1168038514",
+      "goodBuyTime": "2016-04-23",
+      "goodLocation": "0 Ronald Regan Terrace",
+      "goodName": "Beverages - Brewers",
+      "goodPrice": 1239.12,
+      "goodQuality": "9成新",
+      "goodTag": 4,
+      "photos": null,
+      "postId": 55,
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
+      "postUserName": "ruth86",
+      "timestamp": "2016-05-11 00:00:00",
+      "url": "http://127.0.0.1:5000/api/posts/55"
+    }
+
+  ]
+}
+```
 
 #####7、获取某个用户收藏的帖子     【GET】    {此api已实现}
 * URL:www.jxnugo.com/api/user_collectionpost/<int:id>
@@ -193,20 +222,24 @@ http://127.0.0.1:5000/api/posts?page=3
 {
   "collectionPost": [
     {
-      "author": "http://127.0.0.1:5000/api/user/52",
-      "body": "Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.",
-      "contact": "1265122842",
+      "author": "http://127.0.0.1:5000/api/user/82",
+      "body": "Nullam varius.",
+      "commentsCount": 3,
+      "contact": "1302060376",
       "goodBuyTime": "2016-04-22",
-      "goodLocation": "24 Sullivan Street",
-      "goodName": "Industrial Electrical Equipment",
+      "goodLocation": "5873 Nobel Court",
+      "goodName": "Electronics Stores",
       "goodPrice": 1239.12,
       "goodQuality": "9成新",
       "goodTag": 4,
       "photos": null,
-      "timestamp": "Tue, 10 May 2016 00:00:00 GMT",
-      "url": "http://127.0.0.1:5000/api/posts/19"
+      "postId": 16,
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
+      "postUserName": "kathleen72",
+      "timestamp": "2016-05-11 00:00:00",
+      "url": "http://127.0.0.1:5000/api/posts/16"
     },
-    {
+     {
       等等
     }
   ]
@@ -214,9 +247,35 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####8、获取某个帖子的评论  【GET】
+#####8、获取某个帖子的评论  【GET】  {此api已实现}
 * URL: www.jxnugo.com/api/comments/<int:id>
 * 参数：帖子id
+* 请求成功返回值
+
+```
+{
+  "comments": [
+    {
+      "author": "ruth86",
+      "authorAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
+      "authorId": 40,
+      "body": "来评论",
+      "timestamp": "2016-05-12 01:34:45"
+    },
+    {
+      "author": "ruth86",
+      "authorAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
+      "authorId": 40,
+      "body": "再来评论",
+      "timestamp": "2016-05-12 01:34:54"
+    },
+      等等
+  ]
+}
+
+
+```
+
 
 #####9、发表新的帖子  	【POST】    {此api已实现}
 
@@ -269,19 +328,21 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 {
-  "about_me": "Vivamus tortor.",
+  "about_me": "Nulla ac enim.",
+  "avatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
   "followed": 2,
-  "followes": 1,
-  "last_seen": "Wed, 11 May 2016 12:40:22 GMT",
-  "location": "Laguna Beach",
-  "member_since": "Mon, 25 Apr 2016 00:00:00 GMT",
-  "name": "Kathy Richards",
-  "postCollectionCount": 2,
+  "followers": 1,
+  "last_seen": "2016-05-12 12:02:57",
+  "location": "San Clemente",
+  "member_since": "2016-05-09 00:00:00",
+  "name": "Jane Lane",
+  "postCollectionCount": 4,
   "postCount": 1,
+  "contactMe": null,
   "sex": "男",
-  "userName": "amy70"
+  "userId": 40,
+  "userName": "ruth86"
 }
-
 ```
 
 
@@ -301,7 +362,7 @@ http://127.0.0.1:5000/api/posts?page=3
   ]
 }
 ```
-*
+
 
 #####15、获取某个用户的粉丝     【GET】   {此api已实现}
 * URL:www.jxnugo.com/api/user_followers/<int:id>
@@ -327,9 +388,30 @@ http://127.0.0.1:5000/api/posts?page=3
 }
 ```
 
-#####16、获取某个用户发表过的评论   【GET】
+#####16、获取某个用户发表过的评论   【GET】   {此api已实现}
 * URL:www.jxnugo.com/api/user_comments/<int:id>
 * 参数：用户id
+* 请求成功返回值
+
+```
+{
+  "userComments": [
+    {
+      "body": "来评论",
+      "postName": "Electronics Stores",
+      "timestamp": "2016-05-12 01:34:45",
+      "url": "http://127.0.0.1:5000/api/posts/16"
+    },
+    {
+      "body": "再来评论",
+      "postName": "Electronics Stores",
+      "timestamp": "2016-05-12 01:34:54",
+      "url": "http://127.0.0.1:5000/api/posts/16"
+    },    等等
+  ]
+}
+```
+
 
 #####17、关注某个用户   【POST】
 * URL: www.jxnugo.com/api/follow/<int:id>

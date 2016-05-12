@@ -80,7 +80,7 @@
                 <a href="{{ url_for('main.followers',username=user.userName)}}">{{ user.followers.count() }}</a>
                 {% for u in followersTen %}
                     <ul>
-                <li>{{ u.follower_id |changToUserName }}</li>
+                <li>{{ u.follower_id |changToUserAvatar }}</li>
                     </ul>
                 {% endfor %}
     		</div>
@@ -89,7 +89,7 @@
                 <a href="{{ url_for('main.followed_by',username=user.userName)}}">{{ user.followed.count() }}</a>
                 {% for u in followingTen %}
                     <ul>
-                    <li>{{ u.followed_id | changeToUserName }}</li>
+                    <li>{{ u.followed_id | changeToUserAvatar }}</li>
                     </ul>
                 {% endfor %}
     		</div>
