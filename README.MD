@@ -30,7 +30,7 @@ Post.generate_fake(100)  #伪造交易帖子
 
 ###登录注册与token
 
-#####1、用户登录  【GET】       {此api已实现}
+#####1、用户登录  【GET】         {此api已实现}
 * URL:  www.jxnugo.com/api/get_token
 * 描述：用来用户登录验证
 * 参数：userName,passWord
@@ -40,6 +40,7 @@ Post.generate_fake(100)  #伪造交易帖子
   {
 		"expiration"3600,
 		"token":"eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ2MjkwMTM1MSwiaWF0IjoxNDYyODk3NzUxfQ.eyJpZCI6NX0.zsYFk7rzBi68TIY3PWe_8jwjsvPTghrM80RjeyDQd1k"
+		“userId”:40
   }
 ```
 * 请求失败情况
@@ -61,6 +62,7 @@ Post.generate_fake(100)  #伪造交易帖子
 	error：错误信息
 
 	message：具体错误信息
+	userId:用户id
 
 
 
@@ -142,7 +144,7 @@ Post.generate_fake(100)  #伪造交易帖子
     },
     {
     }，
-    ....等等
+    等等
   ]
 }
 ```
@@ -163,7 +165,7 @@ http://127.0.0.1:5000/api/posts?page=3
   "author": "http://127.0.0.1:5000/api/user/79",
   "body": "Nulla nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.",
   "contact": "1266275125",
-  "gooLocation": "3 Toban Pass",
+  "goodLocation": "3 Toban Pass",
   "goodBuyTime": "2016-05-10",
   "goodName": "Medical Practitioners",
   "goodPrice": 1239.12,
@@ -180,9 +182,37 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 
-#####6、获取某个用户发布的帖子 [GET]
+#####6、获取某个用户发布的帖子 [GET]   {此api已实现}
 * URL：www.jxnugo.com/api/user_posts/<int:id>
 * 参数：用户id
+* 请求成功的返回值
+
+
+```
+	{
+  "userPosts": [
+    {
+      "author": "http://127.0.0.1:5000/api/user/40",
+      "body": "Nulla mollis molestie lorem. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. In sagittis dui vel nisl.",
+      "contact": "1168038514",
+      "goodBuyTime": "2016-04-23",
+      "goodLocation": "0 Ronald Regan Terrace",
+      "goodName": "Beverages - Brewers",
+      "goodPrice": 1239.12,
+      "goodQuality": "9成新",
+      "goodTag": 4,
+      "photos": null,
+      "timestamp": "Wed, 11 May 2016 00:00:00 GMT",
+      "url": "http://127.0.0.1:5000/api/posts/55"
+    }
+  ]
+  {
+
+  }
+  等等...
+}
+
+```
 
 #####7、获取某个用户收藏的帖子     【GET】    {此api已实现}
 * URL:www.jxnugo.com/api/user_collectionpost/<int:id>
@@ -214,9 +244,33 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####8、获取某个帖子的评论  【GET】
+#####8、获取某个帖子的评论  【GET】  {此api已实现}
 * URL: www.jxnugo.com/api/comments/<int:id>
 * 参数：帖子id
+* 请求成功返回值
+
+```
+{
+  "comments": [
+    {
+      "author": "ruth86",
+      "authorId": 40,
+      "body": "来评论",
+      "timestamp": "Thu, 12 May 2016 01:34:45 GMT"
+    },
+    {
+      "author": "ddragon",
+      "authorId": 101,
+      "body": "管理员也来评论？",
+      "timestamp": "Thu, 12 May 2016 01:36:24 GMT"
+    }
+    等等
+  ]
+}
+
+
+```
+
 
 #####9、发表新的帖子  	【POST】    {此api已实现}
 
@@ -301,7 +355,7 @@ http://127.0.0.1:5000/api/posts?page=3
   ]
 }
 ```
-*
+
 
 #####15、获取某个用户的粉丝     【GET】   {此api已实现}
 * URL:www.jxnugo.com/api/user_followers/<int:id>
@@ -327,9 +381,31 @@ http://127.0.0.1:5000/api/posts?page=3
 }
 ```
 
-#####16、获取某个用户发表过的评论   【GET】
+#####16、获取某个用户发表过的评论   【GET】   {此api已实现}
 * URL:www.jxnugo.com/api/user_comments/<int:id>
 * 参数：用户id
+* 请求成功返回值
+
+```
+{
+  "userComments": [
+    {
+      "body": "来评论",
+      "postName": "Electronics Stores",
+      "timestamp": "Thu, 12 May 2016 01:34:45 GMT",
+      "url": "http://127.0.0.1:5000/api/posts/16"
+    }
+    {
+      "body": "评论其它的帖子",
+      "postName": "Copper",
+      "timestamp": "Thu, 12 May 2016 19:33:13 GMT",
+      "url": "http://127.0.0.1:5000/api/posts/25"
+    }
+    等等
+  ]
+}
+```
+
 
 #####17、关注某个用户   【POST】
 * URL: www.jxnugo.com/api/follow/<int:id>

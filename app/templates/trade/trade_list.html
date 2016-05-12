@@ -11,7 +11,7 @@ body {
                 <div class="col-md-2 left-align btn-list-toggle" style="font-size:30px;padding-left:30px"><span class="glyphicon glyphicon-th-list"></span> 分类</div>
                 <div class="col-md-7 left-align" style="margin-top:5px;">
                     <button class="btn btn-default" style="font-size:15px;">
-                        <a href="{{url_for('trade.trade_post')}}">发布商品！</a>
+                        <a href="{{url_for('trade.trade_post',_external=True)}}">发布商品！</a>
                     </button>
                 </div>
                 
@@ -56,11 +56,11 @@ body {
             <div class="ui-trade-show col-md-9" style="width:100%">
                 {% if posts %} {% for post in posts %}
                 <div class="col-md-4">
-                    <a href={{url_for('trade.trade_detail',goodId=post.id)}}>
+                    <a href={{url_for('trade.trade_detail',goodId=post.id,_external=True)}}>
                         <div class="ui-trade-show-contain" style="background-image:url('static/images/2.jpeg');background-size:cover;" data-href={{post.id}}>
                             <div class="ui-trade-show-contain-side">
                             </div>
-                            <a href="#"><div class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');"></a>
+                            <a href="#"><div class="ui-trade-show-contain-headbg" style="background-image:url(http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png);"></a>
                             </div>
                             <div class="ui-trade-show-contain-text">
                                 <div class="ui-trade-show-contain-price">￥{{post.goodPrice}}</div>
@@ -78,7 +78,7 @@ body {
 </div>
 <!--这里是引用分页导航的局部模板macros-->
 <div class="ui-pagination center-align">
-    {{ macros.pagination_widget(pagination,'.trade_list')}}
+    {{ macros.pagination_widget(pagination,'.trade_list',_external=True)}}
 </div>
 </div>
 {% endblock %} {% block script %}

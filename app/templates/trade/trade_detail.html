@@ -145,23 +145,23 @@ body {
                 <div class="col-md-4 right-panel">
                     <div class="ui-trade-detail-headbg" style="background-image:url(/static/images/1.jpg)">
                         <div class="ui-trade-detail-userinfo">
-                            <h3><a href="{{ url_for('main.user_zone',username=post.author.userName) }}">{{ post.author.userName }}</a> </h3>
+                            <h3><a href="{{ url_for('main.user_zone',username=post.author.userName,_external=True) }}">{{ post.author.userName }}</a> </h3>
                             <h5 class="sign">{{ post.author.about_me }}</h5></div>
                     </div>
                     <div class="stickypannel " >
                         <div class="ui-trade-detail-rightlist">
                             {% if current_user.is_authenticated %}
                             {% if current_user.is_collecting(post) %}
-                                <h5 ><a href="{{ url_for('.uncollect',pid=post.id) }}" style="color:blue;">取消收藏</a> </h5>
+                                <h5 ><a href="{{ url_for('.uncollect',pid=post.id,_external=True) }}" style="color:blue;">取消收藏</a> </h5>
                                 {% else %}
-                                <h5 ><a href="{{ url_for('.collect',pid=post.id) }}" style="color:blue;">收藏该帖子</a></h5>
+                                <h5 ><a href="{{ url_for('.collect',pid=post.id,_external=True) }}" style="color:blue;">收藏该帖子</a></h5>
                                 {% endif %}
                             {% endif %}
                             <span>该用户的其他帖子</span>
                             <ul>
                             {%  if post.author.posts %}
                             {% for userpost in post.author.posts %}
-                            <li><a href="{{ url_for('trade.trade_detail',goodId=userpost.id)}}"> {{ userpost.goodName }}</a></li>
+                            <li><a href="{{ url_for('trade.trade_detail',goodId=userpost.id,_external=True)}}"> {{ userpost.goodName }}</a></li>
                             {%  endfor %}
                             {% else %}
                             <li>该用户还未发表过帖子~</li>

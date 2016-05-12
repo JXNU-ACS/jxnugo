@@ -50,3 +50,16 @@ def register():
     response.status_code=200
     return response
 
+
+@api.route('/api/user_posts/<int:id>')
+def user_posts(id):
+    user=User.query.get_or_404(id)
+    posts=user.posts.all()
+    return jsonify({"userPosts":[post.to_json() for post in posts]})
+
+
+@api.route('/api/user_comments/<int:id>')
+def user_comments(id):
+    user=User.query.get_or_404(id)
+    comments=user.comments.all()
+    return jsonify({"userComments":[comment.userComment_to_json() for comment in comments]})

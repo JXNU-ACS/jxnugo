@@ -93,10 +93,10 @@ body {
 {% endblock %}
 {% block script %}
     <!--依赖插件-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/plupload/plupload.full.min.js')}}></script>
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/qinniu/dist/qiniu.min.js')}}></script>
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/plupload/plupload.full.min.js',_external=True)}}></script>
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/qinniu/dist/qiniu.min.js',_external=True)}}></script>
     <!--配置-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/qinniu/config.js')}}></script>
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/qinniu/config.js',_external=True)}}></script>
     <script type="text/javascript">
     (function() {
         var upload = Qiniu.uploader(uploaderoption)

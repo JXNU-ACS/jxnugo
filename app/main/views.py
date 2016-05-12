@@ -145,7 +145,7 @@ def follow(username):
         return redirect(url_for('trade.trade_list'))
     current_user.follow(user)
     flash(u'成功关注%s' % username)
-    return redirect(url_for('main.user_zone',username=username))
+    return redirect(url_for('main.user_zone',username=username, _external=True))
 
 
 @main.route('/unfollow/<username>')
@@ -157,7 +157,7 @@ def unfollow(username):
         flash(u'没有该用户')
     current_user.unfollow(user)
     flash(u'成功取消对%s的关注' % username)
-    return redirect(url_for('main.user_zone',username=username))
+    return redirect(url_for('main.user_zone',username=username, _external=True))
 
 
 @main.route('/followers/<username>')
@@ -165,7 +165,7 @@ def followers(username):
     user = User.query.filter_by(userName=username).first()
     if user is None:
         flash(u'该用户不存在')
-        return redirect(url_for('trade.trade_list'))
+        return redirect(url_for('trade.trade_list', _external=True))
     page = request.args.get('page', 1, type=int)
     pagination = user.followers.paginate(
         page, per_page=current_app.config['JXNUGO_FOLLOWERS_PER_PAGE'],
@@ -182,7 +182,7 @@ def followed_by(username):
     user = User.query.filter_by(userName=username).first()
     if user is None:
         flash(u'该用户不存在')
-        return redirect(url_for('trade.trade_list'))
+        return redirect(url_for('trade.trade_list', _external=True))
     page = request.args.get('page', 1, type=int)
     pagination = user.followed.paginate(
         page, per_page=current_app.config['JXNUGO_FOLLOWERS_PER_PAGE'],
