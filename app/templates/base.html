@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}test{% endblock %}</title>
-    <link href={{url_for('main.staticfile',filename='css/bootstrap.min.css',_external=True)}} rel="stylesheet" type="text/css">
-    <link href={{url_for('main.staticfile',filename='css/all_style.css',_external=True)}} rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/anim.css',_external=True)}}>
-    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/global.css',_external=True)}}>
+    <link href={{url_for('main.staticfile',filename='css/bootstrap.min.css')}} rel="stylesheet" type="text/css"> 
+    <link href={{url_for('main.staticfile',filename='css/all_style.css')}} rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/anim.css')}}>
+    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/global.css')}}>
 </head>
 
 <body>
@@ -27,9 +27,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">主页</a></li>
-                        <li><a href={{url_for('trade.trade_list',_external=True)}}>淘二手</a></li>
-                        <li><a href={{url_for('trade.trade_list',_external=True)}} data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
-                        <li><a href={{url_for('bbs.bbs_index',_external=True)}}>校园BBS</a></li>
+                        <li><a href={{url_for('trade.trade_list')}}>淘二手</a></li>
+                        <li><a href={{url_for('trade.trade_list')}} data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
+                        <li><a href={{url_for('bbs.bbs_index')}}>校园BBS</a></li>
 
                         <li><a href="#">客户端</a></li>
                     </ul>
@@ -59,20 +59,20 @@
                                 {% if current_user.is_authenticated %}
                                     <li><a href="#">帖子</a></li>
                                     <li><a href="#">消息</a></li>
-                                    <li><a href="{{url_for('main.user_zone',username=current_user.userName,_external=True)}}" >个人信息</a></li>
+                                    <li><a href="{{url_for('main.user_zone',username=current_user.userName)}}" >个人信息</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">偏好设置</a></li>
                                      {% if current_user.can(Permission.MODERATE_COMMENTS) %}
-                                         <li><a href="{{ url_for('trade.moderate',_external=True)}}">评论管理</a> </li>
+                                         <li><a href="{{ url_for('trade.moderate')}}">评论管理</a> </li>
                                      {% endif %}
                                     <li role="separator" class="divider"></li>
                                     {% if current_user.role_id==2 %}
-                                        <li><a href="{{ url_for('main.show_user',_external=True) }}">用户管理</a> </li>
+                                        <li><a href="{{ url_for('main.show_user') }}">用户管理</a> </li>
                                     {% else %}
                                     {% endif %}
-                                    <li><a href="{{url_for('auth.logout',_external=True)}}">登出</a></li>
+                                    <li><a href="{{url_for('auth.logout')}}">登出</a></li>
                                 {% else %}
-                                    <li><a href="{{url_for('auth.passport',_external=True)}}">登录or注册</a></li>
+                                    <li><a href="{{url_for('auth.passport')}}">登录or注册</a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -191,10 +191,10 @@
         </div>
     </div>
     <!--依赖框架，插件-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/jquery.min.js',_external=True)}}></script>
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/bootstrap.min.js',_external=True)}}></script>
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/jquery.min.js')}}></script>
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/bootstrap.min.js')}}></script>
     <!--全局ui-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/ui/global.js',_external=True)}}></script>
+    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/ui/global.js')}}></script>
     <script type="text/javascript">
         var ui = new UI();
         ui.modalShow(function(){

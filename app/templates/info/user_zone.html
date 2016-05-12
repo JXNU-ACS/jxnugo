@@ -13,14 +13,14 @@ body {
         		<div class="ui-userzone-user-signature">
                 	<span>"</span>{{user.about_me}}<span>"</span><br>
                     {% if current_user.userName==user.userName %}
-					<h6><a href="{{url_for('main.editUserInfo',_external=True)}}">点击这里修改个人信息</a></h6>
+					<h6><a href="{{url_for('main.editUserInfo')}}">点击这里修改个人信息</a></h6>
                     {% else %}
                     {% endif %}
                     {% if current_user.can(Permission.FOLLOW) and user != current_user %}
                         {% if not current_user.is_following(user) %}
-                            <a href="{{ url_for('main.follow', username=user.userName,_external=True)}}">关注</a>
+                            <a href="{{ url_for('main.follow', username=user.userName)}}">关注</a>
                          {% else %}
-                            <a href="{{ url_for('main.unfollow', username=user.userName,_external=True) }}">取消关注</a>
+                            <a href="{{ url_for('main.unfollow', username=user.userName) }}">取消关注</a>
                         {% endif %}
                     {% endif %}
                     {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}

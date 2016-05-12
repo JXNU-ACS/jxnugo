@@ -24,11 +24,11 @@ def login():
         user=User.query.filter_by(userName=loginform.userName.data).first()
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
-            return redirect(url_for('main.index',_external=True))
+            return redirect(url_for('main.index'))
         else:
             flash(u'用户名或密码错误','bg-warning')
-            return redirect(url_for('auth.passport',_external=True))
-    return redirect(url_for('auth.passport',_external=True))
+            return redirect(url_for('auth.passport'))
+    return redirect(url_for('auth.passport'))
 
 
 @auth.route('/register',methods=['GET','POST'])
@@ -44,8 +44,8 @@ def register():
                    'auth/email/confirm',User=regUser,token=token
                    )
         flash(u'注册成功,账户激活信息已经发送到您的邮件!')
-        return redirect(url_for('auth.passport',_external=True))
-    return redirect(url_for('auth.passport',_external=True))
+        return redirect(url_for('auth.passport'))
+    return redirect(url_for('auth.passport'))
 
 
 @auth.route('/logout')
@@ -54,7 +54,7 @@ def logout():
     logout_user()
     session.pop('name',None)
     flash(u'成功推出账户')
-    return redirect(url_for('auth.passport',_external=True))
+    return redirect(url_for('auth.passport'))
 
 
 @auth.route('/confirm/<token>')
@@ -70,7 +70,7 @@ def confirm(token):
     db.session.add(u)
     db.session.commit()
     flash(u'恭喜您完成账号激活')
-    return redirect(url_for('auth.passport',_external=True))
+    return redirect(url_for('auth.passport'))
 
 
 @auth.route('/confirm')
@@ -79,7 +79,7 @@ def resend_email():
     token=current_user.generate_confirmation_token()
     send_email(current_user.userEmail,'激活你的账户','auth/email/confirm',User=current_user,token=token)
     flash(u'激活邮件已经发送到您的账户')
-    return redirect(url_for('trade.trade_list', _external=True))
+    return redirect(url_for('trade.trade_list'))
 
 
 @auth.before_app_request
@@ -87,13 +87,13 @@ def before_request():
     if current_user.is_authenticated:
         current_user.ping()
         if not current_user.confirmed and request.endpoint[:5]!='auth.':
-            return redirect(url_for('auth.unconfirmed', _external=True))
+            return redirect(url_for('auth.unconfirmed'))
 
 
 @auth.route('/unconfirmed')
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
-        return redirect(url_for('trade.trade_list', _external=True))
+        return redirect(url_for('trade.trade_list'))
     return render_template('auth/unconfirmed.html')
 
 
