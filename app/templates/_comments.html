@@ -2,11 +2,11 @@
     {% for comment in comments %}
     <li class="comment">
         <div class="comment-thumbnail">
-            <!--<a href="{{ url_for('main.user_zone', username=comment.author.userName,_external=True) }}">{{comment.author.userName}}</a>-->
+            <!--<a href="{{ url_for('main.user_zone', username=comment.author.userName) }}">{{comment.author.userName}}</a>-->
         </div>
         <div class="comment-content">
             <div class="comment-date">{{ comment.timestamp }}</div>
-            <div class="comment-author"><a href="{{ url_for('main.user_zone', username=comment.author.userName,_external=True) }}">{{ comment.author.userName }}</a></div>
+            <div class="comment-author"><a href="{{ url_for('main.user_zone', username=comment.author.userName) }}">{{ comment.author.userName }}</a></div>
             <div class="comment-body">
                 {% if comment.disabled %}
                 <p><i>这条评论被管理员设为不可查看</i></p>

@@ -41,10 +41,3 @@ def new_post():
     db.session.add(post)
     db.session.commit()
     return jsonify(post.to_json())
-
-
-@api.route('/api/comments/<int:id>')
-def comments(id):
-    post=Post.query.get_or_404(id)
-    comments=post.comments.all()
-    return jsonify({"comments":[comment.to_json() for comment in comments]})

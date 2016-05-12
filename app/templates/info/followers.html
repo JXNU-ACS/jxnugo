@@ -11,12 +11,12 @@
     {% if follow.user != user %}
     <tr>
         <td>
-            <a href="{{ url_for('.user_zone', username = follow.user.userName,_external=True) }}">
+            <a href="{{ url_for('.user_zone', username = follow.user.userName) }}">
                 <!-- user's image -->
                 {{ follow.user.userName }}
             </a>
         </td>
-        <td>{{ moment(follow.timestamp).format('LLL') }}</td>
+        <td>{{ moment(follow.timestamp).format('L') }}</td>
     </tr>
     {% endif %}
     {% endfor %}
