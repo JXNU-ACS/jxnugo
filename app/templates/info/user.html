@@ -18,7 +18,7 @@
     {% endif %}
     {% if current_user.is_administrator() %}
     <p> <a href="mailto:{{user.userEmail}}">{{user.userEmail}}</a> </p>
-        <a href="{{url_for('.editUserInfoAdmin',id=user.id)}}">编辑用户信息</a>
+        <a href="{{url_for('.editUserInfoAdmin',id=user.id,_external=True)}}">编辑用户信息</a>
     {% endif %}
     {% if user.about_me %}<p>{{user.about_me}}</p>
     {% endif %}
@@ -26,7 +26,6 @@
         注册日期:{{moment(user.menber_since).format('YYYY年M月D日, h:mm:ss a')}}
         上次登录:{{moment(user.last_seen).fromNow()}}
     </p>
-    <h2><a href="{{url_for('main.editUserInfo')}}">点击这里修改个人信息</a></h2>
-    <!--这里有个小bug,当管理员点击修改个人信息时,会出现404,不过管理员一般也不会无聊的改自己信息-->
+    <h2><a href="{{url_for('main.editUserInfo',_external=True)}}">点击这里修改个人信息</a></h2>
 </div>
 {% endblock %}

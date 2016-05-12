@@ -5,7 +5,7 @@
     <ul>
     {% if users %}
         {% for user in users %}
-        <li><a href="{{ url_for('main.editUserInfoAdmin',pid=user.id) }}">{{ user.userName }}</a></li>
+        <li><a href="{{ url_for('main.editUserInfoAdmin',pid=user.id,_external=True) }}">{{ user.userName }}</a></li>
         {% endfor %}
     {% endif %}
     </ul>
