@@ -47,14 +47,15 @@ FileuploadUI.prototype.crateImg = function() {
 		},0,0)
     }
 };
-FileuploadUI.prototype.getJson = function(){
+FileuploadUI.prototype.getJson = function(key){
 	var self = this;
 	var a;
+
 	self.submit.click(function(){
 		a = $("div[data-imgname]").length;
 		self.json += "\"photokey\":[";
 		$("div[data-imgname]").each(function(index){
-			self.json += "{\"key\":\""+$(this).attr("data-imgname")+"\"}";
+			self.json += "{\"key\":\""+$(this).attr("data-key")+"\"}";
 			if (index != a-1) self.json +=",";
 		});
 		self.json += "]";
@@ -69,6 +70,7 @@ FileuploadUI.prototype.getJson = function(){
 FileuploadUI.prototype.eachUpload = function(url,key){
 	var file = this.file;
 	var self = this;
+	$("div[data-imgname="+file.id+"]").attr("data-key",key);
 	$("div[data-imgname="+file.id+"]").find(this.imgBg).attr("style","background-image:url("+url+")").hover(function() {
         $(this).find(self.showPictureElement).toggle()
 
