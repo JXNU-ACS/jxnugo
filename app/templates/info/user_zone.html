@@ -11,22 +11,8 @@ body {
         	<!--banner-->
         	<div class="ui-panel-cover" style="background-color:#366462;z-index:0;">
         		<div class="ui-userzone-user-signature">
-                	<span>"</span>{{user.about_me}}<span>"</span><br>
-                    {% if current_user.userName==user.userName %}
-					<h6><a href="{{url_for('main.editUserInfo')}}">点击这里修改个人信息</a></h6>
-                    {% else %}
-                    {% endif %}
-                    {% if current_user.can(Permission.FOLLOW) and user != current_user %}
-                        {% if not current_user.is_following(user) %}
-                            <a href="{{ url_for('main.follow', username=user.userName)}}">关注</a>
-                         {% else %}
-                            <a href="{{ url_for('main.unfollow', username=user.userName) }}">取消关注</a>
-                        {% endif %}
-                    {% endif %}
-                    {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
-                    <span class="label label-default">关注了你</span>
-                    {% endif %}
-					<!--修改个人信息的位置,到时候样式位置什么的都改改-->
+                	<span>"</span>{{user.about_me}}<span>"</span>
+                    
             	</div>
         	</div>
         	<div class="ui-userzone-body row">
@@ -54,11 +40,14 @@ body {
 	                <div class="slideBlock slideblock-user"></div>
 	            </div>
 	            <div class="col-md-12">
+                    
 	                <div class="ui-userzone-content" data-ariapannel="zone_home">{% include 'info/_zone_home.html' %}</div>
 	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_post">{% include 'info/_zone_post.html' ignore missing%}</div>
                     <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_comment">{% include 'info/_zone_comment.html' ignore missing%}</div>
 	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_collection">{% include 'info/_zone_collection.html' ignore missing%}</div>
-        	</div>
+                    <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_followers">{% include 'info/_zone_followers.html' ignore missing%}</div>
+                    <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_followed">{% include 'info/_zone_followed.html' ignore missing%}</div>
+        	   </div>
         	</div>
         </div>
     </div>
@@ -72,6 +61,9 @@ $(document).ready(function(){
         originPosition:"#zone_home",
         slideBlock:".slideblock-user"
     });
+    $(".select-1").click(function(){
+        select1.selectPannel($(this));
+    })
 });
 </script>
 {% endblock %}

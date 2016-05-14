@@ -13,18 +13,49 @@ body {
                 <div class="row">
                 	<div class="ui-edinfo-title">修改信息</div>
                 </div>
+                <form action="/editUserInfo" method="post">
                 <div class="row">
+                	
                 	<div class="col-sm-8">
-                		<div></div>
+                		{{form.hidden_tag()}}
+                        <input type="hidden" id="domain" value="7xrkww.com1.z0.glb.clouddn.com">
+                            <input type="hidden" id="uptoken_url" value="/get_upload_token">
+                            {{form.usrheadimg(style="display:none")}}
+                		<div class="ui-edinfo-row">
+                			{{form.name(class="ui-form-style ui-edinfo-input",**{"placeholder":"昵称"})}}
+                		</div>
+                		<div class="ui-edinfo-row">
+                			{{form.location(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的位置"})}}
+                		</div>
+                		<div class="ui-edinfo-row">
+                			{{form.about_me(class="ui-form-style ui-edinfo-input",**{"placeholder":"签名"})}}
+                		</div>
+                        
                 	</div>
                 	<div class="col-sm-4">
+                		<div id="upload-aira" class="ui-edinfo-uploadimg ">
+                            <a id="pickfiles" href="#">
+                                <div class="progress">
+                                    </div>
+                                <div class="bottom">
+                                    
+                                    <span>上传头像</span>
+                                </div>
+
+                            </a>
+                        </div>
                 	</div>
+                    <div class="row">
+                        {{form.submit(class="btn btn-default ui-edinfo-bottom center-block")}}
+                    </div>
+                
                 </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<!--<div class="divstyle" style="text-align: center;padding: 100px">
+<!--{#<div class="divstyle" style="text-align: center;padding: 100px">
     <h1>修改个人信息</h1>
     <form action="/editUserInfo" method="post">
         {{form.hidden_tag()}}
@@ -34,5 +65,20 @@ body {
         {{form.submit()}}
     </form>
 
-</div>-->
+</div>#}-->
+{% endblock %}
+{% block script %}
+<!--依赖插件-->
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/plupload/plupload.full.min.js' )}}></script>
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/qinniu/dist/qiniu.min.js' )}}></script>
+<!--配置-->
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/qinniu/config.js' )}}></script>
+<script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/ui/Fileload.js' )}}></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    var upload = Qiniu.uploader(userimgupload)
+})
+    
+</script>
 {% endblock %}

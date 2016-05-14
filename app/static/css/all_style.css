@@ -421,7 +421,7 @@
     left: 270px;
     top: 90px;
     font-size: 20px;
-
+    width: 50%;
 }
 
 .ui-userzone-user-signature>span {
@@ -476,7 +476,23 @@
     background-size: cover;
     display: inline-block;
 }
+.ui-userzone-user-follow{
+    padding-top: 50px;
 
+}
+.ui-userzone-user-follow .head-lg {
+    width: 100%;
+    height: 122px;
+    border-radius: 50%;
+    background-color: #eee;
+    background-size: cover;
+}
+.ui-userzone-user-follow .name{
+    text-align: center;
+    font-size: 15px;
+    color: #B7ACA2;
+    margin-top:10px;
+}
 
 /*----------发布帖子--------------*/
 
@@ -573,4 +589,45 @@
     color: #fff;
     position: relative;
     font-size: 90px;
+}
+.ui-edinfo-input {
+    width: 100%;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #eee;
+}
+.ui-edinfo-uploadimg{
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    background: #eee;
+    background-size: cover;
+    
+}
+.ui-edinfo-uploadimg .bottom{
+    width: 250px;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    padding-top: 87%;
+    
+}
+.ui-edinfo-uploadimg .bottom span{
+    padding: 5% 34%;
+    background: rgba(51,51,51,0.6);
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.ui-edinfo-uploadimg .progress{
+    width: 250px;
+    height: 0;
+    position: absolute;
+    background: rgba(51,51,51,0.6);
+    border-radius: 20px;
+}
+.ui-edinfo-bottom{
+    background: #B7ACA2;
+    color:#fff;
+    font-size: 20px;
 }

@@ -1,0 +1,43 @@
+
+<!--{#{% import "./_macros.html" as macros %}
+
+
+<div style="padding-top:100px;">
+    <h1>{{ title }} {{ user.userName }}</h1>
+</div>
+<table class="table table-hover followers">
+    <thead><tr><th>用户名</th><th>关注时间</th></tr></thead>
+    {% for follow in follows %}
+    {% if follow.user != user %}
+    <tr>
+        <td>
+            <a href="{{ url_for('.user_zone', username = follow.user.userName) }}">
+                <!-- user's image 
+                {{ follow.user.userName }}
+            </a>
+        </td>
+        <td>{{ moment(follow.timestamp).format('L') }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, endpoint, username = user.userName) }}
+</div>#}-->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ui-userzone-body-block">
+            <div class="row">
+            <h3><div class="ui-userzone-content-title">ta关注的用户</div></h3>
+            </div>
+            <div class="ui-userzone-user-follow row">
+                {% for u in followerAll %}
+                <div class="col-sm-2">
+                    <div class="head-lg center-align" style="background-images:url({{ u.follower_id | changeToUserAvatar }})"></div>
+                    <div class="name">这里获取用户名</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

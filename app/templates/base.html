@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}test{% endblock %}</title>
-    <link href={{url_for('main.staticfile',filename='css/bootstrap.min.css')}} rel="stylesheet" type="text/css"> 
-    <link href={{url_for('main.staticfile',filename='css/all_style.css')}} rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/anim.css')}}>
-    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/global.css')}}>
+    <link href={{url_for( 'main.staticfile',filename='css/bootstrap.min.css' )}} rel="stylesheet" type="text/css">
+    <link href={{url_for( 'main.staticfile',filename='font-awesome/css/font-awesome.min.css' )}} rel="stylesheet" type="text/css">
+    <link href={{url_for( 'main.staticfile',filename='css/all_style.css' )}} rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href={{url_for( 'main.staticfile',filename='css/anim.css' )}}>
+    <link rel="stylesheet" type="text/css" href={{url_for( 'main.staticfile',filename='css/global.css' )}}>
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -26,11 +29,10 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">主页</a></li>
-                        <li><a href={{url_for('trade.trade_list')}}>淘二手</a></li>
-                        <li><a href={{url_for('trade.trade_list')}} data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
-                        <li><a href={{url_for('bbs.bbs_index')}}>校园BBS</a></li>
-
+                        <li class="active"><a href="{{url_for('main.index')}}">主页</a></li>
+                        <li><a href={{url_for( 'trade.trade_list')}}>淘二手</a></li>
+                        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
+                        <li><a href={{url_for( 'bbs.bbs_index')}}>校园BBS</a></li>
                         <li><a href="#">客户端</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
@@ -42,37 +44,25 @@
                         </div>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <!--{#{% if current_user.is_authenticated %}
-                        <li><a href="{{url_for('auth.logout')}}">登出</a> </li>
-                        {% else %}
-                        <li><a href="{{url_for('auth.passport')}}">用户管理</a> </li>
-                        {% endif %}
-                        <li><a href="#"> 你好&nbsp;{% if session['name'] %}{{session['name']|capitalize}}{% else %}游客{% endif %}</a></li>#}
-                        <!--上面我添加了登录登出,可以变更
-                        <li><a href="#loginModal" data-toggle="modal" data-target="#loginModal">登录</a></li>
-                        <li><a href="#regModal" data-toggle="modal">注册</a></li>
-                        -->
-                        <!--改·用户信息列表-->
                         <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好&nbsp;{% if current_user.userName %}{{current_user.userName|capitalize}}{% else %}游客{% endif %}<span class="caret"></span></a>
-                              <ul class="dropdown-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好&nbsp;{% if current_user.userName %}{{current_user.userName|capitalize}}{% else %}游客{% endif %}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
                                 {% if current_user.is_authenticated %}
-                                    <li><a href="#">帖子</a></li>
-                                    <li><a href="#">消息</a></li>
-                                    <li><a href="{{url_for('main.user_zone',username=current_user.userName)}}" >个人信息</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">偏好设置</a></li>
-                                     {% if current_user.can(Permission.MODERATE_COMMENTS) %}
-                                         <li><a href="{{ url_for('trade.moderate')}}">评论管理</a> </li>
-                                     {% endif %}
-                                    <li role="separator" class="divider"></li>
-                                    {% if current_user.role_id==2 %}
-                                        <li><a href="{{ url_for('main.show_user') }}">用户管理</a> </li>
-                                    {% else %}
-                                    {% endif %}
-                                    <li><a href="{{url_for('auth.logout')}}">登出</a></li>
+                                <li><a href="#">帖子</a></li>
+                                <li><a href="#">消息</a></li>
+                                <li><a href="{{url_for('main.user_zone',username=current_user.userName)}}">个人信息</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">偏好设置</a></li>
+                                {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                                <li><a href="{{ url_for('trade.moderate')}}">评论管理</a> </li>
+                                {% endif %}
+                                <li role="separator" class="divider"></li>
+                                {% if current_user.role_id==2 %}
+                                <li><a href="{{ url_for('main.show_user') }}">用户管理</a> </li>
+                                {% else %} {% endif %}
+                                <li><a href="{{url_for('auth.logout')}}">登出</a></li>
                                 {% else %}
-                                    <li><a href="{{url_for('auth.passport')}}">登录or注册</a></li>
+                                <li><a href="{{url_for('auth.passport')}}">登录or注册</a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -80,159 +70,98 @@
                 </div>
             </div>
         </nav>
-        {%-block nav %}{% endblock %}
+        {%-block nav %}
+        <style type="text/css">
+        body{
+            padding-top:50px;
+        }
+        </style>
+        {% endblock %}
     </div>
     {% block content %}{% endblock %}
-    <!-- 模态登录框 {#
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
-        <div class="modal-dialog modal-sm" role="document" style="margin-top: 200px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" style="text-align:center;">登录</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="/login" method="post">
-                        
-            <div class="form-group">
-                <label class="sr-only">账户</label>
-                <input name="userID" class="ui-form-style"  placeholder="账户" >
-            </div>
-            <div class="form-group">
-                <label class="sr-only">密码</label>
-                <input name="pwdddddd" class="ui-form-style"  placeholder="密码" >
-            </div>
-                        <div class="form-group">
-                            {{ loginform.userName(class="ui-form-style",placeholder="用户名") }}
-                        </div>
-                        <div class="form-group">
-                            {{ loginform.passWord(class="ui-form-style",placeholder="密码") }}
-                        </div>
-                        {{ loginform.submit(class="btn btn-default",value="登陆") }}
-                        <button class="btn btn-default" type="submit">提交</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModalLabel">
-        <div class="modal-dialog modal-sm" role="document" style="margin-top: 200px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" style="text-align:center;">注册</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="/reg">
-                        
-            <div class="form-group">
-                <label class="sr-only">用户名</label>
-                <input name="nickname" class="ui-form-style"  placeholder="账户" >
-            </div>
-
-            <div class="form-group">
-                <label class="sr-only">邮箱</label>
-                <input type="email" name="email" class="ui-form-style"  placeholder="邮箱" >
-            </div>
-            <div class="form-group">
-                <label class="sr-only">密码</label>
-                <input name="pwdddddd" class="ui-form-style"  placeholder="密码" >
-            </div>
-
-
-            <div class="form-group">
-                <label class="sr-only">确认密码</label>
-                <input class="ui-form-style"  placeholder="确认密码" >
-            </div>
-            <button>提交</button>
-            
-                        {# <div class="form-group">
-                            {{ regform.username(class="ui-form-style",placeholder="用户名") }}
-                        </div>
-                        <div class="form-group">
-                            {{ regform.email(class="ui-form-style",placeholder="邮箱") }}
-                        </div>
-                        <div class="form-group">
-                            {{ regform.password(class="ui-form-style",placeholder="密码") }}
-                        </div>
-                        <div class="form-group">
-                            {{ regform.confirmpwd(class="ui-form-style",placeholder="确认密码") }}
-                        </div>
-                        <button class="btn btn-default" type="submit">
-                            提交
-                        </button> #}
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>#}-->
     <!--模态提示框-->
     <div class="modal fade bs-example-modal-sm " id="myModal" tabindex="-1" role="dialog" aria-labelledby="messegeModalLabel">
         <div class="modal-dialog modal-sm " role="document">
             <div class="modal-content">
-                
                 <div class="modal-header ">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title " id="myModalLabel"></h4>
+                    <h6 class="modal-title " id="myModalLabel">tips</h6>
                 </div>
                 <div class="modal-body">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %} 
-                    {% for category,message in messages %}
-                    
-                    {{ message }}
-                    {% endfor %}
-                    
-                    {% endif %} 
-                    {% endwith %}
+                    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category,message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
                 </div>
-
             </div>
         </div>
     </div>
     <!--依赖框架，插件-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/jquery.min.js')}}></script>
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/bootstrap.min.js')}}></script>
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/jquery.min.js' )}}></script>
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/bootstrap.min.js' )}}></script>
     <!--全局ui-->
-    <script type="text/javascript" src={{url_for('main.staticfile',filename='js/ui/global.js')}}></script>
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/ui/global.js' )}}></script>
     <script type="text/javascript">
-        var ui = new UI();
-        ui.modalShow(function(){
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                $(".modal").modal('show')
-            {% endif %} 
-            {% endwith %}
-        });
-        ui.bubbleTip();
+    var ui = new UI();
+    ui.modalShow(function() {
+        {% with messages = get_flashed_messages() %} 
+        {%if messages %}
+        $(".modal").modal('show') 
+        {% endif %} 
+        {% endwith %}
+    });
+    ui.bubbleTip();
     </script>
     {% block script %}{% endblock %}
     <footer class="ui-footer">
-        <div class="title">
-            <span>江西师大GO(?)<small> -从前端到前台坐台</small></span>
+        <div class="ui-mainct">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="title">app下载</div>
+                    <div class="qrcode"></div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="title">运营中心</div>
+                    <ul>
+                        <li>先素楼x4308运维部</li>
+                        <li>电话xxxxx</li>
+                    </ul>
+                    <div class="title">关于我们</div>
+                    <ul>
+                        <li>师大＋</li>
+                        <li>jxnugo</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <div>
+                        <img src="{{url_for('main.staticfile',filename='images/jxnu_s.png')}}">
+                    </div>
+                    <div class="title">share us with</div>
+                    <div class="bdsharebuttonbox">
+                        <a href="#" data-cmd="qzone" title="分享到QQ空间"><span class="fa fa-qq fa-2x"></span></a>
+                        <a href="#" data-cmd="tsina" title="分享到新浪微博"><span class="fa fa-weibo fa-2x"></span></a>
+                        <a href="#" data-cmd="weixin" title="分享到微信"><span class="fa fa-wechat fa-2x"></span></a>
+                        
+                    </div>
+                    <script>
+                    window._bd_share_config = {
+                        "common": {
+                            "bdSnsKey": {},
+                            "bdText": "发现了一个掉节操的地方--jxnugo",
+                            "bdMini": "2",
+                            "bdMiniList": false,
+                            "bdPic": "",
+                            "bdStyle": "2",
+                            "bdSize": "32"
+                        },
+                        "share": {
+                            "bdCustomStyle":"{{url_for( 'main.staticfile',filename='font-awesome/css/font-awesome.min.css' )}}"
+                        }
+                    };
+                    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+                    </script>
+                    <div class="title" style="margin-left:0;"><a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" style="color:white;">赣ICP备16002531号-1</a></div>
+                </div>
+            </div>
+            
         </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <ul>
-                    <li>关于我们</li>
-                    <li>关于我们</li>
-                </ul>
-            </div>
-            <div class="col-sm-4">
-                <ul>
-                    <li>关于我们</li>
-                    <li>关于我们</li>
-                </ul>
-            </div>
-            <div class="col-sm-4">
-                <ul>
-                    <li>关于我们</li>
-                    <li>关于我们</li>
-                </ul>
-            </div>
-        </div>
-        <div class="row"><a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" style="color:white;">赣ICP备16002531号-1</a></div>
     </footer>
 </body>
 
