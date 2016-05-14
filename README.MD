@@ -66,17 +66,16 @@ Post.generate_fake(100)  #伪造交易帖子
 
 
 
-#####2、用户注册	【POST】  {此api已实现}
+#####2、用户注册	【POST】     {此api已实现}
 * URL: www.jxnugo.com/api/register
-* 上传到服务器的信息：
+* 上传到服务器的信息（json格式）如下：
 
 ```
 	{
-		"userName":"",
-		"userEmail":"",
-		"password":""
+  "passWord": "123",
+  "userEmail": "jxnuacs@qq.com",
+  "userName": "test"
 	}
-
 ```
 * 备注：客户端先对数据进行验证再上传
 *  注册成功返回值，状态码：200
@@ -119,22 +118,28 @@ Post.generate_fake(100)  #伪造交易帖子
 
 ```
 	{
-	  "author": "http://127.0.0.1:5000/api/user/25",
-      "body": "Suspendisse potenti. Ut tellus.",
+  "count": 100,
+  "next": "http://127.0.0.1:5000/api/posts?page=2",
+  "prev": null，
+  "posts": [
+    {
+      "author": "http://127.0.0.1:5000/api/user/2",
+      "body": "Pellentesque viverra pede ac diam. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",
       "commentsCount": 0,
-      "contact": "1381077326",
-      "goodBuyTime": "2016-04-29",
-      "goodLocation": "637 Shopko Hill",
-      "goodName": "Property & Casualty Insurance",
+      "contact": "1144728202",
+      "goodBuyTime": "2016-04-26",
+      "goodLocation": "78 Anhalt Parkway",
+      "goodName": "Rental & Leasing Services",
       "goodPrice": 1239.12,
       "goodQuality": "9成新",
       "goodTag": 4,
-      "postId": 5,
       "photos": null,
-      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
-      "postUserName": "marie80",
-      "timestamp": "2016-04-29 00:00:00",
-      "url": "http://127.0.0.1:5000/api/posts/1"    },
+      "postId": 1,
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+      "postUserName": "nicole71",
+      "timestamp": "2016-05-07 00:00:00",
+      "url": "http://127.0.0.1:5000/api/posts/1"
+    },
     {
 
     },
@@ -158,24 +163,23 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 	{
-  {
-  "author": "http://127.0.0.1:5000/api/user/43",
-  "body": "Curabitur at ipsum ac tellus semper interdum. Morbi a ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.",
+  "author": "http://127.0.0.1:5000/api/user/2",
+  "body": "Pellentesque viverra pede ac diam. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",
   "commentsCount": 0,
-  "contact": "1040471275",
-  "goodBuyTime": "2016-05-09",
-  "goodLocation": "8271 Fair Oaks Road",
-  "goodName": "Office Supplies",
+  "contact": "1144728202",
+  "goodBuyTime": "2016-04-26",
+  "goodLocation": "78 Anhalt Parkway",
+  "goodName": "Rental & Leasing Services",
   "goodPrice": 1239.12,
   "goodQuality": "9成新",
   "goodTag": 4,
   "photos": null,
-  "postId": 5,
-  "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
-  "postUserName": "ruby90",
-  "timestamp": "2016-05-06 00:00:00",
-  "url": "http://127.0.0.1:5000/api/posts/5"
-}}
+  "postId": 1,
+  "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+  "postUserName": "nicole71",
+  "timestamp": "2016-05-07 00:00:00",
+  "url": "http://127.0.0.1:5000/api/posts/1"
+}
 
 ```
 
@@ -191,24 +195,23 @@ http://127.0.0.1:5000/api/posts?page=3
 {
   "userPosts": [
     {
-      "author": "http://127.0.0.1:5000/api/user/40",
-      "body": "Nulla mollis molestie lorem. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. In sagittis dui vel nisl.",
+      "author": "http://127.0.0.1:5000/api/user/2",
+      "body": "Pellentesque viverra pede ac diam. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",
       "commentsCount": 0,
-      "contact": "1168038514",
-      "goodBuyTime": "2016-04-23",
-      "goodLocation": "0 Ronald Regan Terrace",
-      "goodName": "Beverages - Brewers",
+      "contact": "1144728202",
+      "goodBuyTime": "2016-04-26",
+      "goodLocation": "78 Anhalt Parkway",
+      "goodName": "Rental & Leasing Services",
       "goodPrice": 1239.12,
       "goodQuality": "9成新",
       "goodTag": 4,
       "photos": null,
-      "postId": 55,
-      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
-      "postUserName": "ruth86",
-      "timestamp": "2016-05-11 00:00:00",
-      "url": "http://127.0.0.1:5000/api/posts/55"
+      "postId": 1,
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+      "postUserName": "nicole71",
+      "timestamp": "2016-05-07 00:00:00",
+      "url": "http://127.0.0.1:5000/api/posts/1"
     }
-
   ]
 }
 ```
@@ -234,7 +237,7 @@ http://127.0.0.1:5000/api/posts?page=3
       "goodTag": 4,
       "photos": null,
       "postId": 16,
-      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA",
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
       "postUserName": "kathleen72",
       "timestamp": "2016-05-11 00:00:00",
       "url": "http://127.0.0.1:5000/api/posts/16"
@@ -277,7 +280,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####9、发表新的帖子  	【POST】    {此api已实现}
+#####9、发表新的帖子  	【POST】
 
 * URL: www.jxnugo.com/api/new_post
 * 描述：上传数据，发布新帖子
@@ -304,18 +307,75 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 
-#####10、对帖子发表评论   	【POST】
+#####10、对帖子发表评论   	【POST】  {此api已实现}
 * URL: www.jxnugo.com/api/new_comment/<int:id>
 * 参数：帖子id
 
 
-#####11、收藏某篇帖子      【POST】
-* URL:www.jxnugo.com/api/collect/<int:id>
-* 参数：帖子id
+```
+    {
+  	"userId":"58",
+  	"postId": "16",
+  	"body":"api来测试评论"
+}
 
-#####12、取消收藏某篇帖子   【POST】
-* URL:www.jxnugo.com/api/uncollect/<int:id>
-* 参数：帖子id
+```
+* 上传成功返回值  http状态码200
+
+```
+{
+  "commentStatus": "successful"
+}
+
+```
+
+
+#####11、收藏某篇帖子      【POST】  {此api已实现}
+* URL:www.jxnugo.com/api/collect
+* 参数：无
+* 数据上传格式（json）用户自身id（selfId）和帖子的id
+
+```
+{
+  "userId": "27",
+  "postId": "58"
+}
+
+```
+* 上传成功的返回值   http状态码200
+
+```
+{
+  "collectStatus": "successful"
+}
+
+```
+
+
+
+
+#####12、取消收藏某篇帖子   【POST】   {此api已实现}
+* URL:www.jxnugo.com/api/uncollect
+* 参数：无
+ * 数据上传格式（json）用户自身id（selfId）和帖子的id
+
+```
+{
+  "userId": "27",
+  "postId": "58"
+}
+
+```
+* 上传成功的返回值   http状态码200
+
+```
+{
+  "uncollectStatus": "successful"
+}
+
+```
+
+
 
 
 
@@ -337,8 +397,8 @@ http://127.0.0.1:5000/api/posts?page=3
   "member_since": "2016-05-09 00:00:00",
   "name": "Jane Lane",
   "postCollectionCount": 4,
-  "postCount": 1,
   "contactMe": null,
+  "postCount": 1,
   "sex": "男",
   "userId": 40,
   "userName": "ruth86"
@@ -354,11 +414,15 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 	{
-  "followers": [
+  "followed": [
     {
-      "urlLinkUser": "http://127.0.0.1:5000/api/user/101",
-      "userName": "ddragon"
-    }
+      "aboutMe": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.",
+      "urlLinkUser": "http://127.0.0.1:5000/api/user/37",
+      "userAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+      "userId": 37,
+      "userName": "nancy90"
+    },
+    等等
   ]
 }
 ```
@@ -372,17 +436,13 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 	{
-  "followed": [
+  "followers": [
     {
-      "urlLinkUser": "http://127.0.0.1:5000/api/user/1",
-      "userName": "shirley91"
-    },
-    {
-      "urlLinkUser": "http://127.0.0.1:5000/api/user/52",
-      "userName": "teresa84"
-    },
-    {
-      等等
+      "aboutMe": "Proin interdum mauris non ligula pellentesque ultrices.",
+      "urlLinkUser": "http://127.0.0.1:5000/api/user/27",
+      "userAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+      "userId": 27,
+      "userName": "ddragon"
     }
   ]
 }
@@ -413,11 +473,43 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####17、关注某个用户   【POST】
-* URL: www.jxnugo.com/api/follow/<int:id>
-* 参数：被关注用户的id
+#####17、关注某个用户   【POST】   {此api已实现}
+* URL: www.jxnugo.com/api/follow
+* 参数：无
+* 上传的数据（json）：包含自己的id和关注用户的id
 
-#####18、取消关注        【POST】
-* URL：www.jxnugo.com/api/unfollow/<int:id>
-* 参数：被取消关注用户的id
+```
+	{
+ 	 "userId": "101",
+  	 "followedId": "58"
+	}
+```
+* 返回数据（json） 返回http状态码200
 
+```
+	{
+  		"followStatus": "successful"
+	}
+
+```
+
+#####18、取消关注        【POST】   {此api已实现}
+* URL：www.jxnugo.com/api/unfollow
+* 参数：无
+* 上传的的数据(json)，包含自己的id和被取消用户的id
+
+```
+	{
+ 	 "userId": "101",
+  	 "unfollowedId": "58"
+	}
+
+```
+* 返回的数据   成功后返回的http状态吗200
+*
+```
+{
+  "unfollowStatus": "successful"
+}
+
+```
