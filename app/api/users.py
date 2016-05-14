@@ -8,14 +8,12 @@ from .. import db
 
 
 @api. route('/api/user/<int:id>')
-@auth.login_required
 def get_user(id):
     user=User.query.get_or_404(id)
     return jsonify(user.to_json())
 
 
 @api.route('/api/user_collectionpost/<int:id>')
-@auth.login_required
 def get_user_collectionpost(id):
     user=User.query.get_or_404(id)
     posts=user.collectionPost
@@ -23,7 +21,6 @@ def get_user_collectionpost(id):
 
 
 @api.route('/api/user_followers/<int:id>')
-@auth.login_required
 def user_followers(id):
     user=User.query.get_or_404(id)
     followers=user.followers.all()
@@ -31,21 +28,22 @@ def user_followers(id):
 
 
 @api.route('/api/user_followed/<int:id>')
-@auth.login_required
 def user_followed(id):
     user=User.query.get_or_404(id)
     followeds=user.followed.all()
     return jsonify({"followed":[followed.followed_to_json() for followed in followeds]})
 
 
-@api.route('/api/register/<int:id>')
+@api.route('/api/register', methods=['POST'])
 def register():
-    user=User.from_json(request.json)
+    userinfo=request.json
+    print userinfo
+    u=User(id=User.query.count()+1,userName=userinfo['userName'],userEmail=userinfo['userEmail'],passWord=userinfo['passWord'])
     db.session.add(u)
     db.session.commit()
-    token=user.generate_confirmation_token()
-    send_email(regUser.userEmail,'激活你的账户',
-                   'auth/email/confirm',User=user,token=token
+    token=u.generate_confirmation_token()
+    send_email(u.userEmail,'激活你的账户',
+                   'auth/email/confirm',User=u,token=token
                    )
     response=jsonify({"registerStatus":"successful"})
     response.status_code=200
@@ -59,8 +57,37 @@ def user_posts(id):
     return jsonify({"userPosts":[post.to_json() for post in posts]})
 
 
+@api.route('/api/test')
+def test():
+    return jsonify({"userName":"test","userEmail":"jxnuacs@qq.com","passWord":"123"})
+
+
 @api.route('/api/user_comments/<int:id>')
 def user_comments(id):
     user=User.query.get_or_404(id)
     comments=user.comments.all()
     return jsonify({"userComments":[comment.userComment_to_json() for comment in comments]})
+
+
+@api.route('/api/follow',methods=['POST'])
+@auth.login_required
+def follow():
+    followInfo=request.json
+    self=User.query.get_or_404(followInfo['userId'])
+    followed=User.query.get_or_404(followInfo['followedId'])
+    self.follow(followed)
+    response=jsonify({"followStatus":"successful"})
+    response.status_code=200
+    return response
+
+
+@api.route('/api/unfollow',methods=['POST'])
+@auth.login_required
+def unfollow():
+    followInfo=request.json
+    self=User.query.get_or_404(followInfo['userId'])
+    unfollowUser=User.query.get_or_404(followInfo['unfollowedId'])
+    self.unfollow(unfollowUser)
+    response=jsonify({"unfollowStatus":"successful"})
+    response.status_code=200
+    return response()
