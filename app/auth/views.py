@@ -27,8 +27,8 @@ def login():
             return redirect(url_for('main.index'))
         else:
             flash(u'用户名或密码错误','bg-warning')
-            return redirect(url_for('auth.passport'))
-    return redirect(url_for('auth.passport'))
+            return redirect(url_for('auth.passport',_external=True))
+    return redirect(url_for('auth.passport',_external=True))
 
 
 @auth.route('/register',methods=['GET','POST'])
@@ -44,8 +44,8 @@ def register():
                    'auth/email/confirm',User=regUser,token=token
                    )
         flash(u'注册成功,账户激活信息已经发送到您的邮件!')
-        return redirect(url_for('auth.passport'))
-    return redirect(url_for('auth.passport'))
+        return redirect(url_for('auth.passport', _external=True))
+    return redirect(url_for('auth.passport', _external=True))
 
 
 @auth.route('/logout')
