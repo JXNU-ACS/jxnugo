@@ -81,7 +81,7 @@ def follow():
     return response
 
 
-@api.route('/api/unfollow',methods=['POST'])
+@api.route('/api/unfollow', methods=['POST'])
 @auth.login_required
 def unfollow():
     followInfo=request.json
@@ -90,4 +90,4 @@ def unfollow():
     self.unfollow(unfollowUser)
     response=jsonify({"unfollowStatus":"successful"})
     response.status_code=200
-    return response()
+    return response
