@@ -37,7 +37,11 @@ FileuploadUI.prototype.bindUploadCancel = function(up) {
 	})
 };
 FileuploadUI.prototype.crateImg = function() {
-    if(this.filemun !=10) this.uploadAreaElment.append(this.uploader);
+	var self = this;//然而计数器并没有实现
+    if(self.filemun !=10) {
+    	self.uploadAreaElment.append(self.uploader);
+    	self.filemun +=1
+    }
     else {
     	var ui = new UI();
 		ui.modalShow(function(){

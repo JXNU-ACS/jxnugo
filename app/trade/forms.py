@@ -22,5 +22,5 @@ class PostForm(Form):
 
 
 class CommentForm(Form):
-    body=StringField(u'评论',validators=[Required()])
+    body=TextAreaField(u'评论',validators=[Required()])
     submit=SubmitField(u'提交')

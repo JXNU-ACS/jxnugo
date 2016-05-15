@@ -111,18 +111,19 @@ UI.prototype.listToggle = function() {
 UI.prototype.sticky = function(config) {
     var a = config.offsetY;
     var b = config.contain; //jq选择对象
+    var self = this;
     if (self.isSupportSticky) {
-        this.stickyElement.attr('style', "position:-webkit-sticky;position:sticky;top:" + a + "px;")
+        self.stickyElement.attr('style', "position:-webkit-sticky;position:sticky;top:" + a + "px;")
 
-    } else {
+   } else {
         var Offset = b.offset();
 
         function onScroll(e) {
-            window.scrollY >= Offset.top ? b.css({ position: "fixed" }) : b.css({ position: "relative" });
+            window.scrollY >= Offset.top ? self.stickyElement.attr("style","position:fixed;top:"+a+"px;") : self.stickyElement.attr("style","position:relative");
         }
         window.addEventListener('scroll', onScroll);
 
-    }
+   }
 };
 
 

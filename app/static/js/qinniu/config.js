@@ -14,8 +14,8 @@ var uploaderoption = {
     get_new_uptoken: true, // 设置上传文件的时候是否每次都重新获取新的 uptoken
     // downtoken_url: '/downtoken',
     // Ajax请求downToken的Url，私有空间时使用,JS-SDK 将向该地址POST文件的key和domain,服务端返回的JSON必须包含`url`字段，`url`值为该文件的下载地址
-    //unique_names: true,              // 默认 false，key 为文件名。若开启该选项，JS-SDK 会为每个文件自动生成key（文件名）
-    //save_key: true, // 默认 false。若在服务端生成 uptoken 的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
+    unique_names: true,              // 默认 false，key 为文件名。若开启该选项，JS-SDK 会为每个文件自动生成key（文件名）
+    save_key: true, // 默认 false。若在服务端生成 uptoken 的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
     domain: $('#domain').val(), // bucket 域名，下载资源时用到，**必需**
     container: 'upload-aira', // 上传区域 DOM ID，默认是 browser_button 的父元素，
     max_file_size: '10mb', // 最大文件体积限制
@@ -77,7 +77,7 @@ var uploaderoption = {
             var domain = up.getOption('domain');
             var res = jQuery.parseJSON(info);
             var sourceLink = "http://"+domain +"/"+res.key; //获取上传成功后的文件的Url
-            var simgLink = Qiniu.watermark(postimg,res.key);
+            var simgLink = "http://"+Qiniu.imageView2(postimg,res.key);
             var ui = new FileuploadUI(file);
             ui.eachUpload(simgLink,res.key);
             ui.bindUploadCancel(up);
@@ -85,7 +85,7 @@ var uploaderoption = {
         },
         'Error': function(up, err, errTip) {
             //上传出错时,处理相关的事情
-            var ui = new FileuploadUI(file);
+            var ui = new FileuploadUI();
             ui.imgStatus(0,"上传失败");
         },
         'UploadComplete': function() {
@@ -129,7 +129,7 @@ var userimgupload = {
                 // 文件添加进队列后,处理相关的事情
                 var ui = new UserImgUpload(file);
                 
-                ui.imgStatus(0,"等待..");
+                ui.imgStatus(0,"等待上传");
             });
         },
         'BeforeUpload': function(up, file) {
@@ -146,10 +146,10 @@ var userimgupload = {
             var domain = up.getOption('domain');
             var res = jQuery.parseJSON(info);
             var sourceLink = "http://"+domain +"/"+res.key; //获取上传成功后的文件的Url
-
+            var simgLink = "http://"+Qiniu.imageView2(usrimg,res.key);
             var ui = new UserImgUpload(file);
             ui.imgStatus(0,"上传头像");
-            ui.setImg(sourceLink);
+            ui.setImg(simgLink);
         },
         'Error': function(up, err, errTip) {
             var ui = new UserImgUpload(file);
@@ -158,7 +158,7 @@ var userimgupload = {
         },
         'UploadComplete': function() {
             //队列文件处理完毕后,处理相关的事情
-            var ui = new UserImgUpload(file);
+            var ui = new UserImgUpload();
             ui.imgStatus(0,"上传头像");
         },
     },
@@ -166,14 +166,14 @@ var userimgupload = {
 var usrimg = {
      mode: 3,  // 缩略模式，共6种[0-5]
        w: 300,   // 具体含义由缩略模式决定
-       h: 200,   // 具体含义由缩略模式决定
+       //h: 200,   // 具体含义由缩略模式决定
        q: 100,   // 新图的图像质量，取值范围：1-100
        format: 'jpg'  // 新图的输出格式，取值范围：jpg，gif，png，webp等
 };
 var postimg = {
-    mode: 3,  // 缩略模式，共6种[0-5]
-       w: 800,   // 具体含义由缩略模式决定
-       h: 600,   // 具体含义由缩略模式决定
+    mode: 2,  // 缩略模式，共6种[0-5]
+       //w: 900,   // 具体含义由缩略模式决定
+       h: 800,   // 具体含义由缩略模式决定
        q: 100,   // 新图的图像质量，取值范围：1-100
        format: 'jpg'
 };
