@@ -69,7 +69,7 @@ def user_comments(id):
     return jsonify({"userComments":[comment.userComment_to_json() for comment in comments]})
 
 
-@api.route('/api/follow',methods=['POST'])
+@api.route('/api/follow', methods=['POST'])
 @auth.login_required
 def follow():
     followInfo=request.json
@@ -89,5 +89,20 @@ def unfollow():
     unfollowUser=User.query.get_or_404(followInfo['unfollowedId'])
     self.unfollow(unfollowUser)
     response=jsonify({"unfollowStatus":"successful"})
+    response.status_code=200
+    return response
+
+
+@api.route('/api/judge_follow',methods=['POST'])
+@auth.login_required
+def judge_follow():
+    followInfo=request.json
+    self=User.query.get_or_404(followInfo['userId'])
+    follower=User.query.get_or_404(followInfo['followerId'])
+    if self.is_following(follower):
+        message=1
+    else:
+        message=0
+    response=jsonify({"judgeInfo":message})
     response.status_code=200
     return response
