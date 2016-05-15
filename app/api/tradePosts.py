@@ -79,5 +79,20 @@ def new_comment():
     db.session.add(comment)
     db.session.commit()
     response=jsonify({"commentStatus":"successful"})
-    response.status_cod=200
+    response.status_code=200
+    return response
+
+
+@api.route('/api/judge_collect',methods=['POST'])
+@auth.login_required
+def judge_collect():
+    judgeInfo=request.json
+    user=User.query.get_or_404(judgeInfo['userId'])
+    post=Post.query.get_or_404(judgeInfo['postId'])
+    if user.is_collecting(post):
+        message=1
+    else:
+        message=0
+    response=jsonify({"collectInfo":message})
+    response.status_code=200
     return response

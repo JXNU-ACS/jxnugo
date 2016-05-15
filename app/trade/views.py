@@ -39,12 +39,16 @@ def trade_detail(goodId):
     post = Post.query.get_or_404(goodId)
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(body=form.body.data,post=post,
+        if current_user.is_anonymous:
+            flash(u'请登录后再尝试评论帖子')
+            return redirect(url_for('auth.passport'))
+        else:
+            comment = Comment(body=form.body.data,post=post,
             author=current_user._get_current_object())
-        db.session.add(comment)
-        db.session.commit()
-        flash(u'你的评论已提交.')
-        return redirect(url_for('.trade_detail', goodId=post.id, page=-1))
+            db.session.add(comment)
+            db.session.commit()
+            flash(u'你的评论已提交.')
+            return redirect(url_for('.trade_detail', goodId=post.id, page=-1))
     page = request.args.get('page', 1, type=int)
     if page == -1:
         page = (post.comments.count() - 1) // \

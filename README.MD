@@ -308,7 +308,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 #####10、对帖子发表评论   	【POST】  {此api已实现}
-* URL: www.jxnugo.com/api/new_comment/<int:id>
+* URL: www.jxnugo.com/api/new_comment
 * 参数：帖子id
 
 
@@ -375,12 +375,33 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
+####13、判断用户是否已经收藏过某篇帖子  【POST】
+* URL:www.jxnugo.com/api/judge_collect
+* 参数：无
+* 数据上传格式（json）用户自身的id和帖子id
+
+```
+{
+  "userId": "101",
+  "postId": "58"
+}
+
+```
+* 请求成功返回值(json)  1代表用户已经关注过该帖子，0代表未关注
+
+```
+{
+  "collectInfo": 0
+}
+```
+
+
 
 
 
 
 ###用户相关
-#####13、获取个人用户信息  【GET】    {此api已实现}
+#####14、获取个人用户信息  【GET】    {此api已实现}
 * URL: www.jxnugo.com/api/user/<int:id>
 * 参数：用户id
 * 描述：获取某个用户的信息
@@ -406,7 +427,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####14、获取某个用户关注的人   【GET】   {此api已实现}
+#####15、获取某个用户关注的人   【GET】   {此api已实现}
 * URL：www.jxnugo.com/api/user_followed/<int:id>
 * 参数：用户id
 * 描述：获取用户关注的人的名字还有指向TA的链接
@@ -428,7 +449,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####15、获取某个用户的粉丝     【GET】   {此api已实现}
+#####16、获取某个用户的粉丝     【GET】   {此api已实现}
 * URL:www.jxnugo.com/api/user_followers/<int:id>
 * 参数：用户id
 * 描述：获取用户的粉丝的名字还有指向TA的链接
@@ -448,7 +469,7 @@ http://127.0.0.1:5000/api/posts?page=3
 }
 ```
 
-#####16、获取某个用户发表过的评论   【GET】   {此api已实现}
+#####17、获取某个用户发表过的评论   【GET】   {此api已实现}
 * URL:www.jxnugo.com/api/user_comments/<int:id>
 * 参数：用户id
 * 请求成功返回值
@@ -473,7 +494,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####17、关注某个用户   【POST】   {此api已实现}
+#####18、关注某个用户   【POST】   {此api已实现}
 * URL: www.jxnugo.com/api/follow
 * 参数：无
 * 上传的数据（json）：包含自己的id和关注用户的id
@@ -493,7 +514,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####18、取消关注        【POST】   {此api已实现}
+#####19、取消关注        【POST】   {此api已实现}
 * URL：www.jxnugo.com/api/unfollow
 * 参数：无
 * 上传的的数据(json)，包含自己的id和被取消用户的id
@@ -506,10 +527,31 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 * 返回的数据   成功后返回的http状态吗200
-*
+
+
 ```
 {
   "unfollowStatus": "successful"
+}
+
+```
+
+#####20、判断用户是否已经关注了某个用户
+* URL: www.jxnugo.com/api/judge_follow
+* 参数：无
+* 上传的数据格式（json），包含自己的id还有其它用户的id
+
+```
+{
+  "userId": "101",
+  "followerId": "59"
+}
+```
+* 请求成功数据返回格式  1代表已经关注过该用户，0代表未关注过
+
+```
+{
+  "judgeInfo": 0
 }
 
 ```
