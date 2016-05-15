@@ -4,7 +4,7 @@ function FileuploadUI(file){
 	this.filemun = 0;
 	//this.fileJson = function(jarrKey){ return "\"photokey\":["+jarrKey+"]"};
 	//---------------上传元素--------------
-    this.uploadAreaElment = $("div[data-ariapannel=\"uploadarea\"]");
+    this.uploadAreaElment = $("div[data-ariapannel=\"uploadaira\"]");
     this.uploader = "<div class='col-sm-3 show-upload' data-imgname="+file.id+"><div class='ui-post-upload uploadimg'><a href='#'> <div class='btn btn-shadow case-in zoom-img' style='display:none;'>浏览大图</div></a><div class = 'btn btn-shadow case-in progress-img' style ='display:none;'></div> <div class='del-bg'><button type='button' class='btn-del case-in'title='删除'><spanaria-hidden='true'>&times;</span></button></div></div></div>";
 
     this.imgBg = ".uploadimg"
@@ -37,7 +37,11 @@ FileuploadUI.prototype.bindUploadCancel = function(up) {
 	})
 };
 FileuploadUI.prototype.crateImg = function() {
-    if(this.filemun !=10) this.uploadAreaElment.append(this.uploader);
+	var self = this;//然而计数器并没有实现
+    if(self.filemun !=10) {
+    	self.uploadAreaElment.append(self.uploader);
+    	self.filemun +=1
+    }
     else {
     	var ui = new UI();
 		ui.modalShow(function(){
@@ -85,3 +89,30 @@ FileuploadUI.prototype.eachUpload = function(url,key){
 	});//closest("a").attr("href",url)
 	$("div[data-imgname="+file.id+"]").find(this.progressStatusElement).attr("style","display:none;");
 };
+
+
+
+function UserImgUpload(file){
+	this.file = file;
+	this.json = "";
+	this.filemun = 0;
+	//this.fileJson = function(jarrKey){ return "\"photokey\":["+jarrKey+"]"};
+	//---------------上传元素--------------
+    this.uploadAreaElment = $("#upload-aira");
+    this.progressStatusElement = $(".progress");
+    this.tips = $("#upload-aira").find("span");
+    this.submit = $("[name=\"submit\"]");
+
+}
+UserImgUpload.prototype.imgStatus = function(isUploading,tip){
+	var self = this;
+    if (isUploading) {
+        self.tips.text("上传中..");
+        self.progressStatusElement.height(self.file.loaded + "%")
+    } else self.tips.text(tip);
+};
+UserImgUpload.prototype.setImg = function(url){
+	var self = this;
+	self.uploadAreaElment.attr("style","background-image:url("+url+")");
+	$("[name='usrheadimg']").attr("value",url);
+}

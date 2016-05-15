@@ -161,7 +161,16 @@
     line-height: 180%;
     text-indent: 2em;
 }
-
+.ui-trade-detail-info{
+    width: 240px;
+    padding: 20px;
+    background: #eee;
+    border-radius: 20px;
+}
+.ui-trade-detail-info .info-row{
+    font-size: 17px;
+    color: #333;
+}
 .ui-trade-detail-content>img {
     width: 100%;
     display: block;
@@ -173,7 +182,7 @@
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    box-shadow: 0 0 10px #2B2929;
+    border: 5px solid #fff;
     position: relative;
     top: -25px;
     z-index: 2;
@@ -218,8 +227,38 @@
 .ui-trade-detail-comment-input {
     width: 100%;
     height: 200px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 50px;
 }
+.ui-trade-detail-comment-input .body{
+    width: 100%;
+    height: 150px;
+    padding: 20px;
+    font-size: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border: 1px solid #eee;
 
+}
+.ui-trade-detail-comment-input .bottom-bg{
+    position: relative;
+    top: -5px;
+    width: 100%;
+    height: 50px;
+    background: #9BB7B4;
+}
+.ui-trade-detail-comment-input .bottom{
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    border-width: 0 1px;
+    border-color: #fff;
+    border-style: solid;
+    color: #fff;
+    padding: 0 50px;
+    font-size: 15px;
+
+}
 .ui-trade-detail-comment-textcontain {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -421,7 +460,7 @@
     left: 270px;
     top: 90px;
     font-size: 20px;
-
+    width: 50%;
 }
 
 .ui-userzone-user-signature>span {
@@ -476,7 +515,23 @@
     background-size: cover;
     display: inline-block;
 }
+.ui-userzone-user-follow{
+    padding-top: 50px;
 
+}
+.ui-userzone-user-follow .head-lg {
+    width: 100%;
+    height: 122px;
+    border-radius: 50%;
+    background-color: #eee;
+    background-size: cover;
+}
+.ui-userzone-user-follow .name{
+    text-align: center;
+    font-size: 15px;
+    color: #B7ACA2;
+    margin-top:10px;
+}
 
 /*----------发布帖子--------------*/
 
@@ -485,7 +540,10 @@
     font-size: 20px;
     padding: 10px;
 }
-
+.ui-post-row .tips{
+    color: #B7ACA2;
+    font-size: 15px;
+}
 .ui-post-title {
     color: #fff;
     position: relative;
@@ -498,13 +556,19 @@
     border-style: solid;
     border-color: #eee;
 }
-
+.ui-post-bottom{
+    background: #9BB7B4;
+    color:#fff;
+    font-size: 20px;
+}
 .ui-post-upload {
+    width: 180px;
     height: 180px;
     border-radius: 20px;
     border: 1px solid #eee;
     background-color: #eee;
     background-size: cover;
+    margin: 20px 0;
     overflow: hidden;
 }
 
@@ -573,4 +637,45 @@
     color: #fff;
     position: relative;
     font-size: 90px;
+}
+.ui-edinfo-input {
+    width: 100%;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #eee;
+}
+.ui-edinfo-uploadimg{
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    background: #eee;
+    background-size: cover;
+    
+}
+.ui-edinfo-uploadimg .bottom{
+    width: 250px;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    padding-top: 87%;
+    
+}
+.ui-edinfo-uploadimg .bottom span{
+    padding: 5% 34%;
+    background: rgba(51,51,51,0.6);
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.ui-edinfo-uploadimg .progress{
+    width: 250px;
+    height: 0;
+    position: absolute;
+    background: rgba(51,51,51,0.6);
+    border-radius: 20px;
+}
+.ui-edinfo-bottom{
+    background: #B7ACA2;
+    color:#fff;
+    font-size: 20px;
 }

@@ -25,29 +25,50 @@ body {
                     </div>
                 </div>
                 <div class="row ui-post-row">
+                    <div class="col-sm-8">
                     {{ form.price(class="ui-form-style ui-post-input",**{"placeholder":"出售的价格"})}}
+                    </div>
+                    <div class="col-sm-4 tips">*价格必填</div>
                 </div>
                 <div class="row ui-post-row">
+                    <div class="col-sm-8">
                     {{ form.num(class="ui-form-style ui-post-input",**{"placeholder":"数量"})}}
+                    </div>
+                    <div class="col-sm-4 tips">出售物品的数量，可不必填</div>
                 </div>
                 <div class="row ui-post-row">
+                    <div class="col-sm-8">
                     {{ form.location(class="ui-form-style ui-post-input",**{"placeholder":"坐标"})}}
+                    </div>
+                    <div class="col-sm-4 tips">寝室（地址）位置，可不必填</div>
                 </div>
                 <div class="row ui-post-row">
+                    <div class="col-sm-8">
                     {{ form.buyTime(class="ui-form-style ui-post-input",**{"placeholder":"购买时间"})}}
+                    </div>
+                    <div class="col-sm-4 tips">
+                        购买时的时间，可不必填</div>
                 </div>
                 <div class="row ui-post-row">
+                    <div class="col-sm-8">
                     {{ form.quality(class="ui-form-style ui-post-input",**{"placeholder":"成色"})}}
+                    </div>
+                    <div class="col-sm-4 tips">
+                        物品的新旧程度，可不必填</div>
                 </div>
                 <div class="row ui-post-row">
+                    <div class="col-sm-8">
                     {{ form.mycontact(class="ui-form-style ui-post-input",**{"placeholder":"联系方式"})}}
+                    </div>
+                    <div class="col-sm-4 tips">
+                        *联系方式，必填</div>
                 </div>
                 <div class="row ui-post-row">
                     {{ form.body(class="ui-form-style ui-post-input",**{"placeholder":"商品描述"})}}
                     {{ form.img(style="display:none;",class="imgjson") }}
                 </div>
 
-                <div class="row ui-post-row" data-ariapannel="uploadarea">
+                <div class="row ui-post-row" data-ariapannel="uploadaira">
                     <!--<div class="col-sm-3 show-upload" style="">
                         <div class="ui-post-upload uploadimg" style="background-image:url('static/images/2.jpeg');">
                             <a href="#">
@@ -80,7 +101,7 @@ body {
                     *最多上传十张图片～
                 </div>
                 <div class="row ui-post-row">
-                    {{form.submit(class="btn")}}
+                    {{form.submit(class="btn ui-post-bottom center-block")}}
 
                 </div>
             </form>

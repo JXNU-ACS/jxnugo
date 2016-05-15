@@ -64,28 +64,34 @@ data-ariapannel 被作用面板
 UI.prototype.slideBlock = function(config) { //config为object
     var a = config.originPosition; //id
     var b = config.slideBlock; //滑块的类
-    setSlideBlockState($(a))
+    var self = this;
+    setposition($(a))
 
-    function setSlideBlockState(a) {
+    function setposition(a) {
         var offset = (a.closest("div").position().left - a.closest("div").parent().find("div:first-child").position().left) + (a.closest("div").innerWidth() / 2) - 47
         $(b).css("left", offset)
             //console.log(a.closest("div").parent().find("div:first-child").position().left)
     }
-    this.selectTagElement.click(function() {
+    self.selectTagElement.click(function() {
+        setposition($(this));
+        a = self.selectPannel($(this));
+    })
+    self.selectTagElement.hover(function() {
+        setposition($(this))
+    }, function() {
+        setposition($(a))
+    })
+};
+//.jqobj 任意id名选择标签（这个是个大坑)
+UI.prototype.selectPannel = function(jqobj){
         //页面切换选择器（
-        var b = $(this).attr("id")
-        a = "#" + b
-        setSlideBlockState($(this))
+        var b = jqobj.attr("id")
+        a = "#" + b;
         $("div[data-ariapannel]").each(function() {
             $(this).attr("data-ariapannel") == b ? $(this).attr("style", "") : $(this).attr("style", "display:none;")
         })
-    })
-    this.selectTagElement.hover(function() {
-        setSlideBlockState($(this))
-    }, function() {
-        setSlideBlockState($(a))
-    })
-};
+        return a;
+}
 //仅作用于trade_list，能复用的时候再改吧
 UI.prototype.listToggle = function() {
     var s = 0
@@ -105,18 +111,19 @@ UI.prototype.listToggle = function() {
 UI.prototype.sticky = function(config) {
     var a = config.offsetY;
     var b = config.contain; //jq选择对象
+    var self = this;
     if (self.isSupportSticky) {
-        this.stickyElement.attr('style', "position:-webkit-sticky;position:sticky;top:" + a + "px;")
+        self.stickyElement.attr('style', "position:-webkit-sticky;position:sticky;top:" + a + "px;")
 
-    } else {
+   } else {
         var Offset = b.offset();
 
         function onScroll(e) {
-            window.scrollY >= Offset.top ? b.css({ position: "fixed" }) : b.css({ position: "relative" });
+            window.scrollY >= Offset.top ? self.stickyElement.attr("style","position:fixed;top:"+a+"px;") : self.stickyElement.attr("style","position:relative");
         }
         window.addEventListener('scroll', onScroll);
 
-    }
+   }
 };
 
 

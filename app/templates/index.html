@@ -1,6 +1,15 @@
 {%-extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href={{ url_for( 'main.staticfile',filename='css/H5FullscreenPage.css' )}}>
+<link rel="stylesheet" type="text/css" href={{ url_for( 'main.staticfile',filename='css/page-animation.css' )}}>
+{% endblock %}
 {% block content %}
-<div class="divstyle" style="text-align: center;padding: 100px">
-    <h1>index page</h1>
+<div class="cantain-fluid">
+    
 </div>
+{% endblock %}
+{% block script %}
+
+
 {% endblock %}
