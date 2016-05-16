@@ -1,7 +1,4 @@
 function UI() {
-    //...这里可以存放jq对象的［元素］
-    //气泡提示
-    this.tooltipElement = $('[data-toggle="tooltip"]');
     //模态框
     this.modalElement = $(".modal");
     //跟随父级容器固定在浏览器上的
@@ -9,52 +6,50 @@ function UI() {
     //选择标签
     this.selectTagElement = $(".select");
     
-
+    this.bubbleTip = function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    //测试是否支持的css属性(sticky)
+    this.isSupportSticky = function() {
+        var prefixTestList = ['', '-webkit-', '-ms-', '-moz-', '-o-'];
+        var stickyText = '';
+        for (var i = 0; i < prefixTestList.length; i++) {
+            stickyText += 'position:' + prefixTestList[i] + 'sticky;';
+        }
+        // 创建一个dom来检查
+        var div = document.createElement('div');
+        var body = document.body;
+        div.style.cssText = 'display:none;' + stickyText;
+        body.appendChild(div);
+        var isSupport = /sticky/i.test(window.getComputedStyle(div).position);
+        body.removeChild(div);
+        div = null;
+        return isSupport;
+    };
+    this.modalShow = function(func,time,isbig) {
+        var a;
+        var b = $(".modal");
+        var c;
+        (isbig)?b.find(".modal-dialog").removeClass("modal-sm").addClass("modal-lg"):b.find(".modal-dialog").addClass("modal-sm").removeClass("modal-lg");
+        b.modal({
+            keyboard: false,
+            show: false
+        }).on("shown.bs.modal", function() {
+            if(time == 0){
+                a = setInterval(function() {
+                    b.modal('hide')
+                }, 3000)
+                c=1;
+            }
+            
+        }).on("hidden.bs.modal", function() {
+            if(c){
+                clearInterval(a);
+            }
+        }).ready(func);
+    };
 
 }
-//测试是否支持的css属性(sticky)
-UI.prototype.isSupportSticky = function() {
-    var prefixTestList = ['', '-webkit-', '-ms-', '-moz-', '-o-'];
-    var stickyText = '';
-    for (var i = 0; i < prefixTestList.length; i++) {
-        stickyText += 'position:' + prefixTestList[i] + 'sticky;';
-    }
-    // 创建一个dom来检查
-    var div = document.createElement('div');
-    var body = document.body;
-    div.style.cssText = 'display:none;' + stickyText;
-    body.appendChild(div);
-    var isSupport = /sticky/i.test(window.getComputedStyle(div).position);
-    body.removeChild(div);
-    div = null;
-    return isSupport;
-};
-UI.prototype.bubbleTip = function() {
-        this.tooltipElement.tooltip();
-    }
-    //模态框
-UI.prototype.modalShow = function(func,time,isbig) {
-    var a;
-    var b = this.modalElement;
-    var c;
-    (isbig)?b.find(".modal-dialog").removeClass("modal-sm").addClass("modal-lg"):b.find(".modal-dialog").addClass("modal-sm").removeClass("modal-lg");
-    b.modal({
-        keyboard: false,
-        show: false
-    }).on("shown.bs.modal", function() {
-        if(time == 0){
-            a = setInterval(function() {
-                b.modal('hide')
-            }, 3000)
-            c=1;
-        }
-        
-    }).on("hidden.bs.modal", function() {
-        if(c){
-            clearInterval(a);
-        }
-    }).ready(func);
-};
 /*选择标签(tag)指向类(class)“.select”
 id指向作用面板
 data-ariapannel 被作用面板
