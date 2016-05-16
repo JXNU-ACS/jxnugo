@@ -288,22 +288,38 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 ```
-	{
-		"body":"",
-		"timestamp":"",
-		"goodName":"",
-		"goodPrice":"",
-		"goodLocation":"",
-		"goodQuality":"",
-		"goodBuyTime":"",
-		"goodTag":"",      #0生活用品1数码科技2服饰箱包3图书音像4其它,默认其它
-		"contact”:“”，
-		"photos":"",
+{
+        "body":"二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，",
+        "goodName":"戴尔灵越5537",
+        "goodNum":"1",
+        "goodPrice":"2000",
+        "goodLocation":"一栋N204",
+        "goodQuality":"7成新",
+        "goodBuyTime":"2014年6月",
+        "goodTag":"1",
+        "contact":"13361640744",
+        "photos":[
+            {
+                "key":"84BE7838-E41C-4E60-A1B8-CA95DBEE326B"
+            },
+            {
+                "key":"84BE7838-E41C-4E60-A1B8-CA95DBEE326B"
+            },
+            {
+              "key":"84BE7838-E41C-4E60-A1B8-CA95DBEE326B"
+            }
 
-	}
+            ]
+
+}
+```
+* 上传成功返回值(json)
 
 ```
-* 上传成功返回值，返回改篇帖子的全部json信息。
+	{
+		"postStatus":"successful"
+	}
+```
 
 
 

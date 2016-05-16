@@ -7,6 +7,7 @@ from flask.ext.login import login_required,current_user
 from ..models import Permission,User,Role,Post,Comment
 from forms import PostForm,CommentForm
 
+
 @trade.route('/trade_list')
 def trade_list():
     page=request.args.get('page',1,type=int)
@@ -15,7 +16,6 @@ def trade_list():
         error_out=False)
     posts=pagination.items
     return render_template('trade/trade_list.html',posts=posts,pagination=pagination)
-
 
 
 @trade.route('/trade_post',methods=['POST','GET'])
@@ -60,6 +60,7 @@ def trade_detail(goodId):
     return render_template('trade/trade_detail.html', post=post, form=form,
                            comments=comments, pagination=pagination)
 
+
 @trade.route('/collect/<pid>',methods=['GET'])
 @login_required
 def collect(pid):
@@ -83,6 +84,7 @@ def uncollect(pid):
     current_user.uncollect(post)
     flash(u'成功取消收藏')
     return redirect(url_for('.trade_detail',goodId=pid))
+
 
 @trade.route('/moderate')
 @login_required
