@@ -57,12 +57,12 @@ FileuploadUI.prototype.getJson = function(key){
 
 	self.submit.click(function(){
 		a = $("div[data-imgname]").length;
-		self.json += "\"photokey\":[";
+		self.json += "{\"photokey\":[";
 		$("div[data-imgname]").each(function(index){
 			self.json += "{\"key\":\""+$(this).attr("data-key")+"\"}";
 			if (index != a-1) self.json +=",";
 		});
-		self.json += "]";
+		self.json += "]}";
 		
 		//self.fileJson("{\"key\":\""+key+"\"},");
 		$(".imgjson").attr("value",self.json);

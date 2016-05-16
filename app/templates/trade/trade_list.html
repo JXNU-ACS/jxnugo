@@ -2,19 +2,17 @@
 <style>
 body {
     padding-top: 120px;
+    background: #eee;
 }
 </style>
 <div class="contain-fluid">
-    <div class="ui-subnav">
-        <div class="ui-subnav-content">
+    <div class="ui-subnav" style="background-color:#7ecef4;">
+        <div class="nav-content">
             <div class="row">
-                <div class="col-md-2 left-align btn-list-toggle" style="font-size:30px;padding-left:30px"><span class="glyphicon glyphicon-th-list"></span> 分类</div>
-                <div class="col-md-7 left-align" style="margin-top:5px;">
-                    <button class="btn btn-default" style="font-size:15px;">
-                        <a href="{{url_for('trade.trade_post')}}">发布商品！</a>
-                    </button>
+                <div class="col-sm-3"><img src="static/images/JXNU.png" style="height:80px;margin-top: -3px;"></div>
+                <div class="col-sm-2 left-align" style="">
+                    <a class="btn btn-default nav-bottom" href="{{url_for('trade.trade_post')}}">发布商品！</a>
                 </div>
-                
             </div>
         </div>
     </div>
@@ -44,7 +42,8 @@ body {
 <div class="container-fluid">
     <div class="ui-mainct">
         <div class="row">
-            <div class="ui-trade-show-list col-md-3">
+            <!--
+            <div class="ui-trade-show-list col-sm-3">
                 <div><span class="glyphicon glyphicon-camera"></span> 闲置数码</div>
                 <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
                 <div><span class="glyphicon glyphicon-camera"></span> 衣服什么的</div>
@@ -52,29 +51,42 @@ body {
                 <br><span>手机</span>
                 <div><span class="glyphicon glyphicon-camera"></span> 日常物品</div>
                 <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
-            </div>
-            <div class="ui-trade-show col-md-9" style="width:100%">
+            </div>-->
+            <div class="ui-trade-show">
                 {% if posts %} {% for post in posts %}
-                <div class="col-md-4">
-                    <a href={{url_for('trade.trade_detail',goodId=post.id)}}>
-                        <div class="ui-trade-show-contain" style="background-image:url('static/images/2.jpeg');background-size:cover;" data-href={{post.id}}>
-                            <div class="ui-trade-show-contain-side">
+                
+                    <div class="ui-trade-show-contain">
+                        <div class="row" style="padding:20px 0 20px 20px;">
+                            <div class="col-sm-3">
+                                <a href="#">
+                                    <div class="list-headbg" style="background-image:url('static/images/2.jpeg');">
+                                    </div>
+                                </a>
                             </div>
-                            <a href="#"><div class="ui-trade-show-contain-headbg" style="background-image:url('static/images/2.jpeg');"></a>
+                            <div class="col-sm-9">
+                                <div class="list-userid">{{post.author.userName}}</div>
+                                <div class="list-time"><span class="glyphicon glyphicon-time"></span> 2016/0/0</div>
                             </div>
-                            <div class="ui-trade-show-contain-text">
-                                <div class="ui-trade-show-contain-price">￥{{post.goodPrice}}</div>
-                                <div class="ui-trade-show-contain-title">{{post.goodName}}</div>
-                                <div class="ui-trade-show-contain-userid">{{post.author.userName}}</div>
-                            </div>
+                            
                         </div>
-                    </a>
-                </div>
+                        <a href={{url_for( 'trade.trade_detail',goodId=post.id)}}>
+                            <div class="list-img" style="background-image:url(static/images/2.jpeg)">
+                                <!--<img src="static/images/2.jpeg" style="width:100%;">-->
+                            </div>
+                        </a>
+                        <div class="list-price">￥{{post.goodPrice}}</div>
+                        <div class="list-title">
+                            {{post.goodName}}
+                        </div>
+                        
+                    </div>
+                
                 <!--end-->
                 {% endfor %} {% else %} 然而什么都没有 {% endif %}
             </div>
         </div>
     </div>
+</div>
 </div>
 <!--这里是引用分页导航的局部模板macros-->
 <div class="ui-pagination center-align">
@@ -83,7 +95,7 @@ body {
 </div>
 {% endblock %} {% block script %}
 <script type="text/javascript">
-    ui = new UI();
-    ui.listToggle();
+ui = new UI();
+ui.listToggle();
 </script>
 {% endblock %}

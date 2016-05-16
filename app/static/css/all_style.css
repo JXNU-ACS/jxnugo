@@ -1,21 +1,10 @@
 /*------------列表-------------------------------------------------*/
 
-
-/*公告容器*/
-
 .ui-trade-show {
-    background-color: #fff;
+    -moz-column-count:4;
+    -webkit-column-count:4;
+    column-count:4;
 }
-
-.ui-trade-show-notice {
-    margin-top: 20px;
-    height: 80px;
-    border-radius: 10px;
-    background-color: #eee;
-    box-shadow: 0 0 10px #AEAFA9;
-}
-
-
 /*列表分类*/
 
 .ui-trade-show-list {
@@ -38,16 +27,19 @@
 /*商品容器*/
 
 .ui-trade-show-contain {
-    margin-top: 40px;
-    height: 400px;
-    width: 100%;
-    border-radius: 10px;
-    background: no-repeat #eee;
-    overflew: hidden;
-    box-shadow: 0 0 10px #AEAFA9;
+    margin: 20px 20px 20px 0;
+    width: 280px;
+    box-shadow: 0 1px 2px #DED1C4;
+    background:#fff;
+    display: inline-table;
 }
-
-.ui-trade-show-contain-side {
+.ui-trade-show-contain .list-img{
+    width: 100%;
+    text-align: center;
+    height: 200px;
+    background-size: cover;
+}
+.ui-trade-show-contain .side {
     background: -webkit-linear-gradient(top, rgba(88, 88, 88, 0) 0%, rgba(70, 70, 70, 0.96) 60%, rgba(43, 41, 41, 1) 90%);
     background: linear-gradient(top, rgba(88, 88, 88, 0) 0%, rgba(70, 70, 70, 0.96) 60%, rgba(43, 41, 41, 1) 90%);
     opacity: 0.9;
@@ -61,48 +53,56 @@
     -webkit-filter: blur(3px);
 }
 
-.ui-trade-show-contain-headbg {
+.ui-trade-show-contain .list-headbg {
     background-color: #DADBD4;
     background-size: cover;
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    position: relative;
+    width: 50px;
+    height: 50px;
+    /*position: relative;
     left: 200px;
     top: 70px;
     box-shadow: 0 0 10px #2B2929;
     filter: none;
-    -webkit-filter: none;
+    -webkit-filter: none;*/
 }
 
-.ui-trade-show-contain-text {
+.ui-trade-show-contain .list-text {
     white-space: nowrap;
     text-shadow: 0 0 10px #fff;
-    position: relative;
+    /*position: relative;
     left: 15px;
-    top: 0px;
+    top: 0px;*/
 }
 
-.ui-trade-show-contain-price {
-    font-size: 30px;
-    color: #FF7A7C;
-    text-shadow: 0 0 10px #FF7A7C;
+.ui-trade-show-contain .list-price {
+    display: inline-block;
+    padding: 0 5px;
+    margin:10px 0 0 0;
+    font-size: 25px;
+    color: #FF7C6A;
+    background: #eee;
 }
 
-.ui-trade-show-contain-title {
+.ui-trade-show-contain .list-title {
+    padding: 20px;
     font-size: 20px;
-    color: #fff;
+    color: #605B55;
     text-overflow: ellipsis;
-    width: 195px;
-    overflow: hidden;
+    /*width: 195px;
+    overflow: hidden;*/
 }
 
-.ui-trade-show-contain-userid {
+.ui-trade-show-contain .list-userid {
+    font-size: 15px;
+    
+    color: #B7ACA2;
+}
+.ui-trade-show-contain .list-time{
     font-size: 15px;
     opacity: 0.7;
-    color: #fff;
+    color: #B7ACA2;
 }
-
 
 /*-------------------end-----------------*/
 
@@ -443,15 +443,15 @@
     color: #B7ACA2;
 }
 .ui-userzone-user-head {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     position: absolute;
     left: 50px;
     top: -130px;
     background-color: #DADBD4;
     background-size: cover;
     border-radius: 20%;
-    
+    border: 3px solid #fff;
 }
 
 .ui-userzone-user-signature {

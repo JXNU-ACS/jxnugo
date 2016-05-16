@@ -29,7 +29,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{url_for('main.index')}}">主页</a></li>
+                        <li><a href="{{url_for('main.index')}}">主页</a></li>
                         <li><a href={{url_for( 'trade.trade_list')}}>淘二手</a></li>
                         <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
                         <li><a href={{url_for( 'bbs.bbs_index')}}>校园BBS</a></li>
@@ -107,39 +107,46 @@
         {% endif %} 
         {% endwith %}
     });
-    ui.bubbleTip();
+    UI.bubbleTip;
+
     </script>
     {% block script %}{% endblock %}
     <footer class="ui-footer">
         <div class="ui-mainct">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="title">app下载</div>
                     <div class="qrcode"></div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="title">运营中心</div>
-                    <ul>
-                        <li>先素楼x4308运维部</li>
-                        <li>电话xxxxx</li>
-                    </ul>
-                    <div class="title">关于我们</div>
-                    <ul>
-                        <li>师大＋</li>
-                        <li>jxnugo</li>
-                    </ul>
+                <div class="col-sm-3">
+                    <dt class="title">运营中心</dt>
+                    
+                        <dd>先素楼x4308运维部</dd>
+                        <dd>电话xxxxx</dd>
+                    
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
+                    <dt class="title">关于我们</dt>
+                    
+                        <dd>师大＋</dd>
+                        <dd>jxnugo</dd>
+                    
+                </div>
+                <div class="col-sm-3">
                     <div>
                         <img src="{{url_for('main.staticfile',filename='images/jxnu_s.png')}}">
                     </div>
-                    <div class="title">share us with</div>
-                    <div class="bdsharebuttonbox">
+                    <div class="title bdsharebuttonbox">share us with
+                        <a href="#" data-cmd="qzone" title="分享到QQ空间"><span class="fa fa-qq"></span></a>
+                        <a href="#" data-cmd="tsina" title="分享到新浪微博"><span class="fa fa-weibo"></span></a>
+                        <a href="#" data-cmd="weixin" title="分享到微信"><span class="fa fa-wechat"></span></a>
+                    </div>
+                    <!--<div class="bdsharebuttonbox">
                         <a href="#" data-cmd="qzone" title="分享到QQ空间"><span class="fa fa-qq fa-2x"></span></a>
                         <a href="#" data-cmd="tsina" title="分享到新浪微博"><span class="fa fa-weibo fa-2x"></span></a>
                         <a href="#" data-cmd="weixin" title="分享到微信"><span class="fa fa-wechat fa-2x"></span></a>
                         
-                    </div>
+                    </div>-->
                     <script>
                     window._bd_share_config = {
                         "common": {

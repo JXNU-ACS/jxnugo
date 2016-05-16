@@ -49,6 +49,9 @@ a:active {
     background-color: #333;
     border-color: #333;
 }
+.nav .active{
+    background: #7ecef4;
+}
 .bdsharebuttonbox span{
     color: #fff;
     margin-left: 5px;
@@ -65,8 +68,18 @@ a:active {
 .btn{
     border-radius: 20px;
 }
+.btn .btn-defualt:hover{
+    background: #fff;
+}
+.btn .btn-defualt:active{
+    background: #fff;
+}
 .btn:hover{
     background: #fff;
+}
+.btn:active{
+    background: #fff;
+
 }
 /*主导航*/
 
@@ -83,16 +96,25 @@ a:active {
     text-align: center;
     height: 82px;
     background: rgba(255, 255, 255, 0.89);
-    margin: -20px 0 0 20px;
+    margin: -20px 0 0 0;
 }
 
-.ui-subnav-content {
+.ui-subnav .nav-content {
     margin: auto;
     width: 1250px;
-    border-bottom: 2px solid #eee;
     padding: 20px;
 }
-
+.ui-subnav .nav-bottom {
+    border: 0;
+    color: #7ecef4;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 18px;
+    border-radius: 20px;
+}
+.ui-subnav .nav-bottom:active{
+    color: #7ecef4;
+}
 
 /*界面容器*/
 
@@ -150,19 +172,21 @@ a:active {
 
 .ui-footer {
     height: 400px;
-    background: #333;
+    background: #454545;
     padding: 10px 0 10px 0;
 
 }
 
 .ui-footer .title {
-    color: #fff;
+    color: #C3C3C3;
     font-size: 18px;
-    margin: 25px;
+    margin: 20px 0;
 }
 
-.ui-footer small {
-    color: #665558;
+.ui-footer dd {
+    font-size: 1em;
+    color: #A6A6A6;
+    margin: 5px 0;
 }
 
 .ui-footer ul {
