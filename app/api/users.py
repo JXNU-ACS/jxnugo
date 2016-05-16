@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from flask import jsonify,request
+from flask import jsonify,request,g
 from authentication import auth
 from ..models import User
 from ..email import send_email
@@ -74,9 +74,13 @@ def user_comments(id):
 def follow():
     followInfo=request.json
     self=User.query.get_or_404(followInfo['userId'])
-    followed=User.query.get_or_404(followInfo['followedId'])
-    self.follow(followed)
-    response=jsonify({"followStatus":"successful"})
+    if g.current_user == self:
+        followed=User.query.get_or_404(followInfo['followedId'])
+        self.follow(followed)
+        message="follow successful"
+    else:
+        message="you dont't hava right to do it"
+    response=jsonify({"followStatus":message})
     response.status_code=200
     return response
 
@@ -86,9 +90,13 @@ def follow():
 def unfollow():
     followInfo=request.json
     self=User.query.get_or_404(followInfo['userId'])
-    unfollowUser=User.query.get_or_404(followInfo['unfollowedId'])
-    self.unfollow(unfollowUser)
-    response=jsonify({"unfollowStatus":"successful"})
+    if g.current_user == self:
+        unfollowUser=User.query.get_or_404(followInfo['unfollowedId'])
+        self.unfollow(unfollowUser)
+        message="unfollow successful"
+    else:
+        message="you don't hava right to do it"
+    response=jsonify({"unfollowStatus":message})
     response.status_code=200
     return response
 
