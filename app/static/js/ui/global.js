@@ -48,6 +48,7 @@ function UI() {
             }
         }).ready(func);
     };
+    
 
 }
 /*选择标签(tag)指向类(class)“.select”

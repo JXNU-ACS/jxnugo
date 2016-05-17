@@ -81,7 +81,7 @@ var uploaderoption = {
             var ui = new FileuploadUI(file);
             ui.eachUpload(simgLink,res.key);
             ui.bindUploadCancel(up);
-            ui.getJson();
+            ui.getJson(res.key);
         },
         'Error': function(up, err, errTip) {
             //上传出错时,处理相关的事情
@@ -150,6 +150,7 @@ var userimgupload = {
             var ui = new UserImgUpload(file);
             ui.imgStatus(0,"上传头像");
             ui.setImg(simgLink);
+            
         },
         'Error': function(up, err, errTip) {
             var ui = new UserImgUpload(file);
