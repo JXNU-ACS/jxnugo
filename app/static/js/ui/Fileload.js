@@ -52,23 +52,72 @@ FileuploadUI.prototype.crateImg = function() {
 };
 FileuploadUI.prototype.getJson = function(key) {
     var keystr ="";
+    var json = "";
     var a = $("div[data-imgname]").length;
-    /*a = $("div[data-imgname]").length;
-    self.json += "\"photos\":[";
-    $("div[data-imgname]").each(function(index) {
-        self.json += "{\"key\":\"" + $(this).attr("data-key") + "\"}";
-        if (index != a - 1) self.json += ",";
-    });
-    self.json += "]";
-    //self.fileJson("{\"key\":\""+key+"\"},");
-    $(".imgjson").attr("value", self.json);*/
+    a = $("div[data-imgname]").length;
     $("[name=\"submit\"]").click(function(){
+    	json += "{\"photos\":[";
+	    $("div[data-imgname]").each(function(index) {
+	        json += "{\"key\":\"" + $(this).attr("data-key") + "\"}";
+	        if (index != a - 1) json += ",";
+	    });
+	    json += "]}";
+	    $(".imgjson").attr("value", json);
+	    /*var requst = $.ajax({
+	    	url:"http://www.jxnugo.com/api/new_post",
+	    	contentType:"application/json;charset=utf-8",
+	    	type: "POST",
+	    	data:{
+	    		"body":"二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，",
+		        "goodName":"戴尔灵越5537",
+		        "goodNum":"1",
+		        "goodPrice":"2000",
+		        "goodLocation":"一栋N204",
+		        "goodQuality":"7成新",
+		        "goodBuyTime":"2014年6月",
+		        "goodTag":"1",
+		        "contact":"13361640744",
+		        "photos":[
+		            {
+		                "key":"84BE7838-E41C-4E60-A1B8-CA95DBEE326B"
+		            },
+		            {
+		                "key":"84BE7838-E41C-4E60-A1B8-CA95DBEE326B"
+		            },
+		            {
+		              	"key":"84BE7838-E41C-4E60-A1B8-CA95DBEE326B"
+		            }
+		        ]
+		    },
+		    dataType: "json",
+		    statusCode: {
+			    404: function() {
+			      	console.log("404")
+			    },
+			    500:function(){
+			    	console.log("500")
+			    },
+			    200:function(){
+			    	console.log("200")
+			    }
+			},
+			xhrFields: {
+			    withCredentials: true
+			}
+
+		})*/
+
+    })
+    
+    //fileJson("{\"key\":\""+key+"\"},");
+    
+    /*$("[name=\"submit\"]").click(function(){
         $("div[data-imgname]").each(function(index) {
         	keystr += key;
         	if (index != a-1) keystr+=":";
         });
         $(".imgjson").attr("value", keystr);
-    })
+    })*/
 
 
 };

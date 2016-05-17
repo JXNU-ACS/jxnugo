@@ -7,7 +7,7 @@ from ..models import User,Role,Post
 from wtforms import ValidationError
 
 class PostForm(Form):
-    formId=IntegerField(u'物品id')
+    
     name=StringField(u'物品名称',validators=[Required(),Length(1,128)])
     num=IntegerField(u'物品数量')
     price=FloatField(u'物品价格')
