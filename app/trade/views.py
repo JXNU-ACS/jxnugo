@@ -23,14 +23,11 @@ def trade_list():
 def trade_post():
     form=PostForm()
     if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
-        post=Post(id=Post.query.count()+1,body=form.body.data,goodName=form.name.data,goodPrice=form.price.data,goodNum=form.num.data,
-                  goodLocation=form.location.data,goodQuality=form.quality.data,goodTag=form.tag.data,
-                  goodBuyTime=form.buyTime.data,contact=form.mycontact.data,photos=form.img.data,
-                  author=current_user._get_current_object())
-        db.session.add(post)
-        db.session.commit()
+        print "show img"
+        print form.img.data
         flash(u'帖子发布成功')
         return redirect(url_for('main.index'))
+    print "error"
     return render_template('trade/trade_post.html',form=form)
 
 
