@@ -6,7 +6,7 @@ var uploaderoption = {
     // 其中 uptoken 是直接提供上传凭证，uptoken_url 是提供了获取上传凭证的地址，如果需要定制获取 uptoken 的过程则可以设置 uptoken_func
     //uptoken : "BK58FryE-_YddhrnjmpS_phqj3vKrR3k-svdydGB:g-wo-Jf46gBQq2mZuoVUvlKcpJM=:eyJzY29wZSI6InRyYWRlOlVVSUQoJzk5Mzg5MWIyLTFkMmUtNDcxZi1hMjBkLWZiM2U0NzM0ZWQ4ZScpIiwiZGVhZGxpbmUiOjE0NjI4MTA2Mzl9", // uptoken 是上传凭证，由其他程序生成
     //uptoken: "BK58FryE-_YddhrnjmpS_phqj3vKrR3k-svdydGB:_s873eUIuGT_OqdJy1H3S2ZgP0Y=:eyJzY29wZSI6InRyYWRlIiwiZGVhZGxpbmUiOjE0NjI4MDY2MTZ9",
-    uptoken_url: $('#uptoken_url').val(), // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
+    uptoken_url: "/get_upload_token", // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
     // uptoken_func: function(file){    // 在需要获取 uptoken 时，该方法会被调用
     //    // do something
     //    return uptoken;
@@ -16,7 +16,7 @@ var uploaderoption = {
     // Ajax请求downToken的Url，私有空间时使用,JS-SDK 将向该地址POST文件的key和domain,服务端返回的JSON必须包含`url`字段，`url`值为该文件的下载地址
     unique_names: true,              // 默认 false，key 为文件名。若开启该选项，JS-SDK 会为每个文件自动生成key（文件名）
     save_key: true, // 默认 false。若在服务端生成 uptoken 的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
-    domain: $('#domain').val(), // bucket 域名，下载资源时用到，**必需**
+    domain: "7xrkww.com1.z0.glb.clouddn.com", // bucket 域名，下载资源时用到，**必需**
     container: 'upload-aira', // 上传区域 DOM ID，默认是 browser_button 的父元素，
     max_file_size: '10mb', // 最大文件体积限制
     flash_swf_url: "static/js/plupload/Moxie.swf", //'path/of/plupload/Moxie.swf',  //引入 flash,相对路径
@@ -106,9 +106,9 @@ var uploaderoption = {
 var userimgupload = {
     runtimes: 'html5,flash,html4', // 上传模式,依次退化
     browse_button: 'pickfiles',
-    uptoken_url: $('#uptoken_url').val(),
+    uptoken_url: "/get_upload_token",
     get_new_uptoken: true,
-    domain: $('#domain').val(),
+    domain: "7xrkww.com1.z0.glb.clouddn.com",
     container: 'upload-aira',
     max_file_size: '10mb',
     flash_swf_url: "static/js/plupload/Moxie.swf", 
