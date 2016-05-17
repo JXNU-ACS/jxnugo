@@ -44,12 +44,9 @@ def comments(id):
 def collect():
     collectInfo=request.json
     user=User.query.get_or_404(collectInfo['userId'])
-    if g.current_user == user:
-        post=Post.query.get_or_404(collectInfo['postId'])
-        user.collect(post)
-        message="collect successful"
-    else:
-        message="you don't have right to do it"
+    post=Post.query.get_or_404(collectInfo['postId'])
+    user.collect(post)
+    message="collect successful"
     response=jsonify({"collectStatus":message})
     response.status_code=200
     return response
@@ -59,12 +56,9 @@ def collect():
 def uncollect():
     collectInfo=request.json
     user=User.query.get_or_404(collectInfo['userId'])
-    if g.current_user == user:
-        post=Post.query.get_or_404(collectInfo['postId'])
-        user.uncollect(post)
-        message="uncollect successful"
-    else:
-        message="you don't have right to do it"
+    post=Post.query.get_or_404(collectInfo['postId'])
+    user.uncollect(post)
+    message="uncollect successful"
     response=jsonify({"uncollectStatus":message})
     response.status_code=200
     return response
@@ -75,13 +69,10 @@ def uncollect():
 def new_comment():
     commentInfo=request.json
     user=User.query.get_or_404(commentInfo['userId'])
-    if g.current_user == user:
-        comment=Comment(id=Comment.query.count()+1,body=commentInfo['body'],author_id=commentInfo['userId'],post_id=commentInfo['postId'])
-        db.session.add(comment)
-        db.session.commit()
-        message="successful"
-    else:
-        message="you don't hava right to do it"
+    comment=Comment(id=Comment.query.count()+1,body=commentInfo['body'],author_id=commentInfo['userId'],post_id=commentInfo['postId'])
+    db.session.add(comment)
+    db.session.commit()
+    message="successful"
     response=jsonify({"commentStatus":message})
     response.status_code=200
     return response

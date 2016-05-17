@@ -74,12 +74,9 @@ def user_comments(id):
 def follow():
     followInfo=request.json
     self=User.query.get_or_404(followInfo['userId'])
-    if g.current_user == self:
-        followed=User.query.get_or_404(followInfo['followedId'])
-        self.follow(followed)
-        message="follow successful"
-    else:
-        message="you dont't hava right to do it"
+    followed=User.query.get_or_404(followInfo['followedId'])
+    self.follow(followed)
+    message="follow successful"
     response=jsonify({"followStatus":message})
     response.status_code=200
     return response
@@ -90,12 +87,9 @@ def follow():
 def unfollow():
     followInfo=request.json
     self=User.query.get_or_404(followInfo['userId'])
-    if g.current_user == self:
-        unfollowUser=User.query.get_or_404(followInfo['unfollowedId'])
-        self.unfollow(unfollowUser)
-        message="unfollow successful"
-    else:
-        message="you don't hava right to do it"
+    unfollowUser=User.query.get_or_404(followInfo['unfollowedId'])
+    self.unfollow(unfollowUser)
+    message="unfollow successful"
     response=jsonify({"unfollowStatus":message})
     response.status_code=200
     return response

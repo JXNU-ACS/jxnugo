@@ -24,6 +24,8 @@ def indexof():
 
 @main.route('/index')
 def index():
+    real_ip = request.headers.get('X-Real-Ip', request.remote_addr)
+    print real_ip
     return render_template('index.html')
 
 
