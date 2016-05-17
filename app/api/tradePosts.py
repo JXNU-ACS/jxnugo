@@ -69,10 +69,14 @@ def uncollect():
 def new_comment():
     commentInfo=request.json
     user=User.query.get_or_404(commentInfo['userId'])
-    comment=Comment(id=Comment.query.count()+1,body=commentInfo['body'],author_id=commentInfo['userId'],post_id=commentInfo['postId'])
-    db.session.add(comment)
-    db.session.commit()
-    message="successful"
+    if g.current_user ==user:
+        comment=Comment(id=Comment.query.count()+1,body=commentInfo['body'],author_id=commentInfo['userId'],post_id=commentInfo['postId'])
+        db.session.add(comment)
+        db.session.commit()
+        message="successful"
+    else:
+        c
+        message=stri
     response=jsonify({"commentStatus":message})
     response.status_code=200
     return response
@@ -97,7 +101,7 @@ def judge_collect():
 @auth.login_required
 def new_post():
     postInfo=request.json
-    user=g.current_user
+    user=User.query.get_or_404(postInfo['userId'])
     photo=postInfo['photos']
     l=[]
     for x in range(0,len(photo)):

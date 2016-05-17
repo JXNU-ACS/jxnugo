@@ -72,6 +72,7 @@ def user_zone(username):
 @login_required
 def editUserInfo():
     form = EditProfileForm()
+    user=current_user
     if form.validate_on_submit():
         current_user.userName = form.name.data
         current_user.location = form.location.data
@@ -82,7 +83,7 @@ def editUserInfo():
     form.name.data = current_user.name
     form.location.data = current_user.location
     form.about_me.data = current_user.about_me
-    return render_template('info/editUserInfo.html', form=form)
+    return render_template('info/editUserInfo.html', form=form,user=user)
 
 
 @main.route('/show_user',methods=['GET','POST'])

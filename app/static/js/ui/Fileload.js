@@ -57,7 +57,7 @@ FileuploadUI.prototype.getJson = function(key){
 
 	self.submit.click(function(){
 		a = $("div[data-imgname]").length;
-		self.json += "{\"photokey\":[";
+		self.json += "{\"photos\":[";
 		$("div[data-imgname]").each(function(index){
 			self.json += "{\"key\":\""+$(this).attr("data-key")+"\"}";
 			if (index != a-1) self.json +=",";

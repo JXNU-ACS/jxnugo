@@ -108,3 +108,21 @@ def judge_follow():
     response=jsonify({"judgeInfo":message})
     response.status_code=200
     return response
+
+
+@api.route('/api/update_userInfo', methods=['POST'])
+@auth.login_required
+def update_userInfo():
+    userInfo=request.json
+    user=User.query.get_or_404(userInfo['userId'])
+    user.name=userInfo['name']
+    user.location=userInfo['location']
+    user.sex=userInfo['sex']
+    user.about_me=userInfo['about_me']
+    user.contact=userInfo['contact']
+    user.avatar=userInfo['avatar']
+    db.session.add(user)
+    db.session.commit()
+    response=jsonify({"updateStatus":"successful"})
+    response.status_code=200
+    return response

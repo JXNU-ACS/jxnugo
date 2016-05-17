@@ -22,7 +22,7 @@ def trade_list():
 @login_required
 def trade_post():
     form=PostForm()
-    if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
+    if  form.validate_on_submit():
         print "show img"
         print form.img.data
         flash(u'帖子发布成功')
