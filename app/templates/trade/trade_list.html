@@ -67,7 +67,7 @@ body {
                             </div>
                             <div class="col-sm-9">
                                 <div class="list-userid">{{post.author.userName}}</div>
-                                <div class="list-time"><span class="glyphicon glyphicon-time"></span> 2016/0/0</div>
+                                <div class="list-time"><span class="glyphicon glyphicon-time"></span>{{ post.timestamp | utcChangeToCst}}</div>
                             </div>
                             
                         </div>

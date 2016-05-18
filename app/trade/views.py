@@ -1,11 +1,12 @@
 # -*- coding: UTF-8 -*-
-from flask import render_template,redirect,url_for,session,flash,request,current_app,request
+from flask import render_template,redirect,url_for,session,flash,request,current_app,request,jsonify
 from ..decorators import admin_required,permission_required
 from . import trade
 from .. import db
 from flask.ext.login import login_required,current_user
 from ..models import Permission,User,Role,Post,Comment
 from forms import PostForm,CommentForm
+from json import loads
 
 
 @trade.route('/trade_list')
@@ -22,12 +23,21 @@ def trade_list():
 @login_required
 def trade_post():
     form=PostForm()
-    if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
-        print "show img"
-        print form.img.data
+    if form.validate_on_submit():
+        recv=form.img.data
+        s=loads(recv)
+        l=[]
+        for x in s['photos']:
+            temp=x['key']
+            l.append(temp)
+        photo=":".join(l)
+        post=Post(id=Post.query.count()+1, body=form.body.data, goodName=form.name.data, goodPrice=form.price.data,
+                  goodNum=form.num.data, goodLocation=form.location.data, goodQuality=form.quality.data,
+                  goodTag=form.tag.data, contact=form.mycontact.data, photos=photo, author_id=current_user.id)
+        db.session.add(post)
+        db.session.commit()
         flash(u'帖子发布成功')
         return redirect(url_for('main.index'))
-    print "error"
     return render_template('trade/trade_post.html',form=form)
 
 
@@ -54,8 +64,9 @@ def trade_detail(goodId):
         page, per_page=current_app.config['JXNUGO_COMMENTS_PER_PAGE'],
         error_out=False)
     comments = pagination.items
+    author=current_user._get_current_object()
     return render_template('trade/trade_detail.html', post=post, form=form,
-                           comments=comments, pagination=pagination)
+                           comments=comments, pagination=pagination,user=author)
 
 
 @trade.route('/collect/<pid>',methods=['GET'])
@@ -116,3 +127,17 @@ def moderate_disable(id):
     db.session.add(comment)
     return redirect(url_for('.moderate',
                             page=request.args.get('page', 1, type=int)), )
+
+
+@trade.route('/post_delete/<int:pid>')
+@login_required
+def post_delete(pid):
+    post=Post.query.filter_by(id=pid).first()
+    if post is None:
+        flash(u"未查询到该篇帖子信息")
+        return redirect(url_for('.trade_list'))
+    else:
+        db.session.delete(post)
+        db.session.commit()
+        flash(u'该帖子已经成功删除')
+    return redirect(url_for('.trade_list'))

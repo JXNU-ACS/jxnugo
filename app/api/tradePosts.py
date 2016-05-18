@@ -16,10 +16,12 @@ def get_posts():
     posts=pagination.items
     prev=None
     if pagination.has_prev:
-        prev=url_for('api.get_posts', page=page-1, _external=True)
+        #prev=url_for('api.get_posts', page=page-1, _external=True)
+        prev="www.jxnugo.com/api/posts?page=%d" % (page-1)
     next=None
     if pagination.has_next:
-        next=url_for('api.get_posts', page=page+1, _external=True)
+        next="www.jxnugo.com/api/posts?page=%d" % (page+1)
+        #next=url_for('api.get_posts', page=page+1, _external=True)
     return jsonify({'posts':[post.to_json() for post in posts],
                     'prev': prev,
                     'next': next,
@@ -69,10 +71,14 @@ def uncollect():
 def new_comment():
     commentInfo=request.json
     user=User.query.get_or_404(commentInfo['userId'])
-    comment=Comment(id=Comment.query.count()+1,body=commentInfo['body'],author_id=commentInfo['userId'],post_id=commentInfo['postId'])
-    db.session.add(comment)
-    db.session.commit()
-    message="successful"
+    if g.current_user ==user:
+        comment=Comment(id=Comment.query.count()+1,body=commentInfo['body'],author_id=commentInfo['userId'],post_id=commentInfo['postId'])
+        db.session.add(comment)
+        db.session.commit()
+        message="successful"
+    else:
+        c
+        message=stri
     response=jsonify({"commentStatus":message})
     response.status_code=200
     return response
@@ -97,7 +103,7 @@ def judge_collect():
 @auth.login_required
 def new_post():
     postInfo=request.json
-    user=g.current_user
+    user=User.query.get_or_404(postInfo['userId'])
     photo=postInfo['photos']
     l=[]
     for x in range(0,len(photo)):
@@ -114,18 +120,18 @@ def new_post():
     return response
 
 
-@api.route('/api/json', methods=['POST'])
-def testjson():
-    info=request.json
-    photo=info['photos']
-    l=[]
-    for x in range(0,len(photo)):
-        temp=photo[x]['key']
-        l.append(temp)
-    photos=":".join(l)
-    print photos
-    response=jsonify({"photos":[{"key":key} for key in photos.split(":")]})
+@api.route('/api/delete_post',methods=['DELETE'])
+@auth.login_required
+def delete_post():
+    postInfo=request.json
+    post=Post.query.get_or_404(postInfo['postId'])
+    if post is None:
+        message="the post dosen't exist"
+    else:
+        db.session.delete(post)
+        db.session.commit()
+        message="successful delete post"
+    response=jsonify({"deleteStatus":message})
     response.status_code=200
     return response
-
 

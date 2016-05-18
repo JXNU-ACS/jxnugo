@@ -5,7 +5,7 @@ from . import main
 from .. import db
 from forms import EditProfileForm, EditProfileAdminForm
 from flask.ext.login import login_required, current_user
-from ..models import Permission, User, Role, Post,Follow,collectionPosts
+from ..models import Permission, User, Role, Post,Follow,collectionPosts,Comment
 from qiniu import Auth,put_file,etag,urlsafe_base64_encode
 import qiniu.config
 from uuid import uuid4
@@ -46,9 +46,10 @@ def staticfile(filename):
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(userName=username).first()
+    comments=Comment.query.filter_by(author_id=user.id).all()
     if user is None:
         abort(404)
-    return render_template('info/user.html', user=user)
+    return render_template('info/user.html', user=user,comments=comments)
 
 
 @main.route('/user_zone/<username>')
@@ -72,6 +73,7 @@ def user_zone(username):
 @login_required
 def editUserInfo():
     form = EditProfileForm()
+    user=current_user
     if form.validate_on_submit():
         current_user.userName = form.name.data
         current_user.location = form.location.data
@@ -82,7 +84,7 @@ def editUserInfo():
     form.name.data = current_user.name
     form.location.data = current_user.location
     form.about_me.data = current_user.about_me
-    return render_template('info/editUserInfo.html', form=form)
+    return render_template('info/editUserInfo.html', form=form,user=user)
 
 
 @main.route('/show_user',methods=['GET','POST'])
@@ -193,3 +195,4 @@ def followed_by(username):
     return render_template('info/followed.html', user=user, title=u'关注他的',
                            endpoint='.followed_by', pagination=pagination,
                            follows=follows,)
+
