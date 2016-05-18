@@ -30,7 +30,7 @@ Post.generate_fake(100)  #伪造交易帖子
 
 ###登录注册与token
 
-#####1、用户登录  【GET】         {此api已实现}
+#####1、用户登录  【GET】
 * URL:  www.jxnugo.com/api/get_token
 * 描述：用来用户登录验证
 * 参数：userName,passWord
@@ -66,7 +66,7 @@ Post.generate_fake(100)  #伪造交易帖子
 
 
 
-#####2、用户注册	【POST】     {此api已实现}
+#####2、用户注册	【POST】
 * URL: www.jxnugo.com/api/register
 * 上传到服务器的信息（json格式）如下：
 
@@ -92,7 +92,7 @@ Post.generate_fake(100)  #伪造交易帖子
 
 
 
-#####3、请求七牛云上传token  【GET】   {此api已实现}
+#####3、请求七牛云上传token  【GET】
 * URL: www.jxnugo.com/api/get_mobile_token
 
 * 描述：获取七牛云上传的token
@@ -111,7 +111,7 @@ Post.generate_fake(100)  #伪造交易帖子
 
 
 
-#####4、获取一个页面的帖子的信息   【GET】  {此api已实现}
+#####4、获取一个页面的帖子的信息   【GET】
 * URL: www.jxnugo.com/api/posts
 * 描述：获取固定数量(可指定数量)的帖子信息
 * 请求成功返回值：
@@ -155,7 +155,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 
-#####5、获取某个帖子信息          	【GET】   {此api已实现}
+#####5、获取某个帖子信息          	【GET】
 * URL: www.jxnugo.com/api/posts/<int:id>
 * 参数：帖子id
 * 描述：获取某个帖子的信息
@@ -185,7 +185,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 
-#####6、获取某个用户发布的帖子 [GET]   {此api已实现}
+#####6、获取某个用户发布的帖子 [GET]
 * URL：www.jxnugo.com/api/user_posts/<int:id>
 * 参数：用户id
 * 请求成功的返回值
@@ -216,7 +216,7 @@ http://127.0.0.1:5000/api/posts?page=3
 }
 ```
 
-#####7、获取某个用户收藏的帖子     【GET】    {此api已实现}
+#####7、获取某个用户收藏的帖子     【GET】
 * URL:www.jxnugo.com/api/user_collectionpost/<int:id>
 * 参数：用户id
 * 请求成功的返回值(后台设置最大返回5个帖子)
@@ -250,7 +250,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####8、获取某个帖子的评论  【GET】  {此api已实现}
+#####8、获取某个帖子的评论  【GET】
 * URL: www.jxnugo.com/api/comments/<int:id>
 * 参数：帖子id
 * 请求成功返回值
@@ -288,7 +288,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 ```
-{
+{		"userId":"1",
         "body":"二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，",
         "goodName":"戴尔灵越5537",
         "goodNum":"1",
@@ -323,7 +323,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 
-#####10、对帖子发表评论   	【POST】  {此api已实现}
+#####10、对帖子发表评论   	【POST】
 * URL: www.jxnugo.com/api/new_comment
 * 参数：帖子id
 
@@ -346,7 +346,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####11、收藏某篇帖子      【POST】  {此api已实现}
+#####11、收藏某篇帖子      【POST】
 * URL:www.jxnugo.com/api/collect
 * 参数：无
 * 数据上传格式（json）用户自身id（selfId）和帖子的id
@@ -370,7 +370,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 
-#####12、取消收藏某篇帖子   【POST】   {此api已实现}
+#####12、取消收藏某篇帖子   【POST】
 * URL:www.jxnugo.com/api/uncollect
 * 参数：无
  * 数据上传格式（json）用户自身id（selfId）和帖子的id
@@ -417,7 +417,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 
 ###用户相关
-#####14、获取个人用户信息  【GET】    {此api已实现}
+#####14、获取个人用户信息  【GET】
 * URL: www.jxnugo.com/api/user/<int:id>
 * 参数：用户id
 * 描述：获取某个用户的信息
@@ -443,7 +443,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####15、获取某个用户关注的人   【GET】   {此api已实现}
+#####15、获取某个用户关注的人   【GET】
 * URL：www.jxnugo.com/api/user_followed/<int:id>
 * 参数：用户id
 * 描述：获取用户关注的人的名字还有指向TA的链接
@@ -465,7 +465,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####16、获取某个用户的粉丝     【GET】   {此api已实现}
+#####16、获取某个用户的粉丝     【GET】
 * URL:www.jxnugo.com/api/user_followers/<int:id>
 * 参数：用户id
 * 描述：获取用户的粉丝的名字还有指向TA的链接
@@ -485,7 +485,7 @@ http://127.0.0.1:5000/api/posts?page=3
 }
 ```
 
-#####17、获取某个用户发表过的评论   【GET】   {此api已实现}
+#####17、获取某个用户发表过的评论   【GET】
 * URL:www.jxnugo.com/api/user_comments/<int:id>
 * 参数：用户id
 * 请求成功返回值
@@ -510,7 +510,7 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 
 
-#####18、关注某个用户   【POST】   {此api已实现}
+#####18、关注某个用户   【POST】
 * URL: www.jxnugo.com/api/follow
 * 参数：无
 * 上传的数据（json）：包含自己的id和关注用户的id
@@ -530,7 +530,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####19、取消关注        【POST】   {此api已实现}
+#####19、取消关注        【POST】
 * URL：www.jxnugo.com/api/unfollow
 * 参数：无
 * 上传的的数据(json)，包含自己的id和被取消用户的id
@@ -552,7 +552,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####20、判断用户是否已经关注了某个用户
+#####20、判断用户是否已经关注了某个用户   [GET]
 * URL: www.jxnugo.com/api/judge_follow
 * 参数：无
 * 上传的数据格式（json），包含自己的id还有其它用户的id
@@ -568,6 +568,54 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 {
   "judgeInfo": 0
+}
+
+```
+
+#####21、更新用户个人信息
+* URL: www.jxnugo.com/api/update_userInfo   [POST]
+* 参数：无
+* 上传的数据格式（json）
+
+```
+{
+        "userId":"17",
+        "name":"haha",
+        "location":"江西南昌",
+        "sex":"女",
+        "contact":"13312312123",
+        "about_me":"七牛云存储",
+        "avatar":"http://7xrkww.com1.z0.glb.clouddn.com/Frkrfg7cCZ3xO3mwmKXCfbdQ-FQ0"
+
+}
+
+```
+
+* 返回的数据
+
+```
+{
+  "updateStatus": "successful"
+}
+```
+
+#####22、删除帖子
+* URL:www.jxnugo.com/api/post_delete  [DELETE]
+* 参数：无
+* 上传的数据格式（json）
+
+```
+	{
+		"userId":"123",
+		"postId":"12"
+	}
+
+```
+* 删除成功返回值  状态码
+
+```
+{
+  "deleteStatus": "successful delete post"
 }
 
 ```

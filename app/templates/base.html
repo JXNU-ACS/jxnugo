@@ -35,24 +35,15 @@
                         <li><a href={{url_for( 'bbs.bbs_index')}}>校园BBS</a></li>
                         <li><a href="#">客户端</a></li>
                     </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="input-group" style="">
-                            <input type="text" class="form-control" placeholder="搜索">
-                            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div>
-                    </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好&nbsp;{% if current_user.userName %}{{current_user.userName|capitalize}}{% else %}游客{% endif %}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 {% if current_user.is_authenticated %}
-                                <li><a href="#">帖子</a></li>
-                                <li><a href="#">消息</a></li>
+                                
                                 <li><a href="{{url_for('main.user_zone',username=current_user.userName)}}">个人信息</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">偏好设置</a></li>
+                                <li><a href="{{url_for('main.editUserInfo')}}">偏好设置</a></li>
                                 {% if current_user.can(Permission.MODERATE_COMMENTS) %}
                                 <li><a href="{{ url_for('trade.moderate')}}">评论管理</a> </li>
                                 {% endif %}
@@ -107,8 +98,8 @@
         {% endif %} 
         {% endwith %}
     });
-    UI.bubbleTip;
-
+    ui.bubbleTip;
+    
     </script>
     {% block script %}{% endblock %}
     <footer class="ui-footer">
@@ -119,17 +110,20 @@
                     <div class="qrcode"></div>
                 </div>
                 <div class="col-sm-3">
-                    <dt class="title">运营中心</dt>
+                    <dl>
+                        <dt class="title">运营中心</dt>
                     
-                        <dd>先素楼x4308运维部</dd>
+                        <dd>先骕楼x4308</dd>
                         <dd>电话xxxxx</dd>
-                    
+                    </dl>
                 </div>
                 <div class="col-sm-3">
-                    <dt class="title">关于我们</dt>
-                    
+                    <dl>
+                        <dt class="title">关于我们</dt>
                         <dd>师大＋</dd>
                         <dd>jxnugo</dd>
+                    </dl>
+                    
                     
                 </div>
                 <div class="col-sm-3">
@@ -164,12 +158,16 @@
                     };
                     with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
                     </script>
-                    <div class="title" style="margin-left:0;"><a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" style="color:white;">赣ICP备16002531号-1</a></div>
+                    <div class="title" style="margin-left:0;"></div>
                 </div>
             </div>
-            
+
         </div>
+        <div class="buttom-side">
+                <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">赣ICP备16002531号-1</a>
+            </div>
     </footer>
+    <div></div>
 </body>
 
 </html>

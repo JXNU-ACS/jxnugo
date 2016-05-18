@@ -129,13 +129,13 @@
                 <span class="item"><span class="uid">UID</span> {{user.id}}</span>
             </div>
             <div class="content-row">
-                <span class="item"><span class="time glyphicon glyphicon-calendar"></span> {{user.menber_since}}</span>
+                <span class="item"><span class="time glyphicon glyphicon-calendar"></span> {{user.menber_since | utcChangeToCst}}</span>
             </div>
             <div class="content-row">
                 <span class="item"><span class="map glyphicon glyphicon-map-marker"></span> {{user.location}}</span>
             </div>
             <div class="content-row">
-                <span class="item"><span class="time glyphicon glyphicon-time"></span> {{user.last_seen}}</span>
+                <span class="item"><span class="time glyphicon glyphicon-time"></span> {{user.last_seen | utcChangeToCst}}</span>
             </div>
             <div class="content-row">
                 <h3>关注TA的用户 <span class="item"><span class="badge">{{ user.followers.count() }}</span> <a href="#{#{{ url_for('main.followers',username=user.userName)}}#}"

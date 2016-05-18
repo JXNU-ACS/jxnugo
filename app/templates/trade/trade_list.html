@@ -2,17 +2,19 @@
 <style>
 body {
     padding-top: 120px;
-    background: #eee;
+    
 }
 </style>
 <div class="contain-fluid">
-    <div class="ui-subnav" style="background-color:#7ecef4;">
+    <div class="ui-subnav">
         <div class="nav-content">
             <div class="row">
-                <div class="col-sm-3"><img src="static/images/JXNU.png" style="height:80px;margin-top: -3px;"></div>
-                <div class="col-sm-2 left-align" style="">
+                <div class="col-sm-4 left-align"><a href="{{url_for('trade.trade_post')}}"><span class="glyphicon glyphicon-pencil nav-text case-in"></span></a></div>
+                <div class="col-sm-4"><img src="{{url_for('main.staticfile',filename='images/jxnu_s.png')}}" style="width: 150px;"></div>
+                <!--<div class="col-sm-2 left-align" style="">
                     <a class="btn btn-default nav-bottom" href="{{url_for('trade.trade_post')}}">发布商品！</a>
-                </div>
+                </div>-->
+                <div class="col-sm-4 right-align"><span class="glyphicon glyphicon-search nav-text case-in"></span></div>
             </div>
         </div>
     </div>
@@ -56,7 +58,7 @@ body {
                 {% if posts %} {% for post in posts %}
                 
                     <div class="ui-trade-show-contain">
-                        <div class="row" style="padding:20px 0 20px 20px;">
+                        <div class="row" style="padding: 20px 0 10px 20px;">
                             <div class="col-sm-3">
                                 <a href="#">
                                     <div class="list-headbg" style="background-image:url('static/images/2.jpeg');">
@@ -65,7 +67,7 @@ body {
                             </div>
                             <div class="col-sm-9">
                                 <div class="list-userid">{{post.author.userName}}</div>
-                                <div class="list-time"><span class="glyphicon glyphicon-time"></span> 2016/0/0</div>
+                                <div class="list-time"><span class="glyphicon glyphicon-time"></span>{{ post.timestamp | utcChangeToCst}}</div>
                             </div>
                             
                         </div>

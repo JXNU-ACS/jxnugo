@@ -28,7 +28,7 @@ body {
                         <div class="col-sm-8">
                             <div id="detail" class="ui-trade-detail-title">
                             <h1>{{ post.goodName }}</h1>
-                            <h5><span class="glyphicon glyphicon-time"></span>{{post.timestamp}}</h5>
+                            <h5><span class="glyphicon glyphicon-time"></span>{{post.timestamp | utcChangeToCst }}</h5>
                             <span>
                             {% if current_user.is_authenticated %}
                             {% if current_user.is_collecting(post) %}

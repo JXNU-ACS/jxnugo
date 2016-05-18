@@ -27,7 +27,7 @@
 /*商品容器*/
 
 .ui-trade-show-contain {
-    margin: 20px 20px 20px 0;
+    margin: 20px;
     width: 280px;
     box-shadow: 0 1px 2px #DED1C4;
     background:#fff;
@@ -85,7 +85,7 @@
 }
 
 .ui-trade-show-contain .list-title {
-    padding: 20px;
+    padding: 10px 20px;
     font-size: 20px;
     color: #605B55;
     text-overflow: ellipsis;
@@ -191,7 +191,6 @@
 .ui-trade-detail-userinfo {
     position: relative;
     left: 150px;
-    top: 30px;
     max-width: 150px;
     color: #5A5B57;
 
