@@ -37,7 +37,7 @@ def trade_post():
         db.session.add(post)
         db.session.commit()
         flash(u'帖子发布成功')
-        return redirect(url_for('main.index'))
+        return redirect(url_for('trade.trade_list'))#感觉 返回列表会好一些
     return render_template('trade/trade_post.html',form=form)
 
 

@@ -19,7 +19,7 @@ body {
 <div class="cantain-fluid">
     <div class="ui-mainct">
         <div class="ui-panel">
-            <div class="ui-panel-cover blur" style="background-image:url('static/images/2.jpeg')">
+            <div class="ui-panel-cover blur">
             </div>
             <div class="row">
                 <!--左边-->
@@ -51,7 +51,9 @@ body {
                         </p>
                     </div>
                     <div id="photo" class="ui-trade-detail-content">
-                        <img src="http://7xrkww.com1.z0.glb.clouddn.com/FtMzRQZbpt5CYVadIFdkRqXSDDl6" >
+                        
+                        
+                        
                     </div>
                     <div id="comment" class="ui-trade-detail-content">
                         <div>
@@ -70,6 +72,7 @@ body {
 
 
                         {% include './_comments.html' %}
+                        
 
                         <!-- <div class="ui-trade-detail-comment">
                             <div class="row">
@@ -157,14 +160,26 @@ body {
                 </div>
                 <!--右边-->
                 <div class="col-md-4 right-panel">
-                    <div class="ui-trade-detail-headbg" style="background-image:url(/static/images/1.jpg)">
+                    <div class="ui-trade-detail-headbg" style="background-image:url({{ post.author.avatar}})">
                         <div class="ui-trade-detail-userinfo">
                             <h3><a href="{{ url_for('main.user_zone',username=post.author.userName) }}">{{ post.author.userName }}</a> </h3>
                             <h5 class="sign">{{ post.author.about_me }}</h5></div>
                     </div>
                     <div class="ui-trade-detail-info">
-                        <div class="info-row"><span class="glyphicon glyphicon-gift"> 新旧程度：9成新</div>
-                        <div class="info-row"><span class="map glyphicon glyphicon-map-marker"> 位置：7栋</div>
+                        {%if post.goodNum%}
+                        <div class="info-row"><span class="glyphicon glyphicon-map-marker"> 数量:{{post.goodNum}}</div>
+                        {% endif %}
+                        {% if post.goodQuality %}<div class="info-row"><span class="glyphicon glyphicon-gift"> {{post.goodQuality}}</div>
+                        {% endif %}
+                        {%if post.contact%}
+                        <div class="info-row"><span class=" glyphicon glyphicon-map-marker"> 联系方式:{{post.contact}}</div>
+                        {% endif %}
+                        {%if post.goodLocation%}
+                        <div class="info-row"><span class=" glyphicon glyphicon-map-marker"> 位置:{{post.goodLocation}}</div>
+                        {% endif %}
+                        {%if post.goodBuyTime%}
+                        <div class="info-row"><span class="glyphicon glyphicon-time"> 购买时间:{{post.goodBuyTime}}</div>
+                        {% endif %}
                     </div>
                     <div class="stickypannel " >
                         <div class="ui-trade-detail-rightlist">
@@ -195,7 +210,16 @@ $(document).ready(function(){
         offsetY:175,
         contain:$('.right-panel'),
     })
-    $(".right-panel").height($(".left-panel").innerHeight())
+    $(".right-panel").height($(".left-panel").innerHeight());
+    $("#photo").append(function(){
+        var html="";
+        var imgs = ("{{post.photos}}").split(":");
+        for(n in imgs){
+            html+="<img src='http://7xrkww.com1.z0.glb.clouddn.com/"+imgs[n]+"' >";
+        }
+        return html;
+    });
+    
 })
 </script>
 {% endblock %}

@@ -1,6 +1,4 @@
 function UI() {
-    //模态框
-    this.modalElement = $(".modal");
     //跟随父级容器固定在浏览器上的
     this.stickyElement = $(".stickypannel");
     //选择标签
@@ -48,7 +46,18 @@ function UI() {
             }
         }).ready(func);
     };
-    
+    //表单验证器（然而没luan用
+    this.formValidation = function(inputObj){//config为数组,值为input的name
+        var self = this;
+        for (input in inputObj){
+            if ($("[name=\""+input+"\"]").attr() == null){
+                self.modalShow(function(){
+                    $(".modal-body").text("然而并没有填写完整～");
+                    $(".modal").show();
+                },0,0)
+            }
+        };
+    };
 
 }
 /*选择标签(tag)指向类(class)“.select”

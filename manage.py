@@ -32,12 +32,12 @@ def changeTime(utcTime):
     return datetime.strftime(local, "%Y-%m-%d %H:%M:%S")
 app.jinja_env.filters['utcChangeToCst'] = changeTime
 
-
 @app.template_filter('getFirstKey')
 def firstKey(keys):
     key=keys.split(":")
     return key[0]
 app.jinja_env.filters['getFirstKey'] = firstKey
+
 
 
 

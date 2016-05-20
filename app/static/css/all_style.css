@@ -166,9 +166,10 @@
     padding: 20px;
     background: #eee;
     border-radius: 20px;
+    margin: 1em;
 }
 .ui-trade-detail-info .info-row{
-    font-size: 17px;
+    font-size: 15px;
     color: #333;
 }
 .ui-trade-detail-content>img {
@@ -560,6 +561,10 @@
     color:#fff;
     font-size: 20px;
 }
+.ui-post-bottom:hover{
+    color:#9BB7B4;
+    border: 1px solid #9BB7B4;
+}
 .ui-post-upload {
     width: 180px;
     height: 180px;
@@ -651,7 +656,7 @@
     background-size: cover;
     
 }
-.ui-edinfo-uploadimg .bottom{
+.ui-edinfo-uploadimg .button{
     width: 250px;
     font-size: 20px;
     color: #fff;
@@ -660,7 +665,7 @@
     padding-top: 87%;
     
 }
-.ui-edinfo-uploadimg .bottom span{
+.ui-edinfo-uploadimg .button span{
     padding: 5% 34%;
     background: rgba(51,51,51,0.6);
     border-bottom-right-radius: 20px;
@@ -673,8 +678,12 @@
     background: rgba(51,51,51,0.6);
     border-radius: 20px;
 }
-.ui-edinfo-bottom{
+.ui-edinfo-button{
     background: #B7ACA2;
     color:#fff;
     font-size: 20px;
+}
+.ui-edinfo-button:hover{
+    border: 1px solid #B7ACA2;
+    color: #B7ACA2;
 }
