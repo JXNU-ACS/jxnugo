@@ -35,7 +35,7 @@
                 {% for u in followingAll %}
                 <div class="col-sm-2">
                     <div class="head-lg center-align" style="background-images:url({{ u.followed_id | changeToUserAvatar }})"></div>
-                    <div class="name">这里获取用户名</div>
+                    <div class="name">{{ u.followed_id | changeToUserName }}</div>
                 </div>
                 {% endfor %}
             </div>

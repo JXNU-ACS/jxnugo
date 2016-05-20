@@ -33,7 +33,7 @@ class Config(object):
 class DevelopmentConfig(Config):
     MAIL_SERVER = MAIL['MAIL_SERVER']
     MAIL_PORT = MAIL['MAIL_PORT']
-    MAIL_USE_TLS = MAIL['MAIL_USE_TLS']
+    #MAIL_USE_TLS = MAIL['MAIL_USE_TLS']
     MAIL_USERNAME = MAIL['MAIL_USERNAME']
     MAIL_PASSWORD = MAIL['MAIL_PASSWORD']
     DEBUG = True

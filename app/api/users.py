@@ -1,10 +1,11 @@
 # -*- coding: UTF-8 -*-
-from flask import jsonify,request,g
+from flask import jsonify,request,g,abort
 from authentication import auth
-from ..models import User
+from ..models import User,getPrimaryKeyId
 from ..email import send_email
 from . import api
 from .. import db
+from errors import bad_request
 
 
 @api. route('/api/user/<int:id>')
@@ -37,8 +38,9 @@ def user_followed(id):
 @api.route('/api/register', methods=['POST'])
 def register():
     userinfo=request.json
-    print userinfo
-    u=User(id=User.query.count()+1,userName=userinfo['userName'],userEmail=userinfo['userEmail'],passWord=userinfo['passWord'])
+    if userinfo['userName'] is None or userinfo['userEmail'] is None or userinfo['passWord'] is None:
+        return bad_request('message uncorrect')
+    u=User(id=getPrimaryKeyId('isUser'), userName=userinfo['userName'],userEmail=userinfo['userEmail'],passWord=userinfo['passWord'])
     db.session.add(u)
     db.session.commit()
     token=u.generate_confirmation_token()

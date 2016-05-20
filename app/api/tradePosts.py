@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from flask import jsonify,current_app,url_for,request,g
 from .authentication import auth
-from ..models import Post,User,Comment
+from ..models import Post,User,Comment,getPrimaryKeyId
 from . import api
 from .. import db
 
@@ -9,19 +9,19 @@ from .. import db
 @api.route('/api/posts')
 def get_posts():
     page=request.args.get('page',1,type=int)
-    pagination=Post.query.paginate(
+    pagination=Post.query.order_by(Post.timestamp.desc()).paginate(
         page,per_page=current_app.config["JXNUGO_POSTS_PER_PAGE"],
         error_out=False
     )
     posts=pagination.items
     prev=None
     if pagination.has_prev:
-        #prev=url_for('api.get_posts', page=page-1, _external=True)
-        prev="www.jxnugo.com/api/posts?page=%d" % (page-1)
+        prev=url_for('api.get_posts', page=page-1, _external=True)
+        #prev="http://www.jxnugo.com/api/posts?page=%d" % (page-1)
     next=None
     if pagination.has_next:
-        next="www.jxnugo.com/api/posts?page=%d" % (page+1)
-        #next=url_for('api.get_posts', page=page+1, _external=True)
+        #next="http://www.jxnugo.com/api/posts?page=%d" % (page+1)
+        next=url_for('api.get_posts', page=page+1, _external=True)
     return jsonify({'posts':[post.to_json() for post in posts],
                     'prev': prev,
                     'next': next,
@@ -110,7 +110,7 @@ def new_post():
         temp=photo[x]['key']
         l.append(temp)
     photos=":".join(l)
-    post=Post(id=Post.query.count()+1,body=postInfo['body'],goodName=postInfo['goodName'],goodPrice=postInfo['goodPrice'],goodLocation=postInfo['goodLocation'],
+    post=Post(id=getPrimaryKeyId('isPost'), body=postInfo['body'],goodName=postInfo['goodName'],goodPrice=postInfo['goodPrice'],goodLocation=postInfo['goodLocation'],
               goodQuality=postInfo['goodQuality'],goodBuyTime=postInfo['goodBuyTime'],goodTag=postInfo['goodTag'], contact=postInfo['contact'],
               author_id=user.id,photos=photos,goodNum=postInfo['goodNum'])
     db.session.add(post)
