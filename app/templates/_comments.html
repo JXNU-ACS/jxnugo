@@ -16,12 +16,13 @@
     </li>
     {% endfor %}
 </ul>#}-->
+{% import "./_macros.html" as macros %} 
 {% for comment in comments %}
 <div class="ui-trade-detail-comment">
     
     <div class="row">
         <div class="col-md-2">
-            <div class="ui-trade-detail-comment-headbg" style="background-image:url(static/images/1.jpg)"></div>
+            <div class="ui-trade-detail-comment-headbg" style="background-image:url({{comment.author.avater}})"></div>
         </div>
         <div class="col-md-8">
             <div class="row">
@@ -41,3 +42,6 @@
     </div>
 </div>
 {% endfor %}
+<div class="ui-pagination center-align">
+    {{ macros.pagination_widget(pagination,'.trade_list')}}
+</div>

@@ -14,7 +14,7 @@
                 <div class="col-sm-11">
                     <div class="row">
                         <div class="col-sm-4">
-                            <div class="smImg" style="background-image:url('static/images/2.jpeg')"></div>
+                            <div class="smImg" style="background-image:url('http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}}')"></div>
                         </div>
                         <div class="col-sm-8">
                             <div class="row">
@@ -107,7 +107,8 @@
 
         <div class="ui-userzone-user-info-block row">
             <div class="content-row">
-                <h3>{{user.userName}} <tr><small><span>{{user.sex}}</span><span style="margin-left:10px;">
+                <h3>{{user.userName}} <tr><small><span>{{user.sex}}</span></small></h3>
+                    <div class="content-row">
                     {% if current_user.userName==user.userName %}
                     <span class="fa fa-pencil"></span><span><a href="{{url_for('main.editUserInfo')}}">修改个人信息</a></span>
                     {% else %}
@@ -122,8 +123,8 @@
                     {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
                     <span class="label label-default">关注了你</span>
                     {% endif %}
-                    </span>
-                    </small>
+                    </div>
+                    
             </div>
             <div class="content-row">
                 <span class="item"><span class="uid">UID</span> {{user.id}}</span>
@@ -141,7 +142,7 @@
                 <h3>关注TA的用户 <span class="item"><span class="badge">{{ user.followers.count() }}</span> <a href="#{#{{ url_for('main.followers',username=user.userName)}}#}"
                 id="zone_followers" class="select-1">more>></a></span></h3>
                 <div class="folower-block">
-                    {% for u in followerTen %}
+                    {% for u in followersTen %}
                     <a href="{{ url_for('main.user_zone',username=u.followed_id)}}">
                         <div class="folower-head" style="background-image:url({{ u.follower_id | changeToUserAvatar }})"></div>
                     </a>

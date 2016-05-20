@@ -10,8 +10,8 @@ class EditProfileForm(Form):
     name=StringField(u'真名',validators=[Length(0,64)])
     location=StringField(u'所在地',validators=[Length(0,64)])
     about_me=TextAreaField(u'关于我')
-    usrheadimg=StringField(u'头像')
     mycontact=StringField(u'联系方式')
+    avatar=StringField(u'头像')
     submit=SubmitField(u'提交')
 
 

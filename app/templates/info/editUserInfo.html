@@ -18,27 +18,28 @@ body {
                 	
                 	<div class="col-sm-8">
                 		{{form.hidden_tag()}}
-                            {{form.usrheadimg(style="display:none")}}
+                            {{form.avatar(style="display:none")}}
                 		<div class="ui-edinfo-row">
                 			{{form.name(class="ui-form-style ui-edinfo-input",**{"placeholder":"昵称"})}}
                 		</div>
                 		<div class="ui-edinfo-row">
                 			{{form.location(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的位置"})}}
                 		</div>
-                		<div class="ui-edinfo-row">
-                			{{form.about_me(class="ui-form-style ui-edinfo-input",**{"placeholder":"签名"})}}
-                		</div>
                         <div class="ui-edinfo-row">
-                			{{form.about_me(class="ui-form-style ui-edinfo-input",**{"placeholder":"联系方式"})}}
+                            {{form.mycontact(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的联系方式"})}}
+                        </div>
+                        <div class="ui-edinfo-row">
+                			{{form.about_me(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的签名"})}}
                 		</div>
+                        
                         
                 	</div>
                 	<div class="col-sm-4">
-                		<div id="upload-aira" class="ui-edinfo-uploadimg ">
+                		<div id="upload-aira" class="ui-edinfo-uploadimg " style="background-image:url({{user.avatar}})">
                             <a id="pickfiles" href="#">
                                 <div class="progress">
                                     </div>
-                                <div class="bottom">
+                                <div class="button">
                                     
                                     <span>上传头像</span>
                                 </div>
@@ -47,7 +48,7 @@ body {
                         </div>
                 	</div>
                     <div class="row">
-                        {{form.submit(class="btn btn-default ui-edinfo-bottom center-block")}}
+                        {{form.submit(class="btn btn-default ui-edinfo-button case-in center-block")}}
                     </div>
                 
                 </div>

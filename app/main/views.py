@@ -79,6 +79,7 @@ def editUserInfo():
         current_user.location = form.location.data
         current_user.about_me = form.about_me.data
         current_user.contactMe = form.mycontact.data
+        current_user.avatar = form.avatar.data
         db.session.add(current_user)
         db.session.commit()
         flash(u'修改个人信息成功')

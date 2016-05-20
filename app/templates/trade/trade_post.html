@@ -102,7 +102,7 @@ body {
                         *最多上传十张图片～至少需要一张照片
                     </div>
                     <div class="row ui-post-row">
-                        {{form.submit(class="btn ui-post-bottom center-block")}}
+                        {{form.submit(class="btn ui-post-bottom center-block case-in")}}
                     </div>
                 </form>
             </div>
@@ -119,6 +119,12 @@ body {
 <script type="text/javascript">
 $(document).ready(function() {
     var upload = Qiniu.uploader(uploaderoption)
+    /*$("[name=\"submit\"]").click(function(){
+        var ui = new UI();
+        ui.formValidation(new Array(
+            "mycontact","price","name"
+        ))
+    })*/
 })
 </script>
 {% endblock %}

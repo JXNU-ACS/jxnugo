@@ -1,8 +1,7 @@
 {%-extends "./base.html" %} {% import "./_macros.html" as macros %} {%-block nav %}
 <style>
 body {
-    padding-top: 120px;
-    
+    padding-top: 130px;
 }
 </style>
 <div class="contain-fluid">
@@ -10,7 +9,7 @@ body {
         <div class="nav-content">
             <div class="row">
                 <div class="col-sm-4 left-align"><a href="{{url_for('trade.trade_post')}}"><span class="glyphicon glyphicon-pencil nav-text case-in"></span></a></div>
-                <div class="col-sm-4"><img src="{{url_for('main.staticfile',filename='images/jxnu_s.png')}}" style="width: 150px;"></div>
+                <div class="col-sm-4"><img src="http://7xrkww.com1.z0.glb.clouddn.com/JXNU_s.png" style="width: 150px;"></div>
                 <!--<div class="col-sm-2 left-align" style="">
                     <a class="btn btn-default nav-bottom" href="{{url_for('trade.trade_post')}}">发布商品！</a>
                 </div>-->
@@ -20,27 +19,6 @@ body {
     </div>
 </div>
 {% endblock %} {% block content %}
-<!--调试时用来显示用户发布的帖子什么的
-<div class="testTradeList" style="padding-top: 50px;">
-<ul>
-
-    {#{% for post in posts %}
-    <li class="post">
-        <a href="{{url_for('main.user',username=post.author.userName)}}">关于{{post.author.userName}}</a>
-        发布时间:{{moment(post.timestamp).fromNow()}}<br>
-        <a href="{{url_for('main.user',username=post.author.userName)}}">发布者:{{post.author.userName}}</a><br>
-        帖子id:{{post.id}}<br>
-        物品名:{{post.goodName}}<br>
-        物品价格:{{post.goodPrice}}<br>
-        购买时间:{{post.goodBuyTime}}<br>
-        物品成色:{{post.goodQuality}}<br>
-        主题:<p>{{post.body}}</p>
-
-    </li>
-    {% endfor %}#}
-</ul>
-</div>
--->
 <div class="container-fluid">
     <div class="ui-mainct">
         <div class="row">
@@ -56,33 +34,29 @@ body {
             </div>-->
             <div class="ui-trade-show">
                 {% if posts %} {% for post in posts %}
-                
-                    <div class="ui-trade-show-contain">
-                        <div class="row" style="padding: 20px 0 10px 20px;">
-                            <div class="col-sm-3">
-                                <a href="#">
-                                    <div class="list-headbg" style="background-image:url('static/images/2.jpeg');">
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="list-userid">{{post.author.userName}}</div>
-                                <div class="list-time"><span class="glyphicon glyphicon-time"></span>{{ post.timestamp | utcChangeToCst}}</div>
-                            </div>
-                            
+                <div class="ui-trade-show-contain">
+                    <div class="row" style="padding: 20px 0 10px 20px;">
+                        <div class="col-sm-3">
+                            <a href="#">
+                                <div class="list-headbg" style="background-image:url('{{post.author.avatar}}');">
+                                </div>
+                            </a>
                         </div>
-                        <a href={{url_for( 'trade.trade_detail',goodId=post.id)}}>
-                            <div class="list-img" style="background-image:url(static/images/2.jpeg)">
-                                <!--<img src="static/images/2.jpeg" style="width:100%;">-->
-                            </div>
-                        </a>
-                        <div class="list-price">￥{{post.goodPrice}}</div>
-                        <div class="list-title">
-                            {{post.goodName}}
+                        <div class="col-sm-9">
+                            <div class="list-userid">{{post.author.userName}}</div>
+                            <div class="list-time"><span class="glyphicon glyphicon-time"></span>{{ post.timestamp | utcChangeToCst}}</div>
                         </div>
-                        
                     </div>
-                
+                    <a href={{url_for( 'trade.trade_detail',goodId=post.id)}}>
+                        <div class="list-img" style="background-image:url(http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}})">
+                            <!--<img src="static/images/2.jpeg" style="width:100%;">-->
+                        </div>
+                    </a>
+                    <div class="list-price">￥{{post.goodPrice}}</div>
+                    <div class="list-title">
+                        {{post.goodName}}
+                    </div>
+                </div>
                 <!--end-->
                 {% endfor %} {% else %} 然而什么都没有 {% endif %}
             </div>
@@ -95,9 +69,4 @@ body {
     {{ macros.pagination_widget(pagination,'.trade_list')}}
 </div>
 </div>
-{% endblock %} {% block script %}
-<script type="text/javascript">
-ui = new UI();
-ui.listToggle();
-</script>
-{% endblock %}
+{% endblock %} {% block script %} {% endblock %}
