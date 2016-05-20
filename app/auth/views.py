@@ -1,13 +1,14 @@
 #-*- coding: UTF-8 -*-
 from flask import render_template,redirect,url_for,flash,session,request,abort
 from . import auth
-from ..models import User,Role,randomId
+from ..models import User,getPrimaryKeyId
 from .. import db
 from ..email import send_email
 from .forms import loginForm,registerForm
 from flask.ext.login import logout_user,login_required,login_user,current_user
 from itsdangerous import JSONWebSignatureSerializer as Serializer
 from config import configs,ENV
+
 
 @auth.route('/passport',methods=['POST','GET'])
 def passport():
@@ -35,8 +36,7 @@ def login():
 def register():
     registerform=registerForm()
     if registerform.validate_on_submit():
-        userid=User.query.count()+1
-        regUser=User(id=userid,userName=registerform.userName.data,userEmail=registerform.email.data,passWord=registerform.passWord.data)
+        regUser=User(id=getPrimaryKeyId('isUser'), userName=registerform.userName.data,userEmail=registerform.email.data,passWord=registerform.passWord.data)
         db.session.add(regUser)
         db.session.commit()
         token=regUser.generate_confirmation_token()

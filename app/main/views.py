@@ -75,15 +75,13 @@ def editUserInfo():
     form = EditProfileForm()
     user=current_user
     if form.validate_on_submit():
-        current_user.userName = form.name.data
+        current_user.name = form.name.data
         current_user.location = form.location.data
         current_user.about_me = form.about_me.data
+        current_user.contactMe = form.mycontact.data
         db.session.add(current_user)
         db.session.commit()
         flash(u'修改个人信息成功')
-    form.name.data = current_user.name
-    form.location.data = current_user.location
-    form.about_me.data = current_user.about_me
     return render_template('info/editUserInfo.html', form=form,user=user)
 
 
@@ -109,17 +107,11 @@ def editUserInfoAdmin(pid):
         user.name = form.name.data
         user.locati = form.location.data
         user.about_me = form.about_me.data
+        user.contactMe = form .mycontact.data
         db.session.add(user)
         db.session.commit()
         flash(u'已将个人信息更新')
         return render_template('info/editUserInfoAdmin.html',form=form,pid=user.id)
-    form.email.data = user.userEmail
-    form.username.data = user.userName
-    form.confirmed.data = user.confirmed
-    form.role.data = user.role_id
-    form.name.data = user.name
-    form.location.data = user.location
-    form.about_me.data = user.about_me
     return render_template('info/editUserInfoAdmin.html',form=form,pid=user.id)
 
 

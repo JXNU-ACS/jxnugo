@@ -11,7 +11,9 @@ class EditProfileForm(Form):
     location=StringField(u'所在地',validators=[Length(0,64)])
     about_me=TextAreaField(u'关于我')
     usrheadimg=StringField(u'头像')
+    mycontact=StringField(u'联系方式')
     submit=SubmitField(u'提交')
+
 
 class EditProfileAdminForm(Form):
     email=StringField(u'邮箱',validators=[Required(),Length(1,64),Email()])
@@ -21,7 +23,7 @@ class EditProfileAdminForm(Form):
     name=StringField(u'名字',validators=[Length(0,64)])
     location=StringField(u'位置',validators=[Length(0,64)])
     about_me=TextAreaField(u'关于我')
-
+    mycontact=StringField(u'联系方式')
     submit=SubmitField(u'提交')
 
     def __init__(self,user,*args,**kwargs):

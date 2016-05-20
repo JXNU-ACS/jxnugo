@@ -4,7 +4,7 @@ from ..decorators import admin_required,permission_required
 from . import trade
 from .. import db
 from flask.ext.login import login_required,current_user
-from ..models import Permission,User,Role,Post,Comment
+from ..models import Permission,User,Role,Post,Comment,getPrimaryKeyId
 from forms import PostForm,CommentForm
 from json import loads
 
@@ -31,7 +31,7 @@ def trade_post():
             temp=x['key']
             l.append(temp)
         photo=":".join(l)
-        post=Post(id=Post.query.count()+1, body=form.body.data, goodName=form.name.data, goodPrice=form.price.data,
+        post=Post(id=getPrimaryKeyId('isPost'), body=form.body.data, goodName=form.name.data, goodPrice=form.price.data,
                   goodNum=form.num.data, goodLocation=form.location.data, goodQuality=form.quality.data,
                   goodTag=form.tag.data, contact=form.mycontact.data, photos=photo, author_id=current_user.id)
         db.session.add(post)
@@ -141,3 +141,9 @@ def post_delete(pid):
         db.session.commit()
         flash(u'该帖子已经成功删除')
     return redirect(url_for('.trade_list'))
+
+
+@trade.route('/query_post/<queryName>',methods=['POST'])
+def query_post(queryName):
+    posts=Post.query.filter_by(Post.goodName.like('%'+queryName+'%')).all()
+    return render_template('trade/query_posts.html',posts=posts)
