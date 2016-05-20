@@ -1,7 +1,7 @@
 # coding: utf-8
 from flask.ext.script import Manager,Shell
 from app import create_app, db
-from app.models import Role, User, Post, Follow, bbsPost,collectionPosts
+from app.models import Role, User, Post, Follow, bbsPost,collectionPosts,Comment
 from flask.ext.migrate import Migrate, MigrateCommand
 from dateutil import tz
 from datetime import datetime
@@ -9,6 +9,7 @@ from datetime import datetime
 app = create_app()
 manager = Manager(app)
 migrate = Migrate(app, db)
+
 
 @app.template_filter('changToUserAvatar')
 def change(pid):
@@ -40,10 +41,8 @@ def firstKey(keys):
 app.jinja_env.filters['getFirstKey'] = firstKey
 
 
-
-
 def make_shell_context():
-    return dict(app=app, db=db, User=User, Role=Role, Post=Post, bbsPost=bbsPost, Follow=Follow,collectionPosts= collectionPosts)
+    return dict(app=app, db=db, User=User, Role=Role,Comment=Comment, Post=Post, bbsPost=bbsPost, Follow=Follow,collectionPosts= collectionPosts)
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
