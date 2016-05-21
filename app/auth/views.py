@@ -22,7 +22,9 @@ def login():
     loginform=loginForm()
     db.create_all()
     if loginform.validate_on_submit():
-        user=User.query.filter_by(userName=loginform.userName.data).first()
+        user=User.query.filter_by(userEmail=loginform.userName.data).first()
+        if user is None:
+            user=User.query.filter_by(userName=loginform.userName.data).first()
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
             return redirect(url_for('main.index'))
@@ -36,7 +38,7 @@ def login():
 def register():
     registerform=registerForm()
     if registerform.validate_on_submit():
-        regUser=User(id=getPrimaryKeyId('isUser'), userName=registerform.userName.data,userEmail=registerform.email.data,passWord=registerform.passWord.data)
+        regUser=User(id=getPrimaryKeyId('isUser'), userName=registerform.userName.data, name='jxnugo_'+str(getPrimaryKeyId('isUser')), userEmail=registerform.email.data,passWord=registerform.passWord.data)
         db.session.add(regUser)
         db.session.commit()
         token=regUser.generate_confirmation_token()
