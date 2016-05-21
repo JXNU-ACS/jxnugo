@@ -19,7 +19,7 @@ app.jinja_env.filters['changeToUserAvatar'] = change
 
 @app.template_filter('changeToUserName')
 def changeUserName(pid):
-    return User.query.filter_by(id=pid).first().userName
+    return User.query.filter_by(id=pid).first().name
 app.jinja_env.filters['changeToUserName'] = changeUserName
 
 
@@ -39,6 +39,25 @@ def firstKey(keys):
     key=keys.split(":")
     return key[0]
 app.jinja_env.filters['getFirstKey'] = firstKey
+
+
+@app.template_filter('pidChangeToTime')
+def pidChangeTime(pid):
+    post=Post.query.filter_by(id=pid).first()
+    from_zone = tz.gettz('UTC')
+    to_zone = tz.gettz('CST')
+    utc =post.timestamp
+    utc = utc.replace(tzinfo=from_zone)
+    local = utc.astimezone(to_zone)
+    return datetime.strftime(local, "%Y-%m-%d %H:%M:%S")
+app.jinja_env.filters['pidChangeToTime'] =pidChangeTime
+
+
+@app.template_filter('pidChangeToTitle')
+def pidChangeTitle(pid):
+    post=Post.query.filter_by(id=pid).first()
+    return post.goodName
+app.jinja_env.filters['pidChangeToTitle'] =pidChangeTitle
 
 
 def make_shell_context():

@@ -40,7 +40,7 @@ def register():
     userinfo=request.json
     if userinfo['userName'] is None or userinfo['userEmail'] is None or userinfo['passWord'] is None:
         return bad_request('message uncorrect')
-    u=User(id=getPrimaryKeyId('isUser'), userName=userinfo['userName'],userEmail=userinfo['userEmail'],passWord=userinfo['passWord'])
+    u=User(id=getPrimaryKeyId('isUser'), name='jxnugo_'+str(getPrimaryKeyId('isUser')), userName=userinfo['userName'], userEmail=userinfo['userEmail'],passWord=userinfo['passWord'])
     db.session.add(u)
     db.session.commit()
     token=u.generate_confirmation_token()
