@@ -118,29 +118,32 @@ Post.generate_fake(100)  #伪造交易帖子
 
 ```
 	{
-  "count": 100,
-  "next": "http://127.0.0.1:5000/api/posts?page=2",
-  "prev": null，
+  "count": 501,
+  "next": "http://www.jxnugo.com/api/posts?page=2",
   "posts": [
     {
-      "author": "http://127.0.0.1:5000/api/user/2",
-      "body": "Pellentesque viverra pede ac diam. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",
-      "commentsCount": 0,
-      "contact": "1144728202",
-      "goodBuyTime": "2016-04-26",
-      "goodLocation": "78 Anhalt Parkway",
-      "goodName": "Rental & Leasing Services",
-      "goodPrice": 1239.12,
-      "goodQuality": "9成新",
-      "goodTag": 4,
-      "photos": null,
-      "postId": 1,
-      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
-      "postUserName": "nicole71",
-      "timestamp": "2016-05-07 00:00:00",
-      "url": "http://127.0.0.1:5000/api/posts/1"
-    },
-    {
+      "author": "http://www.jxnugo.com/api/user/203",
+      "author_id": 203,
+      "body": "cpu. 英特尔（Intel）酷睿四核 ",
+      "commentsCount": 1,
+      "contact": "13361640744",
+      "goodBuyTime": null,
+      "goodLocation": "一栋n204",
+      "goodName": "cpu. 英特尔（Intel）酷睿",
+      "goodPrice": 200,
+      "goodQuality": "非常好",
+      "goodTag": 1,
+      "photos": [
+        {
+          "key": "Fl1Jhx3UlPq1LndvrGMBHN4_LrEh"
+        }
+      ],
+      "postId": 501,
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/2345%E6%88%AA%E5%9B%BE20160505223308(1).png?imageView2/3/w/300/q/100/format/jpg",
+      "postUserName": "jxnugo",
+      "timestamp": "2016-05-20 11:35:39",
+      "url": "http://www.jxnugo.com/api/posts/501"
+    },    {
 
     },
     {
@@ -163,22 +166,30 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 	{
-  "author": "http://127.0.0.1:5000/api/user/2",
-  "body": "Pellentesque viverra pede ac diam. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",
+  "author": "http://www.jxnugo.com/api/user/160",
+  "author_id": 160,
+  "body": "Aenean sit amet justo. Vivamus vel nulla eget eros elementum pellentesque.",
   "commentsCount": 0,
-  "contact": "1144728202",
-  "goodBuyTime": "2016-04-26",
-  "goodLocation": "78 Anhalt Parkway",
-  "goodName": "Rental & Leasing Services",
+  "contact": "1083007150",
+  "goodBuyTime": "2016-05-01",
+  "goodLocation": "9371 Roxbury Lane",
+  "goodName": "Manufactured Housing",
   "goodPrice": 1239.12,
   "goodQuality": "9成新",
   "goodTag": 4,
-  "photos": null,
-  "postId": 1,
+  "photos": [
+    {
+      "key": "FsEAykjBT4VlaqS934nGjd7GbmLu"
+    },
+    {
+      "key": "Fn5e3ZfrHJ4GbfPmlaAjhfYAxiFn"
+    }
+  ],
+  "postId": 2,
   "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
-  "postUserName": "nicole71",
-  "timestamp": "2016-05-07 00:00:00",
-  "url": "http://127.0.0.1:5000/api/posts/1"
+  "postUserName": "carol89",
+  "timestamp": "2016-05-16 08:00:00",
+  "url": "http://www.jxnugo.com/api/posts/2"
 }
 
 ```
@@ -616,6 +627,47 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 {
   "deleteStatus": "successful delete post"
+}
+
+```
+
+#####23、根据物品标签查询相关的帖子
+* URL: www.jxnugo.com/api/post_category/<int:tag>
+* 参数： tag标签，tag标签定义为 0生活用品 1数码科技 2服饰箱包 3图书音像 4其它
+* 上传的数据（无）
+* 请求成功返回值（json）：
+
+```
+{
+  "count": 3,
+  "next": null,
+  "posts": [
+    {
+      "author": "http://127.0.0.1:5000/api/user/203",
+      "author_id": 203,
+      "body": "cpu. 英特尔（Intel）酷睿四核,
+      "commentsCount": 1,
+      "contact": "13361640744",
+      "goodBuyTime": null,
+      "goodLocation": "一栋n204",
+      "goodName": "cpu. 英特尔（Intel）酷睿",
+      "goodPrice": 200,
+      "goodQuality": "非常好",
+      "goodTag": 1,
+      "photos": [
+        {
+          "key": "Fl1Jhx3UlPq1LndvrGMBHN4_LrEh"
+        }
+      ],
+      "postId": 501,
+      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/2345%E6%88%AA%E5%9B%BE20160505223308(1).png?imageView2/3/w/300/q/100/format/jpg",
+      "postUserName": "追风少年",
+      "timestamp": "2016-05-20 11:35:39",
+      "url": "http://127.0.0.1:5000/api/posts/501"
+    },{
+    },
+    ],
+    "prev": null
 }
 
 ```
