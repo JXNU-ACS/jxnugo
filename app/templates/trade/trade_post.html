@@ -1,14 +1,18 @@
-{%-extends "./base.html" %} {%-block nav %}
+{%-extends "./base.html" %}
+{%-block nav %}
 <style>
 body {
-    padding-top: 100px;
+    padding-top: 190px;
 }
 </style>
-{% endblock %} {% block content %}
+{%-import "./_macros.html" as macros %}
+{{ macros.subnav(logo_src=url_for('main.staticfile',filename='images/JXNU_s_market.png'),search_src="/query_post/",sub_attr=["生活用品","数码科技","服饰箱包","图书影音","其他"])}}
+{% endblock %} 
+{% block content %}
 <div class="cantain-fluid">
     <div class="ui-mainct">
         <div class="ui-panel">
-            <div class="ui-panel-cover" style="background:#9BB7B4;z-index:0;"></div>
+            <div class="ui-panel-cover" style="background:#9BB7B4;"></div>
             <div style="padding:60px 60px 0 60px;position:relative;top:-155px;">
                 <div class="row">
                     <div class="ui-post-title col-sm-12">
@@ -119,12 +123,8 @@ body {
 <script type="text/javascript">
 $(document).ready(function() {
     var upload = Qiniu.uploader(uploaderoption)
-    /*$("[name=\"submit\"]").click(function(){
-        var ui = new UI();
-        ui.formValidation(new Array(
-            "mycontact","price","name"
-        ))
-    })*/
 })
 </script>
+{% import "./_js_macros.html" as jsnode %}
+{{ jsnode.navJsNode() }}
 {% endblock %}

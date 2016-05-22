@@ -29,6 +29,61 @@
     </li>
 </ul>
 {% endmacro %}
-{% macro config(imgsrc,searchsrc,attr)%}
+{%-macro mainnav(current_user)%}
+<!--主导航-->
+    <div class="ui-mainnav">
+            <div class="nav-content row">
+                <div class="col-xs-6">
+                    <a href="{{url_for('main.index')}}"><div class="nav-text case-in">主页</div></a>
+                    <a href="{{url_for('trade.trade_list')}}"><div class="nav-text case-in">淘二手</div></a>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="敬请期待？"><div class="nav-text case-in">教务助手</div></a>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="敬请期待？"><div class="nav-text case-in">校园bbs</div></a>
+                </div>
+                <div class="col-xs-5"></div>
+                <div class="col-xs-1">
+                    <div class="nav-avatar center-block case-in fast" data-container="body" data-toggle="popover" data-placement="bottom">
+                    </div>
+                </div>
+                
+                <!--
+                <div class="col-xs-2">
+                    <div class="nav-text case-in">
+                        你好&nbsp;
+                        {% if current_user.userName %}
+                        {{current_user.userName|capitalize}}
+                        {% else %}游客{% endif %}
+                    </div>
+                </div>-->
+            </div>
+        </div>
+{% endmacro-%}
+{%-macro subnav(logo_src,search_src,sub_attr)%}
+<!--副导航-->
 
+        
+        
+        <div class="ui-subnav">
+            <div class="nav-content row">
+                <div class="col-xs-3">
+                    <img src={{ logo_src }}>
+                </div>
+                <div class="col-xs-3" style="text-align:left">
+                    
+                        <a href="{{url_for('trade.trade_post')}}"><span class="glyphicon glyphicon-pencil icon case-in"></span></a>
+                    <div class="input-gr case-in">
+                        <form action={{ search_src }} method="get">
+                        <a href="#" role="button" type="submit"><span class="glyphicon glyphicon-search icon case-in" style="margin:0"></span></a>
+                        <input class="ui-form-style case-in" name="queryName"></input>
+                        </form>
+                    </div >
+                </div>
+                
+                <div class="col-xs-6" style="text-align:right;height:100%">
+                    {% for attr in sub_attr %}
+                    <div class="nav-text case-in fast">{{attr}}
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
 {% endmacro %}

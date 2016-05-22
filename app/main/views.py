@@ -62,6 +62,7 @@ def user_zone(username):
     postFive=Post.query.filter_by(author_id=user.id).limit(5)
     collectionFive=user.collectionPost.limit(5)
     collectionAll=user.collectionPost.all()
+    comments=Comment.query.filter_by(author_id=user.id).all()
     posts = Post.query.filter_by(author_id=user.id).all()
     comments=Comment.query.filter_by(author_id=user.id).all()
     if user is None:

@@ -1,10 +1,14 @@
-{%-extends "./base.html" %} {%-block nav %}
+{%-extends "./base.html" %}
+{%-block nav %}
 <style>
 body {
-    padding-top: 100px;
+    padding-top: 190px;
 }
 </style>
-{% endblock %} {% block content %}
+{% import "./_macros.html" as macros %}
+{{ macros.subnav(logo_src=url_for('main.staticfile',filename='images/JXNU_s_market.png'),search_src="/query_post/",sub_attr=["生活用品","数码科技","服饰箱包","图书影音","其他"])}}
+{% endblock %} 
+{% block content %}
 <!--<nav class="ui-trade-detail-nav">
     <a href="#detail">
         <div class="ui-trade-detail-panel-label"><span class="glyphicon glyphicon-file" style="color:#fff;"> 介绍</span></div>
@@ -19,7 +23,7 @@ body {
 <div class="cantain-fluid">
     <div class="ui-mainct">
         <div class="ui-panel">
-            <div class="ui-panel-cover blur">
+            <div class="ui-panel-cover" style="background:#9BB7B4">
             </div>
             <div class="row">
                 <!--左边-->
@@ -222,4 +226,6 @@ $(document).ready(function(){
     
 })
 </script>
+{% import "./_js_macros.html" as jsnode %}
+{{ jsnode.navJsNode() }}
 {% endblock %}
