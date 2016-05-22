@@ -5,7 +5,7 @@ from ..models import User,getPrimaryKeyId
 from ..email import send_email
 from . import api
 from .. import db
-from errors import bad_request
+from errors import bad_request, NotAccept, ResourceConflict
 
 
 @api. route('/api/user/<int:id>')
@@ -38,8 +38,14 @@ def user_followed(id):
 @api.route('/api/register', methods=['POST'])
 def register():
     userinfo=request.json
-    if userinfo['userName'] is None or userinfo['userEmail'] is None or userinfo['passWord'] is None:
-        return bad_request('message uncorrect')
+    if userinfo['userName'] == '' or userinfo['userEmail'] == '' or userinfo['passWord'] == '':
+        return bad_request('message was empty')
+    user_by_email = User.query.filter_by(userEmail=userinfo['userEmail']).first()
+    user_by_name = User.query.filter_by(userName=userinfo['userName']).first()
+    if user_by_name is not None:
+        return NotAccept('userName was aleady exist')
+    if user_by_email is not None:
+        return ResourceConflict('email was aleady exist')
     u=User(id=getPrimaryKeyId('isUser'), name='jxnugo_'+str(getPrimaryKeyId('isUser')), userName=userinfo['userName'], userEmail=userinfo['userEmail'],passWord=userinfo['passWord'])
     db.session.add(u)
     db.session.commit()

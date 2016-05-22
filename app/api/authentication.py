@@ -54,7 +54,7 @@ def get_token():
     if g.current_user.is_anonymous or g.token_used:
         return unauthorized('Invalid credentisls')
     return jsonify({'token': g.current_user.generate_auth_token(
-        expiration=3600), 'expiration': 3600,'userId':g.current_user.id})
+        expiration=3600), 'expiration': 3600,'userId':g.current_user.id, 'userAvatar':g.current_user.avatar})
 
 
 @api.route('/api/get_mobile_token',methods=['GET'])

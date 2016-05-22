@@ -31,7 +31,8 @@ def login():
         else:
             flash(u'用户名或密码错误','bg-warning')
             return redirect(url_for('auth.passport',_external=True))
-    return redirect(url_for('auth.passport',_external=True))
+    print 'error'
+    return redirect(url_for('auth.passport', _external=True))
 
 
 @auth.route('/register',methods=['GET','POST'])
@@ -43,10 +44,11 @@ def register():
         db.session.commit()
         token=regUser.generate_confirmation_token()
         send_email(regUser.userEmail,'激活你的账户',
-                   'auth/email/confirm',User=regUser,token=token
+                   'auth/email/confirm', User=regUser, token=token
                    )
         flash(u'注册成功,账户激活信息已经发送到您的邮件!')
         return redirect(url_for('auth.passport', _external=True))
+    print 'reer'
     return redirect(url_for('auth.passport', _external=True))
 
 
