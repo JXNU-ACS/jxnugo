@@ -28,7 +28,6 @@ a:link,
 a:visited,
 a:hover,
 a:active {
-    color: #000;
     text-decoration: none;
 }
 /*重写bootstrap样式*/
@@ -102,52 +101,124 @@ a:active {
     border-radius: 50%;
 }
 
+/*导航*/
+.ui-navbar{
+    -webkit-display: flex;
+    display: flex;
+    width: 100%;
+    height: 154px;
+    -ms-transform-origin:0% 0%;
+    -moz-transform-origin:0% 0%;
+    -webkit-transform-origin:0% 0%;
+    transform-origin:0% 0%;
+}
+
+.ui-navbar a:link,
+.ui-navbar a:visited,
+.ui-navbar a:hover,
+.ui-navbar a:active {
+    text-decoration: none;
+    color: #3F9491;
+}
+.ui-navbar input{
+    border: 0;
+    font-size: 15px;
+    height: 50px;
+    width: inherit;
+    max-width: 120px;
+    position: absolute;
+}
+.ui-navbar .input-gr{
+    display: inline-table;
+    height: 50px;
+    border-radius: 30px;
+    border: 1px solid #3F9491;
+}
+.ui-navbar .input-gr--hover,
+.ui-navbar .input-gr--active,
+.ui-navbar .input-gr:hover{
+    width: 70%;
+}
+/*导航弹出层*/
+.ui-navbar .bubblepannel{
+    position: absolute;
+    min-height: 100px;
+    width: 100px;
+    left: 250%;
+    top:-50px;
+    background: #fff;
+    z-index: 9999;
+}
 /*主导航*/
 
 .ui-mainnav {
-    width: 1250px;
-    position: relative;
-    left: -10px;
+    /*height: 64px;*/
+    background-color: #fff;
+    -webkit-flex:2 2 40%;
+    flex:2 2 40%;
 }
-
 
 /*副导航*/
 
 .ui-subnav {
     text-align: center;
-    height: 82px;
-    background-color: #9BB7B4;
-    box-shadow: 2px 0 4px #000;
-    margin: -20px 0 0 0;
+    /*height: 90px;*/
+    -webkit-flex:2 2 60%;
+    flex:2 2 60%;
+    background-color: #fff;
 }
 
-.ui-subnav .nav-content {
-    margin: auto;
-    width: 1250px;
-    padding: 20px;
+
+.ui-mainnav .nav-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: #eee;
+    margin-top: 2%;
 }
-.ui-subnav .nav-bottom {
-    border: 0;
-    color: #7ecef4;
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 18px;
-    border-radius: 20px;
+
+.ui-mainnav .nav-text,
+.ui-subnav .nav-text{
+    
+    color: #3F9491;
+    
+    height: 100%;
+    display: inline-table;
+    
+}
+.ui-mainnav .nav-text{
+    padding: 5px;
+    font-size: 15px;
+    margin: 9px 15px;
+    border-radius: 30px;
 }
 .ui-subnav .nav-text{
-    font-size: 30px;
-    color: #fff;
-    padding: 10px;
+    padding: 3% 2%;
+    font-size: 20px;
+    font-weight: bold;
+}
+.ui-subnav .icon{
+    padding: 15px;
+    margin: 3% 1%;
     border-radius: 30px;
+    font-size: 20px;
+    position: relative;
+    z-index: 2;
+}
+.ui-subnav .icon:hover,
+.ui-mainnav .nav-text:hover{
+    background: #3F9491;
+    color: #fff;
 }
 .ui-subnav .nav-text:hover{
     
-    
-    background: #fff;
-    color: #9BB7B4;
 }
-.ui-subnav .nav-bottom:active{
-    color: #7ecef4;
+.ui-mainnav .nav-content,
+.ui-subnav .nav-content {
+    padding:10px 0;
+    margin: auto;
+    width: 1250px;
+    height: inherit;
 }
 
 /*界面容器*/
@@ -192,11 +263,8 @@ a:active {
 }
 
 .ui-panel-cover {
-    height: 250px;
+    height: 150px;
     background-size: cover;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    z-index: 1;
     position: relative;
     background-color: #fff;
 }
@@ -308,4 +376,9 @@ a:active {
     -webkit-transition: all .3s ease-in;
     -moz-transition: all .3s ease-in;
     transition: all .3s ease-in;
+}
+.case-in .fast{
+    -webkit-transition-duration:.1s;
+    -moz-transition-duration:.1s;
+    transition-duration:.1s;
 }

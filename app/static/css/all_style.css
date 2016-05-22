@@ -33,6 +33,11 @@
     background:#fff;
     display: inline-table;
 }
+.ui-trade-show-contain:hover{
+    box-shadow: 0 0 10px #DED1C4;
+    position: relative;
+    top: -2px;
+}
 .ui-trade-show-contain .list-img{
     width: 100%;
     text-align: center;

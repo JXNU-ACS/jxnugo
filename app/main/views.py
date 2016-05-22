@@ -62,11 +62,12 @@ def user_zone(username):
     postFive=Post.query.filter_by(author_id=user.id).limit(5)
     collectionFive=user.collectionPost.limit(5)
     collectionAll=user.collectionPost.all()
+    comments=Comment.query.filter_by(author_id=user.id).all()
     posts = Post.query.filter_by(author_id=user.id).all()
     if user is None:
         abort(404)
 
-    return render_template('info/user_zone.html',user=user, posts=posts,postFive=postFive,collectionAll=collectionAll,collectionFive=collectionFive, followersTen=followersTen, followersAll=followersAll, followingTen=followingTen,followingAll=followingAll)
+    return render_template('info/user_zone.html',user=user,comments=comments, posts=posts,postFive=postFive,collectionAll=collectionAll,collectionFive=collectionFive, followersTen=followersTen, followersAll=followersAll, followingTen=followingTen,followingAll=followingAll)
 
 
 @main.route('/editUserInfo', methods=['GET', 'POST'])

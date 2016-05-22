@@ -1,0 +1,21 @@
+{% macro navJsNode() -%}
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".ui-navbar").headroom({
+        "tolerance": 5,
+        "offset": 0,
+        "classes": {
+            "initial": "anim",
+            "pinned": "slideDown",
+            "unpinned": "slideUp",
+            "top" : "ui-navbar--top",
+            "notTop" : "ui-navbar--not-top",
+        }
+    });
+    var ui = new UI();
+    ui.addFocusClass($(".ui-navbar input"),$(".input-gr"),"input-gr--active");
+
+})
+
+</script>
+{%- endmacro %}

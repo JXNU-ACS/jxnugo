@@ -58,6 +58,13 @@ function UI() {
             }
         };
     };
+    this.addFocusClass = function(focusobj,jqobj,Attrcss){
+        focusobj.focusin(function(){
+            jqobj.addClass(Attrcss)
+        }).focusout(function(){
+            jqobj.removeClass(Attrcss)
+        })
+    }
 
 }
 /*选择标签(tag)指向类(class)“.select”
