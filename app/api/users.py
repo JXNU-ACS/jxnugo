@@ -45,7 +45,7 @@ def register():
     db.session.commit()
     token=u.generate_confirmation_token()
     send_email(u.userEmail,'激活你的账户',
-                   'auth/email/confirm',User=u,token=token
+                   'auth/email/confirm', User=u, token=token
                    )
     response=jsonify({"registerStatus":"successful"})
     response.status_code=200
