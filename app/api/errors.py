@@ -28,6 +28,21 @@ def methodNotAllowed(message):
     return response
 
 
+def ResourceConflict(message):
+    response = jsonify({'error': 'Resource Conflict' , 'message': message})
+    response.status_code = 409
+    return response
+
+
+
+def NotAccept(message):
+    response = jsonify({'error' : 'upload message error', 'message':message})
+    response.status_code = 406
+    return response
+
+
+
 @api.errorhandler(ValidationError)
 def validation_error(e):
     return bad_request(e.args[0])
+

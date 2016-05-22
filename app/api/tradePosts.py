@@ -4,6 +4,7 @@ from .authentication import auth
 from ..models import Post, User, Comment, getPrimaryKeyId
 from . import api
 from .. import db
+from .errors import bad_request
 
 
 @api.route('/api/posts')
@@ -70,16 +71,13 @@ def uncollect():
 @auth.login_required
 def new_comment():
     commentInfo = request.json
-    user = User.query.get_or_404(commentInfo['userId'])
-    if g.current_user == user:
-        comment = Comment(id=Comment.query.count() + 1, body=commentInfo['body'], author_id=commentInfo['userId'],
+    if commentInfo['body'] == '':
+        return  bad_request('body was empty')
+    comment = Comment(id=Comment.query.count() + 1, body=commentInfo['body'], author_id=commentInfo['userId'],
                           post_id=commentInfo['postId'])
-        db.session.add(comment)
-        db.session.commit()
-        message = "successful"
-    else:
-        c
-        message = stri
+    db.session.add(comment)
+    db.session.commit()
+    message = "successful"
     response = jsonify({"commentStatus": message})
     response.status_code = 200
     return response
