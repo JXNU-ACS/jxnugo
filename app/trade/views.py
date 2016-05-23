@@ -143,20 +143,16 @@ def post_delete(pid):
     return redirect(url_for('.trade_list'))
 
 
-@trade.route('/query_post')
-def query_post():
-    form = SearchForm()
-    if form.validate_on_submit():
-        queryname=form.querybody.data
-        page = request.args.get('page', 1, type=int)
-        pagination = Post.query.filter_by(Post.goodName.like('%'+queryname+'%')).pageinate(
-            page, per_page=current_app.config['JXNUGO_POSTS_PER_PAGE'],
-            error_out=False
-        )
-        posts = pagination.items
-        return render_template('trade/query_posts.html', posts=posts, pagination=pagination)
-    else:
-        return redirect(url_for('.trade_list'))
+@trade.route('/query_post/<problem>')
+def query_post(problem):
+    queryname=problem
+    page = request.args.get('page', 1, type=int)
+    pagination = Post.query.filter(Post.goodName.like('%'+queryname+'%')).paginate(
+        page, per_page=current_app.config['JXNUGO_POSTS_PER_PAGE'],
+        error_out=False
+    )
+    posts = pagination.items
+    return render_template('trade/trade_list.html', posts=posts, pagination=pagination)
 
 
 @trade.route('/post_category/<posttag>')
