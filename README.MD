@@ -1,3 +1,5 @@
+
+
 #JXNUGO
 www.jxnugo.com
 
@@ -79,6 +81,28 @@ Post.generate_fake(100)  #伪造交易帖子
 ```
 * 备注：客户端先对数据进行验证再上传
 *  注册成功返回值，状态码：200
+*  其它异常情况返回值
+   当用户名，邮箱，密码任一值为空时 返回400
+   当注册的用户名已经存在时，返回406
+   当注册的邮箱已经存在时，返回409
+   返回的json如下：
+
+   ```
+   {
+  	"error": "bad request",
+  	"message": "message was empty"
+	}  400
+
+	{
+  "error": "upload message error",
+  "message": "userName was aleady exist"
+	}  406
+	{
+  "error": "Resource Conflict",
+  "message": "email was aleady exist"
+}409
+
+	```
 
 ```
 
@@ -122,28 +146,31 @@ Post.generate_fake(100)  #伪造交易帖子
   "next": "http://www.jxnugo.com/api/posts?page=2",
   "posts": [
     {
-      "author": "http://www.jxnugo.com/api/user/203",
-      "author_id": 203,
-      "body": "cpu. 英特尔（Intel）酷睿四核 ",
-      "commentsCount": 1,
-      "contact": "13361640744",
-      "goodBuyTime": null,
-      "goodLocation": "一栋n204",
-      "goodName": "cpu. 英特尔（Intel）酷睿",
-      "goodPrice": 200,
-      "goodQuality": "非常好",
-      "goodTag": 1,
-      "photos": [
-        {
-          "key": "Fl1Jhx3UlPq1LndvrGMBHN4_LrEh"
-        }
-      ],
-      "postId": 501,
-      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/2345%E6%88%AA%E5%9B%BE20160505223308(1).png?imageView2/3/w/300/q/100/format/jpg",
-      "postUserName": "jxnugo",
-      "timestamp": "2016-05-20 11:35:39",
-      "url": "http://www.jxnugo.com/api/posts/501"
-    },    {
+  "author": "http://127.0.0.1:5000/api/user/71",
+  "author_id": 71,
+  "body": "Pellentesque viverra pede ac diam. Proin at turpis a pede posuere nonummy.",
+  "commentsCount": 3,
+  "contact": "1085665431",
+  "goodsBuyTime": "2016-05-02",
+  "goodsLocation": "71645 Eagle Crest Crossing",
+  "goodsName": "Independent Oil & Gas",
+  "goodsPrice": 1239.12,
+  "goodsQuality": "9成新",
+  "goodsTag": 4,
+  "photos": [
+    {
+      "key": "FsEAykjBT4VlaqS934nGjd7GbmLu"
+    },
+    {
+      "key": "Fn5e3ZfrHJ4GbfPmlaAjhfYAxiFn"
+    }
+  ],
+  "postId": 1,
+  "postNickName": "Tammy Warren",
+  "postUserAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+  "timestamp": "2016-05-19 08:00:00",
+  "url": "http://127.0.0.1:5000/api/posts/1"
+}    {
 
     },
     {
@@ -165,18 +192,18 @@ http://127.0.0.1:5000/api/posts?page=3
 * 返回类型：
 
 ```
-	{
-  "author": "http://www.jxnugo.com/api/user/160",
-  "author_id": 160,
-  "body": "Aenean sit amet justo. Vivamus vel nulla eget eros elementum pellentesque.",
-  "commentsCount": 0,
-  "contact": "1083007150",
-  "goodBuyTime": "2016-05-01",
-  "goodLocation": "9371 Roxbury Lane",
-  "goodName": "Manufactured Housing",
-  "goodPrice": 1239.12,
-  "goodQuality": "9成新",
-  "goodTag": 4,
+{
+  "author": "http://127.0.0.1:5000/api/user/71",
+  "author_id": 71,
+  "body": "Pellentesque viverra pede ac diam. Proin at turpis a pede posuere nonummy.",
+  "commentsCount": 3,
+  "contact": "1085665431",
+  "goodsBuyTime": "2016-05-02",
+  "goodsLocation": "71645 Eagle Crest Crossing",
+  "goodsName": "Independent Oil & Gas",
+  "goodsPrice": 1239.12,
+  "goodsQuality": "9成新",
+  "goodsTag": 4,
   "photos": [
     {
       "key": "FsEAykjBT4VlaqS934nGjd7GbmLu"
@@ -185,13 +212,12 @@ http://127.0.0.1:5000/api/posts?page=3
       "key": "Fn5e3ZfrHJ4GbfPmlaAjhfYAxiFn"
     }
   ],
-  "postId": 2,
-  "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
-  "postUserName": "carol89",
-  "timestamp": "2016-05-16 08:00:00",
-  "url": "http://www.jxnugo.com/api/posts/2"
+  "postId": 1,
+  "postNickName": "Tammy Warren",
+  "postUserAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+  "timestamp": "2016-05-19 08:00:00",
+  "url": "http://127.0.0.1:5000/api/posts/1"
 }
-
 ```
 
 
@@ -205,25 +231,32 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 {
   "userPosts": [
+{
+  "author": "http://127.0.0.1:5000/api/user/71",
+  "author_id": 71,
+  "body": "Pellentesque viverra pede ac diam. Proin at turpis a pede posuere nonummy.",
+  "commentsCount": 3,
+  "contact": "1085665431",
+  "goodsBuyTime": "2016-05-02",
+  "goodsLocation": "71645 Eagle Crest Crossing",
+  "goodsName": "Independent Oil & Gas",
+  "goodsPrice": 1239.12,
+  "goodsQuality": "9成新",
+  "goodsTag": 4,
+  "photos": [
     {
-      "author": "http://127.0.0.1:5000/api/user/2",
-      "body": "Pellentesque viverra pede ac diam. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",
-      "commentsCount": 0,
-      "contact": "1144728202",
-      "goodBuyTime": "2016-04-26",
-      "goodLocation": "78 Anhalt Parkway",
-      "goodName": "Rental & Leasing Services",
-      "goodPrice": 1239.12,
-      "goodQuality": "9成新",
-      "goodTag": 4,
-      "photos": null,
-      "postId": 1,
-      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
-      "postUserName": "nicole71",
-      "timestamp": "2016-05-07 00:00:00",
-      "url": "http://127.0.0.1:5000/api/posts/1"
+      "key": "FsEAykjBT4VlaqS934nGjd7GbmLu"
+    },
+    {
+      "key": "Fn5e3ZfrHJ4GbfPmlaAjhfYAxiFn"
     }
-  ]
+  ],
+  "postId": 1,
+  "postNickName": "Tammy Warren",
+  "postUserAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+  "timestamp": "2016-05-19 08:00:00",
+  "url": "http://127.0.0.1:5000/api/posts/1"
+}  ]
 }
 ```
 
@@ -236,23 +269,31 @@ http://127.0.0.1:5000/api/posts?page=3
 {
   "collectionPost": [
     {
-      "author": "http://127.0.0.1:5000/api/user/82",
-      "body": "Nullam varius.",
-      "commentsCount": 3,
-      "contact": "1302060376",
-      "goodBuyTime": "2016-04-22",
-      "goodLocation": "5873 Nobel Court",
-      "goodName": "Electronics Stores",
-      "goodPrice": 1239.12,
-      "goodQuality": "9成新",
-      "goodTag": 4,
-      "photos": null,
-      "postId": 16,
-      "postUserAvator": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
-      "postUserName": "kathleen72",
-      "timestamp": "2016-05-11 00:00:00",
-      "url": "http://127.0.0.1:5000/api/posts/16"
+  "author": "http://127.0.0.1:5000/api/user/71",
+  "author_id": 71,
+  "body": "Pellentesque viverra pede ac diam. Proin at turpis a pede posuere nonummy.",
+  "commentsCount": 3,
+  "contact": "1085665431",
+  "goodsBuyTime": "2016-05-02",
+  "goodsLocation": "71645 Eagle Crest Crossing",
+  "goodsName": "Independent Oil & Gas",
+  "goodsPrice": 1239.12,
+  "goodsQuality": "9成新",
+  "goodsTag": 4,
+  "photos": [
+    {
+      "key": "FsEAykjBT4VlaqS934nGjd7GbmLu"
     },
+    {
+      "key": "Fn5e3ZfrHJ4GbfPmlaAjhfYAxiFn"
+    }
+  ],
+  "postId": 1,
+  "postNickName": "Tammy Warren",
+  "postUserAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/84BE7838-E41C-4E60-A1B8-CA95DBEE326B.png",
+  "timestamp": "2016-05-19 08:00:00",
+  "url": "http://127.0.0.1:5000/api/posts/1"
+}
      {
       等等
     }
@@ -301,13 +342,13 @@ http://127.0.0.1:5000/api/posts?page=3
 ```
 {		"userId":"1",
         "body":"二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，成色非常好，见鲁大师，见鲁大师二手笔记本，",
-        "goodName":"戴尔灵越5537",
-        "goodNum":"1",
-        "goodPrice":"2000",
-        "goodLocation":"一栋N204",
-        "goodQuality":"7成新",
-        "goodBuyTime":"2014年6月",
-        "goodTag":"1",
+        "goodsName":"戴尔灵越5537",
+        "goodsNum":"1",
+        "goodsPrice":"2000",
+        "goodsLocation":"一栋N204",
+        "goodsQuality":"7成新",
+        "goodsBuyTime":"2014年6月",
+        "goodsTag":"1",
         "contact":"13361640744",
         "photos":[
             {
@@ -583,7 +624,7 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####21、更新用户个人信息
+#####21、更新用户个人信息      [POST]
 * URL: www.jxnugo.com/api/update_userInfo   [POST]
 * 参数：无
 * 上传的数据格式（json）
@@ -610,8 +651,8 @@ http://127.0.0.1:5000/api/posts?page=3
 }
 ```
 
-#####22、删除帖子
-* URL:www.jxnugo.com/api/post_delete  [DELETE]
+#####22、删除帖子     【DELETE】
+* URL:www.jxnugo.com/api/post_delete
 * 参数：无
 * 上传的数据格式（json）
 
@@ -631,16 +672,16 @@ http://127.0.0.1:5000/api/posts?page=3
 
 ```
 
-#####23、根据物品标签查询相关的帖子
+#####23、根据物品标签查询相关的帖子   【GET】
 * URL: www.jxnugo.com/api/post_category/<int:tag>
 * 参数： tag标签，tag标签定义为 0生活用品 1数码科技 2服饰箱包 3图书音像 4其它
 * 上传的数据（无）
-* 请求成功返回值（json）：
+* 请求成功返回值（json）：默认返回每页最多16个帖子
 
 ```
 {
   "count": 3,
-  "next": null,
+  "next": "http://127.0.0.1:5000/api/post_category/1?page=2"(假定有下一页时的格式),
   "posts": [
     {
       "author": "http://127.0.0.1:5000/api/user/203",
@@ -668,6 +709,57 @@ http://127.0.0.1:5000/api/posts?page=3
     },
     ],
     "prev": null
+}
+
+```
+
+
+#####24、帖子搜索功能
+* URL:www.jxnugo.com/api/query_post
+* 参数： 无
+* 请求格式(json)   状态码200
+* 返回结果  json
+
+```
+{
+  "count": 3,
+  "next": null,
+  "posts": [
+    {
+      "author": "http://127.0.0.1:5000/api/user/202",
+      "author_id": 202,
+      "body": "很久的东西了。",
+      "commentsCount": 0,
+      "contact": "110",
+      "goodsBuyTime": "2013-01-02",
+      "goodsLocation": "你猜",
+      "goodsName": "无图商品测试",
+      "goodsPrice": 999,
+      "goodsQuality": "垃圾成色",
+      "goodsTag": 4,
+      "photos": [
+        {
+          "key": ""
+        }
+      ],
+      "postId": 503,
+      "postNickName": "KevinWu",
+      "postUserAvatar": "http://7xrkww.com1.z0.glb.clouddn.com/Fr51qIN-33Dmuo0jDwG_SNyBaUen",
+      "timestamp": "2016-05-21 01:26:25",
+      "url": "http://127.0.0.1:5000/api/posts/503"
+    },
+    ]
+    "prev":""
+
+
+```
+
+* 当搜索时没有匹配的结果时 返回
+
+
+```
+{
+  "message": "query_post dosen't exist"
 }
 
 ```

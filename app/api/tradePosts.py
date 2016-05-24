@@ -109,11 +109,11 @@ def new_post():
         temp = photo[x]['key']
         l.append(temp)
     photos = ":".join(l)
-    post = Post(id=getPrimaryKeyId('isPost'), body=postInfo['body'], goodName=postInfo['goodName'],
-                goodPrice=postInfo['goodPrice'], goodLocation=postInfo['goodLocation'],
-                goodQuality=postInfo['goodQuality'], goodBuyTime=postInfo['goodBuyTime'], goodTag=postInfo['goodTag'],
+    post = Post(id=getPrimaryKeyId('isPost'), body=postInfo['body'], goodName=postInfo['goodsName'],
+                goodPrice=postInfo['goodsPrice'], goodLocation=postInfo['goodsLocation'],
+                goodQuality=postInfo['goodsQuality'], goodBuyTime=postInfo['goodsBuyTime'], goodTag=postInfo['goodsTag'],
                 contact=postInfo['contact'],
-                author_id=user.id, photos=photos, goodNum=postInfo['goodNum'])
+                author_id=user.id, photos=photos, goodNum=postInfo['goodsNum'])
     db.session.add(post)
     db.session.commit()
     response = jsonify({"postStatus": "successful"})
@@ -157,3 +157,31 @@ def post_category(tag):
                     'count': pagination.total
                     }
                    )
+
+
+@api.route('/api/query_post', methods=['POST'])
+def m_query_post():
+    query_info=request.json
+    key_word=query_info['keyWords']
+    page = request.args.get('page', 1, type=int)
+    pagination = Post.query.filter(Post.goodName.like('%'+key_word+'%')).paginate(
+        page, per_page=current_app.config['JXNUGO_POSTS_PER_PAGE'],
+        error_out=False
+    )
+    if pagination.total is not 0:
+        posts = pagination.items
+        prev = None
+        if pagination.has_prev:
+            prev = url_for('api.query_post', page=page - 1, _external=True)
+            # prev="http://www.jxnugo.com/api/posts?page=%d" % (page-1)
+        next = None
+        if pagination.has_next:
+            # next="http://www.jxnugo.com/api/posts?page=%d" % (page+1)
+            next = url_for('api.query_post', page=page + 1, _external=True)
+        return jsonify({'posts': [post.to_json() for post in posts],
+                    'prev': prev,
+                    'next': next,
+                    'count': pagination.total
+                    })
+    else:
+        return jsonify({"message":"query_post dosen't exist"})
