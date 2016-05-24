@@ -140,7 +140,7 @@ def delete_post():
 @api.route('/api/post_category/<int:tag>', methods=['GET'])
 def post_category(tag):
     page = request.args.get('page', 1, type=int)
-    pagination = Post.query.filter_by(goodTag=tag).paginate(
+    pagination = Post.query.filter_by(goodTag=tag).order_by(Post.timestamp.desc()).paginate(
         page, per_page=current_app.config['JXNUGO_POSTS_PER_PAGE'],
         error_out=False
     )
