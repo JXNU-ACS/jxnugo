@@ -21,6 +21,7 @@
         margin-top: 15px;
     }
 }
+
 body{
     background: #eee;
 }
@@ -29,6 +30,9 @@ a:visited,
 a:hover,
 a:active {
     text-decoration: none;
+}
+input, button, select, textarea {
+    outline: 0;
 }
 /*重写bootstrap样式*/
 .modal {
@@ -127,28 +131,26 @@ a:active {
     width: inherit;
     max-width: 120px;
     position: absolute;
+    display: none;
+    -webkit-transform: translateZ(0);
+    
 }
 .ui-navbar .input-gr{
     display: inline-table;
     height: 50px;
     border-radius: 30px;
     border: 1px solid #3F9491;
+    -webkit-transform: translateZ(0);
 }
 .ui-navbar .input-gr--hover,
 .ui-navbar .input-gr--active,
 .ui-navbar .input-gr:hover{
     width: 70%;
+    
+    -webkit-transform: translateZ(0);
 }
 /*导航弹出层*/
-.ui-navbar .bubblepannel{
-    position: absolute;
-    min-height: 100px;
-    width: 100px;
-    left: 250%;
-    top:-50px;
-    background: #fff;
-    z-index: 9999;
-}
+
 /*主导航*/
 
 .ui-mainnav {
@@ -170,11 +172,21 @@ a:active {
 
 
 .ui-mainnav .nav-avatar {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
     background: #eee;
-    margin-top: 2%;
+    background-size: cover;
+    margin-top: 10px;
+    position: absolute;
+    z-index: 1070;
+    margin-left: 33%;
+
+}
+.ui-mainnav .nav-avatar--active{
+    height: 70px;
+    width: 70px;
+    margin-left: 26%;
 }
 
 .ui-mainnav .nav-text,
@@ -201,6 +213,7 @@ a:active {
     padding: 15px;
     margin: 3% 1%;
     border-radius: 30px;
+    background: transparent;
     font-size: 20px;
     position: relative;
     z-index: 2;
@@ -215,10 +228,37 @@ a:active {
 }
 .ui-mainnav .nav-content,
 .ui-subnav .nav-content {
-    padding:10px 0;
+    
     margin: auto;
     width: 1250px;
     height: inherit;
+}
+/*弹出层*/
+.ui-mainnav .popo{
+    position: absolute;
+    z-index: 1060;
+    background: #fff;
+    -webkit-filter: drop-shadow(0px 5px 5px #eee);
+    filter: drop-shadow(0px 5px 5px #eee);
+    width: 170px;
+    right: 20px;
+    top: 49px;
+    padding-bottom: 30px;
+    text-align: center;
+    display: none;
+
+}
+.popo > div{
+    margin-bottom: 10px;
+}
+.popo .title{
+    margin-top: 50px;
+    font-size: 25px;
+    font-size: 1em;
+    color: #605B55;
+}
+.popo .item{
+
 }
 
 /*界面容器*/
@@ -377,7 +417,7 @@ a:active {
     -moz-transition: all .3s ease-in;
     transition: all .3s ease-in;
 }
-.case-in .fast{
+.fast{
     -webkit-transition-duration:.1s;
     -moz-transition-duration:.1s;
     transition-duration:.1s;

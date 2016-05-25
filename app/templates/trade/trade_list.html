@@ -1,68 +1,20 @@
-{%-extends "./base.html" %}
-{% import "./_macros.html" as macros %} 
-{%-block nav %}
-<style>
-body {
-    padding-top: 140px;
-}
-</style>
-<!--<div class="contain-fluid">
-    <div class="ui-subnav">
-        <div class="nav-content">
-            <div class="row">
-                <div class="col-sm-4 left-align"><a href="{{url_for('trade.trade_post')}}"><span class="glyphicon glyphicon-pencil nav-text case-in"></span></a></div>
-                <div class="col-sm-4"><img src="http://7xrkww.com1.z0.glb.clouddn.com/JXNU_s.png" style="width: 150px;"></div>
-                <!--<div class="col-sm-2 left-align" style="">
-                    <a class="btn btn-default nav-bottom" href="{{url_for('trade.trade_post')}}">发布商品！</a>
-                </div>
-                <div class="col-sm-4 right-align"><span class="glyphicon glyphicon-search nav-text case-in"></span></div>
-            </div>
-        </div>
-    </div>
-</div>-->
-{{ macros.subnav(logo_src=url_for('main.staticfile',filename='images/JXNU_s_market.png'),search_src="/query_post/",sub_attr=["生活用品","数码科技","服饰箱包","图书影音","其他"])}}
-{% endblock %} {% block content %}
+{%-extends "trade/base_trade.html" %}
+{% import "./_macros.html" as macros %}
+{% block title %}淘二手{% endblock %}
+{% block content %}
 <div class="container-fluid">
     <div class="ui-mainct">
         <div class="row">
-            <!--
-            <div class="ui-trade-show-list col-sm-3">
-                <div><span class="glyphicon glyphicon-camera"></span> 闲置数码</div>
-                <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
-                <div><span class="glyphicon glyphicon-camera"></span> 衣服什么的</div>
-                <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
-                <br><span>手机</span>
-                <div><span class="glyphicon glyphicon-camera"></span> 日常物品</div>
-                <span>手机</span><span>手机</span><span>手机</span><span>手机</span>
-            </div>-->
+            {% block trade_tip%}<!--查询模版的提示-->
+                {% endblock %}
+                {% if posts %} 
             <div class="ui-trade-show">
-                {% if posts %} {% for post in posts %}
-                <div class="ui-trade-show-contain case-in fast">
-                    <div class="row" style="padding: 20px 0 10px 20px;">
-                        <div class="col-sm-3">
-                            <a href="#">
-                                <div class="list-headbg" style="background-image:url('{{post.author.avatar}}');">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="list-userid">{{post.author.userName}}</div>
-                            <div class="list-time"><span class="glyphicon glyphicon-time"></span>{{ post.timestamp | utcChangeToCst}}</div>
-                        </div>
-                    </div>
-                    <a href={{url_for( 'trade.trade_detail',goodId=post.id)}}>
-                        <div class="list-img" style="background-image:url(http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}})">
-                            <!--<img src="static/images/2.jpeg" style="width:100%;">-->
-                        </div>
-                    </a>
-                    <div class="list-price">￥{{post.goodPrice}}</div>
-                    <div class="list-title">
-                        {{post.goodName}}
-                    </div>
-                </div>
-                <!--end-->
-                {% endfor %} {% else %} 然而什么都没有 {% endif %}
+                
+                {{ macros.listblock(posts)}}
             </div>
+            {% else %}
+            <div class="ui-trade-error">:)<br>然而什么都没有</div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -72,8 +24,4 @@ body {
     {{ macros.pagination_widget(pagination,'.trade_list')}}
 </div>
 </div>
-{% endblock %}
-{% block script %}
-{% import "./_js_macros.html" as jsnode %}
-{{ jsnode.navJsNode() }}
 {% endblock %}

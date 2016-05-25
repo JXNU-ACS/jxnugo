@@ -151,11 +151,9 @@ def query_post(problem):
         page, per_page=current_app.config['JXNUGO_POSTS_PER_PAGE'],
         error_out=False
     )
-    if pagination.total is not 0:
-        posts = pagination.items
-        return render_template('trade/trade_list.html', posts=posts, pagination=pagination)
-    else:
-        return render_template('404.html')
+    
+    posts = pagination.items
+    return render_template('trade/query_posts.html', posts=posts, pagination=pagination,problem=problem)
 
 
 @trade.route('/post_category/<posttag>')

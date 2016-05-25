@@ -1,9 +1,13 @@
+{%-import "./_macros.html" as macros %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}test{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    
+    <title>{% block title %}{% endblock %}－江西师范GO－jxnuGO</title>
     <link href={{url_for( 'main.staticfile',filename='css/bootstrap.min.css' )}} rel="stylesheet" type="text/css">
     <link href={{url_for( 'main.staticfile',filename='font-awesome/css/font-awesome.min.css' )}} rel="stylesheet" type="text/css">
     <link href={{url_for( 'main.staticfile',filename='css/all_style.css' )}} rel="stylesheet" type="text/css">
@@ -17,8 +21,8 @@
     <div class="navbar-fixed-top ui-navbar anim">
     <div class="contain-fluid" style="width:100%;">
     <!--主导航-->
-    {%-import "./_macros.html" as macros %}
-    {{macros.mainnav(current_user=current_user)}}
+    
+    {{macros.mainnav(current_user=current_user,Permission=Permission)}}
     <!--<div class="navbar-fixed-top">
         <nav class="navbar navbar-inverse" style="border-radius:0px;">
             <div class="container-fluid ui-mainnav">
@@ -69,28 +73,21 @@
         {%-block nav %}
         <style type="text/css">
         body{
-            padding-top:30px;
+            padding-top:71px;
         }
         </style>
 
         {% endblock %}
     </div>
     </div>
-    {% block content %}{% endblock %}
-    <!--模态提示框-->
-    <div class="modal fade bs-example-modal-sm " id="myModal" tabindex="-1" role="dialog" aria-labelledby="messegeModalLabel">
-        <div class="modal-dialog modal-sm " role="document">
-            <div class="modal-content">
-                <div class="modal-header ">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h6 class="modal-title " id="myModalLabel">tips</h6>
-                </div>
-                <div class="modal-body">
-                    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category,message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
-                </div>
-            </div>
-        </div>
-    </div>
+    {% block content %}
+    {% endblock %}
+    
+    {{ macros.modal()}}
+
+    {% block footer %}
+    {{ macros.footer() }}
+    {% endblock %}
     <!--依赖框架，插件-->
     <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/jquery.min.js' )}}></script>
     <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/bootstrap.min.js' )}}></script>
@@ -108,6 +105,11 @@
         {% endwith %}
     });
     ui.bubbleTip();
+    $(".ui-mainnav .nav-user").hover(function(){
+        $(".ui-mainnav .popo").toggle();
+        $(".ui-mainnav .nav-avatar").toggleClass("nav-avatar--active")
+    })
+    /*
     $('[data-toggle="popover"]').popover({
         html:true,
         title:"你好 {% if current_user.userName %}{{current_user.userName|capitalize}}{% else %}游客{% endif %}",
@@ -116,70 +118,13 @@
         trigger:"hover",
         container:"body",
         placement:"bottom"
-    })
+    })*/
     
     </script>
-    {% block script %}{% endblock %}
-    <footer class="ui-footer">
-        <div class="ui-mainct">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="title">app下载</div>
-                    <div class="qrcode"></div>
-                </div>
-                <div class="col-sm-3">
-                    <dl>
-                        <dt class="title">运营中心</dt>
-                    
-                        <dd>先骕楼x4308计算机科学协会</dd>
-                        <dd>电话:13361640744</dd>
-                        <dd>邮箱:ddragonever@gmail.com</dd>
-                    </dl>
-                </div>
-                <div class="col-sm-3">
-                    <dl>
-                        <dt class="title">关于我们</dt>
-                        <dd>师大＋</dd>
-                        <dd>jxnugo</dd>
-                    </dl>
-                    
-                    
-                </div>
-                <div class="col-sm-3">
-                    <div>
-                        <img src="http://7xrkww.com1.z0.glb.clouddn.com/JXNU_s.png">
-                    </div>
-                    <div class="title bdsharebuttonbox">share us with
-                        <a href="#" data-cmd="qzone" title="分享到QQ空间"><span class="fa fa-qq"></span></a>
-                        <a href="#" data-cmd="tsina" title="分享到新浪微博"><span class="fa fa-weibo"></span></a>
-                        <a href="#" data-cmd="weixin" title="分享到微信"><span class="fa fa-wechat"></span></a>
-                    </div>
-                    <script>
-                    window._bd_share_config = {
-                        "common": {
-                            "bdSnsKey": {},
-                            "bdText": "发现了一个掉节操的地方--jxnugo",
-                            "bdMini": "2",
-                            "bdMiniList": false,
-                            "bdPic": "",
-                            "bdStyle": "2",
-                            "bdSize": "32"
-                        },
-                        "share": {
-                            "bdCustomStyle":"{{url_for( 'main.staticfile',filename='font-awesome/css/font-awesome.min.css' )}}"
-                        }
-                    };
-                    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-                    </script>
-                    <div class="title" style="margin-left:0;"></div>
-                </div>
-            </div>
 
-        </div>
-        <div class="buttom-side">
-                <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">赣ICP备16002531号-1</a>
-            </div>
-    </footer>
+    {% block script %}
+    {% endblock %}
+    
     <div></div>
 </body>
 
