@@ -1,13 +1,6 @@
-{%-extends "./base.html" %}
-{%-block nav %}
-<style>
-body {
-    padding-top: 190px;
-}
-</style>
+{%-extends "trade/base_trade.html" %}
 {% import "./_macros.html" as macros %}
-{{ macros.subnav(logo_src=url_for('main.staticfile',filename='images/JXNU_s_market.png'),search_src="/query_post/",sub_attr=["生活用品","数码科技","服饰箱包","图书影音","其他"])}}
-{% endblock %} 
+{% block title %}{{ post.goodName }}{% endblock %}
 {% block content %}
 <!--<nav class="ui-trade-detail-nav">
     <a href="#detail">
@@ -164,25 +157,25 @@ body {
                 </div>
                 <!--右边-->
                 <div class="col-md-4 right-panel">
-                    <div class="ui-trade-detail-headbg" style="background-image:url({{ post.author.avatar}})">
+                    <a href="{{ url_for('main.user_zone',username=post.author.userName) }}"><div class="ui-trade-detail-headbg" style="background-image:url({{ post.author.avatar}})"></a>
                         <div class="ui-trade-detail-userinfo">
                             <h3><a href="{{ url_for('main.user_zone',username=post.author.userName) }}">{{ post.author.userName }}</a> </h3>
                             <h5 class="sign">{{ post.author.about_me }}</h5></div>
                     </div>
                     <div class="ui-trade-detail-info">
                         {%if post.goodNum%}
-                        <div class="info-row"><span class="glyphicon glyphicon-map-marker"> 数量:{{post.goodNum}}</div>
+                        <div class="info-row"><span class="glyphicon glyphicon-tags"></span>  数量:{{post.goodNum}}</div>
                         {% endif %}
-                        {% if post.goodQuality %}<div class="info-row"><span class="glyphicon glyphicon-gift"> {{post.goodQuality}}</div>
+                        {% if post.goodQuality %}<div class="info-row"><span class="glyphicon glyphicon-gift"></span>  {{post.goodQuality}}</div>
                         {% endif %}
                         {%if post.contact%}
-                        <div class="info-row"><span class=" glyphicon glyphicon-map-marker"> 联系方式:{{post.contact}}</div>
+                        <div class="info-row"><span class=" glyphicon glyphicon-phone"></span>  {{post.contact}}</div>
                         {% endif %}
                         {%if post.goodLocation%}
-                        <div class="info-row"><span class=" glyphicon glyphicon-map-marker"> 位置:{{post.goodLocation}}</div>
+                        <div class="info-row"><span class=" glyphicon glyphicon-map-marker"></span> {{post.goodLocation}}</div>
                         {% endif %}
                         {%if post.goodBuyTime%}
-                        <div class="info-row"><span class="glyphicon glyphicon-time"> 购买时间:{{post.goodBuyTime}}</div>
+                        <div class="info-row"><span class="glyphicon glyphicon-time"></span>  购买时间:{{post.goodBuyTime}}</div>
                         {% endif %}
                     </div>
                     <div class="stickypannel " >
@@ -208,14 +201,7 @@ body {
 </div>
 {% endblock %} {% block script %}
 <script>
-$(document).ready(function(){
-    var ui = new UI();
-    ui.sticky({
-        offsetY:175,
-        contain:$('.right-panel'),
-    })
-    $(".right-panel").height($(".left-panel").innerHeight());
-    $("#photo").append(function(){
+$("#photo").append(function(){
         var html="";
         var imgs = ("{{post.photos}}").split(":");
         for(n in imgs){
@@ -223,9 +209,16 @@ $(document).ready(function(){
         }
         return html;
     });
-    
+$(document).ready(function(){
+    var ui = new UI();
+    ui.sticky({
+        offsetY:175,
+        contain:$('.right-panel'),
+    })
+})
+$("img").ready(function(){
+    $(".right-panel").height($(".left-panel").innerHeight());
 })
 </script>
-{% import "./_js_macros.html" as jsnode %}
-{{ jsnode.navJsNode() }}
+{{ super() }}
 {% endblock %}

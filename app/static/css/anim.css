@@ -38,8 +38,8 @@
 }*/
 @keyframes slideDown{
 	from{
-		-webkit-transform:translatey(-66px);
-		transform:translatey(-66px);
+		-webkit-transform:translatey(-49px);
+		transform:translatey(-49px);
 	}
 	to{
 		-webkit-transform:translatey(0px);
@@ -53,8 +53,8 @@
 		transform:translatey(0px);
 	}
 	to{
-		-webkit-transform:translatey(-66px);
-		transform:translatey(-66px);
+		-webkit-transform:translatey(-49px);
+		transform:translatey(-49px);
 	}
 }
 /*----------------动画------------------*/

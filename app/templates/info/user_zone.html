@@ -1,7 +1,7 @@
 {%-extends "./base.html" %} {%-block nav %}
 <style>
 body {
-    padding-top: 120px;
+    padding-top: 160px;
 }
 </style>
 {% endblock %} {%-block content %}
@@ -10,6 +10,7 @@ body {
         <div class="ui-panel">
         	<!--banner-->
         	<div class="ui-panel-cover" style="background-color:#366462;z-index:0;">
+                <div class="ui-userzone-user-head" style="background-image:url('{{user.avatar}}')"></div>
         		<div class="ui-userzone-user-signature">
                 	<span>"</span>{{user.about_me}}<span>"</span>
                     
@@ -18,7 +19,7 @@ body {
         	<div class="ui-userzone-body row">
         		<!--左边-->
         		<div class="col-md-4">
-        			<div class="ui-userzone-user-head" style="background-image:url('{{user.avatar}}')"></div>
+        			
         		</div>
         		<!--右边-->
 	            <div class="col-md-8">

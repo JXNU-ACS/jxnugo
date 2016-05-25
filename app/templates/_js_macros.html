@@ -12,10 +12,41 @@ $(document).ready(function(){
             "notTop" : "ui-navbar--not-top",
         }
     });
-    var ui = new UI();
-    ui.addFocusClass($(".ui-navbar input"),$(".input-gr"),"input-gr--active");
+
+    $(".input-gr").hover(function(){
+        $(".ui-navbar input").css("display","inline-block");
+    },function(){
+        if($(".ui-navbar input").val() == "") $(".ui-navbar input").hide();
+    })
+    
+    $(".ui-navbar input").focusin(function(){
+        $(".input-gr").addClass("input-gr--active")
+        }).focusout(function(){
+        if($(".ui-navbar input").val() == "") $(".input-gr").removeClass("input-gr--active")
+        
+    })
+
+    $(".input-gr a").click(function(){
+        console.log($(".input-gr a").attr("data-searchurl"))
+        location.href = $(".input-gr a").attr("data-searchurl") + $(".input-gr input").val()
+    })
+    
+/*
+    $(".ui-mainnav .nav-avatar").hover(function(){
+        $(this).addClass("nav-avatar--active")
+        $(".ui-mainnav .popo").show().addClass("popo--active")
+    },function(){
+        if(!$(".ui-mainnav .popo").hasClass("popo--active")) $(".ui-mainnav .popo").hide()
+    })
+
+    $(".ui-mainnav .popo").hover(function(){
+        $(this).addClass("popo--active")
+        $(".ui-mainnav .nav-avatar").addClass("nav-avatar--active")
+    })
+*/
 
 })
 
 </script>
 {%- endmacro %}
+

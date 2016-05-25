@@ -1,13 +1,6 @@
-{%-extends "./base.html" %}
-{%-block nav %}
-<style>
-body {
-    padding-top: 190px;
-}
-</style>
-{%-import "./_macros.html" as macros %}
-{{ macros.subnav(logo_src=url_for('main.staticfile',filename='images/JXNU_s_market.png'),search_src="/query_post/",sub_attr=["生活用品","数码科技","服饰箱包","图书影音","其他"])}}
-{% endblock %} 
+{%-extends "trade/base_trade.html" %}
+{% import "./_macros.html" as macros %}
+{% block title %}发布二手{% endblock %}
 {% block content %}
 <div class="cantain-fluid">
     <div class="ui-mainct">
@@ -125,6 +118,5 @@ $(document).ready(function() {
     var upload = Qiniu.uploader(uploaderoption)
 })
 </script>
-{% import "./_js_macros.html" as jsnode %}
-{{ jsnode.navJsNode() }}
+{{ super() }}
 {% endblock %}

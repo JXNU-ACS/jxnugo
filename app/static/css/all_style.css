@@ -1,3 +1,36 @@
+/*---------------集体属性------------*/
+.ui-trade-detail-rightlist::after,
+.ui-trade-detail-userinfo .sign::after,
+.ui-userzone-content-datelinebody .text::after,
+.ui-userzone-user-signature::after{
+    content: "...";
+    bottom:0;
+    padding:0 20px 1px 55px;
+    position:absolute;
+}
+
+
+
+/*------------主页---------------*/
+.ui-index-page{
+
+}
+.ui-index-page .two,
+.ui-index-page .one{
+    background: #fff;
+    text-align: center;
+}
+.ui-index-page .half{
+    height: 50%;
+    background-size: cover;
+}
+.ui-index-page a:link,
+.ui-index-page a:visited,
+.ui-index-page a:hover,
+.ui-index-page a:active {
+    text-decoration: none;
+    color: #fff;
+}
 /*------------列表-------------------------------------------------*/
 
 .ui-trade-show {
@@ -5,26 +38,14 @@
     -webkit-column-count:4;
     column-count:4;
 }
-/*列表分类*/
-
-.ui-trade-show-list {
-    position: fixed;
+.ui-trade-error{
+    font-size: 30px;
+    padding: 10% 40%;
+    color: #B7ACA2;
 }
-
-.ui-trade-show-list>div {
-    font-size: 25px;
-    margin: 20px 0 20px 0;
-    white-space: nowrap;
-}
-
-.ui-trade-show-list>span {
-    font-size: 15px;
-    margin-right: 20px;
-    white-space: nowrap;
-}
-
 
 /*商品容器*/
+
 
 .ui-trade-show-contain {
     margin: 20px;
@@ -176,6 +197,8 @@
 .ui-trade-detail-info .info-row{
     font-size: 15px;
     color: #333;
+    margin-bottom: 3px;
+    white-space: nowrap;
 }
 .ui-trade-detail-content>img {
     width: 100%;
@@ -201,14 +224,24 @@
     color: #5A5B57;
 
 }
+.ui-trade-detail-userinfo a:link,
+.ui-trade-detail-userinfo a:visited,
+.ui-trade-detail-userinfo a:hover,
+.ui-trade-detail-userinfo a:active{
+    color: #325D5C;
+}
 .ui-trade-detail-userinfo .sign{
+    position:relative;
+    line-height:1.4em;
+    height:4.2em;
     text-overflow: ellipsis;
-    max-height: 50px;
     overflow: hidden;
 }
 .ui-trade-detail-rightlist {
     font-size: 15px;
     color: #333;
+    line-height:1.4em;
+    height:8.4em;
 }
 
 .ui-trade-detail-rightlist div {
@@ -219,7 +252,12 @@
     color: #BCBEB6;
     font-size: 30px;
 }
-
+.ui-trade-detail-rightlist a:link,
+.ui-trade-detail-rightlist a:visited,
+.ui-trade-detail-rightlist a:hover,
+.ui-trade-detail-rightlist a:active{
+    color: #605B55;
+}
 .ui-trade-detail-comment {
     /*padding-top:20px;
     padding-left:10px;*/
@@ -380,7 +418,7 @@
 
 .ui-userzone-body-block {
     padding: 5px 60px 15px 60px;
-    min-height: 120px;
+    min-height: 220px;
     border-bottom: 1px solid #eee;
 }
 .ui-userzone-body-block .isnone{
@@ -452,7 +490,7 @@
     height: 180px;
     position: absolute;
     left: 50px;
-    top: -130px;
+    top: -50px;
     background-color: #DADBD4;
     background-size: cover;
     border-radius: 20%;
@@ -463,7 +501,7 @@
     color: #fff;
     position: absolute;
     left: 270px;
-    top: 90px;
+    top:15px;
     font-size: 20px;
     width: 50%;
 }
