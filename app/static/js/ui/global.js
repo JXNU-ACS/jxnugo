@@ -47,14 +47,13 @@ function UI() {
         }).ready(func);
     };
     //表单验证器
-    this.formValidation = function(){//config为数组,值为input的name
+    this.formValidation = function(){
         var self = this;
         
         $("form").submit(function(){
             var can_submit = 1;
             
             $('[require="true"]').each(function(){
-                console.log($(this).val())
                 if($(this).val() == "" || $(this).val()== null){
                     $(this).attr("style","border-color:#FF7C6A;")
                     can_submit = 0;
