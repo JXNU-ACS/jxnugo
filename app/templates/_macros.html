@@ -1,5 +1,5 @@
 {% macro pagination_widget(pagination,endpoint) %}
-<!--局部模板,用来显示分页导航-->
+<!--分页导航-->
 <ul class="pagination">
     <li{% if not pagination.has_prev %} class="disabled" {% endif %}>
         <a href="{% if pagination.has_prev %}{{ url_for(endpoint, page=pagination.page-1, **kwargs) }}{% else %}#{% endif %}">
@@ -23,6 +23,24 @@
         </a>
             </li>
 </ul>
+
+{% endmacro %}
+{%-macro showmainnav(current_user)%}
+<!--展示用导航-->
+<div class="ui-shownav row">
+    <div class="nav-content">
+        <div class=" col-xs-2">
+            <img src="{{ url_for( 'main.staticfile',filename='images/index/JXNU_index.png' )}}" style="width:150px">
+        </div>
+        <a href="{{url_for('trade.trade_list')}}"><div class=" text">淘二手</div></a>
+        <a href="#"><div class="text">教务助手</div></a>
+        <a href="#"><div class="text">bbs</div></a>
+        {% if current_user.is_authenticated %}
+        {% else %}
+        <a href="{{url_for('auth.passport')}}"><div class="text button">注册/登录</div></a>
+        {% endif %}
+    </div>
+</div>
 {% endmacro %}
 {%-macro mainnav(current_user,Permission)%}
 <!--主导航-->
@@ -44,38 +62,42 @@
         </div>
         <div class="col-xs-4"></div>
         <div class="col-xs-2">
+            {% if current_user.is_authenticated %}
             <div class="nav-user">
-            <div class="popo case-in">
-                
-                <div class="title">
-                        {% if current_user.name %}
-                        {{current_user.name|capitalize}}
-                        {% else %}游客{% endif %}
+                <div class="popo case-in">
+                    <div class="title">
+                            
+                            {{current_user.name|capitalize}}
+                            
+                    </div>
+                    
+                                    
+                    <a href="{{url_for('main.user_zone',username=current_user.userName)}}">
+                    <div class="item case-in">用户中心</div></a>
+                    <a href="{{url_for('main.editUserInfo')}}">
+                    <div class="item case-in">设置</div></a>
+                    {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                    <a href="{{ url_for('trade.moderate')}}">
+                    <div class="item case-in">评论管理</div></a>
+                    {% endif %}
+                    {% if current_user.role_id==2 %}
+                    <a href="{{ url_for('main.show_user') }}">
+                    <div class="item case-in">用户管理</div></a>
+                    {% endif %}
+                    <a href="{{url_for('auth.logout')}}">
+                    <div class="item case-in">登出</div></a>
+                    
+                    
+                    
                 </div>
-                {% if current_user.is_authenticated %}
-                                
-                <a href="{{url_for('main.user_zone',username=current_user.userName)}}">
-                <div class="item">用户中心</div></a>
-                <a href="{{url_for('main.editUserInfo')}}">
-                <div class="item">设置</div></a>
-                {% if current_user.can(Permission.MODERATE_COMMENTS) %}
-                <a href="{{ url_for('trade.moderate')}}">
-                <div class="item">评论管理</div></a>
-                {% endif %}
-                {% if current_user.role_id==2 %}
-                <a href="{{ url_for('main.show_user') }}">
-                <div class="item">用户管理</div></a>
-                {% endif %}
-                <a href="{{url_for('auth.logout')}}">
-                <div class="item">登出</div></a>
-                {% else%}
-                <a href="{{url_for('auth.passport')}}">
-                <div class="item">登录/注册</div></a>
-                {% endif %}
+                <div class="nav-avatar center-block case-in fast" data-container="body" data-toggle="popover" data-placement="bottom" style="background-image:url('{{ current_user.avatar}}')">
+                </div>
             </div>
-            <div class="nav-avatar center-block case-in fast" data-container="body" data-toggle="popover" data-placement="bottom" style="background-image:url('{{ current_user.avatar}}')">
-            </div>
-            </div>
+            {% else %}
+            <a href="{{url_for('auth.passport')}}">
+            <div class="nav-text case-in">登录/注册</div>
+        </a>
+        {% endif %}
         </div>
         
     </div>
@@ -129,9 +151,11 @@
         </div>
     </a>
     <div class="list-price">￥{{post.goodPrice}}</div>
-    <div class="list-title">
-        {{post.goodName}}
-    </div>
+    <a href={{url_for( 'trade.trade_detail',goodId=post.id)}}>
+        <div class="list-title">
+            {{post.goodName}}
+        </div>
+    </a>
 </div>
 {% endfor %}
 {% endmacro %}
@@ -141,7 +165,8 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="title">app下载</div>
-                    <div class="qrcode"></div>
+                    <div class="qrcode center-align" style="background-image:url()">
+                        <img src="{{url_for('main.staticfile',filename='images/qrcode.png')}}" style="width:150px;"></div>
                 </div>
                 <div class="col-sm-3">
                     <dl>
@@ -155,8 +180,8 @@
                 <div class="col-sm-3">
                     <dl>
                         <dt class="title">关于我们</dt>
-                        <dd>师大＋</dd>
-                        <dd>jxnugo</dd>
+                        <dd><a href="http://fir.im/AwesomeCampus">师大＋</a></dd>
+                        <dd><a href="">jxnugo</a></dd>
                     </dl>
                     
                     

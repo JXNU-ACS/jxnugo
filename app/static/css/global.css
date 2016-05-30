@@ -238,8 +238,8 @@ input, button, select, textarea {
     position: absolute;
     z-index: 1060;
     background: #fff;
-    -webkit-filter: drop-shadow(0px 5px 5px #eee);
-    filter: drop-shadow(0px 5px 5px #eee);
+    -webkit-filter: drop-shadow(0px 5px 5px rgba(238, 238, 238, 0.33));
+    filter: drop-shadow(0px 5px 5px rgba(238, 238, 238, 0.33));
     width: 170px;
     right: 20px;
     top: 49px;
@@ -258,9 +258,42 @@ input, button, select, textarea {
     color: #605B55;
 }
 .popo .item{
-
+    padding: 5px 0;
+}
+.popo .item:hover{
+    background: #3F9491;
+    color: #fff;
 }
 
+/*展示型导航*/
+.ui-shownav{
+    background: rgba(5, 5, 5, 0.44);
+    height: 140px;
+    
+}
+.ui-shownav .nav-content{
+    margin: 50px auto 0 auto;
+    text-align: center;
+    width: 950px;
+}
+.ui-shownav .text{
+    font-size: 1.2em;
+    float: left;
+    margin: 15px 0 0 50px;
+}
+.ui-shownav .button{
+    float: right;
+    border: 1px solid #fff;
+    padding: 5px;
+}
+.ui-shownav a:link,
+.ui-shownav a:visited{
+    color: #fff;
+}
+.ui-shownav a:hover,
+.ui-shownav a:active{
+    text-shadow:0 0 10px #fff;
+}
 /*界面容器*/
 
 .ui-mainct {
@@ -272,14 +305,6 @@ input, button, select, textarea {
 
 .ui-mainct-row {
     margin-left: 20px;
-}
-
-
-/*20px小字体列表公用*/
-
-.ui-listct {
-    margin-right: 30px;
-    font-size: 20px
 }
 
 
@@ -318,7 +343,12 @@ input, button, select, textarea {
     padding: 10px 0 0 0;
 
 }
-
+.ui-footer a:link,
+.ui-footer a:visited,
+.ui-footer a:hover,
+.ui-footer a:active{
+    color: #A6A6A6;
+}
 .ui-footer .title {
     color: #C3C3C3;
     font-size: 18px;
@@ -352,6 +382,7 @@ input, button, select, textarea {
 .ui-footer>.logo{
 
 }
+
 
 /*分页*/
 

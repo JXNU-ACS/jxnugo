@@ -19,7 +19,7 @@ app.jinja_env.filters['changeToUserAvatar'] = change
 
 @app.template_filter('changeToUserName')
 def changeUserName(pid):
-    return User.query.filter_by(id=pid).first().name
+    return User.query.filter_by(id=pid).first().userName
 app.jinja_env.filters['changeToUserName'] = changeUserName
 
 
