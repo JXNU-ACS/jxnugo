@@ -16,10 +16,11 @@
 <!--fullpage-->
 <div id="fullpage" class="cantain-fluid ui-index-page">
     <div class="section">
+        
         <div class="row">
             <div class="col-xs-2"></div>
             <div class="col-xs-8 one">
-            <img style="width:100%;" data-src="{{ url_for( 'main.staticfile',filename='images/index/one.svg' )}}">
+            <img style="width:100%;max-width: 1100px;" data-src="{{ url_for( 'main.staticfile',filename='images/index/one.svg' )}}">
         </div>
             <div class="col-xs-2"></div>
         </div>
@@ -29,7 +30,7 @@
         <div class="row">
             <div class="col-xs-2"></div>
             <div class="col-xs-8 two">
-                <img style="width:100%;" data-src="{{ url_for( 'main.staticfile',filename='images/index/two.svg' )}}">
+                <img style="width:100%;max-width: 1100px;" data-src="{{ url_for( 'main.staticfile',filename='images/index/two.svg' )}}">
             <a class="btn btn-default center-block button" href="{{url_for('trade.trade_list')}}" role="button">去围观 →</a>
             </div>
             <div class="col-xs-2"></div>

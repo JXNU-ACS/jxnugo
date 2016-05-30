@@ -13,6 +13,7 @@
                 <div class="col-md-11">
                     <div class="row">
                         <div class="main-comment">
+                            <div class="date"><span class="glyphicon glyphicon-time"></span> {{comment.timestamp | utcChangeToCst}}</div>
                         {{comment.body}}
                         </div>
                     </div>
@@ -23,10 +24,10 @@
                             </div>
                         </div>-->
                         <div class="row">
-                            <div class="title"><a href="#">{{comment.author_id | pidChangeToTitle}}</a></div>
+                            <div class="title"><a href="{{ url_for('trade.trade_detail',goodId=comment.post_id) }}">{{comment.post_id | pidChangeToTitle}}</a></div>
                         </div>
                         <div class="row">
-                            <div class="date"><span class="glyphicon glyphicon-time"></span> {{comment.author_id | pidChangeToTime}}</div>
+                            <div class="date"><span class="glyphicon glyphicon-time"></span> {{comment.post_id | pidChangeToTime}}</div>
                         </div>
                     </div>
                 </div>

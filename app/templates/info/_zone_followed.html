@@ -32,12 +32,16 @@
             <h3><div class="ui-userzone-content-title">ta关注的用户</div></h3>
             </div>
             <div class="ui-userzone-user-follow row">
+                {% if followingAll %}
                 {% for u in followingAll %}
+                <a href="{{ url_for('main.user_zone',username=u.followed_id | changeToUserName)}}">
                 <div class="col-sm-2">
-                    <div class="head-lg center-align" style="background-images:url({{ u.followed_id | changeToUserAvatar }})"></div>
+                    <div class="head-lg center-align" style="background-image:url({{ u.followed_id | changeToUserAvatar }})"></div>
                     <div class="name">{{ u.followed_id | changeToUserName }}</div>
                 </div>
+            </a>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

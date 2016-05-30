@@ -132,7 +132,7 @@
 {% macro listblock(posts)%}
 <!--列表显示模块(带图片)-->
  {% for post in posts %}
-<div class="ui-trade-show-contain case-in fast">
+<div class="ui-trade-show-contain case-in fast" >
     <div class="row" style="padding: 20px 0 10px 20px;">
         <div class="col-sm-3">
             <a href="{{ url_for('main.user_zone',username=post.author.userName) }}">
