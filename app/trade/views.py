@@ -156,6 +156,7 @@ def query_post(problem):
     return render_template('trade/query_posts.html', posts=posts, pagination=pagination,problem=problem)
 
 
+
 @trade.route('/post_category/<posttag>')
 def post_category(posttag):
     page = request.args.get('page', 1, type=int)

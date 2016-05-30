@@ -263,7 +263,7 @@ http://127.0.0.1:5000/api/posts?page=3
 #####7、获取某个用户收藏的帖子     【GET】
 * URL:www.jxnugo.com/api/user_collectionpost/<int:id>
 * 参数：用户id
-* 请求成功的返回值(后台设置最大返回5个帖子)
+* 请求成功的返回值
 
 ```
 {
@@ -717,7 +717,15 @@ http://127.0.0.1:5000/api/posts?page=3
 #####24、帖子搜索功能
 * URL:www.jxnugo.com/api/query_post
 * 参数： 无
-* 请求格式(json)   状态码200
+* 请求格式(json)
+
+```
+    {
+     "keyWords":""
+     }
+
+```
+
 * 返回结果  json
 
 ```
