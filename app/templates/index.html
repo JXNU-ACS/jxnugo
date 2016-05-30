@@ -1,29 +1,40 @@
 {%-extends "base.html" %}
+{%-import "./_macros.html" as macros %}
+{% block title%}
+首页
+{% endblock %}
+
+{% block mainnav %}
+{{ macros.showmainnav(current_user=current_user)}}
+{% endblock %}
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href={{ url_for( 'main.staticfile',filename='css/jquery.fullpage.min.css' )}}>
 {% endblock %}
 {% block content %}
+
+<!--fullpage-->
 <div id="fullpage" class="cantain-fluid ui-index-page">
-    <div class="section one fp-auto-height">
-    	<div class="half" style="background-image:url({{ url_for( 'main.staticfile',filename='images/index/bg.png' )}});padding-bottom:20px">
-    		<div style="padding-top:15%">
-    			<img src="{{ url_for( 'main.staticfile',filename='images/index/JXNU_index.png' )}}" style="width:400px;">
-    		</div>
-    		<div style="color:#fff;text-shadow:0 0 10px #fff;font-size: 50px;margin-top: 19px;">师大闲置发布平台</div>
-    	</div>
-    	
+    <div class="section">
+        <div class="row">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-8 one">
+            <img style="width:100%;" data-src="{{ url_for( 'main.staticfile',filename='images/index/one.svg' )}}">
+        </div>
+            <div class="col-xs-2"></div>
+        </div>
+        
     </div>
-    <div class="section two">
-    	<div class="half">
-    		<div style="height:300px;width:300px;"></div>
-    	</div>
-    	<div class="half" style="padding:5% 0">
-    		<div style="color:#327A6F;font-size: 50px;">
-    			让更多人发现你的闲置
-    		</div>
-    		<div class="center-block" style="width:250px;padding:5px;border-radius:50px;background:#9BB7B4;font-size: 40px;color:#fff;margin-top: 20px"><a href="" style="width:250px;">现在发布</a></div>
-    	</div>
+    <div class="section">
+        <div class="row">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-8 two">
+                <img style="width:100%;" data-src="{{ url_for( 'main.staticfile',filename='images/index/two.svg' )}}">
+            <a class="btn btn-default center-block button" href="{{url_for('trade.trade_list')}}" role="button">去围观 →</a>
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+        
     </div>
     <div class="section three fp-auto-height">
     	{%-import "./_macros.html" as macros %}
@@ -31,14 +42,18 @@
     </div>
 </div>
 {% endblock %}
+
 {% block footer %}
 {% endblock %}
+
 {% block script %}
 <script type="text/javascript" src="{{ url_for( 'main.staticfile',filename='js/jquery.fullPage.min.js' )}}"></script>
 <script type="text/javascript">
 
     $('#fullpage').fullpage({
-    	
+        navigation: true,
+    	navigationPosition: 'right',
+        navigationTooltips: ['First', 'Second']
     });
 </script>
 

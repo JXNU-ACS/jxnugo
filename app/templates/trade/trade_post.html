@@ -20,12 +20,12 @@
                             {{ form.tag()}}
                         </div>
                         <div class="col-sm-9">
-                            {{ form.name(class="ui-form-style ui-post-input",**{"placeholder":"给你要卖的东西起个标题吧"})}}
+                            {{ form.name(class="ui-form-style ui-post-input",**{"placeholder":"给你要卖的东西起个标题吧","require":"true"})}}
                         </div>
                     </div>
                     <div class="row ui-post-row">
                         <div class="col-sm-8">
-                            {{ form.price(class="ui-form-style ui-post-input",**{"placeholder":"出售的价格"})}}
+                            {{ form.price(class="ui-form-style ui-post-input",**{"placeholder":"出售的价格","require":"true"})}}
                         </div>
                         <div class="col-sm-4 tips">*价格必填</div>
                     </div>
@@ -57,13 +57,13 @@
                     </div>
                     <div class="row ui-post-row">
                         <div class="col-sm-8">
-                            {{ form.mycontact(class="ui-form-style ui-post-input",**{"placeholder":"联系方式"})}}
+                            {{ form.mycontact(class="ui-form-style ui-post-input",**{"placeholder":"联系方式","require":"true"})}}
                         </div>
                         <div class="col-sm-4 tips">
                             *联系方式，必填</div>
                     </div>
                     <div class="row ui-post-row">
-                        {{ form.body(class="ui-form-style ui-post-input",**{"placeholder":"商品描述"})}} 
+                        {{ form.body(class="ui-form-style ui-post-input",**{"placeholder":"商品描述","require":"true"})}} 
                         {{ form.img(style="display:none;",class="imgjson") }}
                     </div>
                     <div class="row ui-post-row" data-ariapannel="uploadaira">
@@ -116,6 +116,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
     var upload = Qiniu.uploader(uploaderoption)
+    var ui = new UI();
+    ui.formValidation();
 })
 </script>
 {{ super() }}

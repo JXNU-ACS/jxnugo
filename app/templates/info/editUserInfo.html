@@ -1,10 +1,13 @@
-{%-extends "base.html" %} {%-block nav %}
+{%-extends "./base.html" %} {%-block nav %}
 <style>
 body {
     padding-top: 100px;
 }
 </style>
-{% endblock %} {% block content %}
+
+{% endblock %} 
+{% block title %}修改信息{% endblock %}
+{% block content %}
 <div class="cantain-fluid">
     <div class="ui-mainct">
         <div class="ui-panel">
@@ -18,18 +21,18 @@ body {
                 	
                 	<div class="col-sm-8">
                 		{{form.hidden_tag()}}
-                            {{form.avatar(style="display:none")}}
+                            {{form.avatar(style="display:none",**{"value":user.avatar})}}
                 		<div class="ui-edinfo-row">
-                			{{form.name(class="ui-form-style ui-edinfo-input",**{"placeholder":"昵称"})}}
+                			{{form.name(class="ui-form-style ui-edinfo-input",**{"placeholder":"昵称","min":"0","max":"10","require":"true"})}}
                 		</div>
                 		<div class="ui-edinfo-row">
-                			{{form.location(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的位置"})}}
+                			{{form.location(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的位置","min":"0","max":"10","require":"true"})}}
                 		</div>
                         <div class="ui-edinfo-row">
-                            {{form.mycontact(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的联系方式"})}}
+                            {{form.mycontact(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的联系方式","min":"0","max":"15","require":"true"})}}
                         </div>
                         <div class="ui-edinfo-row">
-                			{{form.about_me(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的签名"})}}
+                			{{form.about_me(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的签名","min":"0","max":"30","require":"true"})}}
                 		</div>
                         
                         
@@ -81,6 +84,8 @@ body {
 
 $(document).ready(function(){
     var upload = Qiniu.uploader(userimgupload)
+    var ui = new UI();
+    ui.formValidation();
 })
     
 </script>

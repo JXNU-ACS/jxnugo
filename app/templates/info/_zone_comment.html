@@ -13,7 +13,7 @@
                 <div class="col-md-11">
                     <div class="row">
                         <div class="main-comment">
-                        	回复 {{comment.body}}
+                        {{comment.body}}
                         </div>
                     </div>
                     <div class="comment-block">
@@ -23,10 +23,10 @@
                             </div>
                         </div>-->
                         <div class="row">
-                            <div class="title"><a href="#">帖子标题</a></div>
+                            <div class="title"><a href="#">{{comment.author_id | pidChangeToTitle}}</a></div>
                         </div>
                         <div class="row">
-                            <div class="date"><span class="glyphicon glyphicon-time"></span> 2016年</div>
+                            <div class="date"><span class="glyphicon glyphicon-time"></span> {{comment.author_id | pidChangeToTime}}</div>
                         </div>
                     </div>
                 </div>

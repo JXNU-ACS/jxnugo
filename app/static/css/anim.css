@@ -57,6 +57,16 @@
 		transform:translatey(-49px);
 	}
 }
+@keyframes roll{
+	from{
+		background-position: 0 0;
+		
+	}
+	to{
+		background-position: 100% 0;
+		
+	}
+}
 /*----------------动画------------------*/
 /* 弃用
 .list-collapse-close{

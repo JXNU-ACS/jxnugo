@@ -1,4 +1,21 @@
 {%-extends "./base.html" %}
+{%-import "./_macros.html" as macros %}
+
+{%-block nav %}
+        <style type="text/css">
+        body{
+            padding-top:300px;
+            overflow-y:hidden;
+            background: #9BB7B4;
+        }
+        </style>
+
+{% endblock %}
+
+{% block mainnav %}
+{{ macros.showmainnav(current_user=current_user)}}
+{% endblock %}
+
 {% block content %}
 <div class="cantain-fluid" style="">
     	<div class="ui-passport-main-pannel">
@@ -17,42 +34,39 @@
             <div class="ui-passport-main-pannel-form center-align "  data-ariapannel="pass_login">
 
     			<form action="/login" method="post">
-    				<div class="input-group">
+    				<div class="input-group case-in">
                         {{loginform.hidden_tag()}}
-    					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                        {{ loginform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"}) }}
+    					<span class="glyphicon glyphicon-user"></span>
+                        {{ loginform.userName(class="input",**{"placeholder":"用户名"}) }}
                     </div>
-    				<div class="input-group">
-    					<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
-                        {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
+    				<div class="input-group case-in">
+    					<span class="glyphicon glyphicon-lock"></span>
+                        {{loginform.passWord(class="input",**{"placeholder":"密码"}) }}
     				</div>
-                    <div>{{loginform.rememberMe()}} 记住我</div>
-    				<div>{{ loginform.submit(class="btn btn-info center-block") }}</div>
+                    <div class="input-group case-in" style="display: inline;">{{loginform.rememberMe()}} 记住我</div>
+    				{{ loginform.submit(class="case-in button center-block ui-form-style") }}
     			</form>
     		</div>
             <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariapannel="pass_reg" >
                 <form action="/register" method="post">
                     {{registerform.hidden_tag()}}
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                        {{registerform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"})}}
+                    <div class="input-group case-in">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {{registerform.userName(class="input",**{"placeholder":"用户名"})}}
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon2">@</span>
-
-                        {{registerform.email(class="form-control",**{"placeholder":"邮箱","aria-describedby":"basic-addon2"})}}
+                    <div class="input-group case-in">
+                        <span>@</span>
+                        {{registerform.email(class="input",**{"placeholder":"邮箱"})}}
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon3"><span class="glyphicon glyphicon-lock"></span></span>
-                        {{registerform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon3"})}}
+                    <div class="input-group case-in">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        {{registerform.passWord(class="input",**{"placeholder":"密码"})}}
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-lock"></span></span>
-
-
-                        {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4"})}}
+                    <div class="input-group case-in">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        {{registerform.confirm(class="input",**{"placeholder":"确认密码"})}}
                     </div>
-                    <div>{{ registerform.submit(class="btn btn-info center-block") }}</div>
+                    {{ registerform.submit(class="case-in button center-block ui-form-style") }}
                 </form>
             </div>
 
@@ -62,6 +76,10 @@
 
 
 {% endblock %}
+
+{% block footer %}
+{% endblock %}
+
 {% block script %}
 <script type="text/javascript">
 ui = new UI();
@@ -70,6 +88,7 @@ ui.slideBlock({
     slideBlock:".slideBlock-passport"
 })
 $(".cantain-fluid").height($(window).height()-100)
+ui.formValidation();
 /*
 (function(){
 

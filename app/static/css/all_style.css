@@ -1,4 +1,4 @@
-/*---------------集体属性------------*/
+/*---------------集体属性------------
 .ui-trade-detail-rightlist::after,
 .ui-trade-detail-userinfo .sign::after,
 .ui-userzone-content-datelinebody .text::after,
@@ -8,17 +8,40 @@
     padding:0 20px 1px 55px;
     position:absolute;
 }
-
+*/
 
 
 /*------------主页---------------*/
-.ui-index-page{
-
+.ui-index-page .section{
+    background: #9BB7B4;
 }
 .ui-index-page .two,
 .ui-index-page .one{
-    background: #fff;
     text-align: center;
+}/*
+.ui-index-page .one{
+    height: calc(100% - 300px);
+}
+.ui-index-page .two{
+    height: calc(100% - 600px);
+}*/
+.ui-index-page .two .button{
+    width: 20%;
+    font-size: 2.5em;
+    color: #9BB7B4;
+    position: relative;
+    top: -30%;
+    border-radius: 0;
+    left: 2%
+}
+.ui-index-page .one .text{
+    /*-webkit-flex:1 2 auto;
+    flex:1 2 auto;*/
+    color:#fff;
+    position: relative;
+    top: 210px;
+    left: -50px;
+    white-space:nowrap;
 }
 .ui-index-page .half{
     height: 50%;
@@ -234,6 +257,8 @@
     position:relative;
     line-height:1.4em;
     height:4.2em;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -270,7 +295,7 @@
 .ui-trade-detail-comment-input {
     width: 100%;
     height: 200px;
-    border-radius: 20px;
+    
     overflow: hidden;
     margin-bottom: 50px;
 }
@@ -279,8 +304,7 @@
     height: 150px;
     padding: 20px;
     font-size: 20px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+    
     border: 1px solid #eee;
 
 }
@@ -288,7 +312,7 @@
     position: relative;
     top: -5px;
     width: 100%;
-    height: 50px;
+    height: 40px;
     background: #9BB7B4;
 }
 .ui-trade-detail-comment-input .bottom{
@@ -368,34 +392,65 @@
 /*-------------登录/注册界面==============*/
 
 .ui-passport-main-pannel {
-    background-color: #fff;
-    box-shadow: 0 0 10px #eee;
+    background-color: rgba(61, 61, 61, 0.52);
+    box-shadow: 0 0 10px #141414;
     width: 500px;
     padding: 20px;
     margin: auto;
-    margin-top: 200px;
 }
 
 .ui-passport-main-pannel-tag {
     text-align: center;
     padding: 0 0 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.26);
 }
-
+.ui-passport-main-pannel-tag a:link,
+.ui-passport-main-pannel-tag a:visited{
+    color: rgba(255, 255, 255, 0.71);
+}
+.ui-passport-main-pannel-tag a:hover,
+.ui-passport-main-pannel-tag a:active{
+    text-shadow:0 0 5px #fff;
+}
 .ui-passport-main-pannel-tag>div {
     font-size: 20px;
 }
 
 .ui-passport-main-pannel-form div {
-    margin: 30px 0 30px 0;
     height: 30px;
-    width: 300px;
-    -webkit-transition: all .5s case-in;
-    -moz-transition: all .5s case-in;
-    transition: all .5s case-in;
+}
+.ui-passport-main-pannel-form .input-group{
+    padding-left:5%;
+    margin: 30px 0 30px 0;
+}
+.ui-passport-main-pannel-form .input-group:hover{
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.39);
+    border-color: rgba(255, 255, 255, 0.39);
+}
+.ui-passport-main-pannel-form .button{
+    padding: 2% 0;
+    margin: 30px 0;
+    border: 0;
+    font-size: 1.1em;
+}
+.ui-passport-main-pannel-form .button:hover{
+    background: rgba(38, 38, 38, 0.69);
 }
 
-
+.ui-passport-main-pannel-form .button,
+.ui-passport-main-pannel-form .input-group{
+    width: 300px;
+    background: rgba(38, 38, 38, 0.29);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.39);
+    color: rgba(255, 255, 255, 0.76);
+    border-radius: 2%;
+}
+.ui-passport-main-pannel-form .input{
+    background: transparent;
+    width: 85%;
+    border: 0;
+    padding: 1em;
+}
 /*-----------end-----------------*/
 
 
@@ -490,7 +545,7 @@
     height: 180px;
     position: absolute;
     left: 50px;
-    top: -50px;
+    top: -70px;
     background-color: #DADBD4;
     background-size: cover;
     border-radius: 20%;
@@ -501,14 +556,15 @@
     color: #fff;
     position: absolute;
     left: 270px;
-    top:15px;
-    font-size: 20px;
+    top:17px;
+    font-size: 18px;
     width: 50%;
+    white-space: nowrap;
 }
 
 .ui-userzone-user-signature>span {
     text-overflow: ellipsis;
-    font-size: 40px;
+    font-size: 30px;
     color: #fff;
     max-width: 200px;
     min-height: 150px;
