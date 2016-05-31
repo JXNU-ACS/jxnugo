@@ -127,7 +127,7 @@ def update_userInfo():
     user.location=userInfo['location']
     user.sex=userInfo['sex']
     user.about_me=userInfo['about_me']
-    user.contact=userInfo['contact']
+    user.contactMe=userInfo['contact']
     user.avatar=userInfo['avatar']
     db.session.add(user)
     db.session.commit()
