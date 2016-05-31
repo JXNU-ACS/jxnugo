@@ -12,8 +12,12 @@
 
 
 /*------------主页---------------*/
+.ui-index-page{
+    
+}
 .ui-index-page .section{
-    background: #9BB7B4;
+    background: rgba(40, 40, 40, 0.54);
+    
 }
 .ui-index-page .two,
 .ui-index-page .one{
@@ -59,6 +63,10 @@
 .ui-trade-show {
     
 }
+.ui-trade-show span{
+    display: inline-block;
+    vertical-align: top;
+}
 .ui-trade-error{
     font-size: 30px;
     padding: 10% 40%;
@@ -69,11 +77,11 @@
 
 
 .ui-trade-show-contain {
-    margin: 18px;
+    margin:20px 14px;
     width: 280px;
     box-shadow: 0 1px 2px #DED1C4;
     background:#fff;
-    display: inline-block;
+    
     
     
 }
@@ -401,7 +409,7 @@
     box-shadow: 0 0 10px #141414;
     width: 500px;
     padding: 20px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .ui-passport-main-pannel-tag {

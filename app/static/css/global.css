@@ -266,24 +266,25 @@ input, button, select, textarea {
 
 /*展示型导航*/
 .ui-shownav{
-    background: rgba(5, 5, 5, 0.44);
-    height: 140px;
-    
+    background: rgba(5, 5, 5, 0.44);   
 }
 .ui-shownav .nav-content{
-    margin: 50px auto 0 auto;
+    margin: 0 auto;
+    padding: 1% 0;
     text-align: center;
     width: 950px;
+    overflow: hidden;
 }
 .ui-shownav .text{
     font-size: 1.2em;
     float: left;
-    margin: 15px 0 0 50px;
+    margin: 1% 0 0 50px;
+    padding: 5px;
 }
 .ui-shownav .button{
     float: right;
     border: 1px solid #fff;
-    padding: 5px;
+    
 }
 .ui-shownav a:link,
 .ui-shownav a:visited{
