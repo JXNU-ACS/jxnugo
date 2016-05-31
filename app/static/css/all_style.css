@@ -409,7 +409,7 @@
     box-shadow: 0 0 10px #141414;
     width: 500px;
     padding: 20px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .ui-passport-main-pannel-tag {

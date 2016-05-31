@@ -6,9 +6,10 @@
 {%-block nav %}
         <style type="text/css">
         body{
-            padding-top:300px;
             overflow-y:hidden;
-            background: #9BB7B4;
+            background-size: cover;
+            background-attachment:fixed;
+            background-image: url("static/images/index/bg1.jpg");
         }
         </style>
 
@@ -19,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="cantain-fluid" style="">
+<div class="cantain-fluid" style="background: rgba(5, 5, 5, 0.44);padding-top: 10%">
     	<div class="ui-passport-main-pannel">
     		<div class="ui-passport-main-pannel-tag row">
 
@@ -89,7 +90,7 @@ ui.slideBlock({
     originPosition:"#pass_login",
     slideBlock:".slideBlock-passport"
 })
-$(".cantain-fluid").height($(window).height()-100)
+$(".cantain-fluid").height($(window).height())
 ui.formValidation();
 /*
 (function(){
