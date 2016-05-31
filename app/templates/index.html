@@ -1,7 +1,19 @@
 {%-extends "base.html" %}
 {%-import "./_macros.html" as macros %}
+
 {% block title%}
 首页
+{% endblock %}
+
+{%-block nav %}
+        <style type="text/css">
+        body{
+            background-size: cover;
+            background-attachment:fixed;
+            background-image: url("static/images/index/bg1.jpg");
+        }
+        </style>
+
 {% endblock %}
 
 {% block mainnav %}
@@ -16,7 +28,7 @@
 <!--fullpage-->
 <div id="fullpage" class="cantain-fluid ui-index-page">
     <div class="section">
-        
+
         <div class="row">
             <div class="col-xs-2"></div>
             <div class="col-xs-8 one">

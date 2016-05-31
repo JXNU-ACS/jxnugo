@@ -4,18 +4,21 @@
 {% block content %}
 <div class="container-fluid">
     <div class="ui-mainct">
-        <div class="row">
-            {% block trade_tip%}<!--查询模版的提示-->
+        
+            {% block trade_tip%}{#--查询模版的提示--#}
                 {% endblock %}
                 {% if posts %} 
-            <div class="ui-trade-show">
-                
-                {{ macros.listblock(posts)}}
+            <div id="waterfall-container" class="ui-trade-show">
+                <span id="waterFallColumn_1"></span>
+                <span id="waterFallColumn_2"></span>
+                <span id="waterFallColumn_3"></span>
+                <span id="waterFallColumn_4"></span>
+                {#{ macros.listblock(posts)}#}
             </div>
             {% else %}
             <div class="ui-trade-error">:)<br>然而什么都没有</div>
             {% endif %}
-        </div>
+        
     </div>
 </div>
 </div>
@@ -24,4 +27,10 @@
     {{ macros.pagination_widget(pagination,'.trade_list')}}
 </div>
 </div>
+{% endblock %}
+{% block script %}
+{{ super() }}
+{% import "./_js_macros.html" as jsnode %}
+{{ jsnode.colListJsNode(posts) }}
+
 {% endblock %}
