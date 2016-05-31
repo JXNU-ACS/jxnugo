@@ -23,7 +23,6 @@ def changeUserName(pid):
 app.jinja_env.filters['changeToUserName'] = changeUserName
 
 
-
 @app.template_filter('utcChangeToCst')
 def changeTime(utcTime):
     from_zone = tz.gettz('UTC')
