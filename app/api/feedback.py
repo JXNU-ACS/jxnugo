@@ -20,6 +20,7 @@ def feedback():
 def get_notice():
     f = open('notice.txt', 'r')
     content = f.read()
-    response = jsonify({'notice': content})
+    str_content = str(content)
+    response = jsonify({'notice': str_content})
     response.code_status = 200
     return response
