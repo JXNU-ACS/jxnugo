@@ -39,7 +39,7 @@ def login():
 def register():
     registerform=registerForm()
     if registerform.validate_on_submit():
-        regUser=User(id=getPrimaryKeyId('isUser'), userName=registerform.userName.data, name='jxnugo_'+str(getPrimaryKeyId('isUser')), userEmail=registerform.email.data,passWord=registerform.passWord.data)
+        regUser=User(id=getPrimaryKeyId('isUser'), userName=registerform.userName.data, name='jxnugo_'+str(getPrimaryKeyId('isUser')), userEmail=registerform.email.data, passWord=registerform.regpassWord.data)
         db.session.add(regUser)
         db.session.commit()
         token=regUser.generate_confirmation_token()
