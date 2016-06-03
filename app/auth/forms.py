@@ -16,7 +16,7 @@ class loginForm(Form):
 class registerForm(Form):
     userName=StringField(validators=[Required()])
     email=StringField(validators=[Email(), Required()])
-    passWord=PasswordField(validators=[Required(), EqualTo('confirm',message=u'两次密码必须一样')])
+    regpassWord=PasswordField(validators=[Required(), EqualTo('confirm',message=u'两次密码必须一样')])
     confirm=PasswordField(validators=[Required()])
     submit=SubmitField(u'注册')
 

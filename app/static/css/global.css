@@ -408,19 +408,33 @@ input, button, select, textarea {
 }
 
 .center-align {
+    /*
     display: -moz-box;
-    /* Firefox */
+    /* Firefox 
     display: -webkit-box;
-    /* Safari and Chrome */
+    /* Safari and Chrome 
     display: -ms-flexbox;
-    /* Internet Explorer 10 */
+    /* Internet Explorer 10 
     display: box;
     -webkit-box-align: center;
     -webkit-box-pack: center;
     -ms-flex-align: center;
     -ms-flex-pack: center;
     -moz-box-align: center;
-    -moz-box-pack: center;
+    -moz-box-pack: center;*/
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items:center;
+    align-items:center;
+    -webkit-justify-content:center;
+    justify-content:center;
+}
+.vertical-align{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items:center;
+    align-items:center;
 }
 
 .blur {

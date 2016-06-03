@@ -44,25 +44,45 @@ function UI() {
             if(c){
                 clearInterval(a);
             }
+            $(".modal-body").empty()
         }).ready(func);
     };
-    //表单验证器
-    this.formValidation = function(){
+    //表单验证器(jqattr指表单form)
+    this.formValidation = function(jqattr){
         var self = this;
-        
-        $("form").submit(function(){
-            var can_submit = 1;
-            
-            $('[require="true"]').each(function(){
-                if($(this).val() == "" || $(this).val()== null){
-                    $(this).attr("style","border-color:#FF7C6A;")
-                    can_submit = 0;
-                }else $(this).attr("style","border-color:#eee;")
-            })
-            if(can_submit == 1)return true;
+        jqattr.submit(function(){
+            if(self.difFormTip(jqattr))return true;
             else return false;
         })
         
+    };
+    //不同的表单验证提示
+    this.difFormTip = function(jqattr){
+        var tips = "";
+        var offset = "padding: 5% 0;right:10px"
+        var is_ok = true;
+        jqattr.find('[require="true"]').each(function(){
+            $(this).nextAll("span").remove();
+                if($(this).val() == "" || $(this).val()== null || $(this).val() == false ||$('[name="regpassWord"]').val() != $('[name="confirm"]').val()){
+                    if($(this).attr("type") == "text") tips = "没填写的说";
+                    if($(this).attr("type") == "checkbox"){
+                        tips = "没选择的说";
+                        offset = "padding:0 25px";
+                    }
+                    if($(this).attr("type") == "password"){
+                        if($(this).val() == "" || $(this).val()== null) tips = "傻屌忘记输密码啦！";
+                        if($('[name="regpassWord"]').val() != $('[name="confirm"]').val()) tips = "傻屌这个和下面不一样";
+                    }
+                    $(this).attr("style","border-color:#FF7C6A;").focusin(function(){
+                        $(this).nextAll("span").remove();
+                    })
+                    $(this).parent().append("<span style='color:#FF7C6A;position: absolute;white-space: nowrap;"+offset+"'>"+tips+"</span>")
+                    is_ok = false;
+                }else{
+                    $(this).attr("style","border-color:#eee;")
+                }
+        })
+        return is_ok;
     };
 
 }
@@ -103,21 +123,6 @@ UI.prototype.selectPannel = function(jqobj){
         })
         return a;
 }
-//仅作用于trade_list，能复用的时候再改吧
-UI.prototype.listToggle = function() {
-    var s = 0
-    $('.btn-list-toggle').click(function() {
-        if (s == 1) {
-            $(".ui-trade-show").removeClass("contain-shrink").addClass("contain-extend")
-            $(".ui-trade-show-contain-headbg").removeClass("fade-out").addClass("fade-in")
-            s = 0
-        } else {
-            $(".ui-trade-show").removeClass("contain-extend").addClass("contain-shrink")
-            $(".ui-trade-show-contain-headbg").removeClass("fade-in").addClass("fade-out")
-            s = 1
-        }
-    })
-};
 //在支持的但是没开启的浏览器下有bug
 UI.prototype.sticky = function(config) {
     var a = config.offsetY;
