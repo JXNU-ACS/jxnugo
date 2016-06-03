@@ -63,7 +63,7 @@
                             *联系方式，必填</div>
                     </div>
                     <div class="row ui-post-row">
-                        {{ form.body(class="ui-form-style ui-post-input",**{"placeholder":"商品描述","require":"true"})}} 
+                        {{ form.body(class="ui-form-style ui-post-input",**{"placeholder":"商品描述"})}} 
                         {{ form.img(style="display:none;",class="imgjson") }}
                     </div>
                     <div class="row ui-post-row" data-ariapannel="uploadaira">
@@ -117,7 +117,7 @@
 $(document).ready(function() {
     var upload = Qiniu.uploader(uploaderoption)
     var ui = new UI();
-    ui.formValidation();
+    ui.formValidation($("form"));
 })
 </script>
 {{ super() }}
