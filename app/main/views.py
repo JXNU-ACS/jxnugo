@@ -17,6 +17,7 @@ def user_processor():
         return User.query.filter_by(id=pid).first().userName
     return dict(username=username)
 
+
 @main.route('/')
 def indexof():
     return render_template('index.html')
@@ -24,8 +25,6 @@ def indexof():
 
 @main.route('/index')
 def index():
-    real_ip = request.headers.get('X-Real-Ip', request.remote_addr)
-    print real_ip
     return render_template('index.html')
 
 

@@ -63,17 +63,15 @@ function UI() {
         var is_ok = true;
         jqattr.find('[require="true"]').each(function(){
             $(this).nextAll("span").remove();
-            console.log($(this).val())
-                if($(this).val() == "" || $(this).val()== null || $(this).val() == false ||$('[name="regpassWord"]').val() != $('[name="confirm"]').val() || $('input:checkbox').val() == false){
-                    
-                    if($(this).attr("type") == "text") tips = "没填写的说";
-                    if($(this).attr("type") == "checkbox" ){
-                        tips = "没选择的说";
+                if($(this).val() == "" || $(this).val()== null || $(this).val() == false ||$('[name="regpassWord"]').val() != $('[name="confirm"]').val()){
+                    if($(this).attr("type") == "text") tips = "没填写";
+                    if($(this).attr("type") == "checkbox"){
+                        tips = "没选择";
                         offset = "padding:0 25px";
                     }
                     if($(this).attr("type") == "password"){
-                        if($(this).val() == "" || $(this).val()== null) tips = "傻屌忘记输密码啦！";
-                        if($('[name="regpassWord"]').val() != $('[name="confirm"]').val()) tips = "傻屌这个和确认密码不一样";
+                        if($(this).val() == "" || $(this).val()== null) tips = "忘记输密码啦！";
+                        if($('[name="regpassWord"]').val() != $('[name="confirm"]').val()) tips = "这个和下面不一样";
                     }
                     $(this).attr("style","border-color:#FF7C6A;").focusin(function(){
                         $(this).nextAll("span").remove();
