@@ -13,7 +13,7 @@ var uploaderoption = {
     max_retries: 3, 
     dragdrop: true, 
     drop_element: 'upload-aira', 
-    chunk_size: '1024kb', 
+    chunk_size: '10mb', 
     auto_start: true, 
 
     multi_selection: false, 

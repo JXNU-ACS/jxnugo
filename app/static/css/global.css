@@ -299,8 +299,6 @@ input, button, select, textarea {
 .ui-mainct {
     width: 1250px;
     margin: auto;
-    margin-top: 15px;
-    padding: 0 0 80px 0;
 }
 
 .ui-mainct-row {
@@ -338,9 +336,8 @@ input, button, select, textarea {
 /*足*/
 
 .ui-footer {
-    height: 400px;
+    height: 300px;
     background: #454545;
-    padding: 10px 0 0 0;
 
 }
 .ui-footer a:link,
@@ -370,7 +367,6 @@ input, button, select, textarea {
     border-radius: 10px;
 }
 .ui-footer .buttom-side{
-    background: #333;
     text-align: center;
     font-size: 1em;
     
