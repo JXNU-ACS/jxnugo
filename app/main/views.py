@@ -5,10 +5,8 @@ from . import main
 from .. import db
 from forms import EditProfileForm, EditProfileAdminForm
 from flask.ext.login import login_required, current_user
-from ..models import Permission, User, Role, Post,Follow,collectionPosts,Comment
-from qiniu import Auth,put_file,etag,urlsafe_base64_encode
-import qiniu.config
-from uuid import uuid4
+from ..models import Permission, User, Role, Post, Comment
+from qiniu import Auth, put_file, etag, urlsafe_base64_encode
 
 
 @main.context_processor
@@ -45,29 +43,27 @@ def staticfile(filename):
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(userName=username).first()
-    comments=Comment.query.filter_by(author_id=user.id).all()
+    comments = Comment.query.filter_by(author_id=user.id).all()
     if user is None:
         abort(404)
-    return render_template('info/user.html', user=user,comments=comments)
+    return render_template('info/user.html', user=user, comments=comments)
 
 
 @main.route('/user_zone/<username>')
 def user_zone(username):
     user = User.query.filter_by(userName=username).first()
-    followersTen=user.followers.limit(10)
-    followingTen=user.followed.limit(10)
-    followersAll=user.followers.all()
-    followingAll=user.followed.all()
-    postFive=Post.query.filter_by(author_id=user.id).limit(5)
-    collectionFive=user.collectionPost.limit(5)
-    collectionAll=user.collectionPost.all()
-    comments=Comment.query.filter_by(author_id=user.id).all()
+    followersTen = user.followers.limit(10)
+    followingTen = user.followed.limit(10)
+    followersAll = user.followers.all()
+    followingAll = user.followed.all()
+    postFive = Post.query.filter_by(author_id=user.id).limit(5)
+    collectionFive = user.collectionPost.limit(5)
+    collectionAll = user.collectionPost.all()
     posts = Post.query.filter_by(author_id=user.id).all()
-    comments=Comment.query.filter_by(author_id=user.id).all()
+    comments = Comment.query.filter_by(author_id=user.id).all()
     if user is None:
         abort(404)
-
-    return render_template('info/user_zone.html',user=user,comments=comments, posts=posts,postFive=postFive,collectionAll=collectionAll,collectionFive=collectionFive, followersTen=followersTen, followersAll=followersAll, followingTen=followingTen,followingAll=followingAll)
+    return render_template('info/user_zone.html', user=user, comments=comments, posts=posts, postFive=postFive, collectionAll=collectionAll, collectionFive=collectionFive, followersTen=followersTen, followersAll=followersAll, followingTen=followingTen,followingAll=followingAll)
 
 
 @main.route('/editUserInfo', methods=['GET', 'POST'])
@@ -87,11 +83,11 @@ def editUserInfo():
     return render_template('info/editUserInfo.html', form=form,user=user)
 
 
-@main.route('/show_user',methods=['GET','POST'])
+@main.route('/show_user',methods=['GET', 'POST'])
 @login_required
 @admin_required
 def show_user():
-    users=User.query.all()
+    users = User.query.all()
     return render_template('info/show_user.html', users=users)
 
 
@@ -117,16 +113,16 @@ def editUserInfoAdmin(pid):
     return render_template('info/editUserInfoAdmin.html',form=form,pid=user.id)
 
 
-@main.route('/get_upload_token',methods=['GET'])
+@main.route('/get_upload_token', methods=['GET'])
 def get_upload_token():
-    q=Auth(current_app.config['QINIU_ACCESS_KEY'], current_app.config['QINIU_SECRET_KEY'])
-    bucket_name='trade'
-    key=None
-    policy={
+    q = Auth(current_app.config['QINIU_ACCESS_KEY'], current_app.config['QINIU_SECRET_KEY'])
+    bucket_name = 'trade'
+    key = None
+    policy = {
          "scope": "trade"
     }
 
-    upload_token=q.upload_token(bucket_name,key,3600,policy)
+    upload_token = q.upload_token(bucket_name, key, 3600, policy)
     return jsonify({'uptoken': upload_token})
 
 
@@ -134,7 +130,7 @@ def get_upload_token():
 @login_required
 @permission_required(Permission.FOLLOW)
 def follow(username):
-    user=User.query.filter_by(userName=username).first()
+    user = User.query.filter_by(userName=username).first()
     if user is None:
         flash(u'没有该用户,关注失败')
     if current_user.is_following(user):
@@ -142,19 +138,19 @@ def follow(username):
         return redirect(url_for('trade.trade_list'))
     current_user.follow(user)
     flash(u'成功关注%s' % username)
-    return redirect(url_for('main.user_zone',username=username))
+    return redirect(url_for('main.user_zone', username=username))
 
 
 @main.route('/unfollow/<username>')
 @login_required
 @permission_required(Permission.FOLLOW)
 def unfollow(username):
-    user=User.query.filter_by(userName=username).first()
+    user = User.query.filter_by(userName=username).first()
     if user is None:
         flash(u'没有该用户')
     current_user.unfollow(user)
     flash(u'成功取消对%s的关注' % username)
-    return redirect(url_for('main.user_zone',username=username))
+    return redirect(url_for('main.user_zone', username=username))
 
 
 @main.route('/followers/<username>')
