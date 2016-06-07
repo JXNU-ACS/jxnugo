@@ -186,3 +186,7 @@ def followed_by(username):
                            endpoint='.followed_by', pagination=pagination,
                            follows=follows,)
 
+
+@main.route('/about_us')
+def about_us():
+    return render_template('about_us.html')
