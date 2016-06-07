@@ -17,38 +17,36 @@ def passport():
     return render_template('auth/passport.html',loginform=loginform,registerform=registerform)
 
 
-@auth.route('/login',methods=['GET','POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
-    loginform=loginForm()
+    loginform = loginForm()
     db.create_all()
     if loginform.validate_on_submit():
-        user=User.query.filter_by(userEmail=loginform.userName.data).first()
+        user = User.query.filter_by(userEmail=loginform.userName.data).first()
         if user is None:
             user=User.query.filter_by(userName=loginform.userName.data).first()
         if user is not None and user.verify_passWord(loginform.passWord.data):
             login_user(user,loginform.rememberMe.data)
-            return redirect(url_for('main.index'))
+            return redirect(url_for('trade.trade_list'))
         else:
             flash(u'用户名或密码错误','bg-warning')
-            return redirect(url_for('auth.passport',_external=True))
-    print 'error'
+            return redirect(url_for('auth.passport', _external=True))
     return redirect(url_for('auth.passport', _external=True))
 
 
-@auth.route('/register',methods=['GET','POST'])
+@auth.route('/register',methods=['GET', 'POST'])
 def register():
-    registerform=registerForm()
+    registerform = registerForm()
     if registerform.validate_on_submit():
-        regUser=User(id=getPrimaryKeyId('isUser'), userName=registerform.userName.data, name='jxnugo_'+str(getPrimaryKeyId('isUser')), userEmail=registerform.email.data, passWord=registerform.regpassWord.data)
+        regUser = User(id=getPrimaryKeyId('isUser'), userName=registerform.userName.data, name='jxnugo_'+str(getPrimaryKeyId('isUser')), userEmail=registerform.email.data, passWord=registerform.regpassWord.data)
         db.session.add(regUser)
         db.session.commit()
-        token=regUser.generate_confirmation_token()
-        send_email(regUser.userEmail,'激活你的账户',
+        token = regUser.generate_confirmation_token()
+        send_email(regUser.userEmail, '激活你的账户',
                    'auth/email/confirm', User=regUser, token=token
                    )
         flash(u'注册成功,账户激活信息已经发送到您的邮件!')
         return redirect(url_for('auth.passport', _external=True))
-    print 'reer'
     return redirect(url_for('auth.passport', _external=True))
 
 
@@ -65,12 +63,12 @@ def logout():
 def confirm(token):
     s=Serializer(configs[ENV].SECRET_KEY)
     try:
-        recvData=s.loads(token)
+        recvData = s.loads(token)
     except:
         abort(404)
-    RecvId=recvData.get('confirm')
+    RecvId = recvData.get('confirm')
     u = User.query.filter_by(id=RecvId).first_or_404()
-    u.confirmed=True
+    u.confirmed = True
     db.session.add(u)
     db.session.commit()
     flash(u'恭喜您完成账号激活')
@@ -80,7 +78,7 @@ def confirm(token):
 @auth.route('/confirm')
 @login_required
 def resend_email():
-    token=current_user.generate_confirmation_token()
+    token = current_user.generate_confirmation_token()
     send_email(current_user.userEmail,'激活你的账户','auth/email/confirm',User=current_user,token=token)
     flash(u'激活邮件已经发送到您的账户')
     return redirect(url_for('trade.trade_list'))
