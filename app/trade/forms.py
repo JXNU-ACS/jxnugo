@@ -29,3 +29,8 @@ class CommentForm(Form):
 class SearchForm(Form):
     querybody = StringField(u'查询内容',)
     submit = SubmitField(u'查询')
+
+
+class deleteForm(Form):
+    pid = IntegerField(u'帖子id', validators=[Required()])
+    submit = SubmitField(u'删除')

@@ -1,0 +1,12 @@
+{%-extends "base.html" %}
+{% block content %}
+    <form action="post_delete" method="post" style="padding-top: 100px;">
+        <div class="input-group case-in">
+            {{form.hidden_tag()}}
+            <span class="glyphicon glyphicon-user"></span>
+            {{ form.pid(class="input",**{"placeholder":"帖子id","require":"true"}) }}
+        </div>
+        {{ form.submit(class="case-in button center-block ui-form-style") }}
+    </form>
+
+{% endblock %}

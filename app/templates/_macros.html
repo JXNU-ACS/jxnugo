@@ -83,6 +83,8 @@
                     {% if current_user.role_id==2 %}
                     <a href="{{ url_for('main.show_user') }}">
                     <div class="item case-in">用户管理</div></a>
+                    <a href="{{ url_for('trade.post_delete') }}">
+                    <div class="item case-in">帖子管理</div></a>
                     {% endif %}
                     <a href="{{url_for('auth.logout')}}">
                     <div class="item case-in">登出</div></a>
