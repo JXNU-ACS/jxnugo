@@ -37,7 +37,6 @@
     font-size: 3em;
 }
 
-
 /*
 .ui-index-page .one{
     height: calc(100% - 300px);
@@ -745,12 +744,19 @@
     border-style: solid;
     border-color: #eee;
 }
+<<<<<<< 3bb98fe864ac7c4be76ad51c35a9af9cad3d5d76
 
 .ui-post-row textarea {
     height: 200px;
 }
 
 .ui-post-bottom {
+=======
+.ui-post-row textarea{
+    height: 200px;
+}
+.ui-post-bottom{
+>>>>>>> 修改主页效果
     background: #9BB7B4;
     color: #fff;
     font-size: 20px;
