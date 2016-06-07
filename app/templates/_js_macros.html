@@ -26,10 +26,12 @@ $(document).ready(function(){
         if($(".ui-navbar input").val() == "") $(".input-gr").removeClass("input-gr--active")
         
     })
-
+    var ui = new UI()
     $(".input-gr a").click(function(){
-        console.log($(".input-gr a").attr("data-searchurl"))
-        location.href = $(".input-gr a").attr("data-searchurl") + $(".input-gr input").val()
+        if(ui.difFormTip($(this).closest('div'))){
+            location.href = $(".input-gr a").attr("data-searchurl") + $(".input-gr input").val()
+        }else return false;
+        
     })
 
 })

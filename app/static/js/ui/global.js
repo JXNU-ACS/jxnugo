@@ -7,6 +7,19 @@ function UI() {
     this.bubbleTip = function() {
         $('[data-toggle="tooltip"]').tooltip();
     }
+    //
+    this.BgShow = function(jqattr,imgurls){
+        var translate = {
+            init: function(){
+
+            },
+            animate: function(imgurl){
+                jqattr.animate({
+
+                })
+            }
+        }
+    }
     //测试是否支持的css属性(sticky)
     this.isSupportSticky = function() {
         var prefixTestList = ['', '-webkit-', '-ms-', '-moz-', '-o-'];
@@ -64,7 +77,10 @@ function UI() {
         jqattr.find('[require="true"]').each(function(){
             $(this).nextAll("span").remove();
                 if($(this).val() == "" || $(this).val()== null || $(this).val() == false ||$('[name="regpassWord"]').val() != $('[name="confirm"]').val()){
-                    if($(this).attr("type") == "text") tips = "没填写";
+                    if($(this).attr("type") == "text"){
+                        if($(this).attr("name") == "queryName") tips = "";
+                        else tips = "没填写";
+                    }
                     if($(this).attr("type") == "checkbox"){
                         tips = "没选择";
                         offset = "padding:0 25px";
