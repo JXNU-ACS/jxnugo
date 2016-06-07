@@ -323,6 +323,7 @@ input, button, select, textarea {
     border-top-left-radius: 20px;
     background-color: #fff;
     position: relative;
+    margin-bottom: 80px;
 }
 
 .ui-panel-cover {
