@@ -71,7 +71,7 @@ function UI() {
                     }
                     if($(this).attr("type") == "password"){
                         if($(this).val() == "" || $(this).val()== null) tips = "忘记输密码啦！";
-                        if($('[name="regpassWord"]').val() != $('[name="confirm"]').val()) tips = "这个和下面不一样";
+                        if($('[name="regpassWord"]').val() != $('[name="confirm"]').val()) tips = "和第一次输入的不一致";
                     }
                     $(this).attr("style","border-color:#FF7C6A;").focusin(function(){
                         $(this).nextAll("span").remove();
