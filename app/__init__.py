@@ -29,6 +29,8 @@ def create_app():
     app.register_blueprint(trade_blueprint,urlfix='/trade')
     from .bbs import bbs as bbs_blueprint
     app.register_blueprint(bbs_blueprint,urlfix='/bbs')
+    from .api import api as api_blueprint
+    app.register_blueprint(api_blueprint,urlfix='/api')
     login_manager.init_app(app)
     return app
 

@@ -1,0 +1,33 @@
+{% if current_user.is_authenticated %}
+<ul class="comments">
+    {% for comment in comments %}
+    <li class="comment"></li>
+        <div class="comment-content">
+            <div class="comment-date">{{ comment.timestamp }}</div>
+            <div class="comment-author"><a href="{{ url_for('main.user_zone', username=comment.author.userName) }}">{{ comment.author.userName }}</a></div>
+            <div class="post link">
+                评论了:
+                <h5>{{comment.post.head}}</h5>
+
+            </div>
+            <div class="comment-body">
+                {% if comment.disabled %}
+                <p><i>这个评论被管理员设为不可见</i></p>
+                {% endif %}
+                {% if moderate or not comment.disabled %}
+                        {{ comment.body }}
+                {% endif %}
+            </div>
+            {% if moderate %}
+                <br>
+                {% if comment.disabled %}
+                <a class="btn btn-default btn-xs" href="{{ url_for('trade.moderate_enable', id=comment.id, page=page) }}">恢复正常</a>
+                {% else %}
+                <a class="btn btn-danger btn-xs" href="{{ url_for('trade.moderate_disable', id=comment.id, page=page) }}">屏蔽</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}

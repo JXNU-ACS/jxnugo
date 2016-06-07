@@ -1,5 +1,5 @@
 /*图片滚动*/
-/*主页菜单伸缩*/
+/*主页菜单伸缩 弃用
 @keyframes list-collapse-close{
 	from{width: 25%
 		position:relative;}
@@ -35,8 +35,40 @@
 @keyframes fade-in{
 	from{opacity:0;}
 	to{opacity:1;}
+}*/
+@keyframes slideDown{
+	from{
+		-webkit-transform:translatey(-49px);
+		transform:translatey(-49px);
+	}
+	to{
+		-webkit-transform:translatey(0px);
+		transform:translatey(0px);
+		
+	}
+}
+@keyframes slideUp{
+	from{
+		-webkit-transform:translatey(0px);
+		transform:translatey(0px);
+	}
+	to{
+		-webkit-transform:translatey(-49px);
+		transform:translatey(-49px);
+	}
+}
+@keyframes roll{
+	from{
+		background-position: 0 0;
+		
+	}
+	to{
+		background-position: 100% 0;
+		
+	}
 }
 /*----------------动画------------------*/
+/* 弃用
 .list-collapse-close{
     animation:list-collapse-close 1s;
     -webkit-animation:list-collapse-close 1s;
@@ -72,5 +104,23 @@
     -webkit-animation:fade-in 1s;
     animation-fill-mode:both;
     -webkit-animation-fill-mode:both;
+}*/
+.anim{
+	animation-duration:.1s;
+	animation-fill-mode:both;
+	-ms-animation-duration:.1s;
+	-webkit-animation-duration:.1s;
+	-ms-animation-fill-mode:both;
+    -webkit-animation-fill-mode:both;
+}
+.slideDown{
+	-ms-animation-name:slideDown;
+	-webkit-animation-name:slideDown;
+	animation-name:slideDown;
+}
+.slideUp{
+	-ms-animation-name:slideUp;
+	-webkit-animation-name:slideUp;
+	animation-name:slideUp;
 }
 /*------------end----------------------*/

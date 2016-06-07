@@ -1,0 +1,18 @@
+{%-extends "base.html" %}
+{% block content %}
+<div class="divstyle" style="text-align: center;padding: 100px">
+    <h1>修改用户资料</h1>
+    <form action="/editUserInfoAdmin/{{ pid }}" method="post">
+        {{form.hidden_tag()}}
+        昵称:{{form.username()}}<br>
+        邮箱:{{form.email()}}<br>
+        更改用户激活状态:{{form.confirmed()}}<br>
+        用户角色:{{form.role()}}<br>
+        名字:{{form.name}}<br>
+        位置:{{form.location()}}<br>
+        关于用户:{{form.about_me()}}
+        {{form.submit()}}
+    </form>
+
+</div>
+{% endblock %}

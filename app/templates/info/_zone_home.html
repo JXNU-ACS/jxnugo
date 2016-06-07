@@ -1,24 +1,27 @@
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-xs-8">
         <div class="ui-userzone-body-block ">
             <h3><div class="ui-userzone-content-title">ta的帖子</div></h3>
             <!--时间线（？）面板-->
-            {% for post in posts %}
+            {% if postFive %}
+            {% for post in postFive %}
+            
+            
             <div class="ui-userzone-content-datelinebody row">
-                <div class="col-md-1">
+                <div class="col-xs-1">
                     <div class="dot"></div>
                 </div>
-                <div class="col-md-11">
+                <div class="col-xs-11">
                     <div class="row">
-                        <div class="col-md-2">
-                            <div class="smImg"></div>这是图片</div>
-                        <div class="col-md-10">
-
+                        <div class="col-xs-4">
+                            <div class="smImg" style="background-image:url('http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}}')"></div>
+                        </div>
+                        <div class="col-xs-8">
                             <div class="row">
-                                <div class="title">{{post.goodName}}</div>
+                                <div class="title"><a href="{{ url_for('trade.trade_detail',goodId=post.id) }}">{{post.goodName}}</a></div>
                             </div>
                             <div class="row">
-                                <div class="date">{{post.timestamp}}</div>
+                                <div class="date"><span class="glyphicon glyphicon-time"></span> {{post.timestamp}}</div>
                             </div>
                             <div class="row">
                                 <div class="text">{{post.body}}</div>
@@ -29,32 +32,104 @@
             </div>
             <!--end-->
             {% endfor %}
+            {% else %}
+            <div class="isnone center-align">然而什么都没有qwq</div>
+            {% endif %}
         </div>
         <div class="ui-userzone-body-block ">
             <h3><div class="ui-userzone-content-title">ta的收藏</div></h3>
+            {% if collectionFive %}
+            {% for post in collectionFive %}
+            <div class="ui-userzone-content-datelinebody row">
+                <div class="col-xs-1">
+                    <div class="dot"></div>
+                </div>
+                <div class="col-xs-11">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="smImg" style="background-image:url('http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}}')"></div>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="title"><a href="{{ url_for('trade.trade_detail',goodId=post.id) }}">{{post.goodName}}</a></div>
+                            </div>
+                            <div class="row">
+                                <div class="date"><span class="glyphicon glyphicon-time"></span> {{post.timestamp}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="text">{{post.body}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end-->
+            {% endfor %}
+            {% else %}
+            <div class="isnone center-align">然而什么都没有qwq</div>
+            {% endif %}
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-4">
 
-    	<div class="ui-userzone-user-info-block row">
-    		<div class="content-row">
-    			<h3>{{user.userName}} <tr><small><span>男</span></small></h3>
-    		</div>
-    		<div class="content-row">
-    			<span>用户ID:{{user.id}}</span><span>注册时间:{{user.menber_since}}</span>
-    		</div>
-    		<div class="content-row">
-    			<span>地址:{{user.location}}</span><span>上次登录:{{user.last_seen}}</span>
-    		</div>
-    		<div class="content-row">
-    			<h3>他的关注</h3>
-    			。。。。。。。。。。
-    		</div>
-    		<div class="content-row">
-    			<h3>关注他的</h3>
-    			。。。。。。。。。。
-    		</div>
-    	</div>
-    	
+        <div class="ui-userzone-user-info-block row">
+            <div class="content-row">
+                <h3>{{user.name}} <tr><xsall><span>{{user.sex}}</span></xsall></h3>
+                    <div class="content-row">
+                    {% if current_user.userName==user.userName %}
+                    <span class="fa fa-pencil"></span><span><a href="{{url_for('main.editUserInfo')}}">修改个人信息</a></span>
+                    {% else %}
+                    {% endif %}
+                    {% if current_user.can(Permission.FOLLOW) and user != current_user %}
+                        {% if not current_user.is_following(user) %}
+                            <a class="btn btn-default" href="{{ url_for('main.follow', username=user.userName)}}">关注</a>
+                         {% else %}
+                            <a class="btn btn-default" href="{{ url_for('main.unfollow', username=user.userName) }}">取消关注</a>
+                        {% endif %}
+                    {% endif %}
+                    {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
+                    <span class="label label-default">关注了你</span>
+                    {% endif %}
+                    </div>
+                    
+            </div>
+            <div class="content-row">
+                <span class="item"><span class="uid">UID</span> {{user.id}}</span>
+            </div>
+            <div class="content-row">
+                <span class="item"><span class="time glyphicon glyphicon-calendar"></span> {{user.menber_since | utcChangeToCst}}</span>
+            </div>
+            <div class="content-row">
+                <span class="item"><span class="map glyphicon glyphicon-map-marker"></span> {{user.location}}</span>
+            </div>
+            <div class="content-row">
+                <span class="item"><span class="time glyphicon glyphicon-time"></span> {{user.last_seen | utcChangeToCst}}</span>
+            </div>
+            <div class="content-row">
+                <h3>关注TA的用户 <span class="item"><span class="badge">{{ user.followers.count() }}</span> <a href="#{#{{ url_for('main.followers',username=user.userName)}}#}"
+                id="zone_followers" class="select-1">more>></a></span></h3>
+                <div class="folower-block">
+                    {% if followersTen %}
+                    {% for u in followersTen %}
+                    <a href="{{ url_for('main.user_zone',username=u.follower_id | changeToUserName)}}">
+                        <div class="folower-head" style="background-image:url({{ u.follower_id | changeToUserAvatar }})"></div>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="content-row">
+                <h3>TA关注的用户 <span class="item"><span class="badge">{{ user.followed.count() }}</span> <a href="#{#{{ url_for('main.followed_by',username=user.userName)}}#}" id="zone_followed" class="select-1">more>></a></span></h3>
+                <div class="folower-block">
+                    {% if followingTen %}
+                    {% for u in followingTen%}
+                    <a href="{{ url_for('main.user_zone',username=u.followed_id | changeToUserName)}}">
+                        <div class="folower-head" style="background-image:url({{ u.followed_id | changeToUserAvatar }})"></div>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-#-*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 
 from flask.ext.wtf import Form
 from wtforms import StringField,SubmitField,PasswordField,BooleanField,TextAreaField,SelectField
@@ -10,7 +10,10 @@ class EditProfileForm(Form):
     name=StringField(u'真名',validators=[Length(0,64)])
     location=StringField(u'所在地',validators=[Length(0,64)])
     about_me=TextAreaField(u'关于我')
+    mycontact=StringField(u'联系方式')
+    avatar=StringField(u'头像')
     submit=SubmitField(u'提交')
+
 
 class EditProfileAdminForm(Form):
     email=StringField(u'邮箱',validators=[Required(),Length(1,64),Email()])
@@ -20,6 +23,7 @@ class EditProfileAdminForm(Form):
     name=StringField(u'名字',validators=[Length(0,64)])
     location=StringField(u'位置',validators=[Length(0,64)])
     about_me=TextAreaField(u'关于我')
+    mycontact=StringField(u'联系方式')
     submit=SubmitField(u'提交')
 
     def __init__(self,user,*args,**kwargs):

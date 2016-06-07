@@ -1,6 +1,102 @@
 {%-extends "base.html" %}
+{%-import "./_macros.html" as macros %}
+
+{% block title%}
+首页
+{% endblock %}
+
+{%-block nav %}
+        <style type="text/css">
+        body{
+            background-size: cover;
+            background-attachment:fixed;
+            background-image: url("static/images/index/bg1.jpg");
+            background-position-x: center;
+        }
+        </style>
+
+{% endblock %}
+
+{% block mainnav %}
+{{ macros.showmainnav(current_user=current_user)}}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href={{ url_for( 'main.staticfile',filename='css/jquery.fullpage.min.css' )}}>
+{% endblock %}
 {% block content %}
-<div class="divstyle" style="text-align: center;padding: 100px">
-    <h1>index page</h1>
+
+<!--fullpage-->
+<div id="fullpage" class="cantain-fluid ui-index-page">
+    <div class="section">
+
+        <div class="row" style="">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-8 one">
+            <img style="width:100%;max-width: 90%;" data-src="{{ url_for( 'main.staticfile',filename='images/index/one.svg' )}}">
+        </div>
+            <div class="col-xs-2"></div>
+        </div>
+        
+    </div>
+    <div class="section">
+        <div class="row" style="">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-8 two">
+                <img style="width:100%;max-width: 1100px;" data-src="{{ url_for( 'main.staticfile',filename='images/index/two.svg' )}}">
+            
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+        
+    </div>
+    <div class="section fp-auto-height">
+        <div class="row three" style="">
+            越来越多的校友在这里发布闲置<br>
+            <a class="btn btn-default center-block button" href="{{url_for('trade.trade_list')}}" role="button">去围观 →</a>
+        </div>
+    	{%-import "./_macros.html" as macros %}
+    	{{ macros.footer() }}
+    </div>
 </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ url_for( 'main.staticfile',filename='js/jquery.fullPage.min.js' )}}"></script>
+<script type="text/javascript">
+    $('#fullpage').fullpage({
+        navigation: true,
+    	navigationPosition: 'right',
+        navigationTooltips: ['First', 'Second'],
+        //animate
+
+        afterLoad: function(){
+            var a = $(this)
+            console.log(2)
+            a.find('.row').animate({
+                opacity:1,
+                top:'-=20px'
+            },{
+                duration:100,
+                easing:"swing"
+            })
+        },
+        onLeave: function(index,nextIndex){
+            var a = $(this)
+            console.log(3)
+            a.find('.row').animate({
+                opacity:0,
+                top:'+=20px'
+            },{
+                duration:100,
+                easing:"swing"
+            })
+        }
+    });
+    
+</script>
+
 {% endblock %}

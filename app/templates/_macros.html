@@ -1,31 +1,249 @@
 {% macro pagination_widget(pagination,endpoint) %}
-<!--局部模板,用来显示分页导航-->
-
+<!--分页导航-->
 <ul class="pagination">
-    <li{% if not pagination.has_prev %} class="disabled"{% endif %}>
+    <li{% if not pagination.has_prev %} class="disabled" {% endif %}>
         <a href="{% if pagination.has_prev %}{{ url_for(endpoint, page=pagination.page-1, **kwargs) }}{% else %}#{% endif %}">
             &laquo;
         </a>
-    </li>
-    {% for p in pagination.iter_pages() %}
-        {% if p %}
-            {% if p == pagination.page %}
-            <li class="active">
-                <a href="{{ url_for(endpoint, page = p, **kwargs) }}">{{ p }}</a>
-            </li>
-            {% else %}
-            <li>
-                <a href="{{ url_for(endpoint, page = p, **kwargs) }}">{{ p }}</a>
-            </li>
-            {% endif %}
+        </li>
+        {% for p in pagination.iter_pages() %} {% if p %} {% if p == pagination.page %}
+        <li class="active">
+            <a href="{{ url_for(endpoint, page = p, **kwargs) }}">{{ p }}</a>
+        </li>
         {% else %}
+        <li>
+            <a href="{{ url_for(endpoint, page = p, **kwargs) }}">{{ p }}</a>
+        </li>
+        {% endif %} {% else %}
         <li class="disabled"><a href="#">&hellip;</a></li>
-        {% endif %}
-    {% endfor %}
-    <li{% if not pagination.has_next %} class="disabled"{% endif %}>
-        <a href="{% if pagination.has_next %}{{ url_for(endpoint, page=pagination.page+1, **kwargs) }}{% else %}#{% endif %}">
+        {% endif %} {% endfor %}
+        <li{% if not pagination.has_next %} class="disabled" {% endif %}>
+            <a href="{% if pagination.has_next %}{{ url_for(endpoint, page=pagination.page+1, **kwargs) }}{% else %}#{% endif %}">
             &raquo;
         </a>
-    </li>
+            </li>
 </ul>
+
 {% endmacro %}
+{%-macro showmainnav(current_user)%}
+<!--展示用导航-->
+<div class="ui-shownav row">
+    <div class="nav-content">
+        <div class=" col-xs-2">
+            <img src="{{ url_for( 'main.staticfile',filename='images/index/JXNU_index.png' )}}" style="width:150px">
+        </div>
+        <a href="{{url_for('trade.trade_list')}}"><div class=" text">淘二手</div></a>
+        <a href="#"><div class="text">教务助手</div></a>
+        <a href="#"><div class="text">bbs</div></a>
+        {% if current_user.is_authenticated %}
+        {% else %}
+        <a href="{{url_for('auth.passport')}}"><div class="text button">注册/登录</div></a>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}
+{%-macro mainnav(current_user,Permission)%}
+<!--主导航-->
+<div class="ui-mainnav">
+    <div class="nav-content row">
+        <div class="col-xs-6">
+            <a href="{{url_for('main.index')}}">
+                <div class="nav-text case-in">主页</div>
+            </a>
+            <a href="{{url_for('trade.trade_list')}}">
+                <div class="nav-text case-in">淘二手</div>
+            </a>
+            <a href="#" data-toggle="tooltip" data-placement="bottom" title="敬请期待？">
+                <div class="nav-text case-in">教务助手</div>
+            </a>
+            <a href="#" data-toggle="tooltip" data-placement="bottom" title="敬请期待？">
+                <div class="nav-text case-in">校园bbs</div>
+            </a>
+        </div>
+        <div class="col-xs-4"></div>
+        <div class="col-xs-2">
+            {% if current_user.is_authenticated %}
+            <div class="nav-user">
+                <div class="popo case-in">
+                    <div class="title">
+                            
+                            {{current_user.name|capitalize}}
+                            
+                    </div>
+                    
+                                    
+                    <a href="{{url_for('main.user_zone',username=current_user.userName)}}">
+                    <div class="item case-in">用户中心</div></a>
+                    <a href="{{url_for('main.editUserInfo')}}">
+                    <div class="item case-in">设置</div></a>
+                    {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                    <a href="{{ url_for('trade.moderate')}}">
+                    <div class="item case-in">评论管理</div></a>
+                    {% endif %}
+                    {% if current_user.role_id==2 %}
+                    <a href="{{ url_for('main.show_user') }}">
+                    <div class="item case-in">用户管理</div></a>
+                    {% endif %}
+                    <a href="{{url_for('auth.logout')}}">
+                    <div class="item case-in">登出</div></a>
+                    
+                    
+                    
+                </div>
+                <div class="nav-avatar center-block case-in fast" data-container="body" data-toggle="popover" data-placement="bottom" style="background-image:url('{{ current_user.avatar}}')">
+                </div>
+            </div>
+            {% else %}
+            <a href="{{url_for('auth.passport')}}">
+            <div class="nav-text case-in">登录/注册</div>
+        </a>
+        {% endif %}
+        </div>
+        
+    </div>
+</div>
+{% endmacro-%}
+{%-macro subnav(logo_src,search_src,sub_attr)%}
+<!--副导航-->
+<div class="ui-subnav">
+    <div class="nav-content row">
+        <div class="col-xs-3">
+            <img src={{ logo_src }}>
+        </div>
+        <div class="col-xs-3" style="text-align:left">
+            <a href="{{url_for('trade.trade_post')}}"><span class="glyphicon glyphicon-pencil icon case-in"></span></a>
+            <div class="input-gr case-in">
+                
+                    <a href="#" role="button" type="submit" data-searchurl={{search_src}}><span class="glyphicon glyphicon-search icon case-in" style="margin:0" ></span></a>
+
+                    <input class="ui-form-style case-in" name="queryName" type="text" value="" require="true"></input>
+                
+            </div>
+        </div>
+        <div class="col-xs-6" style="text-align:right;height:100%">
+            {% for attr,attr_url in sub_attr %}
+            <a href="{{attr_url}}"><div class="nav-text case-in fast">{{attr}}
+            </div></a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endmacro %} 
+{% macro listblock(posts)%}
+<!--列表显示模块(带图片)-->
+ {% for post in posts %}
+<div class="ui-trade-show-contain pin case-in fast" >
+    <div class="row" style="padding: 20px 0 10px 20px;">
+        <div class="col-sm-3">
+            <a href="{{ url_for('main.user_zone',username=post.author.userName) }}">
+                <div class="list-headbg" style="background-image:url('{{post.author.avatar}}');">
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-9">
+            <a href="{{ url_for('main.user_zone',username=post.author.userName) }}"><div class="list-userid">{{post.author.name}}</div></a>
+            <div class="list-time"><span class="glyphicon glyphicon-time"></span>{{ post.timestamp | utcChangeToCst}}</div>
+        </div>
+    </div>
+    <a href={{url_for( 'trade.trade_detail',goodId=post.id)}}>
+        <div class="list-img" style="background-image:url(http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}})">
+            <!--<img src="static/images/2.jpeg" style="width:100%;">-->
+        </div>
+    </a>
+    <div class="list-price">￥{{post.goodPrice}}</div>
+    <a href={{url_for( 'trade.trade_detail',goodId=post.id)}}>
+        <div class="list-title">
+            {{post.goodName}}
+        </div>
+    </a>
+</div>
+{% endfor %}
+{% endmacro %}
+{% macro footer()%}
+<footer class="ui-footer">
+        <div class="ui-mainct">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="title">app下载</div>
+                    <div class="qrcode center-align" style="background-image:url()">
+                        <img src="{{url_for('main.staticfile',filename='images/qrcode.png')}}" style="width:150px;"></div>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt class="title">运营中心</dt>
+                    
+                        <dd>先骕楼x4308计算机科学协会</dd>
+                        <dd>电话:13361640744</dd>
+                        <dd>邮箱:ddragonever@gmail.com</dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt class="title">关于我们</dt>
+                        <dd><a href="http://fir.im/AwesomeCampus">师大＋</a></dd>
+                        <dd><a href="">jxnugo</a></dd>
+                    </dl>
+                    
+                    
+                </div>
+                <div class="col-sm-3">
+                    <div>
+                        <img src="http://7xrkww.com1.z0.glb.clouddn.com/JXNU_s.png">
+                    </div>
+                    <div class="title bdsharebuttonbox">share us with
+                        <a href="#" data-cmd="qzone" title="分享到QQ空间"><span class="fa fa-qq"></span></a>
+                        <a href="#" data-cmd="tsina" title="分享到新浪微博"><span class="fa fa-weibo"></span></a>
+                        <a href="#"  data-cmd="weixin" title="分享到微信"><span class="fa fa-wechat"></span></a>
+                    </div>
+                    <script>
+                    window._bd_share_config = {
+                        "common": {
+                            "bdSnsKey": {},
+                            "bdText": "发现了一个掉节操的地方--jxnugo",
+                            "bdMini": "2",
+                            "bdMiniList": false,
+                            "bdPic": "",
+                            "bdStyle": "2",
+                            "bdSize": "32"
+                        },
+                        "share": {
+                            "bdCustomStyle":"{{url_for( 'main.staticfile',filename='font-awesome/css/font-awesome.min.css' )}}"
+                        }
+                    };
+                    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+                    </script>
+                    <div class="title" style="margin-left:0;"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="buttom-side">
+                <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">赣ICP备16002531号-1</a>
+            </div>
+    </footer>
+{% endmacro %}
+{% macro modal()%}
+<!--模态提示框-->
+    <div class="modal fade bs-example-modal-sm " id="myModal" tabindex="-1" role="dialog" aria-labelledby="messegeModalLabel">
+        <div class="modal-dialog modal-sm " role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h6 class="modal-title " id="myModalLabel">tips</h6>
+                </div>
+                <div class="modal-body">
+                    {% with messages = get_flashed_messages(with_categories=true) %} 
+                    {% if messages %} 
+                    {% for category,message in messages %} 
+                    {{ message }} 
+                    {% endfor %} 
+                    {% endif %} 
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+{% macro pstext()-%}
+<div><h3>免责声明</h3><p>【JxnuGo】(又称师大Go)是专门为师大人开设的一个网上综合服务平台，目前提供的服务有网站服务。Android手机客户端服务，由网站和Android客户端提供的服务以下简称本服务。在您使用我们的提供各项服务前，请仔细阅读制定的规则并严格遵守，任何不符合要求的帖子、内容和评论等将会被删除或关闭处理，同时，本服务运维团队保留追究责任的权利。本服务认为，所有使用者在使用本服务及其它各层页面时已经仔细看过本条款，间接使用本服务资料者，视为自愿接受本网站声明的规定。</p><p>1、本服务支持每一个公民在宪法的规定下行使公民言论自由的权利，本服务所有言论仅代表使用者个人观点。但并不表示我们支持这些言论所代表的观点，不保证发布帖子内容的真实性，不对使用者发表的言论承担任何法律责任。如果您发现有不当的言论或帖子，请及时邮件通知运维团队，运维团队会在第一时间做出审核和相应的处理。</p><p>2、本服务的使用不得盗用未经作者授权的文字、图书、音像，软件作品等，转载他人作品请获得作者授权，尊重他人的合法权利。如果您在本服务发现有内容侵犯了您的权利，请及时联系运维团队，我们会及时作出处理，同时，具体责任由内容发布者承担。</p><p>3、本服务内严禁一切灌水行为，包括发布水贴，发表无意义表情等行为。严禁发布一切色情、血腥、暴力的话题以及回复。禁止一切谩骂行为，相关内容一旦被发现，将不做通知立即删除相关内容，同时视情况给与删号处理。</p><p>4、严禁发布一切与政治相关的话题，帖子以及回复，如有违反，将不给于警告立即删除相关内容。同时，本服务不对发布的内容承担任何责任。</p><p>5、我们会竭力保障用户的信息安全，如因不可抗拒的因素导致用户信息丢失泄露，如服务器损坏宕机，本服务不承担任何责任。</p><p>6、请各位加入到JxnuGo的网友们，严格遵守以上规定，让JxnuGo可以更加健壮的成长下去。</p><p>7、对本服务有建议，请统一发送到意见反馈邮箱，我们也真诚的期待您的反馈意见。</p><p>备注：如发现本规定有不完善之处，可及时反馈邮件至运维团队进行修正。<br>规定包括但不限于上述内容，规定将会不定期的更新并置放于主页明显出处让使用者查看。<br>以上规定适用于本服务所有版块，自本规定颁布之日起正式实施。<br>JxnuGo运维团队拥有最终解释权，法律上有相关解释的，以中国法律解释为准则。本服务使用者因为违反本声明的规定而触犯中华人民共和国法律的，一切后果自己负责，本服务不承担任何责任。</p><p>JxnuGo运维团队<br>2016年6月2日</p></div>
+{%- endmacro%}

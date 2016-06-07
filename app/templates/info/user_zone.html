@@ -1,7 +1,11 @@
-{%-extends "./base.html" %} {%-block nav %}
+{%-extends "./base.html" %}
+{% block title %}
+用户中心
+{% endblock %}
+{%-block nav %}
 <style>
 body {
-    padding-top: 120px;
+    padding-top: 160px;
 }
 </style>
 {% endblock %} {%-block content %}
@@ -10,44 +14,61 @@ body {
         <div class="ui-panel">
         	<!--banner-->
         	<div class="ui-panel-cover" style="background-color:#366462;z-index:0;">
+                <div class="ui-userzone-user-head" style="background-image:url('{{user.avatar}}')"></div>
         		<div class="ui-userzone-user-signature">
-                	<span>"</span>{{user.about_me}}<span>"</span><br>
-					<h6><a href="{{url_for('main.editUserInfo')}}">点击这里修改个人信息</a></h6>
-					<!--修改个人信息的位置,到时候样式位置什么的都改改-->
+                	<span>"</span>{{user.about_me}}<span>"</span>
+                    
             	</div>
         	</div>
         	<div class="ui-userzone-body row">
         		<!--左边-->
-        		<div class="col-md-4">
-        			<div class="ui-userzone-user-head" style="background-image:url(static/images/1.jpg)"></div>
+        		<div class="col-xs-4">
+        			
         		</div>
         		<!--右边-->
-	            <div class="col-md-8">
+	            <div class="col-xs-8">
 	                <div class="ui-userzone-tag row">
-	                    <div class="col-md-2">
+	                    <div class="col-xs-2">
 	                        <a class="select" id="zone_home" href="#">主页</a>
 	                    </div>
-	                    <div class="col-md-2">
+	                    <div class="col-xs-2">
 	                        <a class="select" id="zone_post" href="#">帖子</a>
 	                    </div>
-	                    <div class="col-md-2">
+                        <div class="col-xs-2">
+                            <a class="select" id="zone_comment" href="#">评论</a>
+                        </div>
+	                    <div class="col-xs-2">
 	                        <a class="select" id="zone_collection" href="#">收藏</a>
-	                    </div>
-	                    <div class="col-md-2">
-	                        <a class="select" id="zone_message" href="#">消息</a>
 	                    </div>
 
 	                </div>
-	                <div class="slideBlock"></div>
+	                <div class="slideBlock slideblock-user"></div>
 	            </div>
-	            <div class="col-md-12">
+	            <div class="col-xs-12">
+                    
 	                <div class="ui-userzone-content" data-ariapannel="zone_home">{% include 'info/_zone_home.html' %}</div>
 	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_post">{% include 'info/_zone_post.html' ignore missing%}</div>
+                    <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_comment">{% include 'info/_zone_comment.html' ignore missing%}</div>
 	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_collection">{% include 'info/_zone_collection.html' ignore missing%}</div>
-	                <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_message">{% include 'info/_zone_message.html' ignore missing%}</div>
-        	</div>
+                    <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_followers">{% include 'info/_zone_followers.html' ignore missing%}</div>
+                    <div class="ui-userzone-content" style="display:none;" data-ariapannel="zone_followed">{% include 'info/_zone_followed.html' ignore missing%}</div>
+        	   </div>
         	</div>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+    var select1 = new UI();
+    select1.slideBlock({
+        originPosition:"#zone_home",
+        slideBlock:".slideblock-user"
+    });
+    $(".select-1").click(function(){
+        select1.selectPannel($(this));
+    })
+});
+</script>
 {% endblock %}

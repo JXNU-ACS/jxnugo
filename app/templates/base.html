@@ -1,228 +1,85 @@
+{%-import "./_macros.html" as macros %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}test{% endblock %}</title>
-    <link href={{url_for('main.staticfile',filename='css/bootstrap.min.css')}} rel="stylesheet" type="text/css"> 
-    <link href={{url_for('main.staticfile',filename='css/all_style.css')}} rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/anim.css')}}>
-    <link rel="stylesheet" type="text/css" href={{url_for('main.staticfile',filename='css/global.css')}}>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    
+    <title>{% block title %}{% endblock %}－JxnuGo-师大综合服务平台</title>
+    <link href={{url_for( 'main.staticfile',filename='css/bootstrap.min.css' )}} rel="stylesheet" type="text/css">
+    <link href={{url_for( 'main.staticfile',filename='font-awesome/css/font-awesome.min.css' )}} rel="stylesheet" type="text/css">
+    <link href={{url_for( 'main.staticfile',filename='css/all_style.css' )}} rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href={{url_for( 'main.staticfile',filename='css/anim.css' )}}>
+    <link rel="stylesheet" type="text/css" href={{url_for( 'main.staticfile',filename='css/global.css' )}}>
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
-    <div class="navbar-fixed-top">
-        <nav class="navbar navbar-inverse" style="border-radius:0px;">
-            <div class="container-fluid ui-mainnav">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"></a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">主页</a></li>
-                        <li><a href={{url_for('trade.trade_list')}}>淘二手</a></li>
-                        <li><a href={{url_for('trade.trade_list')}} data-toggle="tooltip" data-placement="bottom" title="敬请期待？">教务助手</a></li>
-                        <li><a href={{url_for('bbs.bbs_index')}}>校园BBS</a></li>
+    <div class="navbar-fixed-top ui-navbar anim">
+    <div class="contain-fluid" style="width:100%;">
+    
+    {%-block mainnav %}
+    {{macros.mainnav(current_user=current_user,Permission=Permission)}}
+    {% endblock-%}
 
-                        <li><a href="#">客户端</a></li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="input-group" style="">
-                            <input type="text" class="form-control" placeholder="搜索">
-                            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <!--{#{% if current_user.is_authenticated %}
-                        <li><a href="{{url_for('auth.logout')}}">登出</a> </li>
-                        {% else %}
-                        <li><a href="{{url_for('auth.passport')}}">用户管理</a> </li>
-                        {% endif %}
-                        <li><a href="#"> 你好&nbsp;{% if session['name'] %}{{session['name']|capitalize}}{% else %}游客{% endif %}</a></li>#}
-                        <!--上面我添加了登录登出,可以变更
-                        <li><a href="#loginModal" data-toggle="modal" data-target="#loginModal">登录</a></li>
-                        <li><a href="#regModal" data-toggle="modal">注册</a></li>
-                        -->
-                        <!--改·用户信息列表-->
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好&nbsp;{% if session['name'] %}{{session['name']|capitalize}}{% else %}游客{% endif %}<span class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                {% if current_user.is_authenticated %}
-                                    <li><a href="#">帖子</a></li>
-                                    <li><a href="#">消息</a></li>
-                                    <li><a href="{{url_for('main.user',username=current_user.userName)}}" >个人信息</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">偏好设置</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="{{url_for('auth.logout')}}">登出</a></li>
-                                    {% else %}
-                                    <li><a href="{{url_for('auth.passport')}}">登录or注册</a></li>
-                                    {% endif %}
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        {%-block nav %}{% endblock %}
+        {%-block nav %}
+        <style type="text/css">
+        body{
+            padding-top:71px;
+        }
+        </style>
+
+        {% endblock %}
     </div>
-    {% block content %}{% endblock %}
-    <!-- 模态登录框 {#
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
-        <div class="modal-dialog modal-sm" role="document" style="margin-top: 200px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" style="text-align:center;">登录</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="/login" method="post">
-                        
-            <div class="form-group">
-                <label class="sr-only">账户</label>
-                <input name="userID" class="ui-form-style"  placeholder="账户" >
-            </div>
-            <div class="form-group">
-                <label class="sr-only">密码</label>
-                <input name="pwdddddd" class="ui-form-style"  placeholder="密码" >
-            </div>
-                        <div class="form-group">
-                            {{ loginform.userName(class="ui-form-style",placeholder="用户名") }}
-                        </div>
-                        <div class="form-group">
-                            {{ loginform.passWord(class="ui-form-style",placeholder="密码") }}
-                        </div>
-                        {{ loginform.submit(class="btn btn-default",value="登陆") }}
-                        <button class="btn btn-default" type="submit">提交</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModalLabel">
-        <div class="modal-dialog modal-sm" role="document" style="margin-top: 200px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" style="text-align:center;">注册</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="/reg">
-                        
-            <div class="form-group">
-                <label class="sr-only">用户名</label>
-                <input name="nickname" class="ui-form-style"  placeholder="账户" >
-            </div>
+    {% block content %}
+    {% endblock %}
+    
+    {{ macros.modal()}}
 
-            <div class="form-group">
-                <label class="sr-only">邮箱</label>
-                <input type="email" name="email" class="ui-form-style"  placeholder="邮箱" >
-            </div>
-            <div class="form-group">
-                <label class="sr-only">密码</label>
-                <input name="pwdddddd" class="ui-form-style"  placeholder="密码" >
-            </div>
-
-
-            <div class="form-group">
-                <label class="sr-only">确认密码</label>
-                <input class="ui-form-style"  placeholder="确认密码" >
-            </div>
-            <button>提交</button>
-            
-                        {# <div class="form-group">
-                            {{ regform.username(class="ui-form-style",placeholder="用户名") }}
-                        </div>
-                        <div class="form-group">
-                            {{ regform.email(class="ui-form-style",placeholder="邮箱") }}
-                        </div>
-                        <div class="form-group">
-                            {{ regform.password(class="ui-form-style",placeholder="密码") }}
-                        </div>
-                        <div class="form-group">
-                            {{ regform.confirmpwd(class="ui-form-style",placeholder="确认密码") }}
-                        </div>
-                        <button class="btn btn-default" type="submit">
-                            提交
-                        </button> #}
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>#}-->
-    <!--模态提示框-->
-    <div class="modal fade bs-example-modal-sm " id="myModal" tabindex="-1" role="dialog" aria-labelledby="messegeModalLabel">
-        <div class="modal-dialog modal-sm " role="document">
-            <div class="modal-content">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %} 
-                    {% for category,message in messages %}
-                <div class="modal-header {{category}}">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title " id="myModalLabel">提示</h4>
-                </div>
-                <div class="modal-body">
-                    
-                    {{ message }}
-                    {% endfor %}
-                    {% else %}无任何消息
-                    {% endif %} 
-                    {% endwith %}
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <script src={{url_for('main.staticfile',filename='js/jquery.min.js')}}></script>
-    <script src={{url_for('main.staticfile',filename='js/bootstrap.min.js')}}></script>
-    <script>
-    (function(){
-        $(".modal").modal({
-            keyboard:false,
-            show:false
-        }).on("shown.bs.modal",function(){
-            var a = setInterval(function(){
-                $(".modal").modal('hide')
-            }, 3000)
-        }).on("hidden.bs.modal",function(){
-            clearInterval(a)
-        }).ready(function(){
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                $(".modal").modal('show')
-            {% endif %} 
-            {% endwith %}
-            
-        });
-        $('[data-toggle="tooltip"]').tooltip() //气泡
-        
-    })();
+    {% block footer %}
+    {{ macros.footer() }}
+    {% endblock %}
+    <!--依赖框架，插件-->
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/jquery.min.js' )}}></script>
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/bootstrap.min.js' )}}></script>
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/headroom.min.js' )}}></script>
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/jQuery.headroom.js' )}}></script>
+    <!--全局ui-->
+    <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/ui/global.js' )}}></script>
+    <script type="text/javascript">
+    var ui = new UI();
+    ui.modalShow(function() {
+        {% with messages = get_flashed_messages() %} 
+        {%if messages %}
+        $(".modal").modal('show') 
+        {% endif %} 
+        {% endwith %}
+    });
+    ui.bubbleTip();
+    $(".ui-mainnav .nav-user").hover(function(){
+        $(".ui-mainnav .popo").toggle();
+        $(".ui-mainnav .nav-avatar").toggleClass("nav-avatar--active")
+    })
     
     </script>
-    {% block script %}{% endblock %}
-    <!--<footer class="ui-footer">
-
-        {#{% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <ul>
-         {% for category,message in messages %}
-            <li class="{{category}}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}#}
-
-    </footer>-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?89d45c223b5b96f95af9be280116ef6c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    
+    {% block script %}
+    {% endblock %}
+    
 </body>
 
 </html>

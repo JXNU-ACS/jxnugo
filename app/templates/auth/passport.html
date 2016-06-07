@@ -1,6 +1,26 @@
 {%-extends "./base.html" %}
+{%-import "./_macros.html" as macros %}
+{% block title %}
+登录/注册
+{% endblock %}
+{%-block nav %}
+        <style type="text/css">
+        body{
+            background-size: cover;
+            background-attachment:fixed;
+            background-image: url("static/images/index/bg1.jpg");
+            background-position-x: center;
+        }
+        </style>
+
+{% endblock %}
+
+{% block mainnav %}
+{{ macros.showmainnav(current_user=current_user)}}
+{% endblock %}
+
 {% block content %}
-<div class="cantain-fluid" style="">
+<div class="cantain-fluid" style="background: rgba(5, 5, 5, 0.44);padding-top: 10%">
     	<div class="ui-passport-main-pannel">
     		<div class="ui-passport-main-pannel-tag row">
 
@@ -12,47 +32,47 @@
     			</div>
 
     		</div>
-            <div class="slideBlock" style="left:75.5px;"></div>
+            <div class="slideBlock slideBlock-passport" style="left:75.5px;"></div>
 
             <div class="ui-passport-main-pannel-form center-align "  data-ariapannel="pass_login">
 
     			<form action="/login" method="post">
-    				<div class="input-group">
+    				<div class="input-group case-in">
                         {{loginform.hidden_tag()}}
-    					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                        {{ loginform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"}) }}
+    					<span class="glyphicon glyphicon-user"></span>
+                        {{ loginform.userName(class="input",**{"placeholder":"用户名","require":"true"}) }}
                     </div>
-    				<div class="input-group">
-    					<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
-                        {{loginform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon2"}) }}
+    				<div class="input-group case-in">
+    					<span class="glyphicon glyphicon-lock"></span>
+                        {{loginform.passWord(class="input",**{"placeholder":"密码","require":"true"}) }}
     				</div>
-                    <div>{{loginform.rememberMe()}} 记住我</div>
-    				<div>{{ loginform.submit(class="btn btn-info center-block") }}</div>
+                    <span style="color:#fff;">{{loginform.rememberMe()}} 记住我</span>
+    				{{ loginform.submit(class="case-in button center-block ui-form-style") }}
     			</form>
     		</div>
             <div class="ui-passport-main-pannel-form center-align " style="display:none;" data-ariapannel="pass_reg" >
                 <form action="/register" method="post">
                     {{registerform.hidden_tag()}}
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                        {{registerform.userName(class="form-control",**{"placeholder":"用户名","aria-describedby":"basic-addon1"})}}
+                    <div class="input-group case-in">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {{registerform.userName(class="input",**{"placeholder":"用户名","require":"true"})}}
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon2">@</span>
-
-                        {{registerform.email(class="form-control",**{"placeholder":"邮箱","aria-describedby":"basic-addon2"})}}
+                    <div class="input-group case-in">
+                        <span>@</span>
+                        {{registerform.email(class="input",**{"placeholder":"邮箱","require":"true"})}}
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon3"><span class="glyphicon glyphicon-lock"></span></span>
-                        {{registerform.passWord(class="form-control",**{"placeholder":"密码","aria-describedby":"basic-addon3"})}}
+                    <div class="input-group case-in">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        {{registerform.regpassWord(class="input",**{"placeholder":"密码","require":"true"})}}
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-lock"></span></span>
-
-
-                        {{registerform.confirm(class="form-control",**{"placeholder":"确认密码","aria-describedby":"basic-addon4"})}}
+                    <div class="input-group case-in">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        {{registerform.confirm(class="input",**{"placeholder":"确认密码","require":"true"})}}
                     </div>
-                    <div>{{ registerform.submit(class="btn btn-info center-block") }}</div>
+                    
+                    <span style="color:#fff;"><input type="checkbox" checkbox=false require="true"/> 我已阅读并接受 <a href="#">免责声明</a></span>
+                    
+                    {{ registerform.submit(class="case-in button center-block ui-form-style") }}
                 </form>
             </div>
 
@@ -62,34 +82,29 @@
 
 
 {% endblock %}
+
+{% block footer %}
+{% endblock %}
+
 {% block script %}
 <script type="text/javascript">
+ui = new UI();
+ui.slideBlock({
+    originPosition:"#pass_login",
+    slideBlock:".slideBlock-passport"
+})
+$(".cantain-fluid").height($(window).height())
+$(".ui-passport-main-pannel-form span a").click(function(){
+    ui.modalShow(function(){
+        $(".modal-body").append("{{macros.pstext()}}")
+        $(".modal").modal('show')
+    },1,1)
+})
+$(".ui-passport-main-pannel-form #submit").click(function(){
+    ui.formValidation($(this).parent("form"));
+    console.log($(this).parent("form"))
+})
 
-(function(){
-
-    var a = "#pass_login" //这里大概是判断进入时注册还是登录，没有测试传入的值于是假设惹
-    setSlideBlockState($(a))
-    function setSlideBlockState(a){
-        var offset = (a.closest("div").position().left-a.closest("div").parent().find("div:first-child").position().left)+(a.closest("div").innerWidth()/2)-47
-        $(".slideBlock").css("left",offset)
-        //console.log(a.closest("div").parent().find("div:first-child").position().left)
-    }
-    $(".cantain-fluid").height($(window).height()-100)
-    $(".select").click(function(){
-        //页面切换选择器（
-        var b = $(this).attr("id")
-        a = "#"+b
-        setSlideBlockState($(this))
-        $("div[data-ariapannel]").each(function(){
-            $(this).attr("data-ariapannel")==b?$(this).attr("style",""):$(this).attr("style","display:none;")
-        })
-    })
-    $(".select").hover(function(){
-        setSlideBlockState($(this))
-    },function(){
-        setSlideBlockState($(a))
-    })
-})();
 
 </script>
 {% endblock %}
