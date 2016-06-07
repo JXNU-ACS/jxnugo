@@ -20,7 +20,6 @@ def passport():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     loginform = loginForm()
-    db.create_all()
     if loginform.validate_on_submit():
         user = User.query.filter_by(userEmail=loginform.userName.data).first()
         if user is None:

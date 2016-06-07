@@ -5,7 +5,7 @@ from . import trade
 from .. import db
 from flask.ext.login import login_required,current_user
 from ..models import Permission,User,Role,Post,Comment,getPrimaryKeyId
-from forms import PostForm,CommentForm, SearchForm
+from forms import PostForm,CommentForm, SearchForm , deleteForm
 from json import loads
 
 
@@ -129,20 +129,6 @@ def moderate_disable(id):
                             page=request.args.get('page', 1, type=int)), )
 
 
-@trade.route('/post_delete/<int:pid>')
-@login_required
-def post_delete(pid):
-    post = Post.query.filter_by(id=pid).first()
-    if post is None:
-        flash(u"未查询到该篇帖子信息")
-        return redirect(url_for('.trade_list'))
-    else:
-        db.session.delete(post)
-        db.session.commit()
-        flash(u'该帖子已经成功删除')
-    return redirect(url_for('.trade_list'))
-
-
 @trade.route('/query_post/<problem>')
 def query_post(problem):
     queryname = problem
@@ -170,3 +156,20 @@ def post_category(posttag):
     )
     posts = pagination.items
     return render_template('trade/trade_list.html', posts=posts, pagination=pagination)
+
+
+@trade.route('/post_delete', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def post_delete():
+    delete_postid = deleteForm()
+    if delete_postid.validate_on_submit():
+        pid = delete_postid.pid.data
+        p = Post.query.filter_by(id=pid).first()
+        if p is None:
+            flash(u'没有找到这篇帖子')
+        else:
+            db.session.delete(p)
+            db.session.commit()
+            flash(u'删除成功')
+    return render_template('trade/post_delete.html', form = delete_postid )
