@@ -7,7 +7,7 @@ body {
     padding-top: 140px;
 }
 </style>
-{{ macros.subnav(logo_src=url_for('main.staticfile',filename='images/JXNU_s_market.png'),search_src="/query_post/",sub_attr=[("全部",url_for('trade.trade_list')),("生活用品",url_for('trade.post_category',posttag=0)),("数码科技",url_for('trade.post_category',posttag=1)),("服饰箱包",url_for('trade.post_category',posttag=2)),("图书影音",url_for('trade.post_category',posttag=3)),("其他",url_for('trade.post_category',posttag=4))])}}
+{{ macros.subnav(logo_src='http://o8evkf73q.bkt.clouddn.com/image/JXNU_s_market.png',search_src="/query_post/",sub_attr=[("全部",url_for('trade.trade_list')),("生活用品",url_for('trade.post_category',posttag=0)),("数码科技",url_for('trade.post_category',posttag=1)),("服饰箱包",url_for('trade.post_category',posttag=2)),("图书影音",url_for('trade.post_category',posttag=3)),("其他",url_for('trade.post_category',posttag=4))])}}
 {% endblock %}
 
 {% block script %}

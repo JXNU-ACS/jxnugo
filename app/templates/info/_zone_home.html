@@ -21,7 +21,7 @@
                                 <div class="title"><a href="{{ url_for('trade.trade_detail',goodId=post.id) }}">{{post.goodName}}</a></div>
                             </div>
                             <div class="row">
-                                <div class="date"><span class="glyphicon glyphicon-time"></span> {{post.timestamp}}</div>
+                                <div class="date"><span class="glyphicon glyphicon-time"></span> {{post.timestamp | utcChangeToCst}}</div>
                             </div>
                             <div class="row">
                                 <div class="text">{{post.body}}</div>
