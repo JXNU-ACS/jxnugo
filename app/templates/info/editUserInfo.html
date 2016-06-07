@@ -23,7 +23,7 @@ body {
                 		{{form.hidden_tag()}}
                             {{form.avatar(style="display:none",**{"value":user.avatar})}}
                 		<div class="ui-edinfo-row">
-                			{{form.name(class="ui-form-style ui-edinfo-input",**{"placeholder":"昵称","min":"0","max":"10","require":"true"})}}
+                			{{form.name(class="ui-form-style ui-edinfo-input",**{"placeholder":"昵称","require":"true"})}}
                 		</div>
                 		<div class="ui-edinfo-row">
                 			{{form.location(class="ui-form-style ui-edinfo-input",**{"placeholder":"我的位置","min":"0","max":"10","require":"true"})}}
@@ -61,20 +61,12 @@ body {
         </div>
     </div>
 </div>
-<!--{#<div class="divstyle" style="text-align: center;padding: 100px">
-    <h1>修改个人信息</h1>
-    <form action="/editUserInfo" method="post">
-        {{form.hidden_tag()}}
-        我的名字:{{form.name()}}<br>
-        我在这里:{{form.location()}}<br>
-        这句话可以描述我:{{form.about_me()}}
-        {{form.submit()}}
-    </form>
 
-</div>#}-->
 {% endblock %}
 {% block script %}
 <!--依赖插件-->
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/plupload/plupload.full.min.js' )}}></script>
 <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/qinniu/dist/qiniu.min.js' )}}></script>
 <!--配置-->
@@ -84,8 +76,21 @@ body {
 
 $(document).ready(function(){
     var upload = Qiniu.uploader(userimgupload)
-    var ui = new UI();
-    ui.formValidation("form");
+    
+    $('form').validate({
+        rules:{
+            name: {
+            required: true,
+            maxlength: 6
+            },
+        messages: {
+                name: {
+                    required: "请输入用户名",
+                    minlength: "用户名必需不能多于6个字"
+                }
+            }, 
+        }  
+    })
 })
     
 </script>

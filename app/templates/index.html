@@ -10,7 +10,7 @@
         body{
             background-size: cover;
             background-attachment:fixed;
-            background-image: url("static/images/index/bg1.jpg");
+            background-image: url("http://o8evkf73q.bkt.clouddn.com/image/index/bg1.jpg");
             background-position-x: center;
         }
         </style>
@@ -33,7 +33,11 @@
         <div class="row" style="">
             <div class="col-xs-2"></div>
             <div class="col-xs-8 one">
+<<<<<<< HEAD
+            <img style="width:100%;max-width: 90%;" data-src="http://o8evkf73q.bkt.clouddn.com/image/index/one.png">
+=======
             <img style="width:100%;max-width: 90%;" data-src="{{ url_for( 'main.staticfile',filename='images/index/one.png' )}}">
+>>>>>>> pro
         </div>
             <div class="col-xs-2"></div>
         </div>
@@ -43,7 +47,11 @@
         <div class="row" style="">
             <div class="col-xs-2"></div>
             <div class="col-xs-8 two">
+<<<<<<< HEAD
+                <img style="width:100%;max-width: 1100px;" data-src="http://o8evkf73q.bkt.clouddn.com/image/index/two.png">
+=======
                 <img style="width:100%;max-width: 1100px;" data-src="{{ url_for( 'main.staticfile',filename='images/index/two.png' )}}">
+>>>>>>> pro
             
             </div>
             <div class="col-xs-2"></div>
@@ -53,7 +61,11 @@
     <div class="section fp-auto-height">
         <div class="row three" style="">
             越来越多的用户在这里发布闲置<br>
+<<<<<<< HEAD
+            <a class="btn btn-default center-block button case-in" href="{{url_for('trade.trade_list')}}" role="button">去围观 →</a>
+=======
             <a class="btn btn-default center-block button" href="{{url_for('trade.trade_list')}}" role="button">去围观 →</a>
+>>>>>>> pro
         </div>
     	{%-import "./_macros.html" as macros %}
     	{{ macros.footer() }}
@@ -75,7 +87,6 @@
 
         afterLoad: function(){
             var a = $(this)
-            console.log(2)
             a.find('.row').animate({
                 opacity:1,
                 top:'-=20px'
@@ -86,7 +97,6 @@
         },
         onLeave: function(index,nextIndex){
             var a = $(this)
-            console.log(3)
             a.find('.row').animate({
                 opacity:0,
                 top:'+=20px'
