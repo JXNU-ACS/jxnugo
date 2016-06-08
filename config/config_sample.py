@@ -23,6 +23,7 @@ class Config(object):
     SERVER_NAME=FLASK['SERVER_NAME']
     QINIU_ACCESS_KEY=QINIU['ACCESS_KEY']
     QINIU_SECRET_KEY=QINIU['SECRET_KEY']
+    AUTH_TOKEN=FLASK['AUTH_TOKEN']
 
     @staticmethod
     def init_app(app):
