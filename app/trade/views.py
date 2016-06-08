@@ -173,3 +173,16 @@ def post_delete():
             db.session.commit()
             flash(u'删除成功')
     return render_template('trade/post_delete.html', form = delete_postid )
+
+
+@trade.route('/delete_self_post<int:pid>')
+@login_required
+def delete_self_post(pid):
+    p = Post.query.filter_by(id=pid).first()
+    if p is None:
+        flash(u'该帖子不存在')
+    else:
+        db.sessoin.delete(p)
+        db.session.commit()
+        flash(u'删除成功')
+    return render_template('trade/trade_list.html')
