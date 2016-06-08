@@ -121,7 +121,7 @@ def new_post():
     return response
 
 
-@api.route('/api/delete_post', methods=['DELETE'])
+@api.route('/api/delete_post', methods=['POST'])
 @auth.login_required
 def delete_post():
     postInfo = request.json
