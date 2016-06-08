@@ -467,13 +467,10 @@
     font-size: 20px;
 }
 
-.ui-passport-main-pannel-form div {
-    height: 30px;
-}
-
 .ui-passport-main-pannel-form .input-group {
     padding-left: 5%;
     margin: 30px 0 30px 0;
+    height: 30px;
 }
 
 .ui-passport-main-pannel-form .input-group:hover {
@@ -744,19 +741,11 @@
     border-style: solid;
     border-color: #eee;
 }
-<<<<<<< 3bb98fe864ac7c4be76ad51c35a9af9cad3d5d76
-
 .ui-post-row textarea {
     height: 200px;
 }
 
 .ui-post-bottom {
-=======
-.ui-post-row textarea{
-    height: 200px;
-}
-.ui-post-bottom{
->>>>>>> 修改主页效果
     background: #9BB7B4;
     color: #fff;
     font-size: 20px;

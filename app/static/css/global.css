@@ -104,6 +104,14 @@ input, button, select, textarea {
 .pagination>li:first-child>span{
     border-radius: 50%;
 }
+.popover{
+    z-index: 1020;
+}
+.popover .popover-content{
+    color: #FF7C6A;
+    white-space: nowrap;
+
+}
 
 /*导航*/
 .ui-navbar{
@@ -405,21 +413,6 @@ input, button, select, textarea {
 }
 
 .center-align {
-    /*
-    display: -moz-box;
-    /* Firefox 
-    display: -webkit-box;
-    /* Safari and Chrome 
-    display: -ms-flexbox;
-    /* Internet Explorer 10 
-    display: box;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
-    -ms-flex-align: center;
-    -ms-flex-pack: center;
-    -moz-box-align: center;
-    -moz-box-pack: center;*/
-
     display: -webkit-flex;
     display: flex;
     -webkit-align-items:center;

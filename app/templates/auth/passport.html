@@ -8,7 +8,7 @@
         body{
             background-size: cover;
             background-attachment:fixed;
-            background-image: url("o8evkf73q.bkt.clouddn.com/image/index/bg1.jpg");
+            background-image: url("http://o8evkf73q.bkt.clouddn.com/image/index/bg1.jpg");
             background-position-x: center;
         }
         </style>
@@ -40,11 +40,11 @@
     				<div class="input-group case-in">
                         {{loginform.hidden_tag()}}
     					<span class="glyphicon glyphicon-user"></span>
-                        {{ loginform.userName(class="input",**{"placeholder":"用户名","require":"true"}) }}
+                        {{ loginform.userName(class="input",**{"placeholder":"用户名","required":""}) }}
                     </div>
     				<div class="input-group case-in">
     					<span class="glyphicon glyphicon-lock"></span>
-                        {{loginform.passWord(class="input",**{"placeholder":"密码","require":"true"}) }}
+                        {{loginform.passWord(class="input",**{"placeholder":"密码","required":""}) }}
     				</div>
                     <span style="color:#fff;">{{loginform.rememberMe()}} 记住我</span>
     				{{ loginform.submit(class="case-in button center-block ui-form-style") }}
@@ -55,22 +55,22 @@
                     {{registerform.hidden_tag()}}
                     <div class="input-group case-in">
                         <span class="glyphicon glyphicon-user"></span>
-                        {{registerform.userName(class="input",**{"placeholder":"用户名","require":"true"})}}
+                        {{registerform.userName(class="input",**{"placeholder":"用户名","required":""})}}
                     </div>
                     <div class="input-group case-in">
                         <span>@</span>
-                        {{registerform.email(class="input",**{"placeholder":"邮箱","require":"true"})}}
+                        {{registerform.email(class="input",**{"placeholder":"邮箱","required":""})}}
                     </div>
                     <div class="input-group case-in">
                         <span class="glyphicon glyphicon-lock"></span>
-                        {{registerform.regpassWord(class="input",**{"placeholder":"密码","require":"true"})}}
+                        {{registerform.regpassWord(class="input",**{"placeholder":"密码","required":""})}}
                     </div>
                     <div class="input-group case-in">
                         <span class="glyphicon glyphicon-lock"></span>
-                        {{registerform.confirm(class="input",**{"placeholder":"确认密码","require":"true"})}}
+                        {{registerform.confirm(class="input",**{"placeholder":"确认密码","required":""})}}
                     </div>
                     
-                    <span style="color:#fff;"><input type="checkbox" checkbox=false require="true"/> 我已阅读并接受 <a href="#">免责声明</a></span>
+                    <span style="color:#fff;"><input id="checkrequire" name="checkrequire" type="checkbox" checkbox=false requirde=""/> 我已阅读并接受 <a href="#">免责声明</a></span>
                     
                     {{ registerform.submit(class="case-in button center-block ui-form-style") }}
                 </form>
@@ -87,6 +87,7 @@
 {% endblock %}
 
 {% block script %}
+
 <script type="text/javascript">
 ui = new UI();
 ui.slideBlock({
@@ -100,11 +101,7 @@ $(".ui-passport-main-pannel-form span a").click(function(){
         $(".modal").modal('show')
     },1,1)
 })
-$(".ui-passport-main-pannel-form #submit").click(function(){
-    ui.formValidation($(this).parent("form"));
-    console.log($(this).parent("form"))
-})
-
-
 </script>
+{% import "./_js_macros.html" as jsnode %}
+{{ jsnode.formValidate()}}
 {% endblock %}
