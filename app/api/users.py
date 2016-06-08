@@ -8,7 +8,7 @@ from .. import db
 from errors import bad_request, NotAccept, ResourceConflict
 
 
-@api. route('/api/user/<int:id>')
+@api.route('/api/user/<int:id>')
 def get_user(id):
     user=User.query.get_or_404(id)
     return jsonify(user.to_json())
@@ -121,17 +121,17 @@ def judge_follow():
 @api.route('/api/update_userInfo', methods=['POST'])
 @auth.login_required
 def update_userInfo():
-    userInfo=request.json
-    user=User.query.get_or_404(userInfo['userId'])
-    user.name=userInfo['name']
-    user.location=userInfo['location']
-    user.sex=userInfo['sex']
-    user.about_me=userInfo['about_me']
-    user.contactMe=userInfo['contact']
-    user.avatar=userInfo['avatar']
+    userInfo = request.json
+    user = User.query.get_or_404(userInfo['userId'])
+    user.name = userInfo['name']
+    user.location = userInfo['location']
+    user.sex = userInfo['sex']
+    user.about_me = userInfo['about_me']
+    user.contactMe = userInfo['contact']
+    user.avatar = userInfo['avatar']
     db.session.add(user)
     db.session.commit()
-    response=jsonify({"updateStatus":"successful"})
-    response.status_code=200
+    response = jsonify({"updateStatus":"successful"})
+    response.status_code = 200
     return response
 
