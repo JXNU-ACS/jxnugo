@@ -52,17 +52,46 @@ body {
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 {% endblock %} 
+=======
+
+{% endblock %}
+>>>>>>> 3bb98fe864ac7c4be76ad51c35a9af9cad3d5d76
 {% block script %}
 <!--依赖插件-->
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/plupload/plupload.full.min.js' )}}></script>
 <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/qinniu/dist/qiniu.min.js' )}}></script>
 <!--配置-->
 <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/qinniu/config.js' )}}></script>
 <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/ui/Fileload.js' )}}></script>
+<<<<<<< HEAD
 <script>
 $(document).ready(function() {
     Qiniu.uploader(userimgupload)
+=======
+<script type="text/javascript">
+
+$(document).ready(function(){
+    var upload = Qiniu.uploader(userimgupload)
+    
+    $('form').validate({
+        rules:{
+            name: {
+            required: true,
+            maxlength: 6
+            },
+        messages: {
+                name: {
+                    required: "请输入用户名",
+                    minlength: "用户名必需不能多于6个字"
+                }
+            }, 
+        }  
+    })
+>>>>>>> 3bb98fe864ac7c4be76ad51c35a9af9cad3d5d76
 })
 </script>
 {% import "./_js_macros.html" as jsnode %}
