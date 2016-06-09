@@ -45,7 +45,7 @@ def register():
                    'auth/email/confirm', User=regUser, token=token
                    )
         flash(u'注册成功,账户激活信息已经发送到您的邮件!')
-        return redirect(url_for('auth.passport', _external=True))
+        return redirect(url_for('main.editUserInfo', _external=True))
     return redirect(url_for('auth.passport', _external=True))
 
 

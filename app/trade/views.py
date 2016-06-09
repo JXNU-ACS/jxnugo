@@ -182,7 +182,7 @@ def delete_self_post(pid):
     if p is None:
         flash(u'该帖子不存在')
     else:
-        db.sessoin.delete(p)
+        db.session.delete(p)
         db.session.commit()
         flash(u'删除成功')
-    return render_template('trade/trade_list.html')
+    return redirect(url_for('trade.trade_list'))

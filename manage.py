@@ -57,11 +57,41 @@ app.jinja_env.filters['pidChangeToTime'] =pidChangeTime
 def pidChangeTitle(pid):
     post=Post.query.filter_by(id=pid).first()
     return post.goodName
-app.jinja_env.filters['pidChangeToTitle'] =pidChangeTitle
+app.jinja_env.filters['pidChangeToTitle'] = pidChangeTitle
+
+
+@app.template_filter('judgeSexEmpty')
+def judge_sex_empty(uid):
+    u=User.query.filter_by(id=uid).first()
+    if u.sex is None:
+        return u'未知'
+    else:
+        return u.sex
+app.jinja_env.filters['judgeSexEmpty'] = judge_sex_empty
+
+
+@app.template_filter('judgeLocationEmpty')
+def judge_location_empty(uid):
+    u = User.query.filter_by(id=uid).first()
+    if u.location is None:
+        return u'用户没填写位置'
+    else:
+        return u.location
+app.jinja_env.filters['judgeLocationEmpty'] = judge_location_empty
+
+
+@app.template_filter('judgeAboutmeEmpty')
+def judge_aboutme_empty(uid):
+    u = User.query.filter_by(id=uid).first()
+    if u.about_me is None:
+        return u'用户还没有填写个性签名'
+    else:
+        return u.about_me
+app.jinja_env.filters['judgeAboutmeEmpty'] = judge_aboutme_empty
 
 
 def make_shell_context():
-    return dict(app=app, db=db, User=User, Role=Role,Comment=Comment, Post=Post, bbsPost=bbsPost, Follow=Follow,collectionPosts= collectionPosts)
+    return dict(app=app, db=db, User=User, Role=Role, Comment=Comment, Post=Post, bbsPost=bbsPost, Follow=Follow,collectionPosts= collectionPosts)
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
