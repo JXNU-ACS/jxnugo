@@ -9,7 +9,7 @@
         </div>
         <div class="col-xs-8">
             <div class="row">
-                <a href="{{ url_for('main.user_zone', username=comment.author.name) }}">
+                <a href="{{ url_for('main.user_zone', username=comment.author_id | changeToUserName) }}">
                     <div class="ui-trade-detail-comment-extendtext">{{ comment.author.name }}</div>
                 </a>
                 

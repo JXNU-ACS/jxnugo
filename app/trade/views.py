@@ -175,7 +175,7 @@ def post_delete():
     return render_template('trade/post_delete.html', form = delete_postid )
 
 
-@trade.route('/delete_self_post<int:pid>')
+@trade.route('/delete_self_post/<int:pid>')
 @login_required
 def delete_self_post(pid):
     p = Post.query.filter_by(id=pid).first()

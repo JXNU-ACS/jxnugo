@@ -1,37 +1,11 @@
+{%-import "./_macros.html" as macros %}
 <div class="row">
     <div class="col-xs-8">
         <div class="ui-userzone-body-block ">
             <h3><div class="ui-userzone-content-title">ta的帖子</div></h3>
             <!--时间线（？）面板-->
             {% if postFive %}
-            {% for post in postFive %}
-            
-            
-            <div class="ui-userzone-content-datelinebody row">
-                <div class="col-xs-1">
-                    <div class="dot"></div>
-                </div>
-                <div class="col-xs-11">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <div class="smImg" style="background-image:url('http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}}')"></div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="row">
-                                <div class="title"><a href="{{ url_for('trade.trade_detail',goodId=post.id) }}">{{post.goodName}}</a></div>
-                            </div>
-                            <div class="row">
-                                <div class="date"><span class="glyphicon glyphicon-time"></span> {{post.timestamp | utcChangeToCst}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="text">{{post.body}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end-->
-            {% endfor %}
+            {{ macros.datalinepannel(postFive,"trade.delete_self_post",current_user,user)}}
             {% else %}
             <div class="isnone center-align">然而什么都没有qwq</div>
             {% endif %}
@@ -39,32 +13,7 @@
         <div class="ui-userzone-body-block ">
             <h3><div class="ui-userzone-content-title">ta的收藏</div></h3>
             {% if collectionFive %}
-            {% for post in collectionFive %}
-            <div class="ui-userzone-content-datelinebody row">
-                <div class="col-xs-1">
-                    <div class="dot"></div>
-                </div>
-                <div class="col-xs-11">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <div class="smImg" style="background-image:url('http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}}')"></div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="row">
-                                <div class="title"><a href="{{ url_for('trade.trade_detail',goodId=post.id) }}">{{post.goodName}}</a></div>
-                            </div>
-                            <div class="row">
-                                <div class="date"><span class="glyphicon glyphicon-time"></span> {{post.timestamp}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="text">{{post.body}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end-->
-            {% endfor %}
+            {{ macros.datalinepannel(collectionFive,"trade.uncollect",current_user,user)}}
             {% else %}
             <div class="isnone center-align">然而什么都没有qwq</div>
             {% endif %}
