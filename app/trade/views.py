@@ -33,7 +33,7 @@ def trade_post():
         photo = ":".join(l)
         post = Post(id=getPrimaryKeyId('isPost'), body=form.body.data, goodName=form.name.data, goodPrice=form.price.data,
                   goodNum=form.num.data, goodLocation=form.location.data, goodQuality=form.quality.data,
-                  goodTag=form.tag.data, contact=form.mycontact.data, photos=photo, author_id=current_user.id)
+                  goodTag=form.tag.data, contact=form.mycontact.data, goodBuyTime=form.buyTime.data,  photos=photo, author_id=current_user.id)
         db.session.add(post)
         db.session.commit()
         flash(u'帖子发布成功')
@@ -167,12 +167,21 @@ def post_delete():
         pid = delete_postid.pid.data
         p = Post.query.filter_by(id=pid).first()
         if p is None:
-            flash(u'没有找到这篇帖子')
+            flash(u'该帖子不存在')
         else:
+            comments = Comment.query.filter_by(post_id=p.id).all()  # 删除评论
+            for comment in comments:
+                db.session.delete(comment)
+            all_user = User.query.all()     # 删除收藏的关系
+            for user in all_user:
+                if p in user.collectionPost.all():
+                    user.collectionPost.remove(p)
+                else:
+                    pass
             db.session.delete(p)
             db.session.commit()
-            flash(u'删除成功')
-    return render_template('trade/post_delete.html', form = delete_postid )
+            flash(u'帖子及其评论删除成功')
+    return render_template('trade/post_delete.html', form=delete_postid)
 
 
 @trade.route('/delete_self_post/<int:pid>')
@@ -182,7 +191,16 @@ def delete_self_post(pid):
     if p is None:
         flash(u'该帖子不存在')
     else:
+        comments = Comment.query.filter_by(post_id=p.id).all()  # 删除评论
+        for comment in comments:
+            db.session.delete(comment)
+        all_user = User.query.all()     # 删除收藏的关系
+        for user in all_user:
+            if p in user.collectionPost.all():
+                user.collectionPost.remove(p)
+            else:
+                pass
         db.session.delete(p)
         db.session.commit()
-        flash(u'删除成功')
+        flash(u'帖子及其评论删除成功')
     return redirect(url_for('trade.trade_list'))

@@ -158,7 +158,7 @@
                     </a>
                         <div class="ui-trade-detail-userinfo">
                             <h3><a href="{{ url_for('main.user_zone',username=post.author.userName) }}">{{ post.author.name }}</a> </h3>
-                            <h5 class="sign">{{ post.author.about_me }}</h5></div>
+                            <h5 class="sign">{{ post.author.id | judgeAboutmeEmpty }}</h5></div>
                     
                     <div class="ui-trade-detail-info">
                         {%if post.goodNum%}

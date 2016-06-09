@@ -125,11 +125,20 @@ def new_post():
 @auth.login_required
 def delete_post():
     postInfo = request.json
-    post = Post.query.get_or_404(postInfo['postId'])
-    if post is None:
+    p = Post.query.get_or_404(postInfo['postId'])
+    if p is None:
         message = "the post dosen't exist"
     else:
-        db.session.delete(post)
+        all_comments = Comment.query.filter_by(post_id=p.id).all()  # 删除评论
+        for comment in all_comments:
+            db.session.delete(comment)
+        all_user = User.query.all()     # 删除收藏的关系
+        for user in all_user:
+            if p in user.collectionPost.all():
+                user.collectionPost.remove(p)
+            else:
+                pass
+        db.session.delete(p)
         db.session.commit()
         message = "successful delete post"
     response = jsonify({"deleteStatus": message})
