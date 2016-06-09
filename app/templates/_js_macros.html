@@ -59,26 +59,13 @@ start++;
 $("[type=\"submit\"]").click(function() {
     $(this).closest("form").validate({
         rules: {
-            userName: {
-                required: true,
-                maxlength: 6
-            },
-            passWord: {
-                required: true,
-            },
             email: {
                 required: true,
                 email: true
             },
-            regpassWord: {
-                required: true,
-            },
             confirm: {
                 required: true,
                 equalTo: "#regpassWord"
-            },
-            checkrequire: {
-                required: true
             }
         },
         messages: {

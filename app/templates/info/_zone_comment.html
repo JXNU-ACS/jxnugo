@@ -5,6 +5,7 @@
                 <h3><div class="ui-userzone-content-title">ta回复的帖子</div></h3>
             </div>
             <!--时间线（？）面板-->
+            {% if comments%}
             {% for comment in comments %}
             <div class="ui-userzone-content-datelinebody row">
                 <div class="col-md-1">
@@ -33,6 +34,9 @@
                 </div>
             </div>
             {% endfor%}
+            {% else %}
+            <div class="isnone center-align">然而什么都没有qwq</div>
+            {% endif %}
         </div>
     </div>
 </div>
