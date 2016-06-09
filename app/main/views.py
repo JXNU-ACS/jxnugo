@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from flask import render_template, redirect, url_for, session, flash, views,current_app,jsonify,request
+from flask import render_template, redirect, url_for, flash, current_app, jsonify, request, abort
 from ..decorators import admin_required, permission_required
 from . import main
 from .. import db
@@ -26,43 +26,27 @@ def index():
     return render_template('index.html')
 
 
-@main.route('/test')
-@login_required
-@admin_required
-@permission_required(Permission.MODERATE_COMMENTS)
-def test():
-    return "for comment permission"
-
-
 @main.route('/static/<filename>', methods=['GET'])
 def staticfile(filename):
     url_for("static", filename)
     return redirect("base.html")
 
 
-@main.route('/user/<username>')
-def user(username):
-    user = User.query.filter_by(userName=username).first()
-    comments = Comment.query.filter_by(author_id=user.id).all()
-    if user is None:
-        abort(404)
-    return render_template('info/user.html', user=user, comments=comments)
-
-
 @main.route('/user_zone/<username>')
 def user_zone(username):
     user = User.query.filter_by(userName=username).first()
-    followersTen = user.followers.limit(10)
-    followingTen = user.followed.limit(10)
-    followersAll = user.followers.all()
-    followingAll = user.followed.all()
-    postFive = Post.query.filter_by(author_id=user.id).limit(5)
-    collectionFive = user.collectionPost.limit(5)
-    collectionAll = user.collectionPost.all()
-    posts = Post.query.filter_by(author_id=user.id).all()
-    comments = Comment.query.filter_by(author_id=user.id).all()
     if user is None:
         abort(404)
+    else:
+        followersTen = user.followers.limit(10)
+        followingTen = user.followed.limit(10)
+        followersAll = user.followers.all()
+        followingAll = user.followed.all()
+        postFive = Post.query.filter_by(author_id=user.id).limit(5)
+        collectionFive = user.collectionPost.limit(5)
+        collectionAll = user.collectionPost.all()
+        posts = Post.query.filter_by(author_id=user.id).all()
+        comments = Comment.query.filter_by(author_id=user.id).all()
     return render_template('info/user_zone.html', user=user, comments=comments, posts=posts, postFive=postFive, collectionAll=collectionAll, collectionFive=collectionFive, followersTen=followersTen, followersAll=followersAll, followingTen=followingTen,followingAll=followingAll)
 
 
