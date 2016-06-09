@@ -80,7 +80,7 @@ def editUserInfo():
         db.session.add(current_user)
         db.session.commit()
         flash(u'修改个人信息成功')
-    return render_template('info/editUserInfo.html', form=form,user=user)
+    return render_template('info/editUserInfo.html', form=form, user=user)
 
 
 @main.route('/show_user',methods=['GET', 'POST'])
