@@ -174,3 +174,8 @@ def followed_by(username):
 @main.route('/about_us')
 def about_us():
     return render_template('about_us.html')
+
+
+@main.route('/notice')
+def notice():
+    return render_template('notice.html')
