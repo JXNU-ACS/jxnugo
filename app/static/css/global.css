@@ -396,6 +396,10 @@ input, button, select, textarea {
     margin: 20px 0;
 }
 
+ul{
+    list-style-type:none;
+}
+
 .right {
     float: right;
 }
