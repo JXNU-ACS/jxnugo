@@ -39,8 +39,9 @@ $(document).ready(function() {
 <!--瀑布流列表显示模块(带图片)-->
 {# 不得不说这个方法产生的垃圾真多。。。。。。#}
 <script>
-var start = 1; 
-{%for post in posts %}
+var start = 1; { %
+    for post in posts %
+}
 
 var waterfallelement = "<div class='ui-trade-show-contain case-in fast' ><div class='row' style='padding: 20px 0 10px 20px;'><div class='col-sm-3'><a href='{{ url_for('main.user_zone',username=post.author.userName) }}'><div class='list-headbg' style='background-image:url({{post.author.avatar}});'></div></a></div><div class='col-sm-9'><a href='{{ url_for('main.user_zone',username=post.author.userName) }}'><div class='list-userid'>{{post.author.name}}</div></a><div class='list-time'><span class='glyphicon glyphicon-time'></span>{{ post.timestamp | utcChangeToCst}}</div></div></div><a href={{url_for( 'trade.trade_detail',goodId=post.id)}}><div class='list-img' style='background-image:url(http://7xrkww.com1.z0.glb.clouddn.com/{{post.photos | getFirstKey}})'></div></a><div class='list-price'>￥{{post.goodPrice}}</div><a href={{url_for( 'trade.trade_detail',goodId=post.id)}}><div class='list-title'>{{post.goodName}}</div></a></div>"
 if (start > 4) {
@@ -49,15 +50,19 @@ if (start > 4) {
 $("#waterFallColumn_" + start).append(waterfallelement);
 start++;
 
-{% endfor %}
+{ % endfor %
+}
 </script>
-{%- endmacro %} 
-{% macro formValidate()-%}
+{%- endmacro %} {% macro formValidate()-%}
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script>
 $("[type=\"submit\"]").click(function() {
     $(this).closest("form").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        debug: true,
         rules: {
             email: {
                 required: true,
@@ -79,22 +84,25 @@ $("[type=\"submit\"]").click(function() {
             }
         },
         showErrors: function(errorMap, errorList) {
-            $("body").animate({
-                scrollTop:"0px"
-            },500,function(){
-                $.each(this.successList, function(index, value) {
+            $.each(this.successList, function(index, value) {
                 return $(value).popover("hide");
-                });
-                return $.each(errorList, function(index, value) {
-                    var _popover;
-                    _popover = $(value.element).popover({
-                        trigger: "manual",
-                        content: value.message,
-                        placement: 'right',
+            });
+            if (errorList) {
+                $("body").animate({
+                    scrollTop: $(errorList[0].element).offset().top - 140
+                }, 500, function() {
+                    return $.each(errorList, function(index, value) {
+                        var _popover;
+                        _popover = $(value.element).popover({
+                            trigger: "manual",
+                            container: "body",
+                            content: value.message,
+                            placement: 'right',
+                        });
+                        return _popover.popover("show");
                     });
-                    return _popover.popover("show");
-                });
-            })
+                })
+            }
         }
     })
 })
