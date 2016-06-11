@@ -6,45 +6,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
-    <meta name="baidu-site-verification" content="51c1fdca55228eb3479c9b33ce2cabc4"/>
-    <meta name =”keywords” content=”江西师范大学,江西师大,师大,综合平台,校园生活,闲置,二手”/>
+    <meta name="baidu-site-verification" content="51c1fdca55228eb3479c9b33ce2cabc4" />
+    <meta name=”keywords” content=”江西师范大学,江西师大,师大,综合平台,校园生活,闲置,二手”/>
     <meta name=”description” content=”JxnuGo-师大综合服务平台”/>
     <title>{% block title %}{% endblock %}-JxnuGo-师大综合服务平台</title>
     <link href={{url_for( 'main.staticfile',filename='css/bootstrap.min.css' )}} rel="stylesheet" type="text/css">
     <link href={{url_for( 'main.staticfile',filename='font-awesome/css/font-awesome.min.css' )}} rel="stylesheet" type="text/css">
     <link href={{url_for( 'main.staticfile',filename='css/all_style.css' )}} rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href={{url_for( 'main.staticfile',filename='css/anim.css' )}}>
-    <link rel="stylesheet" type="text/css" href={{url_for( 'main.staticfile',filename='css/global.css' )}}>
-    {% block head %}
-    {% endblock %}
+    <link rel="stylesheet" type="text/css" href={{url_for( 'main.staticfile',filename='css/global.css' )}}> {% block head %} {% endblock %}
 </head>
 
 <body>
     <div class="navbar-fixed-top ui-navbar anim">
-    <div class="contain-fluid" style="width:100%;">
-    
-    {%-block mainnav %}
-    {{macros.mainnav(current_user=current_user,Permission=Permission)}}
-    {% endblock-%}
-
-        {%-block nav %}
-        <style type="text/css">
-        body{
-            padding-top:71px;
-        }
-        </style>
-
-        {% endblock %}
+        <div class="contain-fluid" style="width:100%;">
+            {%-block mainnav %} {{macros.mainnav(current_user=current_user,Permission=Permission)}} {% endblock-%} {%-block nav %}
+            <style type="text/css">
+            body {
+                padding-top: 71px;
+            }
+            </style>
+            {% endblock %}
+        </div>
     </div>
-    </div>
-    {% block content %}
-    {% endblock %}
-    
-    {{ macros.modal()}}
-
-    {% block footer %}
-    {{ macros.footer() }}
-    {% endblock %}
+    {% block content %} {% endblock %} {{ macros.modal()}} {% block footer %} {{ macros.footer() }} {% endblock %}
     <!--依赖框架，插件-->
     <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/jquery.min.js' )}}></script>
     <script type="text/javascript" src={{url_for( 'main.staticfile',filename='js/bootstrap.min.js' )}}></script>
@@ -62,26 +47,44 @@
         {% endwith %}
     });
     ui.bubbleTip();
-    $(".ui-mainnav .nav-user").hover(function(){
+    $(".ui-mainnav .nav-user").hover(function() {
         $(".ui-mainnav .popo").toggle();
         $(".ui-mainnav .nav-avatar").toggleClass("nav-avatar--active")
     })
-    
     </script>
-    
     <script>
     var _hmt = _hmt || [];
     (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?89d45c223b5b96f95af9be280116ef6c";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?89d45c223b5b96f95af9be280116ef6c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
     })();
+    window._bd_share_config = {
+        "common": {
+            "bdSign":"on",
+            "bdSnsKey": {},
+            "bdText": "发现了一个掉节操的地方--jxnugo",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "2",
+            "bdSize": "32",
+            "bdCustomStyle": "//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"
+        },
+        "share": [{
+            "tag" : "footer",
+            "bdUrl":"www.jxnugo.com",
+            "bdText": "jxnugo--校园综合服务平台~快来看看吧!"
+        },{
+            "tag" : "post",
+            "bdUrl": this.location.href,
+            "bdText": "[jxnugo]咱在这里发现了个好东西!["+$(".ui-trade-detail-title h1").text()+ "]~快来看看吧!"
+        }]
+    };
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
     </script>
-    
-    {% block script %}
-    {% endblock %}
-    
+    {% block script %} {% endblock %}
 </body>
 
 </html>
