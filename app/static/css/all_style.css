@@ -225,7 +225,14 @@
     border-width: 2px;
     border-color: #eee;
 }
-
+.ui-trade-detail-title .share{
+    display: inline-block;
+    padding: 0 40px;
+}
+.ui-trade-detail-title .share a{
+    color: #eee;
+    font-size: 2em;
+}
 .ui-trade-detail-price {
     font-size: 30px;
     color: #FF7A7C;
