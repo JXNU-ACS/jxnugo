@@ -66,7 +66,7 @@ def new_comment_v11():
         return bad_request('auth_token not correct')
     if commentInfo['body'] == '':
         return bad_request('body was empty')
-    comment = Comment(id=Comment.query.count() + 1, body=commentInfo['body'], author_id=commentInfo['userId'],
+    comment = Comment(body=commentInfo['body'], author_id=commentInfo['userId'],
                       post_id=commentInfo['postId'])
     db.session.add(comment)
     db.session.commit()
