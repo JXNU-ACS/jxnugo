@@ -80,7 +80,7 @@ def user_comments(id):
 @api.route('/api/follow', methods=['POST'])
 @auth.login_required
 def follow():
-    followInfo=request.json
+    followInfo = request.json
     self=User.query.get_or_404(followInfo['userId'])
     followed=User.query.get_or_404(followInfo['followedId'])
     self.follow(followed)
