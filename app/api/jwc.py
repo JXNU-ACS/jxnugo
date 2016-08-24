@@ -7,7 +7,7 @@ from .errors import bad_request
 from ..jxnuspider.jwcspider import JwcSpider
 
 
-@api.route('/api/get_stu_info')
+@api.route('/api/stu_info')
 def get_stu_info():
     stu = JwcSpider()
     stu.get_cookie()
@@ -15,7 +15,7 @@ def get_stu_info():
     return jsonify(stu_response)
 
 
-@api.route('/api/get_stu_grade')
+@api.route('/api/stu_grade')
 def get_stu_grade():
     stu = JwcSpider()
     stu.get_cookie()
@@ -23,7 +23,7 @@ def get_stu_grade():
     return jsonify(stu_response)
 
 
-@api.route('/api/get_stu_timetable')
+@api.route('/api/stu_timetable' )
 def get_stu_timetable():
     stu = JwcSpider()
     stu.get_cookie()
@@ -31,9 +31,20 @@ def get_stu_timetable():
     return jsonify(stu_response)
 
 
-@api.route('/api/get_exam_schedule')
+@api.route('/api/exam_schedule')
 def get_exam_schedule():
     stu = JwcSpider()
     stu.get_cookie()
-    stu_response = stu.get_stu_exem_schedule()
+    stu_response = stu.get_stu_exam_schedule()
     return jsonify(stu_response)
+
+
+@api.route('/api/is_jxnu_student', methods=['POST'])
+def is_jxnu_student():
+    stu = JwcSpider()
+    info = request.json
+    student_id = info['student_id']
+    stu.get_cookie()
+    jwc_name = stu.is_jxnu_student(student_id)
+    return jsonify({"student_name": jwc_name})
+

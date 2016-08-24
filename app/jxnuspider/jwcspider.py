@@ -5,19 +5,18 @@ import urllib
 import cookielib
 from bs4 import BeautifulSoup
 from itertools import izip
-from json import dumps
 
 
 class JwcSpider(object):
     def __init__(self):
         super(JwcSpider, self).__init__()
-        self.login_url='http://jwc.jxnu.edu.cn/Default_Login.aspx?preurl='
-        self.stu_timetable_url='http://jwc.jxnu.edu.cn/User/default.aspx?&&code=111&uctl=MyControl%5cxfz_kcb.ascx&MyAction=Personal'
-        self.stu_info_url='http://jwc.jxnu.edu.cn/MyControl/All_Display.aspx?UserControl=All_StudentInfor.ascx&UserType=Student&UserNum=1408095013'
-        self.stu_grade_url='http://jwc.jxnu.edu.cn/MyControl/All_Display.aspx?UserControl=xfz_cj.ascx&Action=Personal'
-        self.stu_exam_schedule_url='http://jwc.jxnu.edu.cn/User/default.aspx?&code=129&&uctl=MyControl%5cxfz_test_schedule.ascx'
-        self.cookie=cookielib.CookieJar()
-        self.opener=urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cookie))
+        self.login_url = 'http://jwc.jxnu.edu.cn/Default_Login.aspx?preurl='
+        self.stu_timetable_url = 'http://jwc.jxnu.edu.cn/User/default.aspx?&&code=111&uctl=MyControl%5cxfz_kcb.ascx&MyAction=Personal'
+        self.stu_info_url = 'http://jwc.jxnu.edu.cn/MyControl/All_Display.aspx?UserControl=All_StudentInfor.ascx&UserType=Student&UserNum=1408095013'
+        self.stu_grade_url = 'http://jwc.jxnu.edu.cn/MyControl/All_Display.aspx?UserControl=xfz_cj.ascx&Action=Personal'
+        self.stu_exam_schedule_url = 'http://jwc.jxnu.edu.cn/User/default.aspx?&code=129&&uctl=MyControl%5cxfz_test_schedule.ascx'
+        self.cookie = cookielib.CookieJar()
+        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cookie))
 
     def get_cookie(self):
         post_data = urllib.urlencode({
@@ -41,17 +40,21 @@ class JwcSpider(object):
 
     def get_stu_info(self):
         stu_info = {}
-        stu_info_result=self.opener.open(self.stu_info_url)
+        stu_info_result = self.opener.open(self.stu_info_url)
         stu_info_html = stu_info_result.read()
         stu_info_soup = BeautifulSoup(stu_info_html, "html.parser")
-        class_name = stu_info_soup.find(id="_ctl0_lblBJ")
-        stu_id = stu_info_soup.find(id="_ctl0_lblXH")
-        stu_name = stu_info_soup.find(id="_ctl0_lblXM")
-        stu_sex = stu_info_soup.find(id="_ctl0_lblXB")
-        stu_info["class_name"] = str(class_name.contents).decode("unicode_escape")
-        stu_info["stu_id"] = str(stu_id.contents).decode("unicode_escape")
-        stu_info["stu_name"] = str(stu_name.contents).decode("unicode_escape")
-        stu_info["stu_sex"] = str(stu_sex.contents).decode("unicode_escape")
+        for my_class in stu_info_soup.find(id="_ctl0_lblBJ").children:
+            class_name = my_class
+        for my_id in stu_info_soup.find(id="_ctl0_lblXH").children:
+            stu_id = my_id
+        for my_xm in stu_info_soup.find(id="_ctl0_lblXM").children:
+            stu_name = my_xm
+        for my_xb in stu_info_soup.find(id="_ctl0_lblXB").children:
+            stu_sex = my_xb
+        stu_info["class_name"] = class_name.strip()
+        stu_info["stu_id"] = stu_id.strip()
+        stu_info["stu_name"] = stu_name.strip()
+        stu_info["stu_sex"] = stu_sex.strip()
         return stu_info
 
     def get_stu_grade(self):
@@ -84,6 +87,8 @@ class JwcSpider(object):
                 semester_list.append(k)
         grade_itmes = grade_soup.find_all("font",color="#330099")   # 提取课程的详细信息（未除去学期信息）
         for g in grade_itmes:
+            print 'g is %s' % g
+            print 'type g is %s ' % type(g)
             g = str(g.contents).decode("unicode_escape")       # 打印成绩的信息
             courses_list.append(g)
         td_tag = grade_soup.select('td[rowspan]')     # 提取每个学期有多少门课
@@ -146,14 +151,14 @@ class JwcSpider(object):
                 timetable_list.append(child)
         for info in range(0, len(timetable_list), 4):
             timetable = {}
-            timetable["course_id"] = timetable_list[info]
-            timetable["course_name"] = timetable_list[info+1]
-            timetable["class"] = timetable_list[info+2]
-            timetable["teacher"] = timetable_list[info+3]
+            timetable["course_id"] = timetable_list[info].strip()  # 使用strip()函数去除字符串开头和结尾的空格
+            timetable["course_name"] = timetable_list[info+1].strip()
+            timetable["class"] = timetable_list[info+2].strip()
+            timetable["teacher"] = timetable_list[info+3].strip()
             stu_timetable["course"].append(timetable)
         return stu_timetable
 
-    def get_stu_exem_schedule(self):
+    def get_stu_exam_schedule(self):
         exam_dict = {"exam_schedule":[]}
         exam_schedule_list = []
         stu_exam_schedule_result = self.opener.open(self.stu_exam_schedule_url)
@@ -162,15 +167,40 @@ class JwcSpider(object):
         exam_info = exam_soup.find_all("font", color="#330099")
         for i in exam_info:
             for child in i.children:
-                exam_schedule_list.append(str(child.contents).decode("unicode_escape"))
+                for son in child.children:
+                    print next
+                    exam_schedule_list.append(son)
         for subject in range(0, len(exam_schedule_list), 7):
             subject_item = dict()
-            subject_item["course_id"] = exam_schedule_list[subject]
+            subject_item["course_id"] = exam_schedule_list[subject].strip()
             subject_item["course_name"] = exam_schedule_list[subject+1]
-            subject_item["stu_id"] = exam_schedule_list[subject+2]
+            subject_item["stu_id"] = exam_schedule_list[subject+2].strip()
             subject_item["exam_time"] = exam_schedule_list[subject+3]
             subject_item["class_room"] = exam_schedule_list[subject+4]
             subject_item["class_position"] = exam_schedule_list[subject+5]
             subject_item["exam_note"] = exam_schedule_list[subject+6]
             exam_dict["exam_schedule"].append(subject_item)
         return exam_dict
+
+    def is_jxnu_student(self, student_id):
+        stu_info = dict()
+        student_info_url = "http://jwc.jxnu.edu.cn/MyControl/All_Display.aspx?UserControl=All_StudentInfor.ascx&UserType=Student&UserNum="
+        post_url = student_info_url+str(student_id)
+        stu_info_result = self.opener.open(post_url)
+        stu_info_html = stu_info_result.read()
+        stu_info_soup = BeautifulSoup(stu_info_html, "html.parser")
+        for my_class in stu_info_soup.find(id="_ctl0_lblBJ").children:
+            class_name = my_class
+        for my_id in stu_info_soup.find(id="_ctl0_lblXH").children:
+            stu_id = my_id
+        for my_xm in stu_info_soup.find(id="_ctl0_lblXM").children:
+            stu_name = my_xm
+        for my_xb in stu_info_soup.find(id="_ctl0_lblXB").children:
+            stu_sex = my_xb
+        stu_info["class_name"] = class_name.strip()
+        stu_info["stu_id"] = stu_id.strip()
+        stu_info["stu_name"] = stu_name.strip()
+        stu_info["stu_sex"] = stu_sex.strip()
+        return stu_info["stu_name"]
+
+
